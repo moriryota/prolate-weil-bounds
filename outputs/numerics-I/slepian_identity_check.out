@@ -1,0 +1,4 @@
+mu=5 n=0: 1-lambda=2.02073e-26  d/dc log(1-lambda) = -1.983622144  vs  -(lam/(1-lam)) 2 psi(1)^2/c = -1.983622144  ratio 1.0
+mu=5 n=4: 1-lambda=2.59678e-18  d/dc log(1-lambda) = -1.84741888  vs  -(lam/(1-lam)) 2 psi(1)^2/c = -1.84741888  ratio 1.0
+mu=7 n=0: 1-lambda=2.91979e-37  d/dc log(1-lambda) = -1.988398833  vs  -(lam/(1-lam)) 2 psi(1)^2/c = -1.988398833  ratio 1.0
+mu=7 n=4: 1-lambda=1.55799e-28  d/dc log(1-lambda) = -1.893138001  vs  -(lam/(1-lam)) 2 psi(1)^2/c = -1.893138001  ratio 1.0

@@ -1,0 +1,6 @@
+prolate-weil-bounds
+Copyright 2026 Ryota Mori
+
+The code in this repository (proofs-I/, proofs-II/, numerics-I/, numerics-II/, common/, run_all.sh) is
+licensed under the Apache License, Version 2.0 (see LICENSE). The papers in paper-I/ and paper-II/ are
+licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).

@@ -1,0 +1,8 @@
+# Recorded outputs of the Galerkin runs that produced the values in numerics-II/kvector_outofband.py (W_GALERKIN).
+# Original run logs (same code, same parameters):
+mu=  5 {'N': 140}  W(k)/||k||^2=1.39668e-17  lambda_min(even)=9.27214e-18
+mu=  7 {'N': 140}  W(k)/||k||^2=9.32768e-28  lambda_min(even)=6.75211e-28
+mu= 11 {'N': 180, 'nq': 200}  W(k)/||k||^2=1.28507e-48  lambda_min(even)=9.65185e-49   (also nq=260: identical)
+mu= 13 {'N': 260, 'prec': 480, 'nq': 300}  W(k)/||k||^2=3.49221e-59  lambda_min(even)=2.53558e-59
+mu= 15 {'N': 260, 'prec': 480, 'nq': 300}  W(k)/||k||^2=8.71732e-70  lambda_min(even)=6.03916e-70   (N=220 gives 3.781e-69: not converged)
+mu= 17 {'N': 300, 'prec': 560, 'nq': 340}  W(k)/||k||^2=1.86581e-80  lambda_min(even)=1.34779e-80   (N=260 gives 1.19918e-79: not converged)

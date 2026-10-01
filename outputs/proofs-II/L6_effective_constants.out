@@ -1,0 +1,25 @@
+rho_0^2 = 33/16 = 2.062500
+rho_2^2 = 585/16 = 36.562500
+rho_4^2 = 3553/16 = 222.062500
+tail of ||e_inf||^2 outside |y|<=0.8 <= 9.565215232512947e-09 ; ||T h_inf||_{Y0} >= 0.6529439024260046
+mu=40: lattice error exceeds main term
+mu=50: kappa_lambda >= 0.006731   (L6=60.47, gap4=3.92, ||v4||<=0.0817, ||x v4||<=0.1010, ||Tv||<=0.5275)
+mu=60: kappa_lambda >= 0.024111   (L6=60.60, gap4=4.05, ||v4||<=0.0650, ||x v4||<=0.0804, ||Tv||<=0.4200)
+mu=70: kappa_lambda >= 0.042142   (L6=60.70, gap4=4.15, ||v4||<=0.0539, ||x v4||<=0.0668, ||Tv||<=0.3489)
+mu=80: kappa_lambda >= 0.058353   (L6=60.77, gap4=4.22, ||v4||<=0.0461, ||x v4||<=0.0571, ||Tv||<=0.2983)
+mu=100: kappa_lambda >= 0.084472   (L6=60.87, gap4=4.32, ||v4||<=0.0357, ||x v4||<=0.0443, ||Tv||<=0.2313)
+mu=150: kappa_lambda >= 0.124657   (L6=61.00, gap4=4.45, ||v4||<=0.0228, ||x v4||<=0.0284, ||Tv||<=0.1481)
+mu=300: kappa_lambda >= 0.169918   (L6=61.13, gap4=4.58, ||v4||<=0.0110, ||x v4||<=0.0136, ||Tv||<=0.0712)
+mu=1000: kappa_lambda >= 0.204075   (L6=61.22, gap4=4.67, ||v4||<=0.0032, ||x v4||<=0.0040, ||Tv||<=0.0208)
+
+-- theta optimised per mu (grid over theta; any theta gives a valid bound) --
+mu=30: kappa_lambda >= 0.000312  (theta=0.220)
+mu=40: kappa_lambda >= 0.065335  (theta=0.175)
+mu=50: kappa_lambda >= 0.109225  (theta=0.145)
+mu=60: kappa_lambda >= 0.134001  (theta=0.125)
+mu=80: kappa_lambda >= 0.161566  (theta=0.095)
+mu=100: kappa_lambda >= 0.175229  (theta=0.080)
+mu=120: kappa_lambda >= 0.184168  (theta=0.065)
+mu=150: kappa_lambda >= 0.191992  (theta=0.055)
+mu=200: kappa_lambda >= 0.199610  (theta=0.040)
+mu=300: kappa_lambda >= 0.206531  (theta=0.030)

@@ -1,0 +1,43 @@
+eta coefficient 4 f(1/4) <= 0.3829
+int |delta| dz <= D/(c t^2), D <= 0.2909
+eps1 coefficient (per 1/t^2) <= 0.00926 ; eps2 coefficient <= 0.00464
+rho remainder coefficient (per 1/t^2) <= 0.3973
+E0/A0^2 <= 2.1984 ; |w_z|/A0 <= 1.0945
+A_inf^2/A0^2 <= 3.1197 ; |A_inf|/A0 <= 1.767
+near-field coefficient 1.78^2/sqrt(0.7) <= 3.787
+per-unit-interval int l(cu)^2 du <= 1.152
+int_1^2 b^2 coefficient (per Psi^2/c) <= 9.983
+M = (A + B K1^2) Psi^2/c + 0.75 h(0)^2/lam with A <= 73.77 , B <= 19.02
+0.75 h(0)^2/lam <= (coef) rho||h||^2, coef <= 1.531
+M/(rho||h||^2) <= MA + MB K1^2, MA <= 592.0 , MB <= 152.17
+L(c): exact sum vs closed form 2 log(c/3) + 5.49
+  mu=5: exact <= 8.51,  closed = 10.188
+  mu=7: exact <= 9.183,  closed = 10.861
+  mu=11: exact <= 10.087,  closed = 11.765
+
+ mu |   P(mu) <=   | P/observed | H(mu)e^{16mu} <= | n* <=  | K1 <=
+    5 |  1.854e+13 |  1.143e+13 |     3.751e-1     |  3.7899e+1 | 1.2778e+1
+    7 |  6.498e+13 |  3.601e+13 |     1.565e-3     |  5.0146e+1 | 1.3451e+1
+   11 |  3.557e+14 |  1.738e+14 |     5.211e-9     |  7.4519e+1 | 1.4355e+1
+   13 |  6.689e+14 |  3.160e+14 |    6.114e-12     |  8.6674e+1 | 1.4689e+1
+   15 |  1.151e+15 |  5.109e+14 |    5.996e-15     |  9.8815e+1 | 1.4975e+1
+   20 |  3.426e+15 |          - |    1.069e-22     |  1.2914e+2 | 1.5550e+1
+   50 |  1.118e+17 |          - |    7.893e-72     |  3.1058e+2 | 1.7383e+1
+  100 |  1.557e+18 |          - |   1.977e-156     |  6.1254e+2 | 1.8769e+1
+ 1000 |  9.274e+21 |          - |  2.166e-1712     |  6.0422e+3 | 2.3375e+1
+local exponent d log P / d log mu at mu ~ 1400: 3.746
+
+P(mu)/(mu^{7/2} (log mu)^3) on a grid (not a proof of monotonicity):
+  mu=5: 1.592e+10
+  mu=6: 1.201e+10
+  mu=8: 8.234e+9
+  mu=10: 6.431e+9
+  mu=15: 4.431e+9
+  mu=20: 3.562e+9
+  mu=30: 2.751e+9
+  mu=50: 2.112e+9
+  mu=100: 1.595e+9
+  mu=300: 1.150e+9
+  mu=1000: 8.898e+8
+  mu=10000: 6.407e+8
+  mu=1000000: 4.450e+8

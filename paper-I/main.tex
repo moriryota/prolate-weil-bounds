@@ -1,0 +1,367 @@
+% Ryota Mori. Draft 0, 2026-10-02. Licence: CC BY 4.0.
+% Paper I: non-asymptotic bound with the sharp power for 1 - lambda_n(c).
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+\newcommand{\provisional}[1]{{\color{red}#1}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[proposition]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\Kell}{\mathbf{K}}
+\emergencystretch=3em
+
+\title[Sharp-power bounds for the prolate eigenvalue defect]{A non-asymptotic bound with the sharp power of $c$ for the eigenvalue defect $1-\lambda_n(c)$ of time and frequency limiting}
+\author{Ryota Mori}
+\address{Independent researcher, Tokyo, Japan}
+\email{moriryota31@gmail.com}
+\date{Draft, 2 October 2026}
+
+\begin{document}
+
+\begin{abstract}
+Let $\lambda_0(c)>\lambda_1(c)>\cdots$ be the eigenvalues of the time and frequency limiting operator with kernel $\sin c(x-y)/(\pi(x-y))$ on $[-1,1]$. Fuchs' asymptotic formula $1-\lambda_n(c)\sim4\sqrt\pi\,8^n c^{n+1/2}e^{-2c}/n!$ describes the defect of the top eigenvalues as $c\to\infty$. Rigorous non-asymptotic bounds in the literature give the decay rate $e^{-c}$. We prove that for $0\le n\le4$ and every $c\ge10\pi$,
+\[
+1-\lambda_n(c)\le C_n\,c^{n+1/2}e^{-2c},
+\]
+with explicit constants $C_n$. The exponent $e^{-2c}$ and the power $c^{n+1/2}$ are those of Fuchs' formula. The proof combines Slepian's identity $\partial_c\log\lambda_n=2\psi_n(1)^2/c$ with a sharp upper bound for the mass of the band-limited extension of $\psi_n$ outside $[-1,1]$: this mass is at most $(\psi_n(1)^2/c)\,(2/\pi)\Kell(\chi_n/c^2)\,(1+15/c^2)$, where $\Kell$ is the complete elliptic integral. The bound comes from a Bessel-type Liouville transformation at the regular singular point $t=1$, in which the first-order error cancels. All constants are established with ball arithmetic. In a companion paper, the case $n=4$ is used to bound the bottom of windowed Weil quadratic forms, which are related to the Riemann Hypothesis through Weil's criterion.
+\end{abstract}
+
+\maketitle
+
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\small
+\textbf{Status.} Proved in this paper, with explicit constants established by ball arithmetic (Arb). Not formalized. This paper has not yet been reviewed by independent human experts.}}
+\end{center}
+
+\section{Introduction}
+
+For $c>0$ let $Q_c$ be the operator on $L^2(-1,1)$ with kernel $\sin c(x-y)/(\pi(x-y))$. Its eigenvalues $1>\lambda_0(c)>\lambda_1(c)>\cdots>0$ are simple, and the eigenfunctions $\psi_n=\psi_{n,c}$ are the prolate spheroidal wave functions (PSWFs) \cite{SlepianPollak61,LandauPollak61}. We normalize them by $\|\psi_n\|_{L^2(-1,1)}=1$. For fixed $n$, the defect $1-\lambda_n(c)$ tends to $0$ as $c\to\infty$, and Fuchs \cite{Fuchs64} (see also \cite{Slepian65}) gave the asymptotic formula
+\begin{equation}\label{eq:fuchs}
+1-\lambda_n(c)\sim\frac{4\sqrt\pi\,8^n}{n!}\,c^{n+1/2}e^{-2c}\qquad(c\to\infty).
+\end{equation}
+Non-asymptotic bounds for $\lambda_n(c)$ are available in many regimes \cite{Osipov13a,Osipov13b,BonamiKaroui16,BonamiKaroui17,BJK21}. For the defect of the top eigenvalues, Bonami, Jaming and Karoui \cite[Thm.~3.2]{BJK21} proved
+\[
+\lambda_n(c)\ge1-\frac{7}{\sqrt c}\,\frac{(2c)^n}{n!}\,e^{-c}\qquad(0\le n\le c/2.7),
+\]
+whose exponential rate is $e^{-c}$, not $e^{-2c}$. We did not find a rigorous non-asymptotic bound with the rate $e^{-2c}$ in the literature.
+
+\begin{theorem}\label{thm:main}
+For $n\in\{0,1,2,3,4\}$ and every $c\ge10\pi$,
+\[
+1-\lambda_n(c)\le C_n\,c^{n+1/2}e^{-2c},
+\]
+with the constants of Table~\ref{tab:Cn}.
+\end{theorem}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccccc}
+\toprule
+$n$ & 0 & 1 & 2 & 3 & 4\\
+\midrule
+$C_n$ (Theorem~\ref{thm:main}) & $18.34$ & $155.0$ & $703.4$ & $2340$ & $6621$\\
+Fuchs' constant $4\sqrt\pi8^n/n!$ & $7.09$ & $56.7$ & $227$ & $605$ & $1210$\\
+\bottomrule
+\end{tabular}
+\caption{The constants $C_n$ are rounded up; Fuchs' constants are rounded to three digits. The ratios $C_n/(4\sqrt\pi8^n/n!)$ are $2.59$, $2.73$, $3.10$, $3.87$, $5.48$. Each ratio is the product of the factor $e^{\beta_n(c_0)/c_0}$ from the integration in Section~\ref{sec:main} and the ratio of $U_ne^{2c_0}c_0^{-n-1/2}$ to Fuchs' constant at $c_0$ (for $n=4$: $7.18\times0.762$). Lemma~\ref{lem:start} is sharp to $4\times10^{-8}$.}\label{tab:Cn}
+\end{table}
+
+The key estimate concerns the band-limited extension $\tilde\psi_n$ of $\psi_n$ to $\R$ (Section~\ref{sec:prelim}). Its mass outside $[-1,1]$ is $T_n:=\int_{|t|>1}\tilde\psi_n^2=(1-\lambda_n)/\lambda_n$.
+
+\begin{theorem}\label{thm:tail}
+Let $0\le n\le4$, $c\ge10\pi$ and $s=\chi_n(c)/c^2$, where $\chi_n$ is the Sturm--Liouville eigenvalue \eqref{eq:SL}. Then
+\[
+T_n\le\frac{\psi_n(1)^2}{c}\cdot\frac2\pi\Kell(s)\cdot\Big(1+\frac{15}{c^2}\Big),\qquad\Kell(s)=\int_1^\infty\frac{dt}{\sqrt{(t^2-1)(t^2-s)}}.
+\]
+\end{theorem}
+
+Theorem~\ref{thm:tail} is sharp to relative order $c^{-2}$: numerically the ratio of the two sides is $0.985$ at $c=10\pi$ and $0.9925$ at $c=14\pi$ for every $n\le4$ (Table~\ref{tab:num}). The absence of a $1/c$ term in the correction factor is what gives the sharp power: combined with Slepian's identity (Lemma~\ref{lem:slepian}), it yields $\partial_c\log(1-\lambda_n)\le-2+(2n+1)/(2c)+O(c^{-2})$, whose integral produces exactly $c^{n+1/2}e^{-2c}$.
+
+\subsection*{Method}
+\begin{itemize}
+\item On $t>1$ the extension $\tilde\psi_n$ solves the radial prolate equation, which has a regular singular point at $t=1$. A Bessel-type Liouville transformation turns it into Bessel's equation of order $0$ plus a perturbation $\Delta$ with $c^2\Delta$ bounded uniformly (Section~\ref{sec:liouville}).
+\item The leading term $J_0$ gives the main term $\Kell(s)/(\pi c)$ through the identity $\int_0^xyJ_0^2=\tfrac{x^2}2(J_0^2+J_1^2)$.
+\item The first-order error of the Volterra iteration is a priori of relative size $1/c$. It cancels to order $c^{-2}$ because the primitive $\int_0^xyJ_0Y_0=\tfrac{x^2}2(J_0Y_0+J_1Y_1)$ is bounded (Section~\ref{sec:tail}).
+\end{itemize}
+
+\section{Preliminaries}\label{sec:prelim}
+
+Let $\F_cf(x)=\int_{-1}^1e^{icxy}f(y)\,dy$. Then $Q_c=\frac c{2\pi}\F_c^*\F_c$, and $\F_c\psi_n=\mu_n\psi_n$ with $\lambda_n=\frac c{2\pi}|\mu_n|^2$. The functions $\psi_n$ are also the eigenfunctions of
+\begin{equation}\label{eq:SL}
+L_c=-\frac{d}{dx}(1-x^2)\frac d{dx}+c^2x^2,\qquad L_c\psi_n=\chi_n\psi_n,
+\end{equation}
+with $\chi_0<\chi_1<\cdots$. The parity of $\psi_n$ is $(-1)^n$.
+
+\textbf{Extension.} Put $\tilde\psi_n(t)=\mu_n^{-1}\F_c\psi_n(t)$ for $t\in\R$. It is entire, it equals $\psi_n$ on $[-1,1]$, and it satisfies $L_c\tilde\psi_n=\chi_n\tilde\psi_n$ on $\R$. By Plancherel, $\|\tilde\psi_n\|^2_{L^2(\R)}=1/\lambda_n$, hence $T_n=(1-\lambda_n)/\lambda_n$. On $t>1$, with $p=t^2-1$ and $q=c^2t^2-\chi_n$,
+\begin{equation}\label{eq:radial}
+(p\tilde\psi_n')'+q\tilde\psi_n=0.
+\end{equation}
+
+\begin{lemma}[Slepian's identity]\label{lem:slepian}
+$\partial_c\lambda_n(c)=2\lambda_n(c)\psi_n(1)^2/c$.
+\end{lemma}
+\begin{proof}
+The eigenvalues are simple and $c\mapsto Q_c$ is a real-analytic family of trace-class operators. By Hellmann--Feynman, $\partial_c\lambda_n=\langle(\partial_cQ_c)\psi_n,\psi_n\rangle$. Since $\partial_c$ of the kernel is $\cos c(x-y)/\pi$ and $\psi_n$ is real,
+\[
+\partial_c\lambda_n=\frac1\pi\Big|\int_{-1}^1e^{icx}\psi_n(x)\,dx\Big|^2=\frac1\pi|\mu_n|^2\psi_n(1)^2=\frac{2\lambda_n}c\psi_n(1)^2.\qedhere
+\]
+\end{proof}
+The identity is classical; see \cite{Fuchs64,XRY01,BonamiKaroui17}. Consequently
+\begin{equation}\label{eq:dlog}
+\partial_c\log(1-\lambda_n)=-\frac{2\psi_n(1)^2}{c\,T_n}.
+\end{equation}
+
+\begin{lemma}\label{lem:s}
+For $0\le n\le4$ and $c\ge10\pi$, $s=\chi_n(c)/c^2<0.3$.
+\end{lemma}
+\begin{proof}
+By Hellmann--Feynman, $\partial_c\chi_n=2c\langle x^2\psi_n,\psi_n\rangle\le2\chi_n/c$, since $\chi_n\ge c^2\langle x^2\psi_n,\psi_n\rangle$. Hence $\chi_n/c^2$ is non-increasing, and it suffices to take $c=10\pi$. Since $\chi_n\le\chi_4$ for $n\le4$, it suffices to bound $\chi_4$, the third even eigenvalue. The matrix of $L_c$ in the even normalized Legendre polynomials is tridiagonal. Rayleigh--Ritz, together with a Sturm-sequence count in ball arithmetic, shows that it has three eigenvalues below $0.3c^2$ at $c=10\pi$.
+\end{proof}
+
+\begin{lemma}\label{lem:chi}
+For $0\le n\le4$ and $c\ge10\pi$, $\chi_n\le(2n+1)c/(1-\tau_n(c))$, where $\tau_n(c)=\sum_{j}\int_{|u|>\sqrt c}\tilde H_j(u)^2du$. The sum runs over $j\le n$ with $j\equiv n\pmod 2$, and $\tilde H_j$ are the normalized Hermite functions. At $c=10\pi$, $\tau_n\le3.6\times10^{-9}$, and $\tau_n$ decreases in $c$.
+\end{lemma}
+\begin{proof}
+Use min--max in the parity sector of $\psi_n$, with trial functions $c^{1/4}\tilde H_j(\sqrt c\,x)$ restricted to $[-1,1]$. The natural boundary condition of $L_c$ requires no cutoff. The form satisfies $\langle L_cf,f\rangle\le\int_\R(f'^2+c^2x^2f^2)\le(2n+1)c\sum a_j^2$, and $\|f\|_{L^2(-1,1)}^2\ge(1-\tau_n)\sum a_j^2$. The tails are bounded by $\int_X^\infty u^me^{-u^2}du\le X^{m-1}e^{-X^2}$ for $X^2\ge m$.
+\end{proof}
+
+\section{A Bessel-type Liouville transformation}\label{sec:liouville}
+
+Fix $n\le4$, $c\ge10\pi$ and $s=\chi_n/c^2\in[0,0.3]$. For $t>1$ put
+\[
+\xi(t)=\int_1^t\sqrt{q/p},\qquad P=\sqrt{pq},\qquad\tilde\psi_n=(\xi/P)^{1/2}W.
+\]
+Then \eqref{eq:radial} becomes
+\begin{equation}\label{eq:bessel}
+(\xi W')'+\xi W=\xi\Delta W,\qquad\Delta=\frac{(P^{1/2})''}{P^{1/2}}+\frac1{4\xi^2}\qquad({}'=d/d\xi).
+\end{equation}
+Since $\xi=c\,\Xi(t,s)$ with $\Xi$ independent of $c$, the function $F:=c^2\Delta$ depends on $(t,s)$ only. As $t\to1^+$ we have $P/\xi\to1$, so $W(0)=\psi_n(1)$, and $W$ is the solution regular at $\xi=0$.
+
+\begin{lemma}\label{lem:F}
+Put $a=1-s$, $y=\sqrt{t^2-1}$ and $r=y^2+a$. Then $F=C+L$, where
+\[
+C=\frac1{4r}+\frac{3-6s}{4r^2}+\frac{5sa}{4r^3},
+\]
+and $L\ge0$ is given by an explicit integral formula. $F$ is positive and decreasing in $t$, with $F(1,s)=(3-s)/(3a^2)$. Consequently, for $s\in[0,0.3]$:
+\[
+\sup_{t>1}F=\mathrm{TV}_tF\le D_0:=1.837,\qquad\int_1^\infty F\,d\Xi\le D_1:=1.370.
+\]
+\end{lemma}
+
+\begin{proof}
+\textbf{Setup.} Let $v=y^2+1$, $g(y)=\sqrt{r/v}$ and $\Xi(y)=\int_0^yg$, so that $\Xi'(t)\,dt=g(y)\,dy$, $\xi=c\,\Xi$ and $P=cy\sqrt r$. Put $A(y)=\Xi(y)/y=\int_0^1g(yz)\,dz$.
+
+\textbf{Decomposition.} Direct differentiation in \eqref{eq:bessel} gives $F=B+1/(4\Xi^2)$, where $B=(l'+l^2-lg'/g)/g^2$ and $l=1/(2y)+y/(2r)$. The apparent singularity cancels, and one obtains the exact identity $F=C+L$ with
+\[
+L=\frac{A^{-2}-g^{-2}}{4y^2}.
+\]
+Since $g'(w)=sw/[g(w)(1+w^2)^2]$, integration by parts gives $g-A=y^{-1}\int_0^ywg'(w)\,dw=y^2\beta$, where
+\[
+\beta(y)=s\int_0^1\frac{z^2\,dz}{g(yz)(1+y^2z^2)^2}.
+\]
+Hence
+\[
+L=\frac\beta4\Big[\frac1{A^2g}+\frac1{Ag^2}\Big]\ge0.
+\]
+
+\textbf{Monotonicity.}
+\begin{itemize}
+\item The functions $g$ and $A$ are non-decreasing, and $\beta$ is non-increasing. So $L$ is non-increasing.
+\item With $u=y^2$, $-4r^4\partial_uC=u^2+(8-14s)u+7-5s-2s^2>0$ for $s\le0.3$. So $C$ is decreasing.
+\item Therefore $F$ is positive and non-increasing in $t$.
+\end{itemize}
+
+\textbf{Endpoint value.} The series $g=\sqrt a[1+sy^2/(2a)+O(y^4)]$, $A=\sqrt a[1+sy^2/(6a)+O(y^4)]$ and $\beta(0)=s/(3\sqrt a)$ give $F(1,s)=(3-s)/(3a^2)$. This value increases in $s$, and at $s=0.3$ it equals $90/49<1.837$. Since $F$ is positive and non-increasing, $\sup F$ and $\mathrm{TV}_tF$ both equal this value.
+
+\textbf{The integral.} Since $F\ge0$ and $g\le1$, we have $\int F\,d\Xi\le\int_0^\infty(C+L)\,dy$.
+\begin{itemize}
+\item The substitution $y=\sqrt a\tan\theta$ gives $\int_0^\infty C\,dy=\pi(20-17s)/(64a^{3/2})$.
+\item Since $A,g\ge\sqrt a$, Tonelli gives $\int_0^\infty L\,dy\le s\pi/(16a^2)$.
+\end{itemize}
+Both terms increase in $s$. At $s=0.3$ their sum is $1.36906\ldots<1.370$, computed in Arb.
+\end{proof}
+
+\begin{lemma}[Volterra form]\label{lem:volterra}
+Let $M(x)^2=J_0(x)^2+Y_0(x)^2$. Then $W/\psi_n(1)=J_0+\varepsilon_1+\varepsilon_2$, where $\varepsilon_1$ is the first Picard iterate of
+\[
+\varepsilon(\xi)=\frac\pi2\int_0^\xi\eta\,[J_0(\eta)Y_0(\xi)-J_0(\xi)Y_0(\eta)]\,\Delta(\eta)\,(J_0(\eta)+\varepsilon(\eta))\,d\eta.
+\]
+Moreover $|\varepsilon_1|\le\Phi M$ and $|\varepsilon_2|\le(e^\Phi-1-\Phi)M$, where $\Phi\le\int_0^\infty|\Delta|\,d\xi\le D_1/c$.
+\end{lemma}
+\begin{proof}
+The Wronskian of $J_0,Y_0$ is $2/(\pi\xi)$, which gives the Volterra equation. The kernel is at most $\frac\pi2\eta M(\xi)M(\eta)$ by Cauchy--Schwarz. Nicholson's formula \cite[10.9.30]{DLMF} gives $\frac\pi2xM(x)^2\le1$. Picard iteration then gives the bounds.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:tail}}\label{sec:tail}
+
+Let $q(\xi)=c^2(t(\xi)^2-s)$ and $\omega=-(1/q)'\ge0$. From $dt=(P/q)\,d\xi$,
+\[
+T_n=2\int_0^\infty\xi W^2\frac{d\xi}q,\qquad\int_0^\infty\frac{d\xi}q=\frac{\Kell(s)}c.
+\]
+Put $G(x)=\tfrac{x^2}2(J_0^2+J_1^2)=\int_0^x\eta J_0^2$, $H(x)=\tfrac{x^2}2(J_0Y_0+J_1Y_1)=\int_0^x\eta J_0Y_0$ and $R=G-x/\pi$. Then
+\[
+\frac{T_n}{2\psi_n(1)^2}=\underbrace{\int\xi J_0^2/q}_{\text{main}}+\underbrace{2\int\xi J_0\varepsilon_1/q}_{X}+R_2.
+\]
+
+\begin{lemma}\label{lem:bessel}
+\begin{enumerate}
+\item[(BL1)] $\frac\pi2x(J_0^2+Y_0^2)\le1$ for $x>0$.
+\item[(BL2)] $\sup_{x>0}|H(x)|\le h_0:=0.162$.
+\item[(BL3)] $\big|\int_0^\infty R\,\omega\big|\le1.2\,c^{-3}$ for $c\ge10\pi$, $s\in[0,0.3]$.
+\end{enumerate}
+\end{lemma}
+We use the Hankel expansions with explicit remainders. Let $\theta=x-\pi/4$. For $x>0$,
+\begin{equation}\label{eq:hankel}
+H^{(1)}_0=\sqrt{\tfrac2{\pi x}}\,e^{i\theta}\big(1-\tfrac i{8x}+e_0\big),\qquad
+H^{(1)}_1=\sqrt{\tfrac2{\pi x}}\,e^{i(\theta-\pi/2)}\big(1+\tfrac{3i}{8x}+e_1\big),
+\end{equation}
+with $|e_0|\le\frac{9}{128}x^{-2}$ and $|e_1|\le\frac{15}{128}x^{-2}$. This is \cite[10.17(iii)]{DLMF} with $\ell=2$. It also follows from the integral representation
+\[
+H^{(1)}_\nu(x)=\sqrt{\tfrac2{\pi x}}e^{i(x-\nu\pi/2-\pi/4)}\frac1{\Gamma(\alpha+1)}\int_0^\infty e^{-t}t^\alpha\Big(1+\frac{it}{2x}\Big)^\alpha dt,\qquad\alpha=\nu-\tfrac12,
+\]
+and Taylor's theorem with integral remainder.
+
+\begin{proof}
+\textbf{(BL1).} Nicholson's formula \cite[10.9.30]{DLMF}, with $u=2x\sinh t$, gives
+\[
+x(J_0^2+Y_0^2)=\frac4{\pi^2}\int_0^\infty\frac{K_0(u)\,du}{\sqrt{1+u^2/(4x^2)}}.
+\]
+Since $K_0>0$ and $\int_0^\infty K_0=\pi/2$ \cite[10.32.9]{DLMF}, the right-hand side is at most $2/\pi$. We have also checked (BL1) independently in ball arithmetic: by Taylor enclosures on $65{,}520$ cells covering $[1/64,64]$, by Frobenius series on $(0,1/64]$, and by \eqref{eq:hankel} with $\ell=3$ on $[64,\infty)$.
+
+\textbf{(BL2).} We have $H'=xJ_0Y_0$, so (BL1) gives $|H'|\le1/\pi$. The bound is proved separately on three ranges.
+\begin{itemize}
+\item On $[1/64,64]$: Arb values of $H$ at the cell midpoints, together with $|H'|\le1/\pi$, give $|H|<0.1600$.
+\item On $(0,1/64]$: the Frobenius series of $J_0,Y_0,J_1,Y_1$ give $|H|<0.001$.
+\item On $[64,\infty)$: since $JY=\operatorname{Im}((J+iY)^2)/2$, \eqref{eq:hankel} gives
+\[
+|H|\le\frac1{2\pi}\Big[1+\frac1{8x}+\frac{2(b_0d_0+b_1d_1)}x+\frac{d_0^2+d_1^2}{x^3}\Big],
+\]
+where $b_0=1+1/(8x)$, $b_1=1+3/(8x)$, $d_0=9/128$ and $d_1=15/128$. At $x=64$ the bracket gives $0.16041<0.162$, and the bound decreases in $x$.
+\end{itemize}
+
+\textbf{(BL3).} For $x\ge1$ put $E(x)=R(x)+\cos(2x)/(2\pi)$.
+\begin{itemize}
+\item By \eqref{eq:hankel}, $|E(x)|\le A_E/x$ for $x\ge1$, with $A_E=0.2037<1/4$.
+\item For $0<x<1$, the series of $J_0$ and $J_1$ give $|E|<2$.
+\item In the variable $y$, $\omega=2y\sqrt v/(c^3r^{5/2})$. The sign of $\omega_y$ is that of $a+(2a-4)y^2-3y^4$, so $\omega$ is unimodal with $\mathrm{TV}\,\omega=2\max\omega\le9/(4\sqrt3a^2c^3)$.
+\end{itemize}
+Now split $\int R\omega$ into three parts.
+\begin{itemize}
+\item \textbf{Cosine term.} Integration by parts against $\sin(2x)/2$ gives $|\frac1{2\pi}\int\cos(2x)\,\omega|\le\mathrm{TV}\,\omega/(4\pi)$.
+\item \textbf{$E$ on $(0,1)$.} Since $\omega(x)\le2x/(a^3c^4)$ there, $\int_0^1|E|\omega\le2/(a^3c^4)$.
+\item \textbf{$E$ on $[1,\infty)$.} $\int_1^\infty|E|\omega\le\frac14\int\omega/x\,dx\le\pi/(8a^2c^3)$.
+\end{itemize}
+With $a\ge0.7$ and $c\ge10\pi$, the total is at most $1.198\,c^{-3}$.
+\end{proof}
+
+\begin{remark}
+The primitive of $R$ is not bounded. The Hankel expansion gives $R(x)=-\cos(2x)/(2\pi)+(1-\sin2x)/(8\pi x)+O(x^{-2})$, so $\int_1^xR=(\log x)/(8\pi)+O(1)$. This is why (BL3) needs the decomposition above.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:tail}]
+\begin{itemize}
+\item \textbf{Main term.} By parts, $\int\xi J_0^2/q=\int G\omega=\Kell(s)/(\pi c)+\int R\omega$.
+\item \textbf{Cross term.} Swapping the order of integration,
+\[
+X=\pi\int\eta\Delta J_0[J_0A-Y_0B]\,d\eta,\qquad A=\int_\eta^\infty\xi J_0Y_0/q,\quad B=\int_\eta^\infty\xi J_0^2/q.
+\]
+By (BL2), $|A|\le2h_0/q$. Integrating $\eta J_0Y_0=H'$ by parts against $\Delta B$ gives $|X|\le2\pi h_0D_0B(0)/c^2+4h_0D_1/(c^3a)$ (here $\mathrm{TV}\,F=\sup F\le D_0$).
+\item \textbf{Quadratic remainder.} $|R_2|\le[(e^\Phi-1)^2+2(e^\Phi-1-\Phi)]\cdot\frac2\pi\Kell(s)/c$, by (BL1).
+\end{itemize}
+Relative to $\Kell(s)/(\pi c)$, and using $\Kell\ge\pi/2$ and $a\ge0.7$, the four contributions are at most $2.40$, $2.54$, $1.88$ and $8.02$ (times $c^{-2}$). Their sum is at most $15c^{-2}$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:main}
+
+\begin{lemma}[starting values]\label{lem:start}
+At $c_0=10\pi$, $1-\lambda_n(c_0)\le U_n$, where
+\[
+\begin{aligned}
+&U_0=2.0207289\times10^{-26},\quad U_1=4.9533689\times10^{-24},\quad U_2=5.9183604\times10^{-22},\\
+&U_3=4.5903630\times10^{-20},\quad U_4=2.5967761\times10^{-18}.
+\end{aligned}
+\]
+\end{lemma}
+\begin{proof}
+\begin{itemize}
+\item \textbf{Trial space.} Fix polynomials $f_0,\dots,f_4$ of degree $126$ or $127$, with exact rational coefficients, close to $\psi_0,\dots,\psi_4$. By min--max applied to $V_n=\operatorname{span}\{f_0,\dots,f_n\}$,
+\[
+1-\lambda_n\le\max_{f\in V_n}\frac{\|f\|^2-\langle Q_cf,f\rangle}{\|f\|^2}.
+\]
+\item \textbf{Matrices.} The Gram matrix $G$ follows from the Legendre moments. The matrix of $Q_c$ is replaced by that of the truncated kernel $K_N$ obtained from $\sin z/z=\sum_{k\le N}(-1)^kz^{2k}/(2k+1)!$ with $N=160$ (degree $320$ in $z$), integrated termwise. The alternating remainder contributes at most $\varepsilon=20(20\pi)^{322}/323!<3\times10^{-92}$ to every Rayleigh quotient.
+\item \textbf{Bounds.} A lower bound $g_n$ for the smallest eigenvalue of $G$ and an upper bound $R_n$ for the largest eigenvalue of $G-Q$ follow from row sums. Hence $1-\lambda_n\le R_n/g_n+\varepsilon$.
+\end{itemize}
+All entries are computed in ball arithmetic at 512 bits. Independent high-precision Legendre--Galerkin computations give $1-\lambda_n(c_0)$ within the factor $1+4\times10^{-8}$ of $U_n$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By \eqref{eq:dlog} and Theorem~\ref{thm:tail},
+\[
+\partial_c\log(1-\lambda_n)\le-\frac{2}{(1+A)(1+B)}\le-2+2A+2B,
+\]
+where $A=a_n/4+\frac9{64}a_n^2/(1-a_n)$, $a_n=(2n+1)/(c(1-\tau_n))\ge s$ (Lemma~\ref{lem:chi}), and $B=15/c^2$. Here we used $\frac2\pi\Kell(s)\le1+s/4+\frac9{64}s^2/(1-s)$. This equals $-2+(2n+1)/(2c)+\beta_n(c)/c^2$, where
+\[
+\beta_n(c)=30+\frac{(2n+1)c\,\tau_n}{2(1-\tau_n)}+\frac{9(2n+1)^2}{32(1-\tau_n)^2(1-a_n)} .
+\]
+Here $\tau_n(c)$ is bounded by the explicit Gaussian tail of Lemma~\ref{lem:chi}, which is of the form $e^{-c}$ times a polynomial; that bound times $c$ decreases for $c\ge10\pi$, and $a_n$ decreases. Hence $\beta_n$ is bounded by a decreasing function of $c$. Integrating from $c_0=10\pi$ gives
+\[
+1-\lambda_n(c)\le U_n\,e^{2c_0}c_0^{-(n+1/2)}e^{\beta_n(c_0)/c_0}\cdot c^{n+1/2}e^{-2c}.
+\]
+Ball arithmetic gives the constants of Table~\ref{tab:Cn}.
+\end{proof}
+
+\section{Numerical illustration}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccccc}
+\toprule
+& $n=0$ & $1$ & $2$ & $3$ & $4$\\
+\midrule
+$1-\lambda_n(10\pi)$ & $2.02\times10^{-26}$ & $4.95\times10^{-24}$ & $5.92\times10^{-22}$ & $4.59\times10^{-20}$ & $2.60\times10^{-18}$\\
+ratio in Thm~\ref{thm:tail}, $c=10\pi$ & $0.98537$ & $0.98541$ & $0.98545$ & $0.98550$ & $0.98556$\\
+ratio in Thm~\ref{thm:tail}, $c=14\pi$ & $0.99248$ & $0.99249$ & $0.99251$ & $0.99252$ & $0.99254$\\
+\bottomrule
+\end{tabular}
+\caption{Defects and the ratio $T_n/(\text{right-hand side of Theorem~\ref{thm:tail}})$, computed from Legendre expansions at 200 digits (not certified).}\label{tab:num}
+\end{table}
+
+\section{Remarks}
+\begin{enumerate}
+\item \textbf{General $n$.} The proof uses $n\le4$ only through $s\le0.3$ and the starting value. For larger $n$, the same argument works for $c\ge c_0(n)$ once $s\le s_{\max}<1$ is ensured, after recomputing $D_0$, $D_1$ and the Bessel constants on $[0,s_{\max}]$.
+\item \textbf{Constants.} Apart from the starting value, the constants lose the factor $e^{\beta_n/c_0}$ (at most about $7.2$ for $n=4$).
+\end{enumerate}
+
+\section*{Reproducibility}
+All computer-assisted steps are reproducible from the public repository \provisional{(URL and DOI to be added on release)}. It contains every script with its raw output, the exact rational coefficients of the trial polynomials of Lemma~\ref{lem:start} together with the certified matrices and bounds $g_n$, $R_n$, the interval certificates for (BL1) and (BL2), the Sturm count of Lemma~\ref{lem:s}, and a table matching each constant to its script. All constants are computed in ball arithmetic (Arb, via python-flint, 200--512 bits) with directed rounding asserted in the scripts.
+
+\section*{Use of generative AI}
+This work was carried out with extensive use of generative AI systems, namely Anthropic Claude, Google Gemini and OpenAI GPT. Under the direction of the author, these systems drafted the proofs, implemented and ran the computations, reviewed one another's drafts adversarially, searched the literature, and drafted this manuscript. The author chose the problem and the strategy, assigned and reviewed the tasks, and takes full responsibility for the content. The AI systems are not authors of this paper.
+
+\begin{thebibliography}{99}
+\bibitem{BJK21} A.~Bonami, P.~Jaming, A.~Karoui, Non-asymptotic behavior of the spectrum of the sinc-kernel operator and related applications, \emph{J. Math. Phys.} 62 (2021) 033511. \doi{10.1063/1.5140496}
+\bibitem{BonamiKaroui16} A.~Bonami, A.~Karoui, Uniform approximation and explicit estimates for the prolate spheroidal wave functions, \emph{Constr. Approx.} 43 (2016) 15--45. \doi{10.1007/s00365-015-9295-1}
+\bibitem{BonamiKaroui17} A.~Bonami, A.~Karoui, Spectral decay of time and frequency limiting operator, \emph{Appl. Comput. Harmon. Anal.} 42 (2017) 1--20. \doi{10.1016/j.acha.2015.05.003}
+\bibitem{DLMF} NIST Digital Library of Mathematical Functions, \url{https://dlmf.nist.gov/}.
+\bibitem{Fuchs64} W.~H.~J.~Fuchs, On the eigenvalues of an integral equation arising in the theory of band-limited signals, \emph{J. Math. Anal. Appl.} 9 (1964) 317--330. \doi{10.1016/0022-247X(64)90017-4}
+\bibitem{LandauPollak61} H.~J.~Landau, H.~O.~Pollak, Prolate spheroidal wave functions, Fourier analysis and uncertainty II, \emph{Bell Syst. Tech. J.} 40 (1961) 65--84. \doi{10.1002/j.1538-7305.1961.tb03977.x}
+\bibitem{Osipov13a} A.~Osipov, Certain inequalities involving prolate spheroidal wave functions and associated quantities, \emph{Appl. Comput. Harmon. Anal.} 35 (2013) 359--393. \doi{10.1016/j.acha.2012.10.002}
+\bibitem{Osipov13b} A.~Osipov, Certain upper bounds on the eigenvalues associated with prolate spheroidal wave functions, \emph{Appl. Comput. Harmon. Anal.} 35 (2013) 309--340. \doi{10.1016/j.acha.2013.03.002}
+\bibitem{Slepian65} D.~Slepian, Some asymptotic expansions for prolate spheroidal wave functions, \emph{J. Math. and Phys.} (MIT; now Stud. Appl. Math.) 44 (1965) 99--140. \doi{10.1002/sapm196544199}
+\bibitem{SlepianPollak61} D.~Slepian, H.~O.~Pollak, Prolate spheroidal wave functions, Fourier analysis and uncertainty I, \emph{Bell Syst. Tech. J.} 40 (1961) 43--63. \doi{10.1002/j.1538-7305.1961.tb03976.x}
+\bibitem{XRY01} H.~Xiao, V.~Rokhlin, N.~Yarvin, Prolate spheroidal wavefunctions, quadrature and interpolation, \emph{Inverse Problems} 17 (2001) 805--838. \doi{10.1088/0266-5611/17/4/315}
+\end{thebibliography}
+
+\end{document}

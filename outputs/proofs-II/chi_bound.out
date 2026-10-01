@@ -1,0 +1,3 @@
+K=12: # eigenvalues of truncated even matrix below c^2/2 at c=10pi: 4;  below c^2/4: 2;  below 0.3c^2: 3
+K=20: # eigenvalues of truncated even matrix below c^2/2 at c=10pi: 4;  below c^2/4: 2;  below 0.3c^2: 3
+K=30: # eigenvalues of truncated even matrix below c^2/2 at c=10pi: 4;  below c^2/4: 2;  below 0.3c^2: 3

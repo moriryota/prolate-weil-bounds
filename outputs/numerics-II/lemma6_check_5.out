@@ -1,0 +1,2 @@
+mu=5 n=0: s=chi/c^2=0.031065  E(t0)/A0^2=0.58883 (bound 2.1984)  max_[t0,60] E/A0^2=0.64779 (bound 3.12)  A_inf/A0=0.79788 (bound 1.767)  near-field max=0.6186 (bound 3.79)  max |rho|/bound on [2,300]=0.9911
+mu=5 n=4: s=chi/c^2=0.27512  E(t0)/A0^2=0.59064 (bound 2.1984)  max_[t0,60] E/A0^2=0.64758 (bound 3.12)  A_inf/A0=0.79788 (bound 1.767)  near-field max=0.71252 (bound 3.79)  max |rho|/bound on [2,300]=0.9918

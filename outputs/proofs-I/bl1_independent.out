@@ -1,0 +1,11 @@
+0<x<=1/64: bound= [0.3652492116504230769750915305250977400 +/- 5.01e-38] <0.4
+x>=64: |normalized Hankel|²<=1+x^-2*bracket; bracket= [-0.12 +/- 5.01e-3] <0
+certified BL1 through x= 8.0
+certified BL1 through x= 16.0
+certified BL1 through x= 24.0
+certified BL1 through x= 32.0
+certified BL1 through x= 40.0
+certified BL1 through x= 48.0
+certified BL1 through x= 56.0
+compact max certified bound= [0.99996997847964 +/- 3.77e-15] at 63.999511718750000000000000000000000000
+BL1 for every x>0 passed independently of Nicholson integral.

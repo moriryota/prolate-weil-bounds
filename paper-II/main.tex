@@ -1,0 +1,539 @@
+% Ryota Mori. Draft 0, 2026-10-02. Licence: CC BY 4.0.
+% Paper II: sequel to "Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms".
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+\newcommand{\provisional}[1]{{\color{red}#1}}
+
+\newtheorem{theorem}{Theorem}
+\renewcommand{\thetheorem}{\Alph{theorem}}
+\setcounter{theorem}{2}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[proposition]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\F}{\mathcal{F}}
+\emergencystretch=3em
+
+\title[The Weil form of the prolate vector]{The Weil quadratic form of the Connes--Consani--Moscovici prolate vector, and a $\mu^8$ upper bound for windowed Weil forms}
+\author{Ryota Mori}
+\address{Independent researcher, Tokyo, Japan}
+\email{moriryota31@gmail.com}
+\date{Draft, 2 October 2026}
+
+\begin{document}
+
+\begin{abstract}
+Weil's criterion states that the Riemann Hypothesis holds if and only if Weil's quadratic form $W$ is nonnegative. Restricted to test functions supported in a multiplicative window $[\lambda^{-1},\lambda]$, this becomes $\lambda_{\min}(\lambda)\ge0$ for all $\lambda$, where $\lambda_{\min}(\lambda)$ is the bottom of the spectrum of the restricted form; any proof of RH along these lines must control how fast this margin shrinks. Put $\mu=\lambda^2$. In earlier work we proved, without any hypothesis on the zeros of $\zeta$, that $\lambda_{\min}(\lambda)\le1.362\times10^9\mu^{23}e^{-4\pi\mu}$ for $\mu\ge5$. Connes, Consani and Moscovici proposed a vector $k_\lambda$ built from two prolate spheroidal wave functions, and observed numerically that $W(k_\lambda)$ tracks the prolate eigenvalue defect $1-\chi_2$. We prove this unconditionally. Theorem~C bounds $|W(k_\lambda)|$ by an explicit polynomial in $\mu$ times the out-of-band mass $\rho_{\rm out}\le1-\chi_2^2$ of the underlying band-limited function, plus $e^{-16\mu}$. We then show that $\|k_\lambda\|^2\ge0.109\|h_\lambda\|^2$ for $\mu\ge50$ by comparison with Hermite functions. Combined with a non-asymptotic bound $1-\chi_2^2\le C\mu^{9/2}e^{-4\pi\mu}$ from a companion paper, this gives
+\[
+\lambda_{\min}(\lambda)\le5.011\times10^{17}\,\mu^8(\log\mu)^3e^{-4\pi\mu}\qquad(\mu\ge50).
+\]
+All constants are explicit and established with ball arithmetic. The results are upper bounds only and say nothing about positivity.
+\end{abstract}
+
+\maketitle
+
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\small
+\textbf{Status.} Proved in this paper, with explicit constants established by ball arithmetic (Arb). Not formalized. This paper has not yet been reviewed by independent human experts.}}
+\end{center}
+
+\section{Introduction}
+
+\subsection{Background}
+Let $W$ be Weil's quadratic form and $W_\lambda$ its restriction to test functions supported in the multiplicative window $[\lambda^{-1},\lambda]$ \cite{CC21,CCM25}. Write $\lambda_{\min}(\lambda)$ for the bottom of its spectrum and $\mu=\lambda^2$. By Weil's criterion, RH is equivalent to $\lambda_{\min}(\lambda)\ge0$ for all $\lambda$.
+
+In \cite{MoriWWUB} we proved two unconditional upper bounds:
+\[
+\lambda_{\min}(\lambda)\le1.563\times10^9\mu^8e^{-2\pi\mu}
+\quad\text{and}\quad
+\lambda_{\min}(\lambda)\le1.362\times10^9\mu^{23}e^{-4\pi\mu}\qquad(\mu\ge5).
+\]
+\cite{MoriWWUB} left two questions open.
+\begin{itemize}
+\item \emph{Remark~3 there:} does $W(k_\lambda)$ admit a bound by a multiple of the prolate eigenvalue defect $1-\chi_2$? Here $k_\lambda$ is the vector of Connes, Consani and Moscovici \cite[\S7]{CCM25}. Numerically $W(k_\lambda)/\|k_\lambda\|^2\approx(8\text{--}15)(1-\chi_2)$.
+\item \emph{Remark~2 there:} the power $\mu^{23}$ was not optimized.
+\end{itemize}
+This paper answers the first question and reduces the power to $\mu^8$ up to logarithms.
+
+\subsection{Results}
+Let $\psi_n$ be the prolate spheroidal wave functions of bandwidth $c=2\pi\mu$, and $h_{n,\lambda}(x)=\psi_n(x/\lambda)/\sqrt\lambda$ on $|x|<\lambda$. Put
+\[
+h_\lambda=I_4h_{0,\lambda}-I_0h_{4,\lambda}\quad(I_n=\textstyle\int h_{n,\lambda}),\qquad k_\lambda=\E(h_\lambda)|_{[\lambda^{-1},\lambda]}.
+\]
+Let $\chi_0,\chi_2$ be the eigenvalues of the finite Fourier transform on $h_{0,\lambda},h_{4,\lambda}$, and
+\[
+\rho_{\rm out}=\|\hat h_\lambda\mathbf 1_{|\xi|>\lambda}\|^2/\|h_\lambda\|^2=\frac{I_4^2(1-\chi_0^2)+I_0^2(1-\chi_2^2)}{I_0^2+I_4^2}\le1-\chi_2^2 .
+\]
+
+\begin{theorem}\label{thm:C}
+For every $\mu\ge5$, without any hypothesis on the zeros of $\zeta$,
+\[
+|W(k_\lambda)|\le P(\mu)\,\rho_{\rm out}\,\|h_\lambda\|^2+e^{-16\mu}\|h_\lambda\|^2,
+\]
+where $P(\mu)$ is the explicit function \eqref{eq:P}. It satisfies $P(\mu)=O(\mu^{7/2}(\log\mu)^3)$ and $P(5)\le1.854\times10^{13}$.
+\end{theorem}
+
+\begin{theorem}\label{thm:L6}
+For every $\mu\ge50$, $\|k_\lambda\|^2\ge0.109\|h_\lambda\|^2$; for every $\mu\ge80$, $\|k_\lambda\|^2\ge0.161\|h_\lambda\|^2$. Moreover $\liminf_{\mu\to\infty}\|k_\lambda\|^2/\|h_\lambda\|^2\ge\kappa_\infty$, where $\kappa_\infty=0.2192471995\ldots$ is an explicit Hermite constant (numerically the ratio converges to $\kappa_\infty$).
+\end{theorem}
+
+\begin{theorem}\label{thm:E}
+For every $\mu\ge50$,
+\[
+\lambda_{\min}(\lambda)\le5.011\times10^{17}\,\mu^8(\log\mu)^3e^{-4\pi\mu}.
+\]
+\end{theorem}
+
+Theorem~\ref{thm:E} uses the bound $1-\chi_2^2=1-\lambda_4(2\pi\mu)\le C_4(2\pi\mu)^{9/2}e^{-4\pi\mu}$ from the companion paper \cite{MoriPSWF}. The power $9/2$ is that of Fuchs' asymptotic formula \cite{Fuchs64}. Compared with \cite[Thm.~B]{MoriWWUB}, the bound of Theorem~\ref{thm:E} is smaller by a factor of about $1.4\times10^{15}$ at $\mu=50$, $2.8\times10^{19}$ at $\mu=100$, and $8\times10^{33}$ at $\mu=1000$.
+
+\subsection{Numerical context}
+\begin{itemize}
+\item The observed ratio $W(k_\lambda)/(\rho_{\rm out}\|h_\lambda\|^2)$ is $1.6$--$2.3$ for $5\le\mu\le15$, so the factor $P(\mu)$ in Theorem~\ref{thm:C} is far from sharp. The loss comes mainly from the zero side, namely the zero-free region at height $e^{20\mu}$.
+\item The ratio $\|k_\lambda\|^2/\|h_\lambda\|^2$ is about $0.22$ for all $\mu\ge5$.
+\end{itemize}
+
+\subsection{Method}
+\begin{itemize}
+\item \textbf{Theorem~\ref{thm:C}.} As in \cite{MoriWWUB}, $\E(h_\lambda)$ lies in the radical of $W$, so $W(k_\lambda)=\sum_\rho m_\rho\hat r(\gamma_\rho)\hat r(-\gamma_\rho)$, where $r$ is the part of $\E(h_\lambda)$ outside the window. New ingredients:
+  \begin{enumerate}
+  \item a Poisson representation of $r$, in which the oscillating sum $\sum\sin(mx+\Phi)/m$ is summed exactly;
+  \item amplitude and phase estimates for the band-limited extension of $\psi_n$, from Liouville--Green theory and an endpoint estimate $\psi_n(1)^2\le4c(1-\lambda_n)/\lambda_n$;
+  \item a disc-averaging bound for the zero sum, using subharmonicity, the zero-free region of Mossinghoff--Trudgian and the verification of RH to $3\cdot10^{12}$.
+  \end{enumerate}
+\item \textbf{Theorem~\ref{thm:L6}.} The rescaled prolate operator converges to the harmonic oscillator. Hermite residuals of size $O(1/\mu)$, an IMS gap estimate and a Davis--Kahan argument in the form norm give weighted $O(1/\mu)$ control. A lattice-sum bound then transfers it to $k_\lambda$.
+\end{itemize}
+
+\section{Setting}\label{sec:setting}
+
+\subsection{Conventions}
+A word on notation: $r$ denotes the part of $e$ outside the window (Section~\ref{sec:setting}); in Section~\ref{sec:prolate} and Appendix~\ref{app:L5b} the letter $r$ inside formulas in $t$ stands for $t^2-s$; $r_{\rm d}$, $r_T$, $r_\rho$ are disc radii in Section~\ref{sec:zeros}. Similarly $\rho$ denotes a zero of $\zeta$, $\rho_{\rm out}$ the out-of-band mass, and $\rho_n(t)$ a phase remainder; the Hermite residual norms are $\varrho_n$.
+Throughout, $\lambda>1$, $\mu=\lambda^2\ge5$, $a=\log\lambda$ and $c=2\pi\mu\ge10\pi$. Fourier transforms are $\hat f(z)=\int f(y)e^{izy}dy$ in the logarithmic variable and $\hat\varphi(\xi)=\int\varphi(x)e^{2\pi ix\xi}dx$ in the additive variable, as in \cite{MoriWWUB}. For a nontrivial zero $\rho$ of multiplicity $m_\rho$ put $\gamma_\rho=(\rho-\frac12)/i$. Thus $\operatorname{Re}\gamma_\rho=\operatorname{Im}\rho$ is the ordinate, and $|\operatorname{Im}\gamma_\rho|=|\operatorname{Re}\rho-\frac12|$.
+
+\subsection{Prolate functions}
+\begin{itemize}
+\item $\psi_n$ is the $n$-th prolate spheroidal wave function of bandwidth $c$, normalized in $L^2(-1,1)$. It is an eigenfunction of time and frequency limiting with eigenvalue $\lambda_n=\lambda_n(c)$, and of $L_c=-\frac d{ds}(1-s^2)\frac d{ds}+c^2s^2$ with eigenvalue $\chi_n^{\rm SL}$.
+\item $\tilde\psi_n$ is its band-limited extension to $\R$. It satisfies $\|\tilde\psi_n\|_{L^2(\R)}^2=1/\lambda_n$ and $\int_{|t|>1}\tilde\psi_n^2=(1-\lambda_n)/\lambda_n$.
+\item For $n\in\{0,4\}$ we write $\chi_{(n)}=\lambda_n^{1/2}$, so $\chi_0=\chi_{(0)}$ and $\chi_2=\chi_{(4)}$ in the notation of \cite{CCM25,MoriWWUB}.
+\end{itemize}
+
+\subsection{The vector}
+Put $h_{n,\lambda}(x)=\psi_n(x/\lambda)/\sqrt\lambda$ on $|x|<\lambda$ (and $0$ elsewhere), $I_n=\int h_{n,\lambda}$, $\alpha=I_4$, $\beta=-I_0$ and $h=\alpha h_{0,\lambda}+\beta h_{4,\lambda}$. Then $\int h=0$ and $\|h\|^2=\alpha^2+\beta^2$. Further,
+\[
+e(y)=e^{y/2}\sum_{n\ge1}h(ne^y),\qquad k=e\mathbf 1_{[-a,a]}=k_\lambda,\qquad r=e\mathbf 1_{(-\infty,-a)}.
+\]
+In Fourier space $\hat h(\lambda t)=\sum_nw_n\tilde\psi_n(t)$, with $w_n=\mathrm{coef}_n\chi_{(n)}/\sqrt\lambda$, $\mathrm{coef}_0=\alpha$ and $\mathrm{coef}_4=\beta$. Put
+\[
+\Psi=|\alpha|\chi_0|\psi_0(1)|+|\beta|\chi_2|\psi_4(1)|.
+\]
+
+\begin{lemma}[out-of-band identity]\label{lem:L0}
+$\rho_{\rm out}=(\alpha^2(1-\lambda_0)+\beta^2(1-\lambda_4))/(\alpha^2+\beta^2)$.
+\end{lemma}
+\begin{proof}
+By Plancherel, $\|\hat h_{n,\lambda}\|=1$. The in-band part of $\hat h_{n,\lambda}$ is $\chi_{(n)}h_{n,\lambda}$, and $h_{0,\lambda}\perp h_{4,\lambda}$. Hence the out-of-band cross term is $\langle\hat h_0,\hat h_4\rangle-\chi_0\chi_2\langle h_0,h_4\rangle=0$.
+\end{proof}
+
+\subsection{The radical lemma and the explicit formula}
+\begin{lemma}\label{lem:L1}
+\begin{enumerate}
+\item[(a)] $|e(y)|\le\mathrm{TV}(h)e^{y/2}$ for $y\le-a$.
+\item[(b)] $\hat r$ is holomorphic on $\operatorname{Im}z<\frac12$, and $\hat k(\pm\gamma_\rho)=-\hat r(\pm\gamma_\rho)$ for every nontrivial zero.
+\item[(c)] For $\tau<\frac12$, $\int|\hat r(s+i\tau)|^2ds=2\pi\|r_\tau\|^2$, where $r_\tau(X)=X^\tau r(-\log X)$ in $L^2((\lambda,\infty),dX/X)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\textbf{(a)} For $x=e^y\le1/\lambda$, $x\sum h(nx)$ is a Riemann sum for $\int_0^\infty h=0$, with error at most $x\,\mathrm{TV}(h)$.
+
+\textbf{(b)} For $\operatorname{Im}z<-\frac12$, Fubini gives $\hat e(z)=\zeta(\frac12+iz)\int_0^\lambda h(v)v^{-1/2+iz}dv$. The integral is holomorphic on $\operatorname{Im}z<\frac12$, so the identity extends there, minus the pole. Since $e=k+r$ and $\hat e(\pm\gamma_\rho)=0$, the claim follows.
+
+\textbf{(c)} This is Plancherel.
+\end{proof}
+
+By the explicit formula \cite[Lemma~3.2]{MoriWWUB} and Lemma~\ref{lem:L1}(b),
+\begin{equation}\label{eq:W}
+W(k)=\sum_\rho m_\rho\hat r(\gamma_\rho)\hat r(-\gamma_\rho),\qquad|W(k)|\le\sum_\rho m_\rho|\hat r(\gamma_\rho)|^2,
+\end{equation}
+where the last step is Cauchy--Schwarz together with the symmetry $\gamma\mapsto-\gamma$ of the zeros.
+
+\begin{lemma}[Poisson form]\label{lem:P}
+For a.e.\ $X>\lambda$, $r(-\log X)=X^{1/2}\sum_{m\ge1}\hat h(mX)-\frac12h(0)X^{-1/2}$.
+\end{lemma}
+\begin{proof}
+$h$ is even and of bounded variation, with jumps only at $\pm\lambda$. Apply the Dirichlet--Jordan test to the periodization, using symmetric partial sums and $\hat h(0)=0$.
+\end{proof}
+
+\section{The prolate side}\label{sec:prolate}
+
+\begin{lemma}[eigenvalues and variation]\label{lem:S1e}
+For $c\ge10\pi$ and $n\le4$:
+\begin{itemize}
+\item $\lambda_n\ge(1-5\varepsilon_*)/(1-\varepsilon_*)>395/399$, where $\varepsilon_*=16\cdot14!/30^{10}$;
+\item $|\psi_n|\le\sqrt{c/(\pi\lambda_n)}$ and $|\psi_n'|\le c^{3/2}/\sqrt{3\pi\lambda_n}$ on $[-1,1]$;
+\item the total variation $V$ of $k$ on $\R$, including the jumps at $\pm a$, satisfies $V\le9\mu^3\|h\|$.
+\end{itemize}
+\end{lemma}
+\begin{proof}
+\begin{itemize}
+\item \textbf{Eigenvalues.} Apply min--max to $Q_c$ on the span of the five scaled Hermite functions $c^{1/4}\tilde H_k(\sqrt cs)$. Their time and band leakage is at most $\varepsilon_*$.
+\item \textbf{Pointwise bounds.} These follow from $\psi_n=\mu_n^{-1}\F_c\psi_n$ and Cauchy--Schwarz.
+\item \textbf{Variation.} At most $\mu$ terms of $e$ contribute in the window. Each has total variation at most $3\sqrt\lambda M+\lambda^{3/2}D$, where $M=\sup|h|$ and $D=\sup|h'|$ are bounded via the pointwise bounds.
+\end{itemize}
+Full details are in Appendix~\ref{app:S1e}.
+\end{proof}
+
+\begin{lemma}[Liouville--Green]\label{lem:L5a}
+Let $c\ge10\pi$, $n\in\{0,4\}$, $s=\chi_n^{\rm SL}/c^2$, $p=t^2-1$ and $q=c^2(t^2-s)$.
+\begin{enumerate}
+\item[(a)] $s<0.3$.
+\item[(b)] $V(t)=\tilde\psi^2+(p\tilde\psi')^2/(pq)$ is non-increasing on $t>1$, so $|\tilde\psi_n(t)|\le|\psi_n(1)|$ for $|t|\ge1$.
+\item[(c)] With $z'=\sqrt{q/p}$ and $\tilde\psi=(pq)^{-1/4}w$, we have $w_{zz}+(1+\delta)w=0$, where
+\[
+\delta=\frac{1}{4c^2pr}-\frac{s^2+2s+(3-6s)t^2}{4c^2r^3},\qquad r=t^2-s,
+\]
+and $|\delta|c^2t^4\le0.5038$ for $t\ge2$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\textbf{(a)} $\chi/c^2$ is non-increasing in $c$ by Hellmann--Feynman. At $c=10\pi$, a Sturm count in ball arithmetic shows that the third even eigenvalue is below $0.3c^2$.
+
+\textbf{(b)} We have $V'=-(p\tilde\psi')^2(pq)'/(pq)^2\le0$ and $V(1^+)=\psi(1)^2$.
+
+\textbf{(c)} The formula is direct differentiation. The bound on $\delta$ is a ball-arithmetic bound over $u=t^{-2}\in[0,\frac14]$ and $s\in[0,\frac12]$.
+\end{proof}
+
+\begin{lemma}[endpoint value]\label{lem:L5b}
+For $n\in\{0,4\}$ and $c\ge10\pi$, $\psi_n(1)^2\le4c(1-\lambda_n)/\lambda_n$. Consequently $\Psi^2\le8c\,\rho_{\rm out}\|h\|^2$.
+\end{lemma}
+\begin{proof}
+Let $A_0=|\psi_n(1)|$, change the sign of $\psi_n$ so that $\psi_n(1)=A_0$, and let $t_0=1+1/(2c^2)$.
+\begin{enumerate}
+\item Integrating $(p\tilde\psi')'+q\tilde\psi=0$ once gives $|p\tilde\psi'|\le A_0c^2(t-1)t^2$. Hence $\tilde\psi(t_0)\ge\frac{37}{50}A_0$.
+\item The Liouville--Green error satisfies $J:=\int_{t_0}^\infty|\delta|\,dz\le\frac{339}{980}<\frac7{20}$.
+\item By Gronwall, the energy $E=w^2+w_z^2$ stays within $[\frac7{10},\frac{10}7]E(t_0)$ on $[t_0,\infty)$.
+\item A weighted energy identity on $[4/3,\infty)$ gives $2\int_{4/3}^\infty\tilde\psi^2\ge A_0^2/(4c)$.
+\item The mass identity $\int_{|t|>1}\tilde\psi^2=(1-\lambda_n)/\lambda_n$ then gives the claim.
+\end{enumerate}
+The consequence follows from Cauchy--Schwarz and Lemma~\ref{lem:L0}. Full details are in Appendix~\ref{app:L5b}.
+\end{proof}
+
+\begin{lemma}[$h(0)$]\label{lem:H0}
+$h(0)^2\le2.0408\,\lambda\,\rho_{\rm out}\|h\|^2$.
+\end{lemma}
+\begin{proof}
+The eigenrelation at the centre gives $h(0)=I_0I_4(\chi_2-\chi_0)/(\chi_0\chi_2)$. We have $(\chi_0-\chi_2)^2\le1-\chi_2^2$ and $I_4^2\le2\lambda$. Moreover $\lambda_0\lambda_4\ge(395/399)^2$, and $2(399/395)^2\le2.0408$.
+\end{proof}
+
+\begin{lemma}[amplitude]\label{lem:amp}
+Let $A_0=|\psi_n(1)|$ and $E=w^2+w_z^2$. Then:
+\begin{itemize}
+\item $E\le3.12A_0^2$ on $t\ge t_0$;
+\item the limit $A_\infty=\lim E^{1/2}$ satisfies $A_\infty\le1.78A_0$;
+\item $\tilde\psi_n(t)^2\le3.79A_0^2/(c\sqrt{t^2-1})$ for $1<t\le2$.
+\end{itemize}
+\end{lemma}
+\begin{proof}
+\textbf{Initial energy.} From $|p\tilde\psi'|\le A_0c^2(t-1)t^2$ and $|\tilde\psi|\le A_0$, at $t_0$:
+\begin{itemize}
+\item $w^2\le t_0(1+\frac1{4c^2})^{1/2}A_0^2$;
+\item $|w_z|\le A_0[\frac12t_0^2Z^{-1/4}+\frac12t_0(Z^{-1/4}+(c^2p)^{3/4}r_{\rm lo}^{-5/4}/c^2)]$, where $r_{\rm lo}=t_0^2-0.3$ and $Z=c^2p(t_0)r_{\rm lo}$ (so $Z\ge0.7$ for all $c$, and $Z>0.7011$ at $c=10\pi$).
+\end{itemize}
+Every term decreases in $c$. At $c=10\pi$, ball arithmetic gives $E(t_0)\le2.1984A_0^2$.
+
+\textbf{Propagation.} By Gronwall with $J\le\frac7{20}$, $E\le e^{7/20}E(t_0)\le3.1197A_0^2$.
+
+\textbf{Limit and near field.} $\log E$ has an integrable derivative, so the limit exists. For $t\ge t_0$, $\tilde\psi^2=(pq)^{-1/2}w^2$ and $pq\ge0.7c^2(t^2-1)$ give the near-field bound. For $1<t<t_0$, use $|\tilde\psi|\le A_0$ and $3.79/(c\sqrt{t^2-1})>1$.
+\end{proof}
+
+\begin{lemma}[far field]\label{lem:S1a}
+For $t\ge2$, $\tilde\psi_n(t)=A_\infty(ct^2)^{-1/2}[\sin(ct+\Phi_n)+\rho_n(t)]$, where $|\rho_n(t)|\le\min(2,2c/(3t))+0.4/t^2$.
+\end{lemma}
+\begin{proof}
+Use the Pr\"ufer variables $w=A\sin\theta$, $w_z=A\cos\theta$. We have $\int_t^\infty|\delta|\,dz\le0.2909/(ct^2)$. Hence:
+\begin{itemize}
+\item the phase error is $|\varepsilon_1|\le0.00926t^{-2}$;
+\item the amplitude error is $|\varepsilon_2|\le0.00464t^{-2}$;
+\item the normalizing factor is $(pq)^{-1/4}=(ct^2)^{-1/2}(1+\eta)$ with $\eta\le0.3829t^{-2}$, by convexity;
+\item the geometric phase is $|z-ct-Z_0|\le2c/(3t)$.
+\end{itemize}
+\end{proof}
+
+\section{The remainder}\label{sec:r}
+
+\begin{lemma}\label{lem:S1b}
+For $0\le\tau<\frac12$, $\|r_\tau\|^2\le\lambda^{2\tau}(1-2\tau)^{-1}M$, where
+\[
+M\le(592+152.2K_1^2)\,\rho_{\rm out}\|h\|^2,\qquad K_1=2\log(c/3)+8.08.
+\]
+For $\tau<0$, $\|r_\tau\|\le\|r_0\|$.
+\end{lemma}
+\begin{proof}
+Put $u=X/\lambda$ and $B_n=\lambda^{1/2}w_nA_{\infty,n}c^{-1/2}$. Then $B=|B_0|+|B_4|\le1.78\Psi/\sqrt c$ by Lemma~\ref{lem:amp}. For $mu\ge2$, Lemmas~\ref{lem:P} and~\ref{lem:S1a} give
+\[
+X^{1/2}\hat h(mX)=u^{-1/2}\sum_nB_nm^{-1}[\sin(cmu+\Phi_n)+\rho_n(mu)].
+\]
+\begin{itemize}
+\item \textbf{Linear phase.} The sum is explicit: $\sum_m\sin(mx+\Phi)/m=-\sin\Phi\,\ell(x)+\cos\Phi\,(\pi-(x\bmod2\pi))/2$, with $\ell(x)=\log|2\sin(x/2)|$.
+\item \textbf{Phase errors.} $\sum_{mu\ge2}|\rho_n(mu)|/m\le2\log(c/3)+5.49$.
+\item \textbf{The $m=1$ term} for $1<u<2$ is bounded by Lemma~\ref{lem:amp}.
+\item \textbf{Integration.} We use $\int_j^{j+1}\ell(cu)^2du\le\pi^2/12+\pi^3/(3c)\le1.152$ and $\sum_jj^{2\tau-2}\le2/(1-2\tau)$.
+\end{itemize}
+This gives $M\le(73.8+19.02K_1^2)\Psi^2/c+0.75h(0)^2/\lambda$. Conclude with Lemmas~\ref{lem:L5b} and~\ref{lem:H0}.
+\end{proof}
+
+\section{The zero sum}\label{sec:zeros}
+
+We use three explicit results.
+\begin{itemize}
+\item \textbf{Zero counting} \cite[Cor.~1]{Trudgian14}. For $T\ge e$, $|N(T)-\frac T{2\pi}\log\frac T{2\pi e}-\frac78|\le R(\log T)$, where $R(x)=0.111x+0.275\log x+2.450+0.2/e$.
+\item \textbf{Zero-free region} \cite[Thm.~1]{MT15}. There are no zeros with $|t|\ge2$ and $\sigma>1-1/(5.573412\log|t|)$.
+\item \textbf{Verification of RH} \cite{PT21}. All zeros with $0<\gamma\le3\cdot10^{12}$ lie on the critical line.
+\end{itemize}
+
+\begin{lemma}\label{lem:S1c}
+Let $T\ge3\cdot10^{12}$ and $r_T=1/(11.15\log(T+1))$. Let $n^*$ bound the number of zeros, with multiplicity, whose ordinate lies within $\frac14$ of any $s$ with $|s|\le T+1$. Then
+\[
+|W(k)|\le\frac{2n^*}{r_T^2}\Big(\frac12+\frac\lambda2\log\frac1{2r_T}\Big)M+\frac{2\lambda V^2(\log T+1)}{\pi T}.
+\]
+\end{lemma}
+\begin{proof}
+Start from \eqref{eq:W} and put $F=\hat r$.
+
+\textbf{Discs.} To each zero with $|\operatorname{Re}\gamma_\rho|\le T$ attach the disc $D(\gamma_\rho,r_\rho)$.
+\begin{itemize}
+\item If $|\operatorname{Re}\gamma_\rho|\le3\cdot10^{12}$, take $r_\rho=\frac14$; then $\operatorname{Im}\gamma_\rho=0$.
+\item Otherwise take $r_\rho=1/(11.15\log|\operatorname{Re}\gamma_\rho|)$. The zero-free region gives $\frac12-|\operatorname{Im}\gamma_\rho|\ge2r_\rho$.
+\end{itemize}
+In both cases the discs lie in $|\operatorname{Im}z|\le\frac12-r_T$.
+
+\textbf{Low zeros.} By subharmonicity, $|F(\gamma_\rho)|^2\le(\pi r_\rho^2)^{-1}\iint_{D_\rho}|F|^2$. Each point is covered at most $n^*$ times. Lemmas~\ref{lem:L1}(c) and~\ref{lem:S1b} bound the resulting strip integral.
+
+\textbf{High zeros.} Integration by parts gives $|\hat k(z)|\le\lambda^{1/2}V/|\operatorname{Re}z|$. Moreover $\sum_{\gamma>T}m/\gamma^2\le(\log T+1)/(\pi T)$, by $N(t)\le\frac t{2\pi}\log\frac t{2\pi}$ for $t\ge T$.
+\end{proof}
+
+The zero count gives $n^*\le N:=(20\mu+1-\log2\pi)/(4\pi)+2R(20\mu+1)$ for $T=e^{20\mu}$. The first zero has ordinate $14.13$, so for $|s|<13.9$ the count is at most $1\le N$.
+
+\section{Proof of Theorem~\ref{thm:C}}\label{sec:C}
+Take $T=e^{20\mu}$. Then $r_T\ge r_{\rm d}:=1/(11.15(20\mu+1))$ and $n^*\le N$. The prefactor in Lemma~\ref{lem:S1c} is monotone in $(r_T,n^*)$, so we may substitute $(r_{\rm d},N)$. Lemma~\ref{lem:S1e} gives $V^2\le81\mu^6\|h\|^2$, so the high-zero term is at most
+\[
+H(\mu)\|h\|^2,\qquad H(\mu)=2\sqrt\mu\,81\mu^6(20\mu+1)/(\pi e^{20\mu})\le e^{-16\mu}.
+\]
+
+This proves Theorem~\ref{thm:C} with
+\begin{equation}\label{eq:P}
+P(\mu)=\frac{2N}{r_{\rm d}^2}\Big(\frac12+\frac{\sqrt\mu}2\log\frac1{2r_{\rm d}}\Big)\big(592+152.2K_1^2\big),
+\end{equation}
+where
+\[
+r_{\rm d}=\frac1{11.15(20\mu+1)},\qquad N=\frac{20\mu+1-\log2\pi}{4\pi}+2R(20\mu+1),\qquad K_1=2\log(c/3)+8.08 .
+\]
+Ball arithmetic gives the values $P(5)\le1.854\times10^{13}$, $P(15)\le1.151\times10^{15}$ and $P(100)\le1.557\times10^{18}$. Each factor of $P$, divided by its power of $\mu$ or $\log\mu$, is non-increasing, so $P(\mu)/(\mu^{7/2}(\log\mu)^3)$ is non-increasing for $\mu\ge5$. \qed
+
+\section{The Hermite limit and Theorem~\ref{thm:L6}}\label{sec:L6}
+
+\subsection{Rescaled operator}
+In the variable $x=\lambda s$, the operator $L_c$ becomes $\mu A_\mu$, where
+\[
+A_\mu=-\frac d{dx}\Big(1-\frac{x^2}\mu\Big)\frac d{dx}+4\pi^2x^2\quad\text{on }(-\lambda,\lambda),
+\]
+with the natural boundary condition. The function $h_{n,\lambda}$ is its $n$-th eigenfunction, with eigenvalue $E_n(\mu)=\chi_n^{\rm SL}/\mu$. The limit operator is the harmonic oscillator $A_\infty=-d^2/dx^2+4\pi^2x^2$. Its eigenfunctions are $g_n(x)=(2\pi)^{1/4}\tilde H_n(\sqrt{2\pi}x)$, with eigenvalues $E_n^\infty=2\pi(2n+1)$, and $\hat g_n=g_n$ for $n\in\{0,4\}$. Put
+\[
+h_\infty=I_4^\infty g_0-I_0^\infty g_4,\qquad I_n^\infty=g_n(0),\qquad e_\infty(y)=e^{y/2}\sum_{m\ge1}h_\infty(me^y),
+\]
+and $\kappa_\infty=\|e_\infty\|^2/\|h_\infty\|^2$. Then $h_\infty(0)=\int h_\infty=0$, and by Poisson summation $e_\infty$ is even. Ball arithmetic gives $0.219247199548<\kappa_\infty<0.219247199550$.
+
+\subsection{Residuals}
+On $(-\lambda,\lambda)$ we have $(A_\mu-E_n^\infty)g_n=\mu^{-1}(x^2g_n')'$. After scaling,
+\[
+\|(x^2g_n')'\|^2=\varrho_n^2:=\int_\R\big((u^2\tilde H_n')'\big)^2du,
+\]
+with $\varrho_0^2=\frac{33}{16}$, $\varrho_2^2=\frac{585}{16}$ and $\varrho_4^2=\frac{3553}{16}$. Let $\tau_n=\int_{|u|>\sqrt c}\tilde H_n^2$ and $s_n=\sqrt{1-\tau_n}$. The normalized restriction $g_n^\sharp=g_n|_{(-\lambda,\lambda)}/s_n$ then has residual $\|(A_\mu-E_n^\infty)g_n^\sharp\|\le\delta_n=\varrho_n/(\mu s_n)$.
+
+\subsection{Localization of the spectrum}
+\begin{itemize}
+\item \textbf{Each interval contains an eigenvalue.} Each interval $[E_{2k}^\infty-\delta_{2k},E_{2k}^\infty+\delta_{2k}]$, $k=0,1,2$, contains an eigenvalue.
+\item \textbf{Lower bound for the fourth even eigenvalue.} IMS localization uses the ramp cut-off $j_1,j_2$, which has $|j_1'|^2+|j_2'|^2\le\pi^2/R^2$, with $R^2=\theta\mu$. It gives
+\[
+\varepsilon_4\ge L_6:=\min\{(1-\theta)E_6^\infty,\pi^2\theta\mu\}-\frac{\pi^2}{\theta\mu}.
+\]
+\item \textbf{Counting.} If the three intervals are disjoint and $L_6>E_4^\infty+\delta_4$, then $E_{2k}(\mu)$ lies in the $k$-th interval.
+\end{itemize}
+This yields the lower bounds
+\[
+\gamma_0=E_2^\infty-\delta_2-E_0^\infty,\qquad\gamma_4=\min\{E_4^\infty-E_2^\infty-\delta_2,\ L_6-E_4^\infty\}
+\]
+for the distance from $E_0^\infty,E_4^\infty$ to the rest of the even spectrum. The odd sector does not interact with even trial functions.
+
+\subsection{Davis--Kahan in the form norm}
+Let $q_\mu(f)=\int_{-\lambda}^\lambda(1-x^2/\mu)|f'|^2+4\pi^2x^2|f|^2$ be the form of $A_\mu$. Let $\varphi$ be the normalized eigenfunction for $E_n(\mu)$, with the sign chosen so that $\langle g_n^\sharp,\varphi\rangle\ge0$, and put $u=g_n^\sharp-\langle g_n^\sharp,\varphi\rangle\varphi$. Since $(A_\mu-E_n^\infty)u=P^\perp(A_\mu-E_n^\infty)g_n^\sharp$,
+\[
+\|u\|\le a_n:=\frac{\delta_n}{\gamma_n},\qquad q_\mu(u)=\langle(A_\mu-E_n^\infty)u,u\rangle+E_n^\infty\|u\|^2\le\frac{\delta_n^2}{\gamma_n}+\frac{E_n^\infty\delta_n^2}{\gamma_n^2},
+\]
+and $4\pi^2\|xu\|^2\le q_\mu(u)$. Put $b_n=\sqrt{\delta_n^2/\gamma_n+E_n^\infty\delta_n^2/\gamma_n^2}/(2\pi)$. Let $h_{n,\lambda}=\varphi$, extended by zero, and $v_n=h_{n,\lambda}-g_n$ on $\R$. Using $1-\langle g_n^\sharp,\varphi\rangle\le a_n^2$, $\|x\varphi\|\le\sqrt{E_n^\infty+\delta_n}/(2\pi)$ and $\|xg_n\|^2=(2n+1)/(4\pi)$, we get
+\[
+\|v_n\|\le V_n:=a_n+a_n^2+(1-s_n)+\sqrt{\tau_n},
+\]
+\[
+\|xv_n\|\le X_n:=b_n+a_n^2\frac{\sqrt{E_n^\infty+\delta_n}}{2\pi}+(s_n^{-1}-1)\sqrt{\frac{2n+1}{4\pi}}+\|xg_n\mathbf 1_{|x|>\lambda}\|.
+\]
+
+\subsection{Lattice sums}
+For $(Tv)(y)=e^{y/2}\sum_mv(me^y)$, $Y_0=0.8$ and even $v$:
+\[
+\|Tv\|^2_{L^2(|y|\le Y_0)}\le\frac{\pi^2}{12}e^{Y_0}W_{Y_0}(v)^2,\qquad W_{Y_0}(v)^2=\int_\R\big(2\sinh(Y_0)x^2+|x|\big)v^2 .
+\]
+(Cauchy--Schwarz with weights $m^{-2}$, the substitution $x=me^y$, and the count $\#\{m:x\in[me^{-Y_0},me^{Y_0}]\}\le2x\sinh Y_0+1$.) Since $|x|\le(1+x^2)/2$,
+\[
+W_{Y_0}(v_n)\le B_n:=\sqrt{(2\sinh Y_0+\tfrac12)X_n^2+\tfrac12V_n^2},\qquad W_{Y_0}(h_{n,\lambda})\le H_n:=W_{Y_0}(g_n)+B_n,
+\]
+and, since $\|(1+x^2)^{-1/2}\|^2=\pi$, $|I_n(\lambda)-I_n^\infty|\le D_n:=\sqrt\pi\sqrt{V_n^2+X_n^2}$.
+
+\subsection{Conclusion}
+For $\mu\ge5$, the window contains $[-Y_0,Y_0]$. Hence
+\[
+\|k_\lambda\|\ge\|Th_\infty\|_{Y_0}-\|T(h_\lambda-h_\infty)\|_{Y_0},\qquad\|Th_\infty\|_{Y_0}\ge0.65294,
+\]
+where the tail of $e_\infty$ outside $|y|\le0.8$ is below $10^{-8}$. With $\alpha_\infty=I_4^\infty$, $\beta_\infty=-I_0^\infty$ and $h_\lambda-h_\infty=(\alpha_\lambda-\alpha_\infty)h_{0,\lambda}+\alpha_\infty v_0+(\beta_\lambda-\beta_\infty)h_{4,\lambda}+\beta_\infty v_4$,
+\[
+\|T(h_\lambda-h_\infty)\|_{Y_0}\le U_T:=\sqrt{\tfrac{\pi^2}{12}e^{Y_0}}\big[D_4H_0+|\alpha_\infty|B_0+D_0H_4+|\beta_\infty|B_4\big],
+\]
+\[
+\|h_\lambda\|^2\le D_H:=(|\alpha_\infty|+D_4)^2+(|\beta_\infty|+D_0)^2,
+\]
+so that, whenever $0.65294-U_T>0$ and the separation conditions above hold,
+\[
+\frac{\|k_\lambda\|^2}{\|h_\lambda\|^2}\ge F_*(\mu,\theta):=\frac{(0.65294-U_T)^2}{D_H}.
+\]
+For fixed $\theta$, $\delta_n$ and the tails decrease in $\mu$ while $L_6$ and the $\gamma_n$ increase, so $U_T$ and $D_H$ decrease and $F_*$ increases. Ball arithmetic gives:
+
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+$(\mu,\theta)$ & $\gamma_4\ge$ & $V_4\le$ & $X_4\le$ & $U_T\le$ & $F_*\ge$\\
+\midrule
+$(50,0.145)$ & $11.92$ & $0.0257$ & $0.0337$ & $0.178$ & $0.1092$\\
+$(80,0.095)$ & $16.07$ & $0.0118$ & $0.0159$ & $0.0844$ & $0.1615$\\
+\bottomrule
+\end{tabular}
+\end{center}
+This proves Theorem~\ref{thm:L6}. For the $\liminf$, run the same argument with an arbitrary fixed $Y$ in place of $Y_0$: the weighted errors tend to $0$, so $\liminf\|k_\lambda\|^2\ge\|Th_\infty\|^2_{[-Y,Y]}$, and $\|h_\lambda\|^2\to\|h_\infty\|^2$; then let $Y\to\infty$. \qed
+
+\section{Proof of Theorem~\ref{thm:E}}\label{sec:E}
+By Theorem~\ref{thm:C}, Lemma~\ref{lem:L0} and \cite[Thm.~1]{MoriPSWF},
+\[
+|W(k_\lambda)|\le\big(P(\mu)C_4(2\pi\mu)^{9/2}e^{-4\pi\mu}+e^{-16\mu}\big)\|h_\lambda\|^2,
+\]
+where $C_4\le6621$ \cite[Thm.~1 and Table~1]{MoriPSWF}. Since $\lambda_{\min}\le W(k_\lambda)/\|k_\lambda\|^2$ \cite[(2.1)]{MoriWWUB}, Theorem~\ref{thm:L6} gives the first bound. The function $P(\mu)/(\mu^{7/2}\log^3\mu)$ and the term $e^{-16\mu+4\pi\mu}/(\mu^8\log^3\mu)$ are non-increasing, so their values at $\mu=50$ give the constant $5.011\times10^{17}$. \qed
+
+\section{Numerical evidence}\label{sec:num}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccccc}
+\toprule
+$\mu$ & 5 & 7 & 11 & 13 & 15\\
+\midrule
+$W(k_\lambda)/(\rho_{\rm out}\|h\|^2)$ & 1.62 & 1.80 & 2.05 & 2.12 & 2.25\\
+$\|k_\lambda\|^2/\|h_\lambda\|^2$ & 0.2227 & 0.2214 & 0.2205 & 0.2203 & 0.2201\\
+$\rho_{\rm out}$ & $1.9\times10^{-18}$ & $1.1\times10^{-28}$ & $1.4\times10^{-49}$ & $3.6\times10^{-60}$ & $8.5\times10^{-71}$\\
+\bottomrule
+\end{tabular}
+\caption{Galerkin computations (not certified). The value of $\|k_\lambda\|^2/\|h_\lambda\|^2$ at $\mu=50$ is $0.2195$.}
+\end{table}
+
+
+\appendix
+
+\section{Proof of Lemma~\ref{lem:S1e}}\label{app:S1e}
+
+\subsection*{Hermite functions}
+Let $\mathcal F_1g(\omega)=(2\pi)^{-1/2}\int e^{-i\omega s}g(s)\,ds$. Let $P$ be multiplication by $\mathbf 1_{[-1,1]}$ and $B_c=\mathcal F_1^{-1}\mathbf 1_{[-c,c]}\mathcal F_1$. For $f$ on $[-1,1]$ extended by zero, $\langle Q_cf,f\rangle=\|B_cf\|^2$.
+
+Let $u_k(x)=H_k(x)e^{-x^2/2}/(\pi^{1/4}\sqrt{2^kk!})$ and $\phi_k(s)=c^{1/4}u_k(\sqrt cs)$ for $0\le k\le4$. These are orthonormal, and $\mathcal F_1u_k=(-i)^ku_k$. For $g$ in $G=\operatorname{span}(\phi_0,\dots,\phi_4)$, Cauchy--Schwarz gives
+\[
+\|(1-P)g\|^2\le\varepsilon(c)\|g\|^2,\qquad\|(1-B_c)g\|^2\le\varepsilon(c)\|g\|^2,\qquad\varepsilon(c)=\sum_{k\le4}\int_{|x|>\sqrt c}u_k^2 .
+\]
+
+\subsection*{The leakage}
+We have $\sum_{k\le4}H_k(x)^2/(2^kk!)=\frac23x^8-\frac83x^6+5x^4+\frac{15}8\le\frac{181}{24}x^8$ for $x\ge1$. Integration by parts gives $\int_R^\infty x^8e^{-x^2}\le e^{-R^2}R^7$ for $R^2\ge30$. Hence
+\[
+\varepsilon(c)\le\frac{181}{12}e^{-c}c^{7/2}\le16e^{-c}c^4\le16e^{-30}30^4\le\varepsilon_*=\frac{16\cdot14!}{30^{10}}<\frac1{400},
+\]
+using $e^{30}\ge30^{14}/14!$.
+
+\subsection*{The eigenvalue bound}
+Let $U=PG$, which has dimension $5$. For $f=Pg\in U$, $\|(1-B_c)f\|\le2\sqrt{\varepsilon_*}\|g\|$ and $\|f\|^2\ge(1-\varepsilon_*)\|g\|^2$. Hence $\langle Q_cf,f\rangle/\|f\|^2\ge1-4\varepsilon_*/(1-\varepsilon_*)$. Since $U$ contains a vector orthogonal to $\psi_0,\dots,\psi_3$, we get $\lambda_4\ge(1-5\varepsilon_*)/(1-\varepsilon_*)>395/399$.
+
+\subsection*{Pointwise bounds}
+From $\psi_n=\mu_n^{-1}\F_c\psi_n$ and $|\mu_n|^2=2\pi\lambda_n/c$:
+\[
+|\psi_n|\le\sqrt2/|\mu_n|=\sqrt{c/(\pi\lambda_n)},\qquad|\psi_n'|\le c\sqrt{2/3}/|\mu_n|=c^{3/2}/\sqrt{3\pi\lambda_n}.
+\]
+
+\subsection*{Variation}
+Let $H=\|h\|$. Since $|\alpha|+|\beta|\le\sqrt2H$,
+\[
+M=\sup|h|\le2\sqrt2\mu^{1/4}H,\qquad D=\sup|h'|\le4\pi\sqrt{2/3}\,\mu^{3/4}H .
+\]
+At most $N\le\mu$ terms $k_n(y)=e^{y/2}h(ne^y)$ meet the window. Each has smooth variation at most $\sqrt\lambda M+\lambda^{3/2}D$, and its jumps at the window endpoints and at its cut point total at most $(\sqrt\lambda+\lambda^{-1/2})M$. Hence
+\[
+V\le\mu(3\sqrt\lambda M+\lambda^{3/2}D)\le(6\sqrt2\mu^{3/2}+4\pi\sqrt{2/3}\,\mu^{5/2})H\le9\mu^3H .
+\]
+
+\section{Proof of Lemma~\ref{lem:L5b}}\label{app:L5b}
+
+Let $s=\chi_n^{\rm SL}/c^2\in[0,0.3]$, $p=t^2-1$, $r=t^2-s$, $q=c^2r$ and $A_0=\psi_n(1)\ge0$ (after a sign change).
+
+\subsection*{Near the endpoint}
+By Lemma~\ref{lem:L5a}(b), $|\tilde\psi|\le A_0$. Integrating the ODE gives $|p\tilde\psi'(t)|\le A_0c^2(t-1)t^2$. With $t_0=1+1/(2c^2)<1801/1800$ this gives
+\[
+|\tilde\psi(t_0)-A_0|\le A_0t_0^2/4,\qquad\text{hence}\qquad\tilde\psi(t_0)\ge\tfrac{37}{50}A_0 .
+\]
+
+\subsection*{Liouville--Green error}
+Write $D=s^2+2s+(3-6s)t^2$ as in Lemma~\ref{lem:L5a}(c). Then $0\le D\le3t^2$, since $D-3t^2=s(s+2-6t^2)\le0$, and $r\ge\frac7{10}t^2$. Integrating the two positive parts of $\delta$ separately gives
+\[
+J=\int_{t_0}^\infty|\delta|\,z'dt\le\frac{3}{10}+\frac9{196}=\frac{339}{980}<\frac7{20}.
+\]
+For the first part we use $c\sqrt{t_0^2-1}\ge1$. For the second we use $\int_1^\infty dt/(t^3\sqrt{t^2-1})=\pi/4$.
+
+\subsection*{Energy}
+For $E=w^2+w_z^2$ we have $|E_z|\le|\delta|E$, so $\frac7{10}E_0\le E\le\frac{10}7E_0$ on $[t_0,\infty)$. Moreover
+\[
+E_0\ge w(t_0)^2=\sqrt{pq}\,\tilde\psi(t_0)^2\ge\tfrac56(\tfrac{37}{50})^2A_0^2 .
+\]
+
+\subsection*{Mass}
+On $t\ge4/3$, put $N=4c^2pr^3\delta=r^2-pD$. With $v=t^2-1$ one has $2r^2+N=6sv^2+(3-2s-s^2)v+3(1-s)^2\ge0$ and $2r^2-N=(4-6s)v^2+(5-6s+s^2)v+(1-s)^2\ge0$, so $|N|\le2r^2$ and $|\delta|\le1/(2c^2pr)<1/2000$. Put $g=1/q$, a decreasing function of $z$. The identity $E=(2+\delta)w^2+(ww_z)_z$, multiplied by $g$ and integrated by parts, gives
+\[
+T:=\int_{4/3}^\infty\tilde\psi^2\ge\frac{E_0}{2+1/2000}\Big(\frac7{10}I-\frac{10}{7q(4/3)}\Big),\qquad I=\int_{4/3}^\infty\frac{dt}{\sqrt{pq}}\ge\frac{\arcsin(3/4)}c>\frac{21}{25c}.
+\]
+Since $\tilde\psi_n$ has parity $(-1)^n$, $\int_{|t|>1}\tilde\psi^2\ge2T\ge C_*A_0^2/c$ with $C_*=118059822/465616375>\frac14$. The mass identity $\int_{|t|>1}\tilde\psi^2=(1-\lambda_n)/\lambda_n$ completes the proof.
+
+\section*{Reproducibility}
+All computer-assisted steps are reproducible from the public repository \provisional{(URL and DOI to be added on release)}, which contains every script, its raw output, and a table matching each constant of this paper to its script. The constants of Lemmas~\ref{lem:L5a}, \ref{lem:L5b}, \ref{lem:amp}, \ref{lem:S1a} and~\ref{lem:S1b}, of $P(\mu)$, of $\kappa_\infty$, of Theorem~\ref{thm:L6} and of Theorem~\ref{thm:E} are computed in ball arithmetic (Arb, via python-flint) with directed rounding asserted in the scripts. The Galerkin values in Section~\ref{sec:num} are not part of any proof; the script records the parameters needed for convergence.
+
+\section*{Use of generative AI}
+This work was carried out with extensive use of generative AI systems, namely Anthropic Claude, Google Gemini and OpenAI GPT. Under the direction of the author, these systems drafted the proofs, implemented and ran the computations, reviewed one another's drafts adversarially, searched the literature, and drafted this manuscript. The author chose the problem and the strategy, assigned and reviewed the tasks, and takes full responsibility for the content. The AI systems are not authors of this paper.
+
+\begin{thebibliography}{99}
+\bibitem{CC21} A.~Connes, C.~Consani, Spectral triples and $\zeta$-cycles, arXiv:2106.01715.
+\bibitem{CCM25} A.~Connes, C.~Consani, H.~Moscovici, Zeta spectral triples, arXiv:2511.22755.
+\bibitem{Fuchs64} W.~H.~J.~Fuchs, On the eigenvalues of an integral equation arising in the theory of band-limited signals, \emph{J. Math. Anal. Appl.} 9 (1964) 317--330. \doi{10.1016/0022-247X(64)90017-4}
+\bibitem{MoriPSWF} R.~Mori, A non-asymptotic bound with the sharp power of $c$ for the eigenvalue defect $1-\lambda_n(c)$ of time and frequency limiting, companion paper, 2026.
+\bibitem{MoriWWUB} R.~Mori, Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms, version 3, Zenodo, 2026. \doi{10.5281/zenodo.23066578}
+\bibitem{MT15} M.~J.~Mossinghoff, T.~S.~Trudgian, Nonnegative trigonometric polynomials and a zero-free region for the Riemann zeta-function, \emph{J. Number Theory} 157 (2015) 329--349. \doi{10.1016/j.jnt.2015.05.010}
+\bibitem{PT21} D.~Platt, T.~Trudgian, The Riemann hypothesis is true up to $3\cdot10^{12}$, \emph{Bull. London Math. Soc.} 53 (2021) 792--797. \doi{10.1112/blms.12460}
+\bibitem{Trudgian14} T.~Trudgian, An improved upper bound for the argument of the Riemann zeta-function on the critical line II, \emph{J. Number Theory} 134 (2014) 280--292. \doi{10.1016/j.jnt.2013.07.017}
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,10 @@
+certified through x= 8.0
+certified through x= 16.0
+certified through x= 24.0
+certified through x= 32.0
+certified through x= 40.0
+certified through x= 48.0
+certified through x= 56.0
+interval [1/64,64], cells= 65520 each width=1/1024
+maximum certified cell bound [0.15930054540734104625398442511005497003 +/- 4.23e-39] at midpoint 63.619628906250000000000000000000000000
+BL2 compact <0.160; global h0=0.162 after analytic endpoints.

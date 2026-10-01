@@ -1,0 +1,5 @@
+n=0: rho_n = ||(x^2 g')'|| = 1.43614;  rho/(8 pi) = 0.057142
+n=2: rho_n = ||(x^2 g')'|| = 6.04669;  rho/(8 pi) = 0.24059
+n=4: rho_n = ||(x^2 g')'|| = 14.9018;  rho/(8 pi) = 0.59292
+n=6: rho_n = ||(x^2 g')'|| = 28.4704;  rho/(8 pi) = 1.1328
+observed (L6_checks.py): ||h_0-g_0|| ~ 0.025/mu, ||h_4-g_4|| ~ 0.22/mu ; eigenvalue error ~ 0.76/mu (n=0), 11/mu (n=4)

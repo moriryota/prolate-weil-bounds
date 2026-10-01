@@ -1,0 +1,4 @@
+C1p = sup(G - x/pi) ~ 0.172031 at x = 1.62
+h0 = sup|H| ~ 0.159154 at x = 322.8
+sup (pi/2) x (J0^2+Y0^2) ~ 0.99999941 at x = 459.8
+check identity G' = x J0^2 at x=3.7: -1.29e-26 ; H' = x J0 Y0: 0.0

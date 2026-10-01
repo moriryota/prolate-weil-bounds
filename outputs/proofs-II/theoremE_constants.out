@@ -1,0 +1,8 @@
+MU0=50 (theta=0.145): kappa_lambda >= [0.10900000000000000000000000000000000000000000000000000000000 +/- 2.02e-62] for all mu >= 50;  K <= 5.0103e+17  [P/(mu^3.5 log^3) at MU0 = 2.1115e+09]
+   mu=50: Thm E coefficient (times e^-4pi mu) <= 1.172e+33  vs Thm B 1.624e+48
+   mu=100: Thm E coefficient (times e^-4pi mu) <= 3.694e+35  vs Thm B 1.362e+55
+   mu=1000: Thm E coefficient (times e^-4pi mu) <= 6.959e+43  vs Thm B 1.362e+78
+MU0=80 (theta=0.095): kappa_lambda >= [0.16100000000000000000000000000000000000000000000000000000000 +/- 4.51e-62] for all mu >= 80;  K <= 2.7813e+17  [P/(mu^3.5 log^3) at MU0 = 1.7314e+09]
+   mu=80: Thm E coefficient (times e^-4pi mu) <= 3.926e+34  vs Thm B 8.040e+52
+   mu=100: Thm E coefficient (times e^-4pi mu) <= 2.501e+35  vs Thm B 1.362e+55
+   mu=1000: Thm E coefficient (times e^-4pi mu) <= 4.711e+43  vs Thm B 1.362e+78
