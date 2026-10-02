@@ -1,4 +1,4 @@
-% Ryota Mori. Draft 0, 2026-10-02. Licence: CC BY 4.0.
+% Ryota Mori. Version 1, 2026-10-02. Licence: CC BY 4.0.
 % Paper I: non-asymptotic bound with the sharp power for 1 - lambda_n(c).
 \documentclass[11pt]{amsart}
 \usepackage[margin=1in]{geometry}
@@ -26,7 +26,7 @@
 \author{Ryota Mori}
 \address{Independent researcher, Tokyo, Japan}
 \email{moriryota31@gmail.com}
-\date{Draft, 2 October 2026}
+\date{2 October 2026}
 
 \begin{document}
 
@@ -88,6 +88,8 @@ T_n\le\frac{\psi_n(1)^2}{c}\cdot\frac2\pi\Kell(s)\cdot\Big(1+\frac{15}{c^2}\Big)
 \end{theorem}
 
 Theorem~\ref{thm:tail} is sharp to relative order $c^{-2}$: numerically the ratio of the two sides is $0.985$ at $c=10\pi$ and $0.9925$ at $c=14\pi$ for every $n\le4$ (Table~\ref{tab:num}). The absence of a $1/c$ term in the correction factor is what gives the sharp power: combined with Slepian's identity (Lemma~\ref{lem:slepian}), it yields $\partial_c\log(1-\lambda_n)\le-2+(2n+1)/(2c)+O(c^{-2})$, whose integral produces exactly $c^{n+1/2}e^{-2c}$.
+
+In the companion paper \cite{MoriWeilII}, Theorem~\ref{thm:main} with $n=4$ is used to bound the bottom of windowed Weil quadratic forms.
 
 \subsection*{Method}
 \begin{itemize}
@@ -345,7 +347,7 @@ ratio in Thm~\ref{thm:tail}, $c=14\pi$ & $0.99248$ & $0.99249$ & $0.99251$ & $0.
 \end{enumerate}
 
 \section*{Reproducibility}
-All computer-assisted steps are reproducible from the public repository \provisional{(URL and DOI to be added on release)}. It contains every script with its raw output, the exact rational coefficients of the trial polynomials of Lemma~\ref{lem:start} together with the certified matrices and bounds $g_n$, $R_n$, the interval certificates for (BL1) and (BL2), the Sturm count of Lemma~\ref{lem:s}, and a table matching each constant to its script. All constants are computed in ball arithmetic (Arb, via python-flint, 200--512 bits) with directed rounding asserted in the scripts.
+All computer-assisted steps are reproducible from the public repository \url{https://github.com/moriryota/prolate-weil-bounds}, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions; this paper corresponds to release \texttt{v1.0.1}). It contains every script with its raw output, the exact rational coefficients of the trial polynomials of Lemma~\ref{lem:start} together with the certified matrices and bounds $g_n$, $R_n$, the interval certificates for (BL1) and (BL2), the Sturm count of Lemma~\ref{lem:s}, and a table matching each constant to its script. All constants are computed in ball arithmetic (Arb, via python-flint, 200--512 bits) with directed rounding asserted in the scripts.
 
 \section*{Use of generative AI}
 This work was carried out with extensive use of generative AI systems, namely Anthropic Claude, Google Gemini and OpenAI GPT. Under the direction of the author, these systems drafted the proofs, implemented and ran the computations, reviewed one another's drafts adversarially, searched the literature, and drafted this manuscript. The author chose the problem and the strategy, assigned and reviewed the tasks, and takes full responsibility for the content. The AI systems are not authors of this paper.
@@ -357,6 +359,7 @@ This work was carried out with extensive use of generative AI systems, namely An
 \bibitem{DLMF} NIST Digital Library of Mathematical Functions, \url{https://dlmf.nist.gov/}.
 \bibitem{Fuchs64} W.~H.~J.~Fuchs, On the eigenvalues of an integral equation arising in the theory of band-limited signals, \emph{J. Math. Anal. Appl.} 9 (1964) 317--330. \doi{10.1016/0022-247X(64)90017-4}
 \bibitem{LandauPollak61} H.~J.~Landau, H.~O.~Pollak, Prolate spheroidal wave functions, Fourier analysis and uncertainty II, \emph{Bell Syst. Tech. J.} 40 (1961) 65--84. \doi{10.1002/j.1538-7305.1961.tb03977.x}
+\bibitem{MoriWeilII} R.~Mori, The Weil quadratic form of the Connes--Consani--Moscovici prolate vector, and a $\mu^8$ upper bound for windowed Weil forms, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092542}
 \bibitem{Osipov13a} A.~Osipov, Certain inequalities involving prolate spheroidal wave functions and associated quantities, \emph{Appl. Comput. Harmon. Anal.} 35 (2013) 359--393. \doi{10.1016/j.acha.2012.10.002}
 \bibitem{Osipov13b} A.~Osipov, Certain upper bounds on the eigenvalues associated with prolate spheroidal wave functions, \emph{Appl. Comput. Harmon. Anal.} 35 (2013) 309--340. \doi{10.1016/j.acha.2013.03.002}
 \bibitem{Slepian65} D.~Slepian, Some asymptotic expansions for prolate spheroidal wave functions, \emph{J. Math. and Phys.} (MIT; now Stud. Appl. Math.) 44 (1965) 99--140. \doi{10.1002/sapm196544199}

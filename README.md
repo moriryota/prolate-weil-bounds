@@ -17,7 +17,10 @@ with C_n = 18.34, 155.0, 703.4, 2340 and 6621. The power of c is the one in Fuch
 
 Paper II is a sequel to *Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms* ([code](https://github.com/moriryota/weil-window-upper-bounds), [paper](https://doi.org/10.5281/zenodo.23059297)).
 
-DOIs: *to be added on release.*
+DOIs:
+- Code (all versions): [10.5281/zenodo.23092422](https://doi.org/10.5281/zenodo.23092422)
+- Paper I: [10.5281/zenodo.23092454](https://doi.org/10.5281/zenodo.23092454)
+- Paper II: [10.5281/zenodo.23092542](https://doi.org/10.5281/zenodo.23092542)
 
 These are upper bounds only. They say nothing about positivity and do not address the Riemann Hypothesis.
 

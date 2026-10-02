@@ -1,4 +1,4 @@
-% Ryota Mori. Draft 0, 2026-10-02. Licence: CC BY 4.0.
+% Ryota Mori. Version 1, 2026-10-02. Licence: CC BY 4.0.
 % Paper II: sequel to "Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms".
 \documentclass[11pt]{amsart}
 \usepackage[margin=1in]{geometry}
@@ -28,7 +28,7 @@
 \author{Ryota Mori}
 \address{Independent researcher, Tokyo, Japan}
 \email{moriryota31@gmail.com}
-\date{Draft, 2 October 2026}
+\date{2 October 2026}
 
 \begin{document}
 
@@ -520,7 +520,7 @@ T:=\int_{4/3}^\infty\tilde\psi^2\ge\frac{E_0}{2+1/2000}\Big(\frac7{10}I-\frac{10
 Since $\tilde\psi_n$ has parity $(-1)^n$, $\int_{|t|>1}\tilde\psi^2\ge2T\ge C_*A_0^2/c$ with $C_*=118059822/465616375>\frac14$. The mass identity $\int_{|t|>1}\tilde\psi^2=(1-\lambda_n)/\lambda_n$ completes the proof.
 
 \section*{Reproducibility}
-All computer-assisted steps are reproducible from the public repository \provisional{(URL and DOI to be added on release)}, which contains every script, its raw output, and a table matching each constant of this paper to its script. The constants of Lemmas~\ref{lem:L5a}, \ref{lem:L5b}, \ref{lem:amp}, \ref{lem:S1a} and~\ref{lem:S1b}, of $P(\mu)$, of $\kappa_\infty$, of Theorem~\ref{thm:L6} and of Theorem~\ref{thm:E} are computed in ball arithmetic (Arb, via python-flint) with directed rounding asserted in the scripts. The Galerkin values in Section~\ref{sec:num} are not part of any proof; the script records the parameters needed for convergence.
+All computer-assisted steps are reproducible from the public repository \url{https://github.com/moriryota/prolate-weil-bounds}, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions; this paper corresponds to release \texttt{v1.0.1}), which contains every script, its raw output, and a table matching each constant of this paper to its script. The constants of Lemmas~\ref{lem:L5a}, \ref{lem:L5b}, \ref{lem:amp}, \ref{lem:S1a} and~\ref{lem:S1b}, of $P(\mu)$, of $\kappa_\infty$, of Theorem~\ref{thm:L6} and of Theorem~\ref{thm:E} are computed in ball arithmetic (Arb, via python-flint) with directed rounding asserted in the scripts. The Galerkin values in Section~\ref{sec:num} are not part of any proof; the script records the parameters needed for convergence.
 
 \section*{Use of generative AI}
 This work was carried out with extensive use of generative AI systems, namely Anthropic Claude, Google Gemini and OpenAI GPT. Under the direction of the author, these systems drafted the proofs, implemented and ran the computations, reviewed one another's drafts adversarially, searched the literature, and drafted this manuscript. The author chose the problem and the strategy, assigned and reviewed the tasks, and takes full responsibility for the content. The AI systems are not authors of this paper.
@@ -529,7 +529,7 @@ This work was carried out with extensive use of generative AI systems, namely An
 \bibitem{CC21} A.~Connes, C.~Consani, Spectral triples and $\zeta$-cycles, arXiv:2106.01715.
 \bibitem{CCM25} A.~Connes, C.~Consani, H.~Moscovici, Zeta spectral triples, arXiv:2511.22755.
 \bibitem{Fuchs64} W.~H.~J.~Fuchs, On the eigenvalues of an integral equation arising in the theory of band-limited signals, \emph{J. Math. Anal. Appl.} 9 (1964) 317--330. \doi{10.1016/0022-247X(64)90017-4}
-\bibitem{MoriPSWF} R.~Mori, A non-asymptotic bound with the sharp power of $c$ for the eigenvalue defect $1-\lambda_n(c)$ of time and frequency limiting, companion paper, 2026.
+\bibitem{MoriPSWF} R.~Mori, A non-asymptotic bound with the sharp power of $c$ for the eigenvalue defect $1-\lambda_n(c)$ of time and frequency limiting, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092454}
 \bibitem{MoriWWUB} R.~Mori, Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms, version 3, Zenodo, 2026. \doi{10.5281/zenodo.23066578}
 \bibitem{MT15} M.~J.~Mossinghoff, T.~S.~Trudgian, Nonnegative trigonometric polynomials and a zero-free region for the Riemann zeta-function, \emph{J. Number Theory} 157 (2015) 329--349. \doi{10.1016/j.jnt.2015.05.010}
 \bibitem{PT21} D.~Platt, T.~Trudgian, The Riemann hypothesis is true up to $3\cdot10^{12}$, \emph{Bull. London Math. Soc.} 53 (2021) 792--797. \doi{10.1112/blms.12460}
