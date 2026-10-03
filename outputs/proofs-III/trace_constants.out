@@ -1,0 +1,57 @@
+{
+  "certified_constants": true,
+  "precision_bits": 256,
+  "CE_upper": "410726.283447",
+  "two_CE_squared_upper": "337392159829",
+  "positive_zero_reciprocal_sum_upper": "0.106260832",
+  "simple_positive_zero_sum_upper": "0.107",
+  "norm_k_over_original_H2_lower": "0.1089",
+  "conditional_E_conversion_constant_upper": "237522697",
+  "rows": [
+    {
+      "mu": 5,
+      "E_upper": "1415902.870",
+      "J2_over_B_upper": "2004825828558",
+      "kappa_upper": "1.201842116",
+      "m0_upper": "2005235809210"
+    },
+    {
+      "mu": 7,
+      "E_upper": "1404662.495",
+      "J2_over_B_upper": "1973129421401",
+      "kappa_upper": "1.129976463",
+      "m0_upper": "1973551089234"
+    },
+    {
+      "mu": 10,
+      "E_upper": "1396233.265",
+      "J2_over_B_upper": "1949529935898",
+      "kappa_upper": "1.084469304",
+      "m0_upper": "1949963226410"
+    },
+    {
+      "mu": 50,
+      "E_upper": "1380508.203",
+      "J2_over_B_upper": "1905941316999",
+      "kappa_upper": "1.014793452",
+      "m0_upper": "1906402330378"
+    },
+    {
+      "mu": 100,
+      "E_upper": "1378547.524",
+      "J2_over_B_upper": "1900588753039",
+      "kappa_upper": "1.007278114",
+      "m0_upper": "1901038912455"
+    },
+    {
+      "mu": 1000,
+      "E_upper": "1376799.817",
+      "J2_over_B_upper": "1896195140487",
+      "kappa_upper": "1.000717348",
+      "m0_upper": "1896379008594"
+    }
+  ],
+  "P_tilde": null,
+  "mu_max": null,
+  "status": "No polylog trace estimate exists uniformly at infinity; C-prime/E-prime not proved."
+}

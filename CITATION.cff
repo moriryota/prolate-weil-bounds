@@ -1,13 +1,13 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "Sharp-power bounds for the prolate eigenvalue defect and a mu^8 upper bound for windowed Weil forms: code"
+title: "Sharp-power bounds for the prolate eigenvalue defect and upper bounds for windowed Weil forms: code"
 authors:
   - family-names: Mori
     given-names: Ryota
 license: Apache-2.0
-version: "1.0.1"
+version: "1.1.0"
 doi: "10.5281/zenodo.23092422"
-date-released: "2026-10-02"
+date-released: "2026-10-03"
 repository-code: "https://github.com/moriryota/prolate-weil-bounds"
 keywords:
   - prolate spheroidal wave functions

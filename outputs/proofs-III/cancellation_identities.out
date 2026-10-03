@@ -1,0 +1,6 @@
+Schrodinger transformation residual = 0
+first asymptotic correction residual difference = 0
+layer endpoint (D, D_prime, D_second) = (1, 0, -8*k^2)
+alpha = -c*(1 - r)/2
+V = c**2*(1 - r)/(t**2 - 1) + (t**2 - 1)**(-2)
+All symbolic assertions passed.

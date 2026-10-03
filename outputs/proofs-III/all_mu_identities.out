@@ -1,0 +1,9 @@
+{
+  "S4": "572587/414720",
+  "j_over_x_derivative_difference": "0",
+  "n_over_x_derivative_difference": "0",
+  "A1_normalization_difference": "0",
+  "D_over_c3_derivative": "-(3*Cd*log(c)**2 - 2*Cd*log(c) + 32*c)/c**4",
+  "T_interpolation_ratio_when_u_le_1": "u**(-4/3)",
+  "T_interpolation_ratio_when_u_ge_1": "u**(2/3)"
+}

@@ -1,0 +1,65 @@
+{
+  "interval_certified": true,
+  "precision_bits": 256,
+  "beta": 4,
+  "power": 2,
+  "K": 8,
+  "C1_upper": "3184",
+  "C2_upper": "1618",
+  "d_upper": "16862.845",
+  "j_upper": "95390.656",
+  "z_upper": "153762.946",
+  "v_upper": "143087.984",
+  "uniform_C3_upper": "180844462",
+  "uniform_C4_upper": "96820104",
+  "S4_exact": "572587/414720",
+  "tail_A_times_1e20_upper": "54.103237",
+  "rows": [
+    {
+      "mu": 50,
+      "C3_upper": "10207731",
+      "C4_upper": "970733",
+      "m0_upper": "1906402330378",
+      "eta_upper": "3193.954",
+      "log10_q_upper": "-125.404",
+      "log10_error_upper": "-124.570",
+      "norm_ratio_lower": "0.1089",
+      "conditional_tail_coefficient_times_1e20_upper": "1005.228931"
+    },
+    {
+      "mu": 100,
+      "C3_upper": "4657394",
+      "C4_upper": "243388",
+      "m0_upper": "1901038912455",
+      "eta_upper": "2157.100",
+      "log10_q_upper": "-261.335",
+      "log10_error_upper": "-260.354",
+      "norm_ratio_lower": "0.1089",
+      "conditional_tail_coefficient_times_1e20_upper": "1410.403240"
+    },
+    {
+      "mu": 1000,
+      "C3_upper": "397177",
+      "C4_upper": "2563",
+      "m0_upper": "1896379008594",
+      "eta_upper": "629.220",
+      "log10_q_upper": "-2715.497",
+      "log10_error_upper": "-2714.024",
+      "norm_ratio_lower": "0.1089",
+      "conditional_tail_coefficient_times_1e20_upper": "4401.593548"
+    },
+    {
+      "mu": 10000,
+      "C3_upper": "37903",
+      "C4_upper": "41",
+      "m0_upper": "1896111916299",
+      "eta_upper": "193.686",
+      "log10_q_upper": "-27272.533",
+      "log10_error_upper": "-27270.562",
+      "norm_ratio_lower": "0.1089",
+      "conditional_tail_coefficient_times_1e20_upper": "13860.567835"
+    }
+  ],
+  "mu_max": null,
+  "caution": "The 10000 row is a reference point, not mu_max. Tail coefficient is conditional on unproved K. No C-prime or E-prime is certified."
+}

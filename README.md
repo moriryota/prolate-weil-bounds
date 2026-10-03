@@ -1,6 +1,6 @@
 # prolate-weil-bounds
 
-This repository contains the computations for two papers by Ryota Mori, together with their LaTeX sources and PDFs.
+This repository contains the computations for three papers by Ryota Mori, together with their LaTeX sources and PDFs.
 
 **Paper I** (`paper-I/`). *A non-asymptotic bound with the sharp power of c for the eigenvalue defect 1 − λ_n(c) of time and frequency limiting.*
 
@@ -15,12 +15,17 @@ with C_n = 18.34, 155.0, 703.4, 2340 and 6621. The power of c is the one in Fuch
 - **Theorem D:** ‖k_λ‖² ≥ 0.109‖h_λ‖² for μ ≥ 50.
 - **Theorem E:** λ_min(λ) ≤ 5.011×10¹⁷ μ⁸ (log μ)³ e^{−4πμ} for μ ≥ 50.
 
+**Paper III** (`paper-III/`). *An endpoint-smoothed prolate vector and a μ^{9/2}(log μ)⁴ upper bound for windowed Weil forms.* The vector of paper II is smoothed in a layer of width ≍ c⁻² at its truncation points. Unconditionally:
+- **Theorem F:** |W(k̃_λ)| ≤ 6.034×10¹⁴ (log μ)⁴ B for 50 ≤ μ ≤ 10⁴, and |W(k̃_λ)| ≤ 5.2×10¹⁴ √μ (log μ)⁵ B for all μ ≥ 50, where B = ρ_out‖h_λ‖².
+- **Theorem G:** λ_min(λ) ≤ 1.434×10²³ μ^{9/2} (log μ)⁴ e^{−4πμ} for 50 ≤ μ ≤ 10⁴, and λ_min(λ) ≤ 1.24×10²³ μ⁵ (log μ)⁵ e^{−4πμ} for all μ ≥ 50. An explicit refinement is below 0.832 times the bound of paper II, Theorem E, for all μ ≥ 50.
+
 Paper II is a sequel to *Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms* ([code](https://github.com/moriryota/weil-window-upper-bounds), [paper](https://doi.org/10.5281/zenodo.23059297)).
 
 DOIs:
 - Code (all versions): [10.5281/zenodo.23092422](https://doi.org/10.5281/zenodo.23092422)
 - Paper I: [10.5281/zenodo.23092454](https://doi.org/10.5281/zenodo.23092454)
 - Paper II: [10.5281/zenodo.23092542](https://doi.org/10.5281/zenodo.23092542)
+- Paper III: [10.5281/zenodo.23119609](https://doi.org/10.5281/zenodo.23119609)
 
 These are upper bounds only. They say nothing about positivity and do not address the Riemann Hypothesis.
 
@@ -28,9 +33,9 @@ These are upper bounds only. They say nothing about positivity and do not addres
 
 | Directory | Contents |
 |---|---|
-| `paper-I/`, `paper-II/` | LaTeX sources and PDFs. |
-| `proofs-I/`, `proofs-II/` | Computations that **prove** the numerical constants of the papers. They use ball arithmetic (Arb, through python-flint) or exact rationals. Every printed upper bound is rounded upward, every lower bound downward, and each is asserted against the ball. |
-| `numerics-I/`, `numerics-II/` | Numerical illustrations. These scripts are **not** part of any proof. |
+| `paper-I/`, `paper-II/`, `paper-III/` | LaTeX sources and PDFs. |
+| `proofs-I/`, `proofs-II/`, `proofs-III/` | Computations that **prove** the numerical constants of the papers. They use ball arithmetic (Arb, through python-flint) or exact rationals. Every printed upper bound is rounded upward, every lower bound downward, and each is asserted against the ball. |
+| `numerics-I/`, `numerics-II/`, `numerics-III/` | Numerical illustrations. These scripts are **not** part of any proof. |
 | `common/` | Shared code for the numerics: prolate spheroidal wave functions from Legendre expansions, and the Weil form on a Legendre basis in Arb. |
 | `outputs/` | The raw outputs of all scripts, with the same file names that `run_all.sh` produces. |
 
@@ -67,6 +72,12 @@ These are upper bounds only. They say nothing about positivity and do not addres
 | II | κ_∞ | `proofs-II/kappa_inf_enclosure.py` |
 | II | Theorem D | `proofs-II/L6_effective_constants.py` |
 | II | Theorem E | `proofs-II/theoremE_constants.py` |
+| III | Lemmas 3.1, 3.2, Proposition 3.3, m₀(c) in (3.3) | `proofs-III/layer_constants.py` |
+| III | Lemma 5.1 (trace J); zero-count constants | `proofs-III/trace_constants.py` |
+| III | Lemma 4.1 (symbolic identities) | `proofs-III/cancellation_identities.py` |
+| III | Lemma 4.1, Propositions 4.2 and 5.3; Theorems F(a), G(a) | `proofs-III/theoremF_a_constants.py` |
+| III | P″(μ); Theorems F(b), G(b), G(c) | `proofs-III/theoremF_b_constants.py` |
+| III | Sections 6–7 (symbolic identities) | `proofs-III/all_mu_identities.py` |
 
 ## Licence
 

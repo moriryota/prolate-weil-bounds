@@ -1,0 +1,6 @@
+c=10pi p=2 beta=4.0 n=0 s=0: B/||f||^2 = 2.02073e-26  ratio to s=0: 1.0  max|coef| deg>L-20: 4.14e-60
+c=10pi p=2 beta=4.0 n=0 s=1: B/||f||^2 = 2.40604e-26  ratio to s=0: 1.19068  max|coef| deg>L-20: 9.95e-27
+c=10pi p=2 beta=4.0 n=0 s=2: B/||f||^2 = 2.99289e-26  ratio to s=0: 1.48109  max|coef| deg>L-20: 1.26e-21
+c=10pi p=2 beta=4.0 n=4 s=0: B/||f||^2 = 2.59678e-18  ratio to s=0: 1.0  max|coef| deg>L-20: 9.11e-60
+c=10pi p=2 beta=4.0 n=4 s=1: B/||f||^2 = 2.92917e-18  ratio to s=0: 1.128  max|coef| deg>L-20: 1.91e-23
+c=10pi p=2 beta=4.0 n=4 s=2: B/||f||^2 = 3.37316e-18  ratio to s=0: 1.29898  max|coef| deg>L-20: 4.43e-17

@@ -1,0 +1,7 @@
+mu=5 n=0 dps=50 c=31.415927 A=|psi(1)|=7.934936e-13  nodes=18400
+  t=  1c: |g^|=8.666255e-13  bound=1.1354183e-6  ratio=7.63265e-7  (size of leading term ~1.187e-12)
+  t=  2c: |g^|=1.4574316e-13  bound=2.8385458e-7  ratio=5.13443e-7  (size of leading term ~5.933e-13)
+  t=  5c: |g^|=3.9166912e-14  bound=4.5416733e-8  ratio=8.62389e-7  (size of leading term ~2.373e-13)
+  t= 10c: |g^|=3.4879309e-15  bound=1.1354183e-8  ratio=3.07193e-7  (size of leading term ~1.187e-13)
+  t= 20c: |g^|=2.476147e-15  bound=2.8385458e-9  ratio=8.72329e-7  (size of leading term ~5.933e-14)
+  t= 40c: |g^|=1.8238459e-6  bound=7.0963645e-10  ratio=2570.11  (size of leading term ~2.966e-14)

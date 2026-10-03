@@ -1,0 +1,473 @@
+% Ryota Mori. Version 1, 2026-10-03. Licence: CC BY 4.0. doi:10.5281/zenodo.23119609
+% Paper III: sequel to Paper II (doi:10.5281/zenodo.23092542).
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+\newcommand{\provisional}[1]{{\color{red}#1}}
+
+\newtheorem{theorem}{Theorem}
+\renewcommand{\thetheorem}{\Alph{theorem}}
+\setcounter{theorem}{5}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[proposition]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\F}{\mathcal{F}}
+\emergencystretch=3em
+
+\title[Windowed Weil forms: the power $9/2$]{An endpoint-smoothed prolate vector and a $\mu^{9/2}(\log\mu)^4$ upper bound for windowed Weil forms}
+\author{Ryota Mori}
+\address{Independent researcher, Tokyo, Japan}
+\email{moriryota31@gmail.com}
+\date{3 October 2026}
+
+\begin{document}
+
+\begin{abstract}
+Weil's criterion states that the Riemann Hypothesis holds if and only if Weil's quadratic form $W$ is nonnegative. Restricted to test functions supported in a multiplicative window $[\lambda^{-1},\lambda]$, this becomes $\lambda_{\min}(\lambda)\ge0$ for all $\lambda$, where $\lambda_{\min}(\lambda)$ is the bottom of the spectrum of the restricted form. Put $\mu=\lambda^2$. In a previous paper we proved, without any hypothesis on the zeros of $\zeta$, that $\lambda_{\min}(\lambda)\le5.011\times10^{17}\mu^8(\log\mu)^3e^{-4\pi\mu}$ for $\mu\ge50$, using the prolate vector of Connes, Consani and Moscovici. The loss $\mu^{7/2}$ in that bound comes from the jump of the truncated prolate functions at the spatial truncation points $x=\pm\lambda$, which forces the zero sum to be controlled up to height $e^{20\mu}$. We smooth the vector in a layer of width $\asymp c^{-2}$ at these points, where $c=2\pi\mu$ is the bandwidth. This costs only a bounded factor in the out-of-band mass, and it makes the outer remainder differentiable with a polynomial bound. The zero sum is then dominated by zeros below $3\cdot10^{12}$, where RH is verified. We prove, unconditionally,
+\[
+\lambda_{\min}(\lambda)\le1.434\times10^{23}\,\mu^{9/2}(\log\mu)^4e^{-4\pi\mu}\qquad(50\le\mu\le10^4),
+\]
+and $\lambda_{\min}(\lambda)\le1.24\times10^{23}\mu^5(\log\mu)^5e^{-4\pi\mu}$ for all $\mu\ge50$. The power $9/2$ is that of Fuchs' asymptotic formula for the prolate eigenvalue defect. All constants are explicit and established with ball arithmetic. The results are upper bounds only and say nothing about positivity.
+\end{abstract}
+
+\maketitle
+
+\noindent\textit{Version 1.} Zenodo, \doi{10.5281/zenodo.23119609}. Licence: CC BY 4.0.
+
+
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\small
+\textbf{Status.} The proofs passed independent AI reviews with no blocking or major findings; this manuscript was reviewed separately and revised. Constants are established by ball arithmetic (Arb). Not formalized. This paper has not yet been reviewed by independent human experts.}}
+\end{center}
+
+\section{Introduction}
+
+\subsection{Background}
+Let $W$ be Weil's quadratic form and $W_\lambda$ its restriction to test functions supported in the multiplicative window $[\lambda^{-1},\lambda]$ \cite{CC21,CCM25}. Write $\lambda_{\min}(\lambda)$ for the bottom of its spectrum and $\mu=\lambda^2$. By Weil's criterion, RH is equivalent to $\lambda_{\min}(\lambda)\ge0$ for all $\lambda$. Numerically $\lambda_{\min}(\lambda)$ is positive but decays like $e^{-4\pi\mu}$; any approach to RH through these forms must control this decay.
+
+Upper bounds are obtained from test vectors. In \cite{MoriWWUB} we proved $\lambda_{\min}(\lambda)\le1.362\times10^9\mu^{23}e^{-4\pi\mu}$ for $\mu\ge5$. In \cite{MoriWeilII} we analysed the prolate vector $k_\lambda$ of Connes, Consani and Moscovici \cite[\S7]{CCM25} and proved (Theorems~C and~E there)
+\[
+|W(k_\lambda)|\le P(\mu)\rho_{\rm out}\|h_\lambda\|^2+e^{-16\mu}\|h_\lambda\|^2,\qquad
+\lambda_{\min}(\lambda)\le5.011\times10^{17}\mu^8(\log\mu)^3e^{-4\pi\mu}\quad(\mu\ge50),
+\]
+with $P(\mu)=O(\mu^{7/2}(\log\mu)^3)$. The factor $\rho_{\rm out}\le1-\lambda_4(2\pi\mu)\le C\mu^{9/2}e^{-4\pi\mu}$ is controlled by the companion paper \cite{MoriPSWF}, so the power of $\mu$ in the final bound is $9/2$ plus the power lost in $P$.
+
+\subsection{Where the loss comes from}
+In \cite{MoriWeilII}, $h_\lambda$ is a combination of prolate functions truncated at $\pm\lambda$. It jumps at the endpoints, so the part $r$ of $\E(h_\lambda)$ outside the window has a Fourier transform decaying only like $1/t$. The zero sum $\sum_\rho|\hat r(\gamma_\rho)|^2$ must then be controlled up to height $e^{20\mu}$, far above the height $3\cdot10^{12}$ to which RH is verified \cite{PT21}. Above that height the only available information is the zero-free region \cite{MT15}, of width $\asymp1/\log T\asymp1/\mu$, and disc averaging over that width costs $\mu^3$; a further $\sqrt\mu$ comes from zeros that may lie off the critical line.
+
+\subsection{Results}
+Let $\psi_n$ be the prolate spheroidal wave functions of bandwidth $c=2\pi\mu$, $h_{n}(x)=\psi_n(x/\lambda)/\sqrt\lambda$ on $|x|<\lambda$, and $I_n=\int h_n$. Let
+\[
+L(u)=\bigl(1-e^{-c^2(1-u^2)/4}\bigr)^2,\qquad D_L=1-L,\qquad J_n=\int h_n(x)D_L(x/\lambda)\,dx,\qquad \tilde I_n=I_n-J_n,
+\]
+and define the \emph{smoothed prolate vector}
+\[
+\tilde h(x)=L(x/\lambda)\bigl(\tilde I_4h_0(x)-\tilde I_0h_4(x)\bigr),\qquad
+\tilde k=\E(\tilde h)|_{[\lambda^{-1},\lambda]}.
+\]
+Then $\int\tilde h=0$, and $\tilde h$ is $C^1$ with $\tilde h(\pm\lambda)=\tilde h'(\pm\lambda)=0$. The factor $L$ differs from $1$ only in a layer of width $\asymp c^{-2}$ at the endpoints. As in \cite{MoriWeilII}, $h=I_4h_0-I_0h_4$ and $B=\rho_{\rm out}\|h\|^2=I_4^2(1-\lambda_0)+I_0^2(1-\lambda_4)$ refer to the unsmoothed vector. The quantity $B$ is the natural small parameter of the paper: by \cite{MoriPSWF}, $B\le(1-\lambda_4(c))\|h\|^2\le6621c^{9/2}e^{-2c}\|h\|^2$, and every estimate below is a multiple of $B$. We continue the theorem lettering of \cite{MoriWeilII}, whose main results are Theorems~C, D and~E.
+
+\begin{theorem}\label{thm:F}
+Without any hypothesis on the zeros of $\zeta$:
+\begin{enumerate}
+\item[(a)] for $50\le\mu\le10^4$, $|W(\tilde k)|\le6.034\times10^{14}(\log\mu)^4B$;
+\item[(b)] for every $\mu\ge50$, $|W(\tilde k)|\le P''(\mu)B\le5.2\times10^{14}\sqrt\mu(\log\mu)^5B$, where $P''$ is the explicit function \eqref{eq:Ppp}.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}\label{thm:G}
+Without any hypothesis on the zeros of $\zeta$:
+\begin{enumerate}
+\item[(a)] for $50\le\mu\le10^4$, $\lambda_{\min}(\lambda)\le1.434\times10^{23}\,\mu^{9/2}(\log\mu)^4e^{-4\pi\mu}$;
+\item[(b)] for every $\mu\ge50$, $\lambda_{\min}(\lambda)\le1.24\times10^{23}\,\mu^5(\log\mu)^5e^{-4\pi\mu}$;
+\item[(c)] for every $\mu\ge50$, $\lambda_{\min}(\lambda)\le237522697\,P''(\mu)\,\mu^{9/2}e^{-4\pi\mu}$, and this is less than $0.832$ times the bound of \cite[Thm.~E]{MoriWeilII}.
+\end{enumerate}
+\end{theorem}
+
+Theorem~\ref{thm:G}(a) improves \cite[Thm.~E]{MoriWeilII} for $55\le\mu\le10^4$, by a factor of about $8$ at $\mu=100$ and $4\times10^7$ at $\mu=10^4$. The power $9/2$ matches that in Fuchs' asymptotic formula $1-\lambda_4(c)\sim\frac{2^{11}\sqrt\pi}{3}c^{9/2}e^{-2c}$ \cite{Fuchs64} for the prolate eigenvalue defect. We do not claim optimality among Rayleigh-quotient arguments. Theorem~\ref{thm:G}(c) shows that the new bound is never worse than the old one. The cutoff $\mu\le10^4$ in part~(a) is where we stop absorbing the contribution of the zeros above $3\cdot10^{12}$, which grows like a power of $\mu$, into the $(\log\mu)^4$ envelope; it is not optimized.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+$\mu$ & $50$ & $10^3$ & $10^6$ & $10^{12}$\\
+\midrule
+Theorem~\ref{thm:G}(a) / \cite[Thm.~E]{MoriWeilII} & $1.27$ & $6.3\times10^{-5}$ & -- & --\\
+Theorem~\ref{thm:G}(b) / \cite[Thm.~E]{MoriWeilII} & $30.3$ & $1.2\times10^{-2}$ & $4.7\times10^{-11}$ & $1.9\times10^{-28}$\\
+Theorem~\ref{thm:G}(c) / \cite[Thm.~E]{MoriWeilII} & $0.830$ & $2.4\times10^{-5}$ & $8.5\times10^{-12}$ & $5.8\times10^{-30}$\\
+\bottomrule
+\end{tabular}
+\caption{Ratios of the new upper bounds for $\lambda_{\min}$ to the bound $5.011\times10^{17}\mu^8(\log\mu)^3e^{-4\pi\mu}$ of \cite[Thm.~E]{MoriWeilII}.}\label{tab:compare}
+\end{table}
+
+\subsection{Numerical context}
+\begin{itemize}
+\item With the factor $L$, the normalized out-of-band mass of $\psi_nL$ ($n=0,4$) is $1.20$--$1.48$ times that of $\psi_n$ for $c\in\{10\pi,14\pi,20\pi\}$, the factor decreasing in $c$. For $\mu=5,7$ the Galerkin value of $W$ changes by a factor of $1.27$--$1.32$, and $\|\tilde k\|^2/\|\tilde h\|^2$ is unchanged to six digits (Section~\ref{sec:num}).
+\item The observed ratio $W(\tilde k)/B$ is about $2$ for $\mu=5,7$, so the constant in Theorem~\ref{thm:F} is far from sharp.
+\end{itemize}
+
+\subsection{Method}
+\begin{enumerate}
+\item \textbf{The layer.} Its width must be $\asymp c^{-2}$: the prolate functions grow inward from the endpoint like $e^{c\sqrt{2(1-u)}}$, so a layer of width $c^{-1}$ would remove mass $e^{\sqrt{2c}}$ times larger than the endpoint value. With width $c^{-2}$, the correction is controlled by the endpoint values $|\psi_n(1)|$, which are themselves bounded by $\sqrt{c(1-\lambda_n)}$ (Section~\ref{sec:layer}).
+\item \textbf{Endpoint cancellation.} On the open half-line, $\tilde r'=\frac12\tilde r+\E(x\tilde h')$, and $x\tilde h'$ is again even with mean zero. Write $x\tilde h'$ as the difference of a part coming from the truncated prolate function and a part coming from the layer. Schematically, with $A=|\psi_n(1)|$,
+\[
+\hat g^{\rm raw}(\lambda t)=\frac{2\sqrt\lambda\,\psi_n'(1)}{ct}\sin(ct)+O\Bigl(\frac{\sqrt\lambda Ac^2}{t^2}\Bigr),\qquad
+\hat g^{\rm lay}(\lambda t)=\frac{2\sqrt\lambda\,\psi_n'(1)}{ct}\sin(ct)+O\Bigl(\frac{\sqrt\lambda Ac^2}{t^2}\Bigr),
+\]
+so the smoothed function has $\hat g^{\rm raw}-\hat g^{\rm lay}=O(\sqrt\lambda Ac^2/t^2)$: the endpoint jump that produced the $1/t$ decay is cancelled exactly. Since $A=O(\sqrt{cB})$, the amplitude is proportional to $\sqrt B$ (Section~\ref{sec:fourier}).
+\item \textbf{A second boundary regularization.} Smoothing removes the jump inherited from $h$ at $x=\pm\lambda$, but $\tilde r$ is still cut at the window boundary $y=-a$, and its value $J$ there can be as large as $\sqrt{cB}$ (Lemma~\ref{lem:J}). A correction $Je^{c^2(y+a)}$, localized at frequency $\asymp c^2$, removes this cut at negligible cost (Section~\ref{sec:A}).
+\item \textbf{The zero sum.} Zeros below $3\cdot10^{12}$ lie on the critical line, and a one-dimensional Sobolev bound weighted by the local zero count gives $(\log\mu)^4$. Higher zeros are handled by the disc averages of \cite{MoriWeilII}, now with a $t^2$ weight that makes their contribution negligible for $\mu\le10^4$ (Section~\ref{sec:zeros}).
+\end{enumerate}
+
+\section{Setting and inputs}\label{sec:setting}
+
+\subsection{Conventions}
+We follow \cite{MoriWeilII}: $\lambda>1$, $\mu=\lambda^2\ge50$, $a=\log\lambda$, $c=2\pi\mu$, $c_0=10\pi$, $\ell=395/399$. Fourier transforms are $\hat f(z)=\int f(y)e^{izy}dy$ in the logarithmic variable and $\hat\varphi(\xi)=\int\varphi(x)e^{2\pi ix\xi}dx$ in the additive variable. For $n\in\{0,4\}$ write $\lambda_n=\lambda_n(c)$, $b_n=1-\lambda_n$, $A_n=|\psi_n(1)|$, $\chi_{(n)}=\lambda_n^{1/2}$, and $\tilde\psi_n$ for the band-limited extension. Let $\chi=\chi_n^{\rm SL}$ be the Sturm--Liouville eigenvalue of $\psi_n$, $\sigma=\chi/c^2$, $\mu_n=\chi_{(n)}/\lambda$ (so that $\mu_n\tilde\psi_n(t)=\int_{-1}^1\psi_n(u)e^{icut}du$) and $K_1=2\log(c/3)+8.08$. For a nontrivial zero $\rho$ of multiplicity $m_\rho$ write $\gamma_\rho=(\rho-\frac12)/i=t_\rho+i\tau_\rho$, so that $t_\rho$ is the ordinate and $|\tau_\rho|=|\operatorname{Re}\rho-\frac12|$; ranges of zeros refer to $|t_\rho|$. Put $H=\|h\|$. For a function $f$ on $(-\infty,-a)$ and $|\tau|<\frac12$, $f_\tau(y)=e^{-\tau y}f(y)$; then $\int|\hat f(t+i\tau)|^2dt=2\pi\|f_\tau\|^2$. Let $\tilde e=\E(\tilde h)$, $\tilde r=\tilde e\mathbf 1_{y<-a}$ and $F=\hat{\tilde r}$.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{ll}
+\toprule
+$\lambda,\ \mu=\lambda^2,\ a=\log\lambda,\ c=2\pi\mu$ & window, its square, log-width, prolate bandwidth\\
+$\lambda_n=\lambda_n(c),\ b_n=1-\lambda_n,\ A_n=|\psi_n(1)|$ & prolate eigenvalues, defects, endpoint values\\
+$\lambda_{\min}(\lambda)$ & bottom of the spectrum of $W_\lambda$\\
+$h,\ H=\|h\|,\ B=\rho_{\rm out}H^2$ & unsmoothed vector, its norm, its out-of-band mass\\
+$L,\ D_L=1-L,\ E_L=e^{-c^2(1-u^2)/4}$ & layer factor and its complement\\
+$\tilde h,\ \tilde k,\ \tilde r,\ F=\hat{\tilde r}$ & smoothed vector, window part, outer part, its transform\\
+$J=\tilde e(-a),\ b_d,\ q_d=\tilde r-b_d$ & boundary trace, corrector, corrected remainder\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Results used from earlier papers}
+From \cite{MoriWeilII}:
+\begin{itemize}
+\item the radical lemma \cite[Lemma~2.2]{MoriWeilII} and the explicit formula \cite[(2.1)]{MoriWeilII}: $\hat{\tilde e}$ vanishes at every nontrivial zero, so $W(\tilde k)=\sum_\rho m_\rho F(\gamma_\rho)F(-\gamma_\rho)$; this holds for any even $C^1$ function of mean zero supported in $[-\lambda,\lambda]$;
+\item the Poisson form \cite[Lemma~2.3]{MoriWeilII}, $\tilde r(-\log X)=X^{1/2}\sum_{m\ge1}\hat{\tilde h}(mX)-\frac12\tilde h(0)X^{-1/2}$ for $X>\lambda$;
+\item Lemma~3.1 (eigenvalues and pointwise bounds), Lemma~3.2 (Liouville--Green), Lemma~3.3 ($A_n^2\le4cb_n/\lambda_n$), Lemma~3.4 ($h(0)^2\le2.0408\lambda B$), Lemma~3.5 (amplitude), Lemma~3.6 (far field) and Lemma~4.1 ($\|r_\tau\|^2\le\lambda^{2\tau}(1-2\tau)^{-1}(592+152.2K_1^2)B$ for $0\le\tau<\frac12$), all of \cite{MoriWeilII};
+\item \cite[Thm.~D]{MoriWeilII}: $\|k\|^2\ge0.109H^2$ for $\mu\ge50$;
+\item the three external results: the zero count of Trudgian \cite{Trudgian14}, the zero-free region of Mossinghoff and Trudgian \cite{MT15}, and the verification of RH to $3\cdot10^{12}$ by Platt and Trudgian \cite{PT21}.
+\end{itemize}
+From \cite{MoriPSWF}: $1-\lambda_4(c)\le6621c^{9/2}e^{-2c}$ for $c\ge10\pi$, hence $B\le U(c)H^2$ with $U(c)=6621c^{9/2}e^{-2c}$.
+
+\section{The layer}\label{sec:layer}
+
+\emph{Design of $L$.} The width $c^{-2}$ is the natural scale of the regular singular point $u=1$ of the prolate equation: by Lemma~\ref{lem:volterra}, $\psi_n$ stays within a bounded factor of $\psi_n(1)$ on $1-u\lesssim c^{-2}$, but grows like $e^{c\sqrt{2(1-u)}}$ beyond it. The square in $L=(1-E_L)^2$ makes both $L$ and $L'$ vanish at $u=\pm1$. Then $x\tilde h'$ vanishes at $\pm\lambda$, and this is exactly what produces the cancellation of the leading terms in Lemma~\ref{lem:cancel}.
+
+\begin{lemma}[inward growth]\label{lem:volterra}
+For $n\in\{0,4\}$, $c\ge10\pi$ and $0\le x\le1$,
+\[
+|\psi_n(1-x)|\le A_ne^{2c\sqrt x},\qquad|\psi_n'(1-x)|\le c^2A_ne^{2c\sqrt x},
+\]
+\[
+|\psi_n''(1-x)|\le2c^4A_ne^{2c\sqrt x},\qquad|\psi_n'''(1-x)|\le3c^6A_ne^{2c\sqrt x}.
+\]
+\end{lemma}
+\begin{proof}
+Integrating the prolate equation from the regular singular endpoint gives $(1-u^2)\psi'(u)=-\int_u^1(c^2v^2-\chi)\psi(v)dv$, and $|c^2v^2-\chi|\le c^2$ since $\chi/c^2<0.3$ \cite[Lemma~3.2]{MoriWeilII}. With $f(x)=\psi(1-x)$ and $x(2-x)\ge x$,
+\[
+|f(x)|\le A+c^2\int_0^x\frac1s\int_0^s|f(t)|\,dt\,ds.
+\]
+The positive operator on the right maps $t^k$ to $x^{k+1}/(k+1)^2$, and the remainder of the $N$-th iterate is at most $\max|f|(c^2x)^N/(N!)^2\to0$. Hence $|f(x)|\le A\sum_k(c^2x)^k/(k!)^2\le Ae^{2c\sqrt x}$, using $\binom{2k}k\le4^k$. The bound for $\psi'$ follows from the same integral identity. For $\psi''$ and $\psi'''$, differentiate the regular form $\psi'(u)=-(1+u)^{-1}\int_0^1[c^2(u+(1-u)v)^2-\chi]\psi(u+(1-u)v)dv$ and use $c\ge10\pi$.
+\end{proof}
+
+Let $E_L=e^{-c^2(1-u^2)/4}$, so that $D_L=2E_L-E_L^2$. Then $|D_L|\le2E_L$, $|D_L'|\le c^2E_L$, $|D_L''|\le2c^4E_L$ and $|D_L'''|\le2c^6E_L$. Substituting $t_1=c^2(1-u)$ and completing the square,
+\begin{equation}\label{eq:layerint}
+\int_0^1e^{2c\sqrt{1-u}}E_L\,du\le c^{-2}\int_0^\infty e^{2\sqrt{t_1}-t_1/4}dt_1\le8e^8c^{-2}.
+\end{equation}
+Similarly, with $d_n=h_nD_L(\cdot/\lambda)$,
+\begin{equation}\label{eq:dn}
+\|d_n\|\le\frac{\sqrt{32}\,e^8}{c}A_n,\qquad|J_n|\le\|d_n\|_1\le\frac{32e^8\sqrt\lambda}{c^2}A_n,\qquad
+{\rm TV}(d_n)\le\frac{2+48e^8}{\sqrt\lambda}A_n.
+\end{equation}
+
+\begin{lemma}[coefficients]\label{lem:coef}
+$I_0^2\ge\pi\ell\lambda/c$. With $S=|\tilde I_4|A_0+|\tilde I_0|A_4$ we have $S\le3\sqrt{cB}$ and $(J_0^2+J_4^2)^{1/2}\le z\sqrt B/c$, where $z=32e^8\sqrt{8/\pi}/\ell$.
+\end{lemma}
+\begin{proof}
+$\psi_0$ is positive in $(-1,1)$, so $1=\int\psi_0^2\le\|\psi_0\|_\infty\int\psi_0$, and $\|\psi_0\|_\infty\le\sqrt{c/(\pi\ell)}$ by \cite[Lemma~3.1]{MoriWeilII}. By \cite[Lemma~3.3]{MoriWeilII} and $b_0\le b_4$, $(|I_4|A_0+|I_0|A_4)^2\le8cB/\ell$ and $A_0^2+A_4^2\le8cb_4/\ell\le8cB/(\ell I_0^2)$. Combining with \eqref{eq:dn} gives the bound for $(J_0^2+J_4^2)^{1/2}$. Then $S\le\sqrt{8cB/\ell}+(z\sqrt B/c)\sqrt{A_0^2+A_4^2}$, and $A_0^2+A_4^2\le8cb_4/\ell\le8cU(c)/\ell$, so $S\le\sqrt{8cB/\ell}\,[1+z\sqrt{U(c)}/c]$. The bracket decreases in $c$; ball arithmetic at $c_0$ gives $S\le2.84278\sqrt{cB}$.
+\end{proof}
+
+\begin{proposition}[out-of-band mass and norms]\label{prop:oob}
+Let $\delta h=\tilde h-h$ and $\eta(c)=\sqrt{32}e^8\sqrt{8/(\ell c)}+z/c$. Then
+\begin{enumerate}
+\item[(a)] $\|\delta h\|\le\eta(c)\sqrt B$, so the out-of-band mass of $\tilde h$ is at most $[1+\eta(c)]^2B$;
+\item[(b)] $|\tilde h(0)|^2\le\theta(c)^2\lambda B$ with $\theta(c)=\sqrt{2.0408}+2z/(\sqrt\ell c)$;
+\item[(c)] $\|\tilde k\|^2\ge0.1089\,H^2$ for $\mu\ge50$;
+\item[(d)] ${\rm TV}(\delta h)\le V(c)\sqrt{\lambda B}$, with $V(c)$ given in Appendix~\ref{app:functions}.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(a) $\delta h=-D_Lh+L(-J_4h_0+J_0h_4)$; bound the first term by \eqref{eq:dn} and Lemma~\ref{lem:coef}, and the second by orthogonality of $h_0,h_4$ and $\|L\|_\infty\le1$. The orthogonal projection onto out-of-band frequencies is a contraction.
+(b) \cite[Lemma~3.4]{MoriWeilII} and the pointwise bound for $h_n(0)$.
+(c) Each $n\le\mu$ contributes $\|e^{y/2}v(ne^y)\|^2_{[-a,a]}\le\|v\|^2/(2n)$, so $\|\tilde k-k\|\le\sqrt{2\mu}\,\|\delta h\|\le\sqrt{2\mu}\,\eta\sqrt{U}H$. With \cite[Thm.~D]{MoriWeilII}, $\|\tilde k\|\ge(\sqrt{0.109}-\sqrt{2\mu}\,\eta\sqrt U)H$; the correction is below $10^{-124}$ at $\mu=50$ and decreasing.
+(d) ${\rm TV}(Lh_n)$ is bounded via \cite[Lemma~3.1]{MoriWeilII}, ${\rm TV}(d_n)$ by \eqref{eq:dn}, and the coefficients by Lemma~\ref{lem:coef}.
+\end{proof}
+
+Since $\delta h$ is even, of bounded variation and of mean zero, the Riemann-sum error gives $|\E(\delta h)(y)|\le{\rm TV}(\delta h)e^{y/2}$. Combined with \cite[Lemma~4.1]{MoriWeilII} (and $\|r_\tau\|\le\lambda^{\tau}\|r_0\|$ for $\tau<0$), for all $|\tau|<\frac12$,
+\begin{equation}\label{eq:m0}
+\|\tilde r_\tau\|^2\le\frac{\lambda^{2\tau}}{1-2\tau}m_0(c)B,\qquad m_0(c)=\Bigl[\sqrt{2\{592+152.2(2\log(c/3)+8.08)^2\}}+V(c)\Bigr]^2=O((\log c)^2).
+\end{equation}
+
+\section{High-frequency Fourier bounds}\label{sec:fourier}
+
+Let $g_{n,L}(x)=x\,(h_nL(\cdot/\lambda))'(x)$, so that $g_1:=x\tilde h'=\tilde I_4g_{0,L}-\tilde I_0g_{4,L}$. Write $g_{n,L}=g_n^{\rm raw}-g_n^{\rm lay}$ with $g_n^{\rm raw}=\lambda^{-1/2}u\psi_n'(u)$ and $g_n^{\rm lay}=\lambda^{-1/2}u(\psi_nD_L)'(u)$, $u=x/\lambda$, on $|u|<1$.
+
+\begin{lemma}[cancellation]\label{lem:cancel}
+For $n\in\{0,4\}$, $A=A_n$ and $t\ge c$,
+\[
+|\hat g_{n,L}(\lambda t)|\le C_f\sqrt\lambda\,A\,\frac{c^2}{t^2},\qquad C_f=20+321e^8.
+\]
+For $2\le t<c$, $|\hat g_{n,L}(\lambda t)|\le A_f\sqrt\lambda A$ with $A_f=10+48e^8$, and $\int_1^2|(t\tilde\psi_n)'|^2dt\le400c^2A^2$.
+\end{lemma}
+\begin{proof}
+\emph{The raw part.} Integration by parts gives exactly
+\[
+\hat g_n^{\rm raw}(\lambda t)=-\frac{\chi_{(n)}}{\sqrt\lambda}(t\tilde\psi_n)'(t)+2\sqrt\lambda\,\psi_n(1)\cos(ct).
+\]
+Put $w(t)=\sqrt{t^2-1}\,\tilde\psi_n(t)$. Then $w''+(c^2+\mathcal V)w=0$ with $\mathcal V=c^2(1-\sigma)/(t^2-1)+(t^2-1)^{-2}$, $\sigma=\chi/c^2$. From the finite Fourier representation, $w=C\sin(ct)+O_c(t^{-1})$ with $C=2\psi_n(1)/(\mu_nc)$ and $|C|\le A/\sqrt c$. Let $w_0=C[\sin(ct)+\alpha t^{-1}\cos(ct)]$ with $\alpha=-c(1-\sigma)/2$. The residual $\mathcal R=w_0''+(c^2+\mathcal V)w_0$ satisfies $|\mathcal R|\le2|C|c^3/t^3$ for $t\ge c$. Since $w-w_0$ and its derivative vanish at infinity, the Green formula with kernel $\sin(c(s-t))/c$ gives $|w-w_0|(t)\le c^{-1}\int_t^\infty|\mathcal R|+c^{-1}\int_t^\infty\mathcal V|w-w_0|$; with $\int_t^\infty|\mathcal R|\le|C|c^3/t^2$ and $c^{-1}\int_t^\infty\mathcal V\le2$ for $t\ge c$, Gronwall's inequality gives $|w-w_0|\le e^2|C|c^2/t^2$ and $|(w-w_0)'|\le6|C|c^3/t^2$. Hence, for $t\ge c$,
+\[
+\Bigl|\hat g_n^{\rm raw}(\lambda t)-\frac{2\sqrt\lambda\,\psi_n'(1)}{ct}\sin(ct)\Bigr|\le18\sqrt\lambda A\frac{c^2}{t^2},
+\]
+since $\chi_{(n)}Cc/\sqrt\lambda=2\sqrt\lambda\psi_n(1)$ and $c\alpha\psi_n(1)=\psi_n'(1)$; the $\cos(ct)$ terms cancel.
+
+\emph{The layer part.} Let $\phi(u)=u(\psi_nD_L)'(u)$. At $u=1$, $D_L=1$, $D_L'=0$ and $D_L''=-c^4/2$, and $\psi_n'(1)=\frac12(\chi-c^2)\psi_n(1)$. Lemma~\ref{lem:volterra} and \eqref{eq:layerint} give $\int_{-1}^1|\phi''|\le321e^8c^4A$. Two integrations by parts give
+\[
+\Bigl|\hat g_n^{\rm lay}(\lambda t)-\frac{2\sqrt\lambda\,\psi_n'(1)}{ct}\sin(ct)\Bigr|\le(2+321e^8)\sqrt\lambda A\frac{c^2}{t^2}.
+\]
+The two leading terms are identical, and subtracting gives the first claim.
+
+\emph{Lower frequencies.} For $2\le t<c$, use the Liouville--Green representation of \cite[Lemmas~3.2 and~3.5]{MoriWeilII}: $|(t\tilde\psi)'|\le3\sqrt cA$, and $\|\hat g_n^{\rm lay}\|_\infty\le\|g_n^{\rm lay}\|_1\le48e^8\sqrt\lambda A$. For $1\le t<2$, split at $t=1+1/(2c^2)$ and integrate the Liouville--Green bounds; the constant is $320.4<400$.
+\end{proof}
+
+\begin{proposition}\label{prop:Eg1}
+For all $|\tau|<\frac12$,
+\[
+\|\E(g_1)\mathbf 1_{y<-a}\|_\tau^2\le\frac{\lambda^{2\tau}}{1-2\tau}\,G(c)B,\qquad G(c)=\bigl[g_Ac^2+120c^{3/2}\bigr]^2,\quad g_A=\frac{3(A_f+2C_f)}{\sqrt{2\pi}}.
+\]
+\end{proposition}
+\begin{proof}
+$g_1$ is even, continuous, compactly supported, $g_1(0)=0$ and $\int g_1=-\int\tilde h=0$. By Lemma~\ref{lem:cancel} its Fourier samples are absolutely summable, so $\E(g_1)(-\log X)=\sqrt X\sum_{m\ge1}\hat g_1(mX)$ for $X\ge\lambda$. Put $u=X/\lambda$. Split the sum into $mu<c$ (at most $c/u$ terms, each at most $A_f\sqrt\lambda S$) and $m\ge\lceil c/u\rceil$, where $\sum_{m\ge M}m^{-2}\le2/M\le2u/c$. Apart from the band-edge term $m=1$, $1\le u<2$, this gives $|\E(g_1)(-\log(\lambda u))|\le\lambda Sc(A_f+2C_f)u^{-1/2}$. The band-edge derivative term is $\sqrt u\,\mathcal H(u)$ with $\mathcal H(u)=\sum_{n=0,4}\alpha_n\chi_{(n)}(u\tilde\psi_n(u))'$, $\alpha_0=\tilde I_4$, $\alpha_4=-\tilde I_0$; by Lemma~\ref{lem:cancel} and Minkowski, $\|\mathcal H\|_{L^2(1,2)}\le20cS$, and $(1-2\tau)u^{2\tau}\le4$ on $[1,2]$ gives the term $120c^{3/2}$. Integrate against $u^{2\tau-1}du$ and use $S\le3\sqrt{cB}$ and $\lambda^2=c/(2\pi)$.
+\end{proof}
+
+No term of size $H/\sqrt B$ appears: every amplitude is a multiple of the endpoint values $A_n$, which are $O(\sqrt{cB})$.
+
+\section{The boundary trace and condition (A)}\label{sec:A}
+
+Endpoint smoothing removes the discontinuity inherited from $h$ at $x=\pm\lambda$. The truncation at the window boundary $y=-a$ still leaves a trace $J$. We remove this remaining singularity with a localized exponential corrector, the second of the two boundary regularizations.
+
+\begin{lemma}[the trace]\label{lem:J}
+Let $J=\tilde e(-a)$. Then $J^2\le D_J(c)B\le\bigl(16c+337392159829(\log c)^2\bigr)B$, where $D_J(c)=[\sqrt{8c}+E_J(c)]^2$ and $E_J(c)=O(\log c)$ is given in Appendix~\ref{app:functions}.
+\end{lemma}
+\begin{proof}
+Apply the Poisson form at $X=\lambda$. The first term is exactly $M(c)=\sqrt\lambda\,\hat h(\lambda)=I_4\chi_{(0)}\psi_0(1)-I_0\chi_{(4)}\psi_4(1)$, a band-edge value with $|M|\le\sqrt{8cB}$. For $m\ge2$, the far-field phase is pure sine: two integrations by parts of the finite Fourier relation give $\tilde\psi_n(t)=2\psi_n(1)\sin(ct)/(\mu_nct)+O_c(t^{-2})$, so the phase $\Phi_n$ of \cite[Lemma~3.6]{MoriWeilII} satisfies $\sin\Phi_n=0$. Hence $|\sum_{m\ge2}\sin(cm)/m|\le\pi/2+1$, also when $c\in2\pi\mathbb Z$. The phase errors are summed as in \cite[Lemma~4.1]{MoriWeilII}, the $h(0)$ term is bounded by \cite[Lemma~3.4]{MoriWeilII}, and the smoothing changes the value by at most ${\rm TV}(\delta h)/\sqrt\lambda\le V(c)\sqrt B$.
+\end{proof}
+
+\begin{remark}\label{rem:J}
+Numerically the trace is not small compared with $\sqrt B$: for the smoothed vector, $J^2/B(\tilde h)=7.17$, $13.9$ and $20.2$ at $\mu=5,7,10$, where $B(\tilde h)$ is the out-of-band mass of $\tilde h$ (Section~\ref{sec:num}); we do not use or prove an asymptotic statement about $J$. Lemma~\ref{lem:J} still does not cost a power of $\mu$ in Theorem~\ref{thm:F}, because the corrector $b_d$ below is localized. At the zeros on the verified part of the critical line, its Fourier transform $Je^{-iaz}/(d+iz)$ contributes at most $2J^2S(d)=O(J^2\log c/c^2)$ to the zero sum. Above that height the factor $\lambda^{2\tau}$ is kept, as in Section~\ref{sec:zeros}. For the \emph{unsmoothed} vector we observed that at the first eight zeros $|\hat k(t_\rho)|^2$ is only $1.5\times10^{-5}$--$2.0\times10^{-3}$ times $J^2/(\frac14+t_\rho^2)$ (Section~\ref{sec:num}). A heuristic explanation is that near the band edge the remainder oscillates like a chirp of frequency $\gg c$, so the cut acts like a $1/t$ tail only at high frequency. We have not proved this, and it is not used.
+\end{remark}
+
+Let $d=c^2$, $b_d(y)=Je^{d(y+a)}\mathbf 1_{y<-a}$ and $q_d=\tilde r-b_d$. Then $q_d(-a)=0$, $\|(b_d)_\tau\|^2=\lambda^{2\tau}J^2/(2(d-\tau))$, and $\hat b_d(z)=Je^{-iaz}/(d+iz)$. On the open half-line,
+\begin{equation}\label{eq:qprime}
+q_d'=\tfrac12q_d+\E(g_1)+(\tfrac12-d)b_d.
+\end{equation}
+
+\begin{proposition}[condition (A)]\label{prop:A}
+For $\mu\ge50$ and $|\tau|<\frac12$, $e^{-\tau y}q_d$ extended by zero lies in $H^1(\R)$, and
+\[
+\|(e^{-\tau y}q_d)'\|^2\le\frac{\lambda^{2\tau}}{1-2\tau}K_*(\mu)B,\qquad K_*=\bigl[\sqrt Z+g_Ac^2+120c^{3/2}+c\sqrt{D_+(c)}\bigr]^2=O(c^4),
+\]
+where $Z=Z_C(\log\mu)^2$, $Z_C=125363711220$, and $D_+(c)=16c+337392159829(\log c)^2$. We write $K_*(\mu)$ throughout.
+\end{proposition}
+\begin{proof}
+By \eqref{eq:m0}, Lemma~\ref{lem:J} and $(1-2\tau)/(2(d-\tau))\le1/d$, $\|(q_d)_\tau\|^2\le\lambda^{2\tau}(1-2\tau)^{-1}Z_{\rm raw}B$ with $Z_{\rm raw}=[\sqrt{m_0}+\sqrt{D_J}/c]^2\le Z$; the last inequality reduces to $\mu=50$ by monotonicity (Appendix~\ref{app:functions}). Insert this, Proposition~\ref{prop:Eg1} and Lemma~\ref{lem:J} into \eqref{eq:qprime}, using $|\frac12-\tau|\le1$ and $(d-\frac12)^2(1-2\tau)/(2(d-\tau))\le c^2$. Since $\tilde h$ is $C^1$ and vanishes to first order at $\pm\lambda$, $\tilde e$ is $C^1$ on the open half-line. As $q_d(-a)=0$, the zero extension has the same weak derivative.
+\end{proof}
+
+\section{The zero sum}\label{sec:zeros}
+
+Write $F=Q+\hat b_d$ with $Q=\hat q_d$, and $|F|^2\le2|Q|^2+2|\hat b_d|^2$. Let $T_0=3\cdot10^{12}$. The zeros are split into three ranges:
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{llll}
+\toprule
+range of $|t_\rho|$ & location of zeros & method & contribution / $B$\\
+\midrule
+$\le T_0$ & on the critical line \cite{PT21} & 1D Sobolev, local count & $O((\log\mu)^4)$\\
+$(T_0,\max(T_0,c^3)]$ & zero-free region \cite{MT15} & discs, zeroth-order bound & $O(\sqrt\mu(\log\mu)^5)$; empty if $\mu\le2295$\\
+$>\max(T_0,c^3)$ & zero-free region \cite{MT15} & dyadic discs, $t^2$ weight & $O(\sqrt\mu(\log\mu)^3)$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Zeros on the verified part of the critical line}
+For $0<t_\rho\le T_0$ we have $\tau_\rho=0$ \cite{PT21}. For $x$ in $I_\rho=[t_\rho-\frac12,t_\rho+\frac12]$, $|F(t_\rho)|^2\le|F(x)|^2+\int_{I_\rho}2|F||F'|$; averaging over $x$ gives
+\begin{equation}\label{eq:sobolev}
+\sum_{0<t_\rho\le T_0}m_\rho|F(t_\rho)|^2\le\frac1{2\pi}\int_\R\omega(t)\bigl(|F|^2+2|F||F'|\bigr)dt,\qquad0\le\omega(t)\le12\pi\log(|t|+e+1),
+\end{equation}
+where $\omega/2\pi$ counts zeros within $\frac12$ of $t$, bounded with \cite{Trudgian14}. With $R=c^3$ we use $\log(|t|+e+1)\le\log(2R)+t^2/R^2$. Since $\hat q_d'$ is the transform of $iyq_d$, Plancherel, Proposition~\ref{prop:A}, \eqref{eq:m0} and the bounds $\|yq_d\|^2\le2(a+4)^2ZB$, $\|(yq_d)'\|^2\le YB$ (from $\tau=\frac14$) bound the $Q$ part by $48\pi[\mathfrak A_0+2\sqrt{\mathfrak A_0\mathfrak A_1}]B$, where $\mathfrak A_0=O((\log\mu)^3)$ and $\mathfrak A_1=O((\log\mu)^5)$ are defined in Appendix~\ref{app:functions}; thus $\sqrt{\mathfrak A_0\mathfrak A_1}=O((\log\mu)^4)$. The factor $48\pi$ is $12\pi$ from \eqref{eq:sobolev}, $2$ for the two signs of $t_\rho$, and $2$ from $|F|^2\le2|Q|^2+2|\hat b_d|^2$. For the $b_d$ part, $\sum_{t_\rho>0}m_\rho/(d^2+t_\rho^2)\le S(d)=O(\log d/d)$.
+
+\subsection{Zeros above the verified height}
+We use the disc averages of \cite[Lemma~5.1]{MoriWeilII} on dyadic ranges. Let $T\ge T_0$, $x_T=\log(3T)$, $x_j=\log(3\cdot2^jT)$ and $r_j=1/(11.15x_j)$. For $2^jT<|t_\rho|\le2^{j+1}T$, take discs of radius $1/(11.15\log|t_\rho|)\ge r_j$ centred at $\gamma_\rho$. By the zero-free region \cite{MT15} they lie in $|\tau|\le\frac12-r_j$, and Trudgian's count bounds the overlap by $n(x_j)$; zeros of opposite sign never cover the same point, so no extra factor $2$ is needed. The weight $t^2$ and Proposition~\ref{prop:A} reduce the sum over the $j$-th range to $\int_{-1/2+r_j}^{1/2-r_j}\lambda^{2\tau}(1-2\tau)^{-1}d\tau$ times explicit factors. We use two bounds for this strip integral. For Theorem~\ref{thm:F}(a) we take $T=T_0$ and bound the integral over the $j$-th range by $L_j=\frac12+\frac\lambda2\log\frac{11.15x_j}2$, as in \cite[proof of Lemma~5.1]{MoriWeilII}; this needs no condition on $r_j$. Since $L_j\le(x_j/x_0)L_T(\lambda)$ with $L_T$ of Appendix~\ref{app:functions}, this growth is one of the four factors $x_j/x_T\le1+j/40$ absorbed by $S_4$ below. For Theorem~\ref{thm:F}(b) we take $T=\max(T_0,c^3)$ and use Lemma~\ref{lem:strip}. Its hypothesis $r_j\log\mu<1$ holds: if $c^3\le T_0$ then $\mu\le\mu_*$ (see below) and $\log\mu/(11.15x_T)\le\log\mu_*/(11.15\log(3T_0))<0.03$, and if $c^3>T_0$ then $x_T\ge3\log c>3\log\mu$, so $\log\mu/(11.15x_T)<1/33$. Since $r_j\le r_0=1/(11.15x_T)$, the hypothesis holds for every $j$. Thus, for Theorem~\ref{thm:F}(b) (both cases),
+\[
+\sum_{|t_\rho|>T}m_\rho|Q(\gamma_\rho)|^2\le\mathcal A(T)\,\lambda\,j(x_T,\log\mu)\,K_*(\mu)B,\qquad\mathcal A(T)=\frac{2(1000/999)^2S_4n(x_T)(11.15x_T)^2}{T^2},
+\]
+with $S_4=\sum_{j\ge0}4^{-j}(1+j/40)^4=572587/414720$ (which absorbs $x_j/x_T\le1+j/40$), and $j$ the strip factor of Lemma~\ref{lem:strip}. For $b_d$ the contribution is at most $4\lambda J^2(\log T+1)/(\pi T)$, by $|\hat b_d(t+i\tau)|^2\le\lambda J^2/t^2$ and $\sum_{|t_\rho|>T}m_\rho/t_\rho^2\le2(\log T+1)/(\pi T)$.
+
+\begin{lemma}[strip integral]\label{lem:strip}
+For $0<r<\frac12$ with $r\log\mu<1$,
+\[
+\int_{-1/2+r}^{1/2-r}\frac{\lambda^{2\tau}}{1-2\tau}d\tau\le\frac\lambda2\Bigl[\log\frac1{r\log\mu}+e^{-1}\Bigr].
+\]
+\end{lemma}
+\begin{proof}
+Put $l=\log\mu$ and $w=l(\frac12-\tau)$. Then $\lambda^{2\tau}=\lambda e^{-w}$, $1-2\tau=2w/l$ and $d\tau=-dw/l$, so the integral equals $\frac\lambda2\int_{lr}^{l(1-r)}e^{-w}w^{-1}dw\le\frac\lambda2\int_{lr}^{\infty}e^{-w}w^{-1}dw\le\frac\lambda2\bigl[\int_{lr}^1w^{-1}dw+E_1(1)\bigr]$, and $E_1(1)<e^{-1}$.
+\end{proof}
+
+\subsection{The intermediate range}
+For Theorem~\ref{thm:F}(b), let $T=\max(T_0,c^3)$. If $c^3>T_0$, which happens exactly when $\mu>\mu_*=T_0^{1/3}/(2\pi)\approx2295.4$, the zeros with $T_0<|t_\rho|\le T$ are handled by discs of the common radius $r=1/(11.15x_T)$, $x_T=\log(3T)=\log(3c^3)$. These lie in $|\tau|\le\frac12-r$ by \cite{MT15}, since $1/(5.573412\log|t_\rho|)>2r$. Using \eqref{eq:m0} directly for $F$ (which already contains $\hat b_d$),
+\[
+\sum_{T_0<|t_\rho|\le T}m_\rho|F(\gamma_\rho)|^2\le2n(x_T)(11.15x_T)^2\,\lambda\,j(x_T,\log\mu)\,m_0(c)B.
+\]
+The factor $\lambda=\sqrt\mu$ accounts for possible zeros off the critical line; it is the only source of the extra $\sqrt\mu$ in Theorem~\ref{thm:F}(b).
+
+\section{Proofs of Theorems~\ref{thm:F} and~\ref{thm:G}}\label{sec:proofs}
+
+\emph{Theorem~\ref{thm:F}(a).} Take $T=T_0$. The bound is $L_{\rm low}(c)$ plus the high-zero bound of Section~\ref{sec:zeros}, in which the strip integral is bounded by the cruder $L_T(\lambda)$ of Appendix~\ref{app:functions}. By the monotonicity statements of Appendix~\ref{app:functions}, $L_{\rm low}/(\log\mu)^4$ is maximal at $\mu=50$ and the high-zero coefficient is maximal at $\mu=10^4$, which gives $C_{F,a}$ of \eqref{eq:CFa}. Ball arithmetic gives $C_{F,a}\le603317800634135\le6.034\times10^{14}$.
+
+\emph{Theorem~\ref{thm:F}(b).} With $T=\max(T_0,c^3)$,
+\begin{equation}\label{eq:Ppp}
+P''(\mu)=L_{\rm low}(c)+M_{\rm mid}(c)+2\mathcal A(T)\lambda j(x_T,\log\mu)K_*(\mu)+\frac{4\lambda D_+(c)(\log T+1)}{\pi T},
+\end{equation}
+with $L_{\rm low}$ and $M_{\rm mid}$ as in Appendix~\ref{app:functions} ($M_{\rm mid}=0$ for $\mu\le\mu_*$). The four monotonicity statements of Appendix~\ref{app:functions} reduce the envelope to evaluations at $\mu=50$ and $\mu=\mu_*$:
+\[
+P''\le C_L(\log\mu)^4+C_M\lambda(\log\mu)^5\mathbf 1_{\mu>\mu_*}+C_T\lambda(\log\mu)^3+C_B\lambda\log\mu\le5.2\times10^{14}\sqrt\mu(\log\mu)^5,
+\]
+with $C_L=395545739509246$, $C_M=496386197282357$, $C_T=11498327513$ and $C_B=3492549$.
+
+\emph{Theorem~\ref{thm:G}.} By Proposition~\ref{prop:oob}(c), $\lambda_{\min}\le W(\tilde k)/\|\tilde k\|^2\le|W(\tilde k)|/(0.1089H^2)$, and $B\le U(c)H^2$ with $c^{9/2}=(2\pi)^{9/2}\mu^{9/2}$. The conversion factor is $6621(2\pi)^{9/2}/0.1089\le237522697$, and $237522697\times6.034\times10^{14}<1.434\times10^{23}$, $237522697\times5.2\times10^{14}<1.24\times10^{23}$. For (c), with $l=\log\mu$, the ratio to $5.011\times10^{17}\mu^8l^3$ is at most
+\[
+\frac{237522697}{5.011\times10^{17}}\Bigl[C_L\frac{l}{\mu^{7/2}}+\frac{C_T}{\mu^3}+\frac{C_B}{\mu^3l^2}+\mathbf 1_{\mu>\mu_*}C_M\frac{l^2}{\mu^3}\Bigr].
+\]
+The first three terms decrease for $\mu\ge50$ and the last for $\mu\ge\mu_*$, so the sum of their values at $50$ (first three) and at $\mu_*$ (last) bounds the ratio; ball arithmetic gives $0.831028501\ldots<0.832$.
+
+\section{Numerical evidence}\label{sec:num}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+& $c=10\pi$ & $c=14\pi$ & $c=20\pi$\\
+\midrule
+out-of-band mass ratio, $n=0$, one factor of $1-E_L$ & 1.191 & 1.142 & 1.102\\
+out-of-band mass ratio, $n=0$, $L$ & 1.481 & 1.359 & 1.260\\
+out-of-band mass ratio, $n=4$, $L$ & 1.299 & 1.254 & 1.204\\
+\bottomrule
+\end{tabular}
+\caption{Normalized out-of-band mass $B(f)/\|f\|^2$ of $f=\psi_n(1-E_L)$ or $f=\psi_nL$ on $[-1,1]$ (bandwidth $c$), divided by $1-\lambda_n=B(\psi_n)/\|\psi_n\|^2$. Computed with 60 digits as $\|f\|^2$ minus the in-band mass.}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+$\mu$ & $W(k)/B$ & $W(\tilde k)/\tilde B$ & $\|k\|^2/H^2$ & $\|\tilde k\|^2/\|\tilde h\|^2$\\
+\midrule
+5 & 1.623 & 2.141 & 0.222685 & 0.222685\\
+7 & 1.805 & 2.292 & 0.221439 & 0.221439\\
+\bottomrule
+\end{tabular}
+\caption{Galerkin values ($N=140$ Legendre modes, 480 bits); not part of any proof. Here $\tilde B=\tilde I_4^2b_0+\tilde I_0^2b_4$ is the out-of-band mass of the unsmoothed combination with the smoothed coefficients; it differs from $B$ by a relative amount of order $\eta(c)\sqrt{U(c)}$.}
+\end{table}
+
+\begin{itemize}
+\item For the unsmoothed vector $k$ and its trace $J=e(-a)$, $|\hat k(t_\rho)|^2/(J^2/(\frac14+t_\rho^2))$ is $1.5\times10^{-5}$--$2.0\times10^{-3}$ at the first eight zeros for $\mu=5,7,10$, and the partial zero sum over the first $40$ zeros is concentrated at $t_\rho\approx2.5c$--$3c$.
+\item For the smoothed vector, $J^2/B(\tilde h)=7.17$, $13.9$, $20.2$ at $\mu=5,7,10$.
+\item The bound of Lemma~\ref{lem:cancel} was compared with direct quadrature of $\hat g_{0,L}(\lambda t)$ at $\mu=5$ for $t/c\in\{1,2,5,10,20,40,80\}$; the ratio actual/bound stays in $[3\times10^{-7},9\times10^{-7}]$.
+\end{itemize}
+
+\appendix
+\section{Explicit functions and monotonicity}\label{app:functions}
+
+Throughout, $l=\log\mu$, $\mu\ge50$, $c=2\pi\mu$, $\lambda=\sqrt\mu$, $a=\log\lambda$, $T_0=3\cdot10^{12}$, $R=c^3$, $L_R=\log(2R)$ and $d=c^2$.
+
+\emph{Prolate side.}
+\begin{gather*}
+z=\frac{32e^8\sqrt{8/\pi}}{\ell},\qquad V(c)=(2+48e^8)\sqrt{16\pi/\ell}+\frac{2z}{\sqrt\ell}\Bigl(\frac4c+\frac2{\sqrt3}\Bigr),\\
+E_J(c)=V(c)+1.78\sqrt8\Bigl[\frac\pi2+1+2\log\frac c3+5.49\Bigr]+\frac{\sqrt{2.0408}}2,
+\end{gather*}
+$D_J(c)=[\sqrt{8c}+E_J(c)]^2\le D_+(c)$, $m_0(c)$ as in \eqref{eq:m0}, $Z_{\rm raw}=[\sqrt{m_0}+\sqrt{D_J}/c]^2$, $Z=Z_Cl^2$, $K_*(\mu)$ as in Proposition~\ref{prop:A}, and
+\[
+Y=\bigl[\sqrt Z+\sqrt2(a+4)(\sqrt{K_*}+\tfrac14\sqrt Z)\bigr]^2,\qquad \mathfrak A_0=L_RZ+K_*/R^2,\qquad \mathfrak A_1=2(a+4)^2L_RZ+Y/R^2.
+\]
+
+\emph{Zero side.} With $C_N=3.325+0.2/e$,
+\begin{gather*}
+S(d)=\frac{\frac43\log d+1}{\pi d}+\frac{0.772\log d+2C_N+0.193}{d^2},\\
+n(x)=\Bigl(\frac1{4\pi}+0.222\Bigr)x+0.55\log x+4.9+\frac{0.4}e,\qquad
+j(x,l)=\frac12\Bigl[\log\frac{11.15x}l+e^{-1}\Bigr],
+\end{gather*}
+$\mathcal A(T)$ as in Section~\ref{sec:zeros}, $x_0=\log(3T_0)$, $L_T(\lambda)=\frac12+\frac\lambda2\log\frac{11.15x_0}2$ (the strip bound of \cite[proof of Lemma~5.1]{MoriWeilII}), $H_T=(\log T_0+1)/(\pi T_0)$, and
+\begin{gather*}
+L_{\rm low}(c)=48\pi\bigl[\mathfrak A_0+2\sqrt{\mathfrak A_0\mathfrak A_1}\bigr]+4D_+(c)S(c^2),\\
+M_{\rm mid}(c)=\begin{cases}0,&c^3\le T_0,\\ 2n(x)(11.15x)^2\lambda j(x,l)m_0(c),\ x=\log(3c^3),&c^3>T_0.\end{cases}
+\end{gather*}
+
+\emph{Monotonicity.} The functions named in the four items below are sums or products of positive monotone functions. All are decreasing on the stated ranges, except the high-zero coefficient in item~2, which is increasing. The derivatives of $n(x)/x$ and $j(x,l)/x$ are checked in \texttt{all\_mu\_identities.py}.
+\begin{enumerate}
+\item $Z_{\rm raw}/l^2$, $\sqrt{K_*}/(c^3\sqrt Z)$, $\mathfrak A_0/l^3$, $\mathfrak A_1/l^5$ and $D_+(c)S(c^2)$ decrease for $\mu\ge50$. At $\mu=50$, $K_*/(R^2Z)<0.000033$, so $\mathfrak A_0\le5Z_Cl^3$, $\mathfrak A_1\le12(1.53)^2Z_Cl^5$ and $48\pi[\mathfrak A_0+2\sqrt{\mathfrak A_0\mathfrak A_1}]\le48\pi\cdot26Z_Cl^4$.
+\item For $T=T_0$ the high-zero coefficient $2\mathcal A(T_0)L_T(\lambda)K_*(\mu)+4\lambda D_+(c)H_T$ increases in $\mu$. Hence, for $50\le\mu\le10^4$,
+\begin{multline}\label{eq:CFa}
+\frac{|W(\tilde k)|}{B\,l^4}\le C_{F,a}:=48\pi\cdot26Z_C\\+\frac{4D_+(100\pi)S((100\pi)^2)+2\mathcal A(T_0)L_T(100)K_*(10^4)+400D_+(2\pi\cdot10^4)H_T}{(\log50)^4}.
+\end{multline}
+\item For $\mu>\mu_*$ (where $x=x_T=\log(3c^3)$), $x/l$, $n(x)/l$, $j(x,l)$ and $m_0/l^2$ decrease. Hence $M_{\rm mid}/(\lambda l^5)$ is bounded on $\mu>\mu_*$ by its right limit at $\mu_*$, computed from the formula for $c^3>T_0$ (note $M_{\rm mid}(\mu_*)=0$); this gives $C_M$.
+\item $K_*/c^4$ decreases, $T^2\ge T_0^{2/3}c^4$ and $x_T\le(x_0/\log50)\,l$ (since $x_T/l$ decreases), which give $C_T$; $\log T+1\le x_T$, $T\ge c^3$ and the decrease of $D_+(c)/c^3$ give $C_B$; and $L_{\rm low}/l^4\le C_L$ by item~1.
+\end{enumerate}
+
+\section*{Reproducibility}
+All computer-assisted steps are reproducible from the public repository \url{https://github.com/moriryota/prolate-weil-bounds}, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions; this paper corresponds to release \texttt{v1.1.0}). It contains every script and its raw output. The scripts in \texttt{proofs-III/} use ball arithmetic (Arb, via python-flint) or SymPy; every printed upper bound is rounded upward, every lower bound downward, and each is asserted against the ball.
+
+\begin{center}\small
+\begin{tabular}{ll}
+\toprule
+Statement & Script\\
+\midrule
+Lemma~\ref{lem:volterra}, \eqref{eq:dn}, Proposition~\ref{prop:oob}, \eqref{eq:m0} & \texttt{proofs-III/layer\_constants.py}\\
+Lemma~\ref{lem:coef} ($2.84278$; key \texttt{endpoint\_coeff}) & \texttt{proofs-III/theoremF\_a\_constants.py}\\
+Lemma~\ref{lem:J}, zero-count constants of Section~\ref{sec:zeros} & \texttt{proofs-III/trace\_constants.py}\\
+Lemma~\ref{lem:cancel} (identities) & \texttt{proofs-III/cancellation\_identities.py}\\
+Lemma~\ref{lem:cancel}, Propositions~\ref{prop:Eg1}, \ref{prop:A}; Theorems~\ref{thm:F}(a), \ref{thm:G}(a) & \texttt{proofs-III/theoremF\_a\_constants.py}\\
+$P''$, Theorems~\ref{thm:F}(b), \ref{thm:G}(b), (c) & \texttt{proofs-III/theoremF\_b\_constants.py}\\
+Sections~\ref{sec:zeros}--\ref{sec:proofs} (identities) & \texttt{proofs-III/all\_mu\_identities.py}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The numerical values in Section~\ref{sec:num} and the check of Lemma~\ref{lem:strip} come from \texttt{numerics-III/}; they are not part of any proof.
+
+\section*{Use of generative AI}
+This work was carried out with extensive use of generative AI systems, namely Anthropic Claude, Google Gemini and OpenAI GPT. Under the direction of the author, these systems drafted the proofs, implemented and ran the computations, reviewed one another's drafts adversarially, and drafted this manuscript. The author chose the problem and the strategy, assigned and reviewed the tasks, and takes full responsibility for the content. The AI systems are not authors of this paper.
+
+\begin{thebibliography}{99}
+\bibitem{CC21} A.~Connes, C.~Consani, Spectral triples and $\zeta$-cycles, arXiv:2106.01715.
+\bibitem{CCM25} A.~Connes, C.~Consani, H.~Moscovici, Zeta spectral triples, arXiv:2511.22755.
+\bibitem{Fuchs64} W.~H.~J.~Fuchs, On the eigenvalues of an integral equation arising in the theory of band-limited signals, \emph{J. Math. Anal. Appl.} 9 (1964) 317--330. \doi{10.1016/0022-247X(64)90017-4}
+\bibitem{MoriPSWF} R.~Mori, A non-asymptotic bound with the sharp power of $c$ for the eigenvalue defect $1-\lambda_n(c)$ of time and frequency limiting, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092454}
+\bibitem{MoriWeilII} R.~Mori, The Weil quadratic form of the Connes--Consani--Moscovici prolate vector, and a $\mu^8$ upper bound for windowed Weil forms, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092542}
+\bibitem{MoriWWUB} R.~Mori, Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms, version 3, Zenodo, 2026. \doi{10.5281/zenodo.23066578}
+\bibitem{MT15} M.~J.~Mossinghoff, T.~S.~Trudgian, Nonnegative trigonometric polynomials and a zero-free region for the Riemann zeta-function, \emph{J. Number Theory} 157 (2015) 329--349. \doi{10.1016/j.jnt.2015.05.010}
+\bibitem{PT21} D.~Platt, T.~Trudgian, The Riemann hypothesis is true up to $3\cdot10^{12}$, \emph{Bull. London Math. Soc.} 53 (2021) 792--797. \doi{10.1112/blms.12460}
+\bibitem{Trudgian14} T.~Trudgian, An improved upper bound for the argument of the Riemann zeta-function on the critical line II, \emph{J. Number Theory} 134 (2014) 280--292. \doi{10.1016/j.jnt.2013.07.017}
+\end{thebibliography}
+
+\end{document}
