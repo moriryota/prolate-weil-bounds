@@ -1,0 +1,33 @@
+# 954 positive zeros up to 1366.4 (float; not interval-certified)
+mu=5.0
+  exp3 eps=0        D=    9.587  2mu^(1+eps)=   10.000  ratio=0.9587  hi/T_eps=0.968  (L=47)
+  exp3 eps=0.05     D=   10.366  2mu^(1+eps)=   10.838  ratio=0.9565  hi/T_eps=0.894  (L=51)
+  exp3 eps=1/log mu D=   26.881  2mu^(1+eps)=   27.183  ratio=0.9889  hi/T_eps=0.886  (L=128)
+  exp4 q=0.05    removed=   0/84  D=   26.881  D/mu=5.3762
+  exp4 q=0.01    removed=   0/84  D=   26.881  D/mu=5.3762
+  exp4 q=1/mu    removed=   0/84  D=   26.881  D/mu=5.3762
+  exp4 q=1/mu^2  removed=   0/84  D=   26.881  D/mu=5.3762
+mu=10.0
+  exp3 eps=0        D=   19.723  2mu^(1+eps)=   20.000  ratio=0.9862  hi/T_eps=1.036  (L=94)
+  exp3 eps=0.05     D=   22.261  2mu^(1+eps)=   22.440  ratio=0.9920  hi/T_eps=1.074  (L=106)
+  exp3 eps=1/log mu D=   54.348  2mu^(1+eps)=   54.366  ratio=0.9997  hi/T_eps=1.082  (L=256)
+  exp4 q=0.05    removed=   0/222  D=   54.348  D/mu=5.4348
+  exp4 q=0.01    removed=   0/222  D=   54.348  D/mu=5.4348
+  exp4 q=1/mu    removed=   0/222  D=   54.348  D/mu=5.4348
+  exp4 q=1/mu^2  removed=   0/222  D=   54.348  D/mu=5.4348
+mu=20.0
+  exp3 eps=0        D=   39.875  2mu^(1+eps)=   40.000  ratio=0.9969  hi/T_eps=0.884  (L=188)
+  exp3 eps=0.05     D=   46.308  2mu^(1+eps)=   46.463  ratio=0.9967  hi/T_eps=1.069  (L=219)
+  exp3 eps=1/log mu D=  108.812  2mu^(1+eps)=  108.731  ratio=1.0007  hi/T_eps=1.042  (L=512)
+  exp4 q=0.05    removed=   0/556  D=  108.812  D/mu=5.4406
+  exp4 q=0.01    removed=   0/556  D=  108.812  D/mu=5.4406
+  exp4 q=1/mu    removed=   0/556  D=  108.812  D/mu=5.4406
+  exp4 q=1/mu^2  removed=   0/556  D=  108.812  D/mu=5.4406
+mu=50.0
+  exp3 eps=0        D=  100.159  2mu^(1+eps)=  100.000  ratio=1.0016  hi/T_eps=0.987  (L=471)
+  exp3 eps=0.05     D=  121.828  2mu^(1+eps)=  121.604  ratio=1.0018  hi/T_eps=1.025  (L=573)
+  exp3 eps=1/log mu D=  272.208  2mu^(1+eps)=  271.828  ratio=1.0014  hi/T_eps=0.980  (L=1281)
+  exp4 q=0.05    removed=   0/1762  D=  272.208  D/mu=5.4442
+  exp4 q=0.01    removed=   0/1762  D=  272.208  D/mu=5.4442
+  exp4 q=1/mu    removed=   0/1762  D=  272.208  D/mu=5.4442
+  exp4 q=1/mu^2  removed=   0/1762  D=  272.208  D/mu=5.4442

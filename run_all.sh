@@ -5,7 +5,7 @@ set -u
 PY=${PYTHON:-python3}
 MODE=${1:-proofs}
 NEW=run_all_outputs
-mkdir -p $NEW/proofs-I $NEW/proofs-II $NEW/proofs-III $NEW/numerics-I $NEW/numerics-II $NEW/numerics-III
+mkdir -p $NEW/proofs-I $NEW/proofs-II $NEW/proofs-III $NEW/numerics-I $NEW/numerics-II $NEW/numerics-III $NEW/numerics-IV
 status=0
 run() {  # run DIR SCRIPT [ARGS...]  -> NEW/DIR/SCRIPT[_ARGS].out, compared with outputs/DIR/same name
   d=$1; s=$2; shift 2
@@ -34,6 +34,10 @@ if [ "$MODE" = all ] || [ "$MODE" = numerics ]; then
   for m in 5 7 10; do run numerics-III trace_ratio $m 4 80; run numerics-III khat_at_zeros $m 40; done
   run numerics-III cancellation_direct 5 0 50
   run numerics-III cancellation_direct 5 0 50 2400
+  run numerics-IV zero_deficit 5 10 20 50
+  run numerics-IV condition_G 5 10 20
+  run numerics-IV lattice_deletion
+  run numerics-IV local_pairs 7500
 fi
 echo; [ $status = 0 ] && echo "All runs completed and all compared outputs are identical." || echo "Some runs failed or differ (see above)."
 exit $status

@@ -1,6 +1,6 @@
 # prolate-weil-bounds
 
-This repository contains the computations for three papers by Ryota Mori, together with their LaTeX sources and PDFs.
+This repository contains the computations for four papers by Ryota Mori, together with their LaTeX sources and PDFs.
 
 **Paper I** (`paper-I/`). *A non-asymptotic bound with the sharp power of c for the eigenvalue defect 1 − λ_n(c) of time and frequency limiting.*
 
@@ -19,6 +19,8 @@ with C_n = 18.34, 155.0, 703.4, 2340 and 6621. The power of c is the one in Fuch
 - **Theorem F:** |W(k̃_λ)| ≤ 6.034×10¹⁴ (log μ)⁴ B for 50 ≤ μ ≤ 10⁴, and |W(k̃_λ)| ≤ 5.2×10¹⁴ √μ (log μ)⁵ B for all μ ≥ 50, where B = ρ_out‖h_λ‖².
 - **Theorem G:** λ_min(λ) ≤ 1.434×10²³ μ^{9/2} (log μ)⁴ e^{−4πμ} for 50 ≤ μ ≤ 10⁴, and λ_min(λ) ≤ 1.24×10²³ μ⁵ (log μ)⁵ e^{−4πμ} for all μ ≥ 50. An explicit refinement is below 0.832 times the bound of paper II, Theorem E, for all μ ≥ 50.
 
+**Paper IV** (`paper-IV/`). *A conditional lower bound for windowed Weil forms from sampling on the zeros of ζ.* Under the Riemann Hypothesis and a local hypothesis (LP) on close pairs of zeros, 4πμ − O(log μ) ≤ −log λ_min(λ) ≤ Cμ log log μ; under RH alone, effective but weak lower bounds. The proofs are analytic; `numerics-IV/` contains numerical illustrations only.
+
 Paper II is a sequel to *Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms* ([code](https://github.com/moriryota/weil-window-upper-bounds), [paper](https://doi.org/10.5281/zenodo.23059297)).
 
 DOIs:
@@ -26,16 +28,17 @@ DOIs:
 - Paper I: [10.5281/zenodo.23092454](https://doi.org/10.5281/zenodo.23092454)
 - Paper II: [10.5281/zenodo.23092542](https://doi.org/10.5281/zenodo.23092542)
 - Paper III: [10.5281/zenodo.23119609](https://doi.org/10.5281/zenodo.23119609)
+- Paper IV: [10.5281/zenodo.23134085](https://doi.org/10.5281/zenodo.23134085)
 
-These are upper bounds only. They say nothing about positivity and do not address the Riemann Hypothesis.
+Papers I–III give upper bounds only; they say nothing about positivity and do not address the Riemann Hypothesis. Paper IV gives lower bounds under RH (and, for the main theorem, an additional hypothesis); it does not prove RH.
 
 ## Layout
 
 | Directory | Contents |
 |---|---|
-| `paper-I/`, `paper-II/`, `paper-III/` | LaTeX sources and PDFs. |
+| `paper-I/` … `paper-IV/` | LaTeX sources and PDFs. |
 | `proofs-I/`, `proofs-II/`, `proofs-III/` | Computations that **prove** the numerical constants of the papers. They use ball arithmetic (Arb, through python-flint) or exact rationals. Every printed upper bound is rounded upward, every lower bound downward, and each is asserted against the ball. |
-| `numerics-I/`, `numerics-II/`, `numerics-III/` | Numerical illustrations. These scripts are **not** part of any proof. |
+| `numerics-I/` … `numerics-IV/` | Numerical illustrations. These scripts are **not** part of any proof. |
 | `common/` | Shared code for the numerics: prolate spheroidal wave functions from Legendre expansions, and the Weil form on a Legendre basis in Arb. |
 | `outputs/` | The raw outputs of all scripts, with the same file names that `run_all.sh` produces. |
 

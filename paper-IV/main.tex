@@ -1,0 +1,342 @@
+% Ryota Mori. Version 1, 2026-10-04. Licence: CC BY 4.0. doi:10.5281/zenodo.23134085
+% Paper IV: lower bounds for windowed Weil forms under RH (sequel to Papers II, III).
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+\newcommand{\provisional}[1]{{\color{red}#1}}
+
+\newtheorem{theorem}{Theorem}
+\renewcommand{\thetheorem}{\Alph{theorem}}
+\setcounter{theorem}{7}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\theoremstyle{definition}
+\newtheorem{hypothesis}[proposition]{Hypothesis}
+\newtheorem{definition}[proposition]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[proposition]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathcal{E}}
+\emergencystretch=3em
+
+\title[A conditional lower bound for windowed Weil forms]{A conditional lower bound for windowed Weil forms from sampling on the zeros of $\zeta$}
+\author{Ryota Mori}
+\address{Independent researcher, Tokyo, Japan}
+\email{moriryota31@gmail.com}
+\date{4 October 2026}
+
+\begin{document}
+
+\begin{abstract}
+Let $\lambda_{\min}(\lambda)$ be the bottom of the spectrum of Weil's quadratic form restricted to test functions supported in the multiplicative window $[\lambda^{-1},\lambda]$, and put $\mu=\lambda^2$. In previous papers we proved, without any hypothesis on the zeros, that $\lambda_{\min}\le1.24\times10^{23}\mu^5(\log\mu)^5e^{-4\pi\mu}$ for $\mu\ge50$. Under the Riemann Hypothesis, $\lambda_{\min}$ is bounded below by a sampling constant of the ordinates of the zeros for a Paley--Wiener space, an observation used by Zhu to prove positivity on fixed windows. We make this argument quantitative for growing windows. Assume RH and a local hypothesis (LP) bounding the number of close pairs of zeros in every interval by a Poisson-level count plus lower-order terms. Then
+\[
+4\pi\mu-O(\log\mu)\ \le\ -\log\lambda_{\min}\ \le\ C\mu\log\log\mu .
+\]
+The ingredients are the counting deficit $2\mu^{1+\varepsilon}+O(\log\mu)$ of the zeros relative to the Nyquist density, a thinning lemma, and Voss's explicit lower bound in the Duffin--Schaeffer theorem. Without (LP), the same argument gives effective but weak bounds under RH alone. We also show that cumulative pair-correlation bounds alone cannot replace (LP) in this argument.
+\end{abstract}
+
+\maketitle
+
+\noindent\textit{Version 1.} Zenodo, \doi{10.5281/zenodo.23134085}. Licence: CC BY 4.0.
+
+
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\small
+\textbf{Status.} The proofs and the manuscript passed independent AI reviews with no blocking or major findings. The lower bounds are conditional on RH, and the main theorem also on Hypothesis~(LP), which we do not know how to derive from RH or from the usual pair correlation conjecture. Constants are effective but not computed. Not formalized. Not reviewed by independent human experts.}}
+\end{center}
+
+\section{Introduction}
+
+\subsection{Background}
+Let $W$ be Weil's quadratic form and $W_\lambda$ its restriction to test functions supported in the multiplicative window $[\lambda^{-1},\lambda]$ \cite{CC21,CCM25}. Write $\lambda_{\min}(\lambda)$ for the bottom of its spectrum, $\mu=\lambda^2$ and $a=\log\lambda=\frac12\log\mu$. By Weil's criterion, RH is equivalent to $\lambda_{\min}(\lambda)\ge0$ for all $\lambda$. Under RH, $\lambda_{\min}(\lambda)>0$ for every fixed window \cite[Prop.~2.3]{Zhu26}, but no effective constant is given there \cite[Rem.~2.4]{Zhu26}. For small windows, Suzuki \cite{Suzuki26} determined the asymptotics of the lowest eigenvalue as $a\to0$. For large windows, numerics show that $\lambda_{\min}$ decays like $e^{-4\pi\mu}$, and we proved \cite[Thm.~G(b)]{MoriWeilIII}
+\begin{equation}\label{eq:upper}
+\lambda_{\min}(\lambda)\le1.24\times10^{23}\,\mu^5(\log\mu)^5e^{-4\pi\mu}\qquad(\mu\ge50),
+\end{equation}
+without any hypothesis on the zeros. This paper is about lower bounds for growing windows.
+
+\subsection{Sampling on the zeros}
+Under RH the explicit formula gives, for $f$ supported in $[-a,a]$ in the logarithmic variable,
+\[
+W(f)=\sum_\rho m_\rho\,|\hat f(\gamma_\rho)|^2,\qquad \hat f(t)=\int_{-a}^af(y)e^{ity}\,dy .
+\]
+The functions $\hat f$ form the Paley--Wiener space of type $a$, with Nyquist density $a/\pi$. Thus $\lambda_{\min}$ is bounded below by a lower sampling constant of the ordinates of the zeros (Lemma~\ref{lem:reduction}). Zhu \cite[Prop.~2.3]{Zhu26} used this, with a separated subsequence and Beurling's sampling theorem, to prove positivity on fixed windows. The zero ordinates have been compared with time--frequency degrees of freedom before, in Fourier interpolation \cite{BRS23,Kulikov21}.
+
+The density $\frac1{2\pi}\log\frac{|t|}{2\pi}$ of the zeros is below $a/\pi$ for $|t|<2\pi\mu$ and above it beyond. With a margin $1+\varepsilon$, the uniform counting deficit of the zeros is $2\mu^{1+\varepsilon}+O(\log\mu)$ (Proposition~\ref{prop:N}), an elementary consequence of the Riemann--von Mangoldt formula. The deficit region has size $|t|\lesssim2\pi\mu^{1+\varepsilon}$; it contains many zeros, but fewer than the Nyquist count. For a sampling bound with explicit dependence on this deficit we use Voss's explicit form of the Duffin--Schaeffer theorem \cite{Voss99}, combined with Hall's marriage theorem (Proposition~\ref{prop:V}). The remaining difficulty is close pairs of zeros: sampling bounds need separated points, and thinning loses points wherever zeros cluster.
+
+\subsection{Results}
+Let $s=\log\mu$. $C,B,\mu_0$ denote effective positive constants depending only on the counting constants of the zeros under RH, a fixed parameter $c_0>0$ and, in Theorem~\ref{thm:main}, the constants of (LP).
+
+\begin{hypothesis}[LP, local pairs]\label{hyp:LP}
+For a bounded interval $J$ let $\ell_J=|J|$, $L_J=\log(2+\max(2,\sup_{t\in J}|t|))$, and let $P_h(J)$ count unordered pairs of distinct labelled zeros (multiplicity included, distance zero allowed) in $J$ at distance less than $h$. There are $C_P,h_0>0$ such that $P_h(J)\le C_P(h\ell_JL_J^2+\ell_J+L_J^2)$ for all bounded $J$ and $0<h\le h_0$.
+\end{hypothesis}
+
+The term $h\ell_JL_J^2$ is the Poisson-level count of pairs, with no repulsion. The other terms allow $O(1)$ extra pairs per unit length and clusters of size $O(L_J)$. (LP) is much weaker than the local predictions of random matrix theory, but it is uniform over all intervals at all heights, and we do not know how to derive it from RH or from the usual pair correlation conjecture, which concerns averages over $[T,2T]$ \cite{CGdL20}.
+
+\begin{theorem}[RH and (LP)]\label{thm:main}
+Assume RH and Hypothesis~(LP). There are $C,\mu_0$ such that for $\mu\ge\mu_0$
+\[
+e^{-C\mu\log\log\mu}\ \le\ \lambda_{\min}(\sqrt\mu)\ \le\ 1.24\times10^{23}\mu^5(\log\mu)^5e^{-4\pi\mu},
+\]
+that is, $4\pi\mu-O(\log\mu)\le-\log\lambda_{\min}(\sqrt\mu)\le C\mu\log\log\mu$.
+\end{theorem}
+
+Under RH and (LP), the margin of Weil positivity on a window of area $\mu$ thus shrinks exponentially in $\mu$, up to a factor $\log\log\mu$ in the exponent; it is not, say, of size $e^{-\mu^2}$. The upper bound is unconditional; its exponent $4\pi\mu$ is that of the prolate eigenvalue defect. The lower bound does not identify the constant $4\pi$. In the literature we checked we have not found a quantitative lower bound for growing windows; the closest results are Zhu's positivity on fixed windows and Suzuki's asymptotics for small windows (Section~\ref{sec:related}).
+
+Without (LP), the same argument gives effective versions of Zhu's positivity under RH alone. They are routine consequences of the method, and we record them for completeness.
+
+\begin{theorem}[RH]\label{thm:RH}
+Assume RH. There are $C,B,\mu_0$ such that for $\mu\ge\mu_0$:
+\begin{enumerate}
+\item[(a)] $\lambda_{\min}(\sqrt\mu)\ge\exp[-\exp(C\mu^B)]$;
+\item[(b)] $\lambda_{\min}(\sqrt\mu)\ge\exp[-C\,K_\mu\,\mu\log\log\mu]$, where $K_\mu\ge1$ is the finite statistic of Definition~\ref{def:K}. It is computed from the zeros of height at most $\exp(\mu^B)$. It is the normalized maximum of $d|J|-B_{h_\mu}(J)$, which controls the deficit of the thinned zeros up to $1$ (Lemma~\ref{lem:thin}).
+\end{enumerate}
+\end{theorem}
+
+Finally, we show that (LP) cannot be replaced, in this argument, by cumulative information alone. There is a point set with the counting function of the zeros, polylogarithmic separation, and cumulative pair counts $O(T)$ at all scales $\beta\le1$, for which the deficit condition fails (Section~\ref{sec:LP}).
+
+\subsection{What this paper adds}
+The sampling inequality (Proposition~\ref{prop:V}) is a combination of known results \cite{Voss99,Lindner99,KS21}, Proposition~\ref{prop:N} follows from the Riemann--von Mangoldt formula, and Theorem~\ref{thm:RH} is a routine effective version of Zhu's argument. What we add is the treatment of close pairs over all intervals and heights (Section~\ref{sec:pairs}), which leads to Theorem~\ref{thm:main}, and the counter-model of Proposition~\ref{prop:counter}. We have not found these in the literature we checked, but we make no claim of priority.
+
+\section{Setting}\label{sec:setting}
+
+We use the conventions of \cite{MoriWeilII,MoriWeilIII}: $\lambda>1$, $\mu=\lambda^2$, $a=\log\lambda$, $s=\log\mu=2a$. The window in the logarithmic variable is $[-a,a]$, and $\lambda_{\min}$ is the bottom of the spectrum of $W$ on $L^2(-a,a)$.
+
+\begin{lemma}[sampling reduction; RH]\label{lem:reduction}
+Let $\Gamma\subset\R$ be a subset of the ordinates of the zeros (each counted once). For $\Lambda\subset\R$ let
+\[
+A(\Lambda)=\inf_{0\ne g\in PW_\pi}\frac{\sum_{x\in\Lambda}|g(x)|^2}{\|g\|_2^2},
+\]
+where $PW_\pi$ is the space of entire functions of exponential type at most $\pi$ that are square integrable on $\R$. Then, under RH, $\lambda_{\min}(\lambda)\ge s\,A\bigl((a/\pi)\Gamma\bigr)$.
+\end{lemma}
+\begin{proof}
+The bottom of the spectrum is the infimum of $W(f)/\|f\|_2^2$ over the core $C_c^\infty((-a,a);\mathbb C)$ of the closed form \cite{CCM25}. The form $W$ is the Hermitian extension of a real symmetric form, so $W(u+iv)=W(u)+W(v)$ for real $u,v$, and $\|u+iv\|_2^2=\|u\|_2^2+\|v\|_2^2$. It therefore suffices to show $W(u)\ge sA\|u\|_2^2$ for real $u\in C_c^\infty((-a,a))$. For such $u$ the explicit formula \cite[Lemma~3.2]{MoriWWUB} gives $W(u)=\sum_\rho m_\rho\hat u(\gamma_\rho)\hat u(-\gamma_\rho)$, the sum over zeros converging absolutely. Under RH all $\gamma_\rho$ are real and $\hat u(-\gamma)=\overline{\hat u(\gamma)}$, so $W(u)=\sum_\rho m_\rho|\hat u(\gamma_\rho)|^2\ge\sum_{\gamma\in\Gamma}|\hat u(\gamma)|^2$. Put $g(x)=\hat u(\pi x/a)$. Then $g\in PW_\pi$, $\|g\|_2^2=(a/\pi)\|\hat u\|_2^2=2a\|u\|_2^2=s\|u\|_2^2$, and $\sum_{\gamma\in\Gamma}|\hat u(\gamma)|^2=\sum_{x\in(a/\pi)\Gamma}|g(x)|^2\ge A\,s\|u\|_2^2$.
+\end{proof}
+
+\section{Counting the zeros}\label{sec:count}
+
+We use the RH bound $S(t)=O(\log t/\log\log t)$ of Carneiro, Chandee and Milinovich \cite{CCM13}, in the weaker form
+\begin{equation}\label{eq:count}
+N(T)=\frac T{2\pi}\log\frac T{2\pi}-\frac T{2\pi}+O(\log(2+T)).
+\end{equation}
+
+\begin{proposition}[the deficit of the zeros]\label{prop:N}
+For $0\le\varepsilon\le1$ let $d_\varepsilon=(1+\varepsilon)a/\pi$ and let $\nu$ count the ordinates $\pm\gamma_\rho$ with multiplicity. Assuming \eqref{eq:count},
+\[
+\sup_{I}\bigl[d_\varepsilon|I|-\nu(I)\bigr]=2\mu^{1+\varepsilon}+O(\log\mu+1),
+\]
+the supremum running over all bounded intervals, uniformly in $\varepsilon$.
+\end{proposition}
+
+The deficit with $\varepsilon=0$ is $2\mu$, attained near $(-2\pi\mu,2\pi\mu)$. The main term comes from optimizing the Riemann--von Mangoldt main term over symmetric intervals; compare the density and time--frequency comparison in \cite{Kulikov21}. The point of the proof is that the error is uniform over intervals at arbitrary height.
+
+\begin{proof}[Proof of Proposition~\ref{prop:N}]
+Let $r(t)=\frac1{2\pi}\log^+\frac{|t|}{2\pi}$, $M(t)=\int_0^tr$, and let $C(t)$ be the signed cumulative count of $\nu$ (right-continuous, $C(0)=0$). By \eqref{eq:count}, $|C(t)-M(t)|\le C_0\log(2+|t|)$. Fix $h>2\pi C_0$. Since $(M(t\pm h)-M(t))/\log(2+|t|)\to\pm h/(2\pi)$ as $|t|\to\infty$, there is $K$ with
+\[
+M(t-h)-K\le C(t)\le M(t+h)+K\qquad(t\in\R),
+\]
+and $h,K$ do not depend on $d,\mu,\varepsilon$. For an interval $(u,v)$ with $v-u\ge2h$,
+\[
+d(v-u)-\nu((u,v])\le2hd+\int_{u+h}^{v-h}(d-r)\,dt+2K\le2hd+2K+\int_\R(d-r)_+\,dt,
+\]
+and shorter intervals have deficit at most $2hd$. The positive part is supported in $(-2\pi e^{2\pi d},2\pi e^{2\pi d})$, and $\int_\R(d-r)_+=2(e^{2\pi d}-1)$. Conversely, the interval $(-2\pi e^{2\pi d},2\pi e^{2\pi d})$ attains this up to $O(d+1)$. With $d=d_\varepsilon$, $e^{2\pi d}=\mu^{1+\varepsilon}$.
+\end{proof}
+
+We also need a lower bound for the number of zeros in an interval that is uniform in its position and uses the height of the interval. For a bounded interval $J$ let $N_J$ be the number of zeros (both signs, with multiplicity) in $J$, $H_J=\max(2,\sup_{t\in J}|t|)$ and $L_J=\log(2+H_J)$.
+
+\begin{lemma}[counting by height; RH]\label{lem:height}
+There are absolute constants $b,c>0$ such that $N_J\ge|J|\bigl(\frac{L_J}{2\pi}-b\bigr)-cL_J$ for every bounded interval $J$.
+\end{lemma}
+\begin{proof}
+By \eqref{eq:count} applied at the two endpoints, $N_J\ge\int_Jr(t)\,dt-cL_J$, the endpoint multiplicities being included in the error. If $\sup_J|t|<2$, then $|J|\le4$ and $L_J=\log4$, and the claim holds with $b\ge1$. Otherwise $H:=H_J=\sup_J|t|\ge2$. If $|J|<H/2$, then, since $J$ is an interval whose closure contains a point of absolute value $H$, $|t|\ge H/2$ on $J$. If $|J|\ge H/2$, then $\int_J\log(H/|t|)\,dt\le\int_{-H}^H\log(H/|t|)\,dt=2H\le4|J|$. In both cases the average of $\log(H/|t|)$ over $J$ is at most $4$, so $\int_Jr\ge\frac{|J|}{2\pi}(\log H-\log2\pi-4)$. Finally $\log(2+H)-\log H\le\log2$.
+\end{proof}
+
+\section{Thinning and sampling}\label{sec:sampling}
+
+For a locally finite labelled multiset $Z\subset\R$, an interval $I$ and $h>0$, let $N_I$ be the number of labels in $I$, $P_h(I)$ the number of unordered pairs of distinct labels in $I$ at distance $<h$ (distance $0$ allowed), $p_h(I)$ the largest size of an $h$-separated subset of $Z\cap I$, and
+\[
+B_h(I)=\max\Bigl(N_I-P_h(I),\ \frac{N_I^2}{N_I+2P_h(I)}\Bigr),
+\]
+with the convention that the fraction is $0$ when $N_I=0$.
+
+\begin{lemma}[thinning]\label{lem:thin}
+$p_h(I)\ge B_h(I)$ for every $I$. Moreover there is one $h$-separated set $\Lambda\subset Z$ with $\#(\Lambda\cap I)\ge p_h(I)-1$ for every bounded interval $I$.
+\end{lemma}
+\begin{proof}
+Join labels at distance $<h$ by an edge. Removing one endpoint of each edge leaves an independent set, which gives $N_I-P_h(I)$. For the second bound, order the vertices at random and keep each vertex that precedes all its neighbours. The expected size is $\sum_v(1+\deg v)^{-1}\ge N_I^2/(N_I+2P_h(I))$, by Cauchy--Schwarz.
+
+For the global set, run the greedy algorithm from the left on $Z\cap[-T,T]$: keep a point if it is at distance $\ge h$ from the last kept point. Restricted to an interval $I$, this loses at most one point compared with the greedy selection inside $I$, which is optimal. Let $T\to\infty$ along a diagonal subsequence; by local finiteness the choices stabilize on every bounded interval.
+\end{proof}
+
+\begin{proposition}[Voss and Hall]\label{prop:V}
+Let $0<\varepsilon\le1$, $D\ge0$, $q>0$, and let $\Gamma\subset\R$ be $q$-separated with $\#(\Gamma\cap I)\ge(1+\varepsilon)|I|-D$ for every bounded interval $I$. Then, with $q_*=\min(q,1)$ and $\frac12\log C_V=15.807\ldots$ defined in \eqref{eq:CV},
+\[
+A(\Gamma)\ \ge\ \frac{\pi^2}{108}\exp\Bigl[-(D+3)\Bigl\{2\log\frac1{q_*}+4\log\frac1\varepsilon+\tfrac12\log C_V\Bigr\}\Bigr].
+\]
+\end{proposition}
+\begin{proof}
+\emph{Selection.} Let $\rho=1+\varepsilon/2$ and $r=(D+1)/(2(1+\varepsilon))$. For a finite set $F$ of integers, consider the union of the intervals $[n/\rho-r,n/\rho+r]$, $n\in F$. A connected component that contains the intervals of $m$ elements of $F$ has length at least $(m-1)/\rho+2r$, hence contains at least $(1+\varepsilon)((m-1)/\rho+2r)-D\ge(m-1)+(D+1)-D=m$ points of $\Gamma$, since $(1+\varepsilon)/\rho\ge1$ and $2(1+\varepsilon)r=D+1$. So Hall's condition holds. By Hall's marriage theorem (finite form, then a diagonal limit by local finiteness) there is an injection $n\mapsto\lambda_n\in\Gamma$ with $|\lambda_n-n/\rho|\le r$ for all $n\in\Z$. Put $\Lambda=\{\lambda_n\}\subset\Gamma$.
+
+\emph{Scaling.} Let $t_n=\rho\lambda_n$. Then $\sup|t_n-n|\le\rho r\le L:=\lceil\rho r\rceil$ and $\inf_{m\ne n}|t_m-t_n|\ge\delta:=\min(1,\rho q)$. For $g\in PW_\pi$, $G(x)=g(x/\rho)$ has type $\tau=\pi/\rho<\pi$ and $\|G\|_2^2=\rho\|g\|_2^2$.
+
+\emph{Voss's theorem.} By \cite[Thm.~2 and Cor.~1, (1.6)]{Voss99} with $p=2$, for sequences with $\sup|t_n-n|\le L\in\mathbb N$ and separation $\ge\delta$,
+\[
+\sum_n|G(t_n)|^2\ge\frac{\mathcal H^2}{2L+1}\|G\|_2^2,\quad
+\mathcal H=\delta^{2L}\Bigl(\frac1{\pi-\tau}+\frac{21}{10}\Bigr)^{-4L}\Bigl(\frac2\pi\Bigr)^{2L-1}\frac L{3e^{4L}}\Bigl(4+\frac1L\Bigr)^{-4L}.
+\]
+The hypothesis $\sum|G(t_n)|^2<\infty$ of \cite[Thm.~2]{Voss99} holds for separated $t_n$ (Plancherel--P\'olya). Since $\Lambda\subset\Gamma$, $A(\Gamma)\ge\rho\mathcal H^2/(2L+1)$.
+
+\emph{Constants.} We have $\pi-\tau=\pi\varepsilon/(2\rho)$, $\rho\le3/2$, so $\frac1{\pi-\tau}+\frac{21}{10}\le b_V/\varepsilon$ with $b_V=\frac3\pi+\frac{21}{10}$; also $\delta\ge q_*$, $4+1/L\le5$ and $L^2/(2L+1)\ge1/3$. Hence $A(\Gamma)\ge\frac{\pi^2}{108}(q_*^4\varepsilon^8/C_V)^L$ with
+\begin{equation}\label{eq:CV}
+C_V=e^8(\pi/2)^4\,5^8\,b_V^8,
+\end{equation}
+and $L\le\rho r+1\le(D+3)/2$.
+\end{proof}
+
+\section{Close pairs}\label{sec:pairs}
+
+Fix $c_0>0$ and set $\varepsilon=1/s$, $h_\mu=2\pi c_0/s^2$ (so that the normalized separation is $q=(a/\pi)h_\mu=c_0/s$), $k=1/(2\pi)$ and $d=k(s+1)=(1+\varepsilon)a/\pi$. In the raw variable $t$, if $B_{h_\mu}(J)\ge d|J|-D$ for all bounded $J$, then by Lemma~\ref{lem:thin} there is one $h_\mu$-separated set of zeros with at least $d|J|-(D+1)$ points in every $J$; after normalization this is the hypothesis of Proposition~\ref{prop:V} with deficit $D+1$.
+
+\begin{lemma}[high intervals; RH]\label{lem:high}
+There are $B,\mu_0$ such that for $\mu\ge\mu_0$, every interval $J$ with $|J|\ge\mu/s$ and $\sup_{t\in J}|t|\ge T_1:=\exp(\mu^B)$ satisfies $B_{h}(J)\ge d|J|$ for all $0<h\le h_\mu$.
+\end{lemma}
+\begin{proof}
+From \cite{CCM13} and the Riemann--von Mangoldt formula, intervals of length $2r\le2$ around $t$ contain $O(r\log(2+|t|)+\log(2+|t|)/\log\log(3+|t|)+1)$ zeros. Hence, with $L=L_J$, every label in $J$ has at most $C_RL(h+1/\log L)$ labels within distance $h$, and $N_J+2P_h(J)\le N_JC_RL(h+1/\log L)$. Lemma~\ref{lem:height} gives $N_J\ge|J|(kL-b)-cL\ge\frac k2|J|L$ for $L\ge\mu^B$, $|J|\ge\mu/s$ and $\mu$ large. Then
+\[
+B_h(J)\ge\frac{N_J^2}{N_J+2P_h(J)}\ge\frac{k|J|}{2C_R(h+1/\log L)}\ge d|J|,
+\]
+provided $h\le h_\mu\le1/(4C_R(s+1))$ and $\log L\ge Bs\ge4C_R(s+1)$, which holds with $B=8C_R$.
+\end{proof}
+
+\begin{definition}[clustering statistic]\label{def:K}
+Let $\mathcal J_\mu$ be the set of intervals $J\subset[-T_1,T_1]$ with $|J|\ge\mu/s$, and
+\[
+K_\mu=\max\Bigl(1,\ \mu^{-1}\sup_{J\in\mathcal J_\mu}\bigl[d|J|-B_{h_\mu}(J)\bigr]_+\Bigr).
+\]
+\end{definition}
+
+$K_\mu$ depends only on the finitely many zeros in $[-T_1,T_1]$, and $K_\mu\le\max(1,2dT_1/\mu)$ since $B_h\ge0$. Intervals of every type (open, closed, empty of zeros, ending at $\pm T_1$) are included in the supremum.
+
+\begin{proposition}[(LP) bounds $K_\mu$]\label{prop:LPK}
+Under RH and (LP), $K_\mu\le C$ for $\mu\ge\mu_0$; more precisely $B_{h_\mu}(J)\ge d|J|-C\mu$ for all bounded $J$.
+\end{proposition}
+\begin{proof}
+Short intervals ($|J|<\mu/s$) have deficit at most $d\mu/s\le2k\mu$. If $L_J\le s+B'$ for a suitable constant $B'$, then $|J|=O(\mu)$, (LP) gives $P_{h_\mu}(J)=O(\mu)$, and Proposition~\ref{prop:N} gives $N_J\ge d|J|-O(\mu)$; so $B\ge N-P\ge d|J|-O(\mu)$. If $|J|\ge\mu/s$ and $L=L_J\ge s+B'$, write $N_J\ge|J|(\alpha L-b)$ with $\alpha=k-c/|J|\ge k/2$ and $2P_{h_\mu}(J)/|J|\le zL^2+w$ with $z=2C_P(h_\mu+1/|J|)$ and $w=2C_P$, by (LP). Then
+\[
+\frac{B_{h_\mu}(J)}{|J|}\ge F(L)=\frac{(\alpha L-b)^2}{\alpha L-b+zL^2+w},
+\]
+and $F$ increases for $L>b/\alpha$ (the numerator of $F'$ is $(\alpha L-b)\{\alpha(\alpha L-b)+2zbL+2\alpha w\}$). At $L_0=s+B'$ one has $zL_0^2+w\le E$ for a constant $E$, and $F(L_0)\ge k(s+B')-b-1-E\ge d$ once $B'\ge1+(b+2+E)/k$.
+\end{proof}
+
+\section{Proofs of the theorems}\label{sec:proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:RH}]
+(b) By Definition~\ref{def:K}, Lemma~\ref{lem:high} and the bound for short intervals, $B_{h_\mu}(J)\ge d|J|-\mu K_\mu$ for all bounded $J$. Lemma~\ref{lem:thin} gives an $h_\mu$-separated set of zeros with $\#\ge d|J|-(\mu K_\mu+1)$. After normalization $x=(a/\pi)t$ this is a $c_0/s$-separated set with density margin $1+1/s$ and deficit $D=\mu K_\mu+1$. Proposition~\ref{prop:V} and Lemma~\ref{lem:reduction} give
+\[
+\lambda_{\min}\ge\frac{\pi^2s}{108}\exp[-(\mu K_\mu+4)Z],\qquad Z=6\log s-2\log c_0+\tfrac12\log C_V,
+\]
+and $Z=O(\log\log\mu)$.
+(a) Do not use the zeros in $[-T_1,T_1]$ at all. Intervals contained in $[-T_1,T_1]$ have deficit at most $d|J|\le2dT_1$; short intervals have deficit at most $2k\mu$; the remaining intervals have no deficit by Lemma~\ref{lem:high}. Hence the thinned zeros satisfy the hypothesis of Proposition~\ref{prop:V} with $D=2dT_1+2k\mu+1$, and $-\log\lambda_{\min}\le(D+3)Z-\log(\pi^2s/108)\le CT_1\,s\log s\le\exp(C\mu^B)$ after enlarging $C$. (The zeros in $[-T_1,T_1]$ are still present; we only make no use of information about their configuration.)
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By Proposition~\ref{prop:LPK}, the argument of Theorem~\ref{thm:RH}(b) applies with $D=C\mu+1$, which gives the lower bound. The upper bound is \eqref{eq:upper}.
+\end{proof}
+
+\begin{remark}[parameters]
+The deficit forces $\varepsilon\lesssim1/\log\mu$: with fixed $\varepsilon$, Proposition~\ref{prop:N} gives $D\asymp\mu^{1+\varepsilon}$. Proposition~\ref{prop:V} then costs $\log(1/\varepsilon)\asymp\log\log\mu$ per point. Optimizing $\varepsilon=\theta/s$ improves the constant but not the order $\mu\log\log\mu$. Closing the gap to $4\pi\mu$ would require a sampling bound that sees the position-dependent density of the zeros, not only a uniform deficit, together with a sharp lower counterpart of the prolate analysis of \cite{MoriWeilIII}.
+\end{remark}
+
+\section{Related work}\label{sec:related}
+\begin{itemize}
+\item \emph{Fixed windows.} Positivity of $W$ on a fixed window, with certified constants, is known for small windows: Zhu \cite{Zhu26} proves $\lambda^*\ge8.9\times10^{-18}$ for half-width $0.8$ ($\mu\approx4.95$), and gives certified upper bounds up to half-width $2$. Under RH, positivity on every fixed window holds with a positive but non-explicit constant \cite[Prop.~2.3]{Zhu26}. Zhu also shows that certificates of his type cost doubly exponentially in the half-width, because of the mass of the prime terms. Our lower bounds avoid the prime side altogether by working on the zero side under RH.
+\item \emph{Upper bounds.} The unconditional upper bounds \cite{MoriWWUB,MoriWeilII,MoriWeilIII} come from test vectors built from prolate spheroidal functions. Under RH, Zhu proves $\lambda^*\le\exp(-\frac12\sqrt\mu\log\mu)$.
+\item \emph{Sampling theory.} Landau's necessary density conditions \cite{Landau67} and the characterization of Fourier frames by Ortega-Cerd\`a and Seip \cite{OCS02} explain qualitatively why separated subsets of the zeros, which are dense at large height, satisfy lower sampling inequalities for every $PW_a$. (The full set of zeros has unbounded density, so it has no upper frame bound; we use only lower inequalities.) Quantitative lower frame bounds for sequences near a lattice go back to Duffin and Schaeffer \cite{DS52}; explicit constants are due to Lindner \cite{Lindner99} and Voss \cite{Voss99}.
+\item \emph{Zeros and Fourier analysis.} Bondarenko, Radchenko and Seip \cite{BRS23} proved Fourier interpolation formulas with the zeros of $\zeta$, and Kulikov \cite{Kulikov21} compared the density of the zeros with time--frequency localization. Suzuki \cite{Suzuki26} determined the asymptotics of the lowest eigenvalue of the Weil form on small windows. These works concern small windows, interpolation or uniqueness, and do not give lower bounds for $\lambda_{\min}$ on growing windows.
+\item \emph{Hall's theorem.} Bounded matchings of point sets with lattices by Hall's marriage theorem are standard in discrete geometry; see \cite{KS21}.
+\end{itemize}
+
+\section{Remarks on Hypothesis (LP)}\label{sec:LP}
+
+\emph{A statistic equivalent to (LP).} Put $Q_h(J)=P_h(J)/(h\ell_JL_J^2+\ell_J+L_J^2)$ and, for real $\mu\ge\mu_0$, $K^H_\mu=\sup_JQ_{h_\mu}(J)$, the supremum over all bounded intervals. Under RH, every label has $O(L_J)$ labels within distance $1$, so $P_h(J)=O((\ell_J+1)L_J^2)$ and $K^H_\mu=O(1/h_\mu)<\infty$. As $\mu$ runs over $[\mu_0,\infty)$, $h_\mu=2\pi c_0/(\log\mu)^2$ runs over $(0,h_{\mu_0}]$. Hence (LP) with $h_0=h_{\mu_0}$ holds if and only if $\sup_{\mu\ge\mu_0}K^H_\mu<\infty$. Unlike $K_\mu$, the statistic $K^H_\mu$ involves zeros at all heights.
+
+\emph{Cumulative information does not suffice.} For $\beta>0$ let $P(T,\beta)$ be the number of unordered pairs of points in $(0,T]$ at distance less than $2\pi\beta/\log T$.
+
+\begin{proposition}[a counter-model]\label{prop:counter}
+Let $A>1$. There is a set $\Gamma_+\subset(0,\infty)$ of simple points, with symmetrization $\Gamma=\Gamma_+\cup(-\Gamma_+)$, such that:
+\begin{enumerate}
+\item its counting function satisfies $N(T)=M(T)+O(\log T/\log\log T)$, where $M'(T)=\frac1{2\pi}\log\frac T{2\pi}$;
+\item gaps between consecutive points near height $\gamma$ are at least $c(\log\gamma)^{-A}$;
+\item $P(T,\beta)\le CT$ for all $T$ and all $0<\beta\le1$;
+\item there is a sequence $\mu_j\to\infty$ such that, with $q,\varepsilon,h_{\mu_j}$ as in Section~\ref{sec:pairs}, $\sup_J[d|J|-B_{h_{\mu_j}}(J)]/\mu_j\to\infty$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\emph{Base set.} Let the base points be the solutions of $M(\gamma_n)=n$ for large $n$; their counting function is $M+O(1)$, and their spacing near height $t$ is $(1+o(1))2\pi/\log t$.
+
+\emph{Clusters.} Choose $T_j=\exp(\exp(j+j_0))$ and put $L_j=\log T_j$, $w_j=1/\log L_j$, $b_j=T_j\log L_j/L_j^2$ and $\delta_j=2L_j^{-A}$. Divide $[T_j,T_j+b_j]$ into cells of length $w_j$. Each cell contains $m=(1+o(1))L_j/(2\pi\log L_j)$ base points. Replace them by $m$ points at mutual spacing $\delta_j$, centred in the cell. Since $m\delta_j=O(L_j^{1-A}/\log L_j)=o(w_j)$, each cluster lies in the middle half of its cell. Points outside the blocks are unchanged.
+
+\emph{(1) and (2).} The cumulative count changes only inside cells, by at most $m=O(\log T/\log\log T)$. Inside a cluster the gap is $\delta_j\ge c(\log\gamma)^{-A}$; elsewhere the gaps are those of the base set or larger.
+
+\emph{(3).} For $T\ge T_j$ and $\beta\le1$, the threshold $2\pi\beta/\log T$ is smaller than the base spacing and much smaller than $w_j$. So the only close pairs are inside clusters. The $j$-th block contributes at most $(b_j/w_j)m^2=O(T_j)$ pairs, and $\sum_{T_j\le T}T_j=O(T)$ because $T_j$ grows superexponentially.
+
+\emph{(4).} Fix $K>2\pi$ and put $\mu_j=L_j^K$, so $s_j=\log\mu_j=K\log L_j$ and $h_j=h_{\mu_j}=2\pi c_0/s_j^2$. Then the cluster diameter is $o(h_j)$ and $h_j=o(w_j)$. Let $J_j$ be an interval consisting of the $r_j\sim b_j\log L_j$ full cells of the $j$-th block, with $\ell_j=|J_j|\sim b_j$. Within $J_j$, all pairs inside a cluster are closer than $h_j$, and no pair from different clusters is. With $m_i$ the cluster sizes, $N=\sum m_i$ and $N+2P=\sum m_i^2$, so $N^2/(N+2P)\le r_j$ by Cauchy--Schwarz. Moreover $N-P\le0$ once $m_i\ge3$. Hence $B_{h_j}(J_j)\le r_j$. The required count is $d_j\ell_j$ with $d_j=(s_j+1)/(2\pi)\sim\frac K{2\pi}\log L_j$, so
+\[
+d_j\ell_j-B_{h_j}(J_j)\ge\Bigl(\frac K{2\pi}-1+o(1)\Bigr)\ell_j\log L_j,
+\]
+and $\ell_j\log L_j/\mu_j\asymp T_j(\log L_j)^2/L_j^{K+2}\to\infty$.
+\end{proof}
+
+The base set is not modelled on random matrix statistics, and Proposition~\ref{prop:counter} is not a statement about the zeros of $\zeta$. It shows that counting information of RH quality, polylogarithmic separation and cumulative pair bounds at all scales $\beta\le1$ do not together imply the deficit bound used in the proof of Theorem~\ref{thm:main}.
+
+\emph{Numerics.} For the first $7500$ zeros ($t\le7708$, including the Lehmer pair at $7005$), the ratio $Q_h(J)$ is at most $0.019$ over the windows we scanned (Section~\ref{sec:num}).
+
+\section{Numerical illustrations}\label{sec:num}
+None of the numbers in this section is used in a proof; they are floating-point computations over finite ranges.
+\begin{itemize}
+\item \emph{Deficit.} The deficit $\sup_I[(1+\varepsilon)(a/\pi)|I|-\nu(I)]$ of the zeros divided by $2\mu^{1+\varepsilon}$ is $0.956$--$1.002$ for $\mu\in\{5,10,20,50\}$ and $\varepsilon\in\{0,0.05,1/\log\mu\}$, where the supremum is taken over intervals in $|t|\le1.5\cdot2\pi\mu^{1+\varepsilon}$.
+\item \emph{Deficit after thinning.} With $\varepsilon=1/\log\mu$ and normalized separation $q=1/\log\mu$, the quantity $\sup_J[d|J|-B_h(J)]$, which bounds the deficit of the thinned set up to $1$, is $5.71\mu$ at $\mu=20$, against $5.44\mu$ without thinning. For $q=(\log\mu)^{-1/3}$ and $q=0.9$ it is about $15$--$20\,\mu$: a $q$-separated set has density at most about $1/q$, which falls short of $1+\varepsilon$ when $q$ is close to $1$.
+\item \emph{Lattice model.} Deleting $M$ consecutive points from $\delta\Z$, $\delta=1/(1+\varepsilon)$, gives $-\log A\approx\kappa(\varepsilon)M$ with $\kappa(\varepsilon)=2\log\cot\frac{\pi\varepsilon}{4(1+\varepsilon)}$, linear in $M$, consistent with Proposition~\ref{prop:V}.
+\end{itemize}
+
+\section*{Reproducibility}
+The proofs use no computer calculations, except the evaluation of the constant $\frac12\log C_V$ in \eqref{eq:CV}. The numerical illustrations of Section~\ref{sec:num} can be reproduced with the scripts in \texttt{numerics-IV/} of the public repository \url{https://github.com/moriryota/prolate-weil-bounds} (Zenodo, \doi{10.5281/zenodo.23092422}; release \texttt{v1.2.0}). The scripts and their purposes are:
+\begin{itemize}
+\item \texttt{zero\_deficit.py}: the deficit of the zeros for several $\varepsilon$;
+\item \texttt{condition\_G.py}: the quantity $\sup_J[d|J|-B_h(J)]$ for several separations;
+\item \texttt{local\_pairs.py}: the ratios in (LP) for the first $7500$ zeros;
+\item \texttt{lattice\_deletion.py}: the lattice model.
+\end{itemize}
+They use floating-point zeros computed with mpmath over finite ranges, and they are not part of any proof.
+
+\section*{Use of generative AI}
+This work was carried out with extensive use of generative AI systems, namely Anthropic Claude, Google Gemini and OpenAI GPT. Under the direction of the author, these systems drafted the proofs, implemented and ran the computations, reviewed one another's drafts adversarially, searched the literature, and drafted this manuscript. The author chose the problem and the strategy, assigned and reviewed the tasks, and takes full responsibility for the content. The AI systems are not authors of this paper.
+
+\begin{thebibliography}{99}
+\bibitem{CCM13} E.~Carneiro, V.~Chandee, M.~B.~Milinovich, Bounding $S(t)$ and $S_1(t)$ on the Riemann hypothesis, \emph{Math. Ann.} 356 (2013) 939--968. \doi{10.1007/s00208-012-0876-z}
+\bibitem{BRS23} A.~Bondarenko, D.~Radchenko, K.~Seip, Fourier interpolation with zeros of zeta and $L$-functions, \emph{Constr. Approx.} 57 (2023) 405--461. \doi{10.1007/s00365-022-09599-w}
+\bibitem{CC21} A.~Connes, C.~Consani, Spectral triples and $\zeta$-cycles, arXiv:2106.01715.
+\bibitem{CGdL20} A.~Chirre, F.~Gon\c{c}alves, D.~de~Laat, Pair correlation estimates for the zeros of the zeta function via semidefinite programming, \emph{Adv. Math.} 361 (2020) 106926. \doi{10.1016/j.aim.2019.106926}
+\bibitem{CCM25} A.~Connes, C.~Consani, H.~Moscovici, Zeta spectral triples, arXiv:2511.22755.
+\bibitem{DS52} R.~J.~Duffin, A.~C.~Schaeffer, A class of nonharmonic Fourier series, \emph{Trans. Amer. Math. Soc.} 72 (1952) 341--366. \doi{10.1090/S0002-9947-1952-0047179-6}
+\bibitem{KS21} M.~Kelly, L.~Sadun, Pattern equivariant mass transport in aperiodic tilings and cohomology, \emph{Int. Math. Res. Not. IMRN} 2021 (2021) 15121--15142. \doi{10.1093/imrn/rnz310}
+\bibitem{Kulikov21} A.~Kulikov, Fourier interpolation and time-frequency localization, \emph{J. Fourier Anal. Appl.} 27 (2021) 58. \doi{10.1007/s00041-021-09861-y}
+\bibitem{Landau67} H.~J.~Landau, Necessary density conditions for sampling and interpolation of certain entire functions, \emph{Acta Math.} 117 (1967) 37--52. \doi{10.1007/BF02395039}
+\bibitem{Lindner99} A.~M.~Lindner, On lower bounds of exponential frames, \emph{J. Fourier Anal. Appl.} 5 (1999) 185--192. \doi{10.1007/BF01261608}
+\bibitem{MoriWWUB} R.~Mori, Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms, version 3, Zenodo, 2026. \doi{10.5281/zenodo.23066578}
+\bibitem{MoriWeilII} R.~Mori, The Weil quadratic form of the Connes--Consani--Moscovici prolate vector, and a $\mu^8$ upper bound for windowed Weil forms, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092542}
+\bibitem{MoriWeilIII} R.~Mori, An endpoint-smoothed prolate vector and a $\mu^{9/2}(\log\mu)^4$ upper bound for windowed Weil forms, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23119609}
+\bibitem{OCS02} J.~Ortega-Cerd\`a, K.~Seip, Fourier frames, \emph{Ann. of Math.} 155 (2002) 789--806. \doi{10.2307/3062132}
+\bibitem{Suzuki26} M.~Suzuki, Weil's quadratic form via the screw function, arXiv:2606.09096.
+\bibitem{Voss99} J.~J.~Voss, On discrete and continuous norms in Paley--Wiener spaces and consequences for exponential frames, \emph{J. Fourier Anal. Appl.} 5 (1999) 193--201. \doi{10.1007/BF01261609}
+\bibitem{Zhu26} X.~Zhu, Weil positivity in compact windows: a finite reduction, certified two-sided bounds, and a Landau--Widom decay law, arXiv:2608.24827.
+\end{thebibliography}
+
+\end{document}
