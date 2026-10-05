@@ -10,9 +10,9 @@
   "mu_max_is_optimal": false,
   "log_power": 4,
   "ZC_upper": "125363711220",
-  "derived_CP_upper": "603317800634135",
-  "CP_upper": "603400000000000",
-  "CE_upper": "143400000000000000000000",
+  "derived_CP_upper": "604723437447156",
+  "CP_upper": "604800000000000",
+  "CE_upper": "143700000000000000000000",
   "frequency_A_upper": "143095.983379",
   "frequency_C_upper": "956907.513841",
   "frequency_ga_upper": "2461766.308004",
@@ -28,10 +28,10 @@
       "qnorm_B_upper": "1918556708242",
       "log10_K_upper": "22.774844",
       "low_Q_upper": "92640800758613776",
-      "low_boundary_upper": "2350428931",
-      "high_zeros_upper": "1198117",
-      "direct_P_upper": "92640803110240824",
-      "P_tilde_upper": "141322368091616884"
+      "low_boundary_upper": "2350429911",
+      "high_zeros_upper": "1213168",
+      "direct_P_upper": "92640803110256855",
+      "P_tilde_upper": "141650262217119475"
     },
     {
       "mu": 100,
@@ -39,10 +39,10 @@
       "qnorm_B_upper": "2658662494560",
       "log10_K_upper": "23.977316",
       "low_Q_upper": "151124720907578599",
-      "low_boundary_upper": "821296478",
-      "high_zeros_upper": "26774247",
-      "direct_P_upper": "151124721755649324",
-      "P_tilde_upper": "271386377031806165"
+      "low_boundary_upper": "821296559",
+      "high_zeros_upper": "27110842",
+      "direct_P_upper": "151124721755985999",
+      "P_tilde_upper": "272016043799861399"
     },
     {
       "mu": 1000,
@@ -51,9 +51,9 @@
       "log10_K_upper": "27.975499",
       "low_Q_upper": "536447287991118227",
       "low_boundary_upper": "20242378",
-      "high_zeros_upper": "832029702930",
-      "direct_P_upper": "536448120041063533",
-      "P_tilde_upper": "1373893533723518706"
+      "high_zeros_upper": "842490317583",
+      "direct_P_upper": "536448130501678186",
+      "P_tilde_upper": "1377081221736798332"
     },
     {
       "mu": 10000,
@@ -62,9 +62,9 @@
       "log10_K_upper": "31.975250",
       "low_Q_upper": "1375015371417311944",
       "low_boundary_upper": "404602",
-      "high_zeros_upper": "26185468242271762",
-      "direct_P_upper": "1401200839659988307",
-      "P_tilde_upper": "4342182032508898626"
+      "high_zeros_upper": "26514682566256232",
+      "direct_P_upper": "1401530053983972777",
+      "P_tilde_upper": "4352256700797782381"
     }
   ],
   "limitation": "Constants are conservative. High zero sum is absorbed into the logarithmic envelope on the stated finite interval, not asserted < B."

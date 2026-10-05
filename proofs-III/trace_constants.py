@@ -23,7 +23,7 @@ def D(c):return ((8*c).sqrt()+E(c))**2
 def eta(c):return d*(8/(ell*c)).sqrt()+z/c
 def m0(c):return ((2*(592+A('152.2')*(2*(c/3).log()+A('8.08'))**2)).sqrt()+V(c))**2
 CE=(V(c0)+A('1.78')*A(8).sqrt()*(pi/2+1+A('5.49')-2*A(3).log())+A('2.0408').sqrt()/2)/c0.log()+2*A('1.78')*A(8).sqrt()
-t=A(14);Zplus=(t.log()+1)/(pi*t)+A('.386')*(t.log()+A('.5'))/t**2+(A('3.325')+A('.2')/A(1).exp())/t**2
+t=A(14);Zplus=(t.log()+1)/(pi*t)+A('.390')*(t.log()+A('.5'))/t**2+(A('3.385')+A('.2')/A(1).exp())/t**2
 assert Zplus<A('.107')
 c50=100*pi
 pert=eta(c50)*(6621*c50**(A(9)/2)*(-2*c50).exp()).sqrt()

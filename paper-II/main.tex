@@ -1,4 +1,4 @@
-% Ryota Mori. Version 1, 2026-10-02. Licence: CC BY 4.0.
+% Ryota Mori. Version 2, 2026-10-05 (version 1: 2026-10-02). Licence: CC BY 4.0.
 % Paper II: sequel to "Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms".
 \documentclass[11pt]{amsart}
 \usepackage[margin=1in]{geometry}
@@ -28,19 +28,23 @@
 \author{Ryota Mori}
 \address{Independent researcher, Tokyo, Japan}
 \email{moriryota31@gmail.com}
-\date{2 October 2026}
+\date{2 October 2026; version 2, 5 October 2026}
 
 \begin{document}
 
 \begin{abstract}
 Weil's criterion states that the Riemann Hypothesis holds if and only if Weil's quadratic form $W$ is nonnegative. Restricted to test functions supported in a multiplicative window $[\lambda^{-1},\lambda]$, this becomes $\lambda_{\min}(\lambda)\ge0$ for all $\lambda$, where $\lambda_{\min}(\lambda)$ is the bottom of the spectrum of the restricted form; any proof of RH along these lines must control how fast this margin shrinks. Put $\mu=\lambda^2$. In earlier work we proved, without any hypothesis on the zeros of $\zeta$, that $\lambda_{\min}(\lambda)\le1.362\times10^9\mu^{23}e^{-4\pi\mu}$ for $\mu\ge5$. Connes, Consani and Moscovici proposed a vector $k_\lambda$ built from two prolate spheroidal wave functions, and observed numerically that $W(k_\lambda)$ tracks the prolate eigenvalue defect $1-\chi_2$. We prove this unconditionally. Theorem~C bounds $|W(k_\lambda)|$ by an explicit polynomial in $\mu$ times the out-of-band mass $\rho_{\rm out}\le1-\chi_2^2$ of the underlying band-limited function, plus $e^{-16\mu}$. We then show that $\|k_\lambda\|^2\ge0.109\|h_\lambda\|^2$ for $\mu\ge50$ by comparison with Hermite functions. Combined with a non-asymptotic bound $1-\chi_2^2\le C\mu^{9/2}e^{-4\pi\mu}$ from a companion paper, this gives
 \[
-\lambda_{\min}(\lambda)\le5.011\times10^{17}\,\mu^8(\log\mu)^3e^{-4\pi\mu}\qquad(\mu\ge50).
+\lambda_{\min}(\lambda)\le5.046\times10^{17}\,\mu^8(\log\mu)^3e^{-4\pi\mu}\qquad(\mu\ge50).
 \]
 All constants are explicit and established with ball arithmetic. The results are upper bounds only and say nothing about positivity.
 \end{abstract}
 
 \maketitle
+
+\begin{sloppypar}
+\noindent\textit{Version 2} (5 October 2026), Zenodo \doi{10.5281/zenodo.23162895}; version~1: \doi{10.5281/zenodo.23092542}. Licence: CC BY 4.0. Version~1 used the zero-counting bound of \cite{Trudgian14} with the constants $0.111$, $0.275$, $2.450$ of its arXiv version (arXiv:1208.5846v2), while citing the published version, whose constants are $0.112$, $0.278$, $2.510$. All constants that depend on this bound have been recomputed with the published constants: $P(5)\le1.872\times10^{13}$ (was $1.854\times10^{13}$), $P(15)\le1.159\times10^{15}$, $P(100)\le1.568\times10^{18}$, and the constant in Theorem~\ref{thm:E} is $5.046\times10^{17}$ (was $5.011\times10^{17}$). Nothing else changes: the statements, powers and proofs are those of version~1.
+\end{sloppypar}
 
 \begin{center}
 \fbox{\parbox{0.92\textwidth}{\small
@@ -80,7 +84,7 @@ For every $\mu\ge5$, without any hypothesis on the zeros of $\zeta$,
 \[
 |W(k_\lambda)|\le P(\mu)\,\rho_{\rm out}\,\|h_\lambda\|^2+e^{-16\mu}\|h_\lambda\|^2,
 \]
-where $P(\mu)$ is the explicit function \eqref{eq:P}. It satisfies $P(\mu)=O(\mu^{7/2}(\log\mu)^3)$ and $P(5)\le1.854\times10^{13}$.
+where $P(\mu)$ is the explicit function \eqref{eq:P}. It satisfies $P(\mu)=O(\mu^{7/2}(\log\mu)^3)$ and $P(5)\le1.872\times10^{13}$.
 \end{theorem}
 
 \begin{theorem}\label{thm:L6}
@@ -90,7 +94,7 @@ For every $\mu\ge50$, $\|k_\lambda\|^2\ge0.109\|h_\lambda\|^2$; for every $\mu\g
 \begin{theorem}\label{thm:E}
 For every $\mu\ge50$,
 \[
-\lambda_{\min}(\lambda)\le5.011\times10^{17}\,\mu^8(\log\mu)^3e^{-4\pi\mu}.
+\lambda_{\min}(\lambda)\le5.046\times10^{17}\,\mu^8(\log\mu)^3e^{-4\pi\mu}.
 \]
 \end{theorem}
 
@@ -294,7 +298,7 @@ This gives $M\le(73.8+19.02K_1^2)\Psi^2/c+0.75h(0)^2/\lambda$. Conclude with Lem
 
 We use three explicit results.
 \begin{itemize}
-\item \textbf{Zero counting} \cite[Cor.~1]{Trudgian14}. For $T\ge e$, $|N(T)-\frac T{2\pi}\log\frac T{2\pi e}-\frac78|\le R(\log T)$, where $R(x)=0.111x+0.275\log x+2.450+0.2/e$.
+\item \textbf{Zero counting} \cite[Cor.~1]{Trudgian14}. For $T\ge e$, $|N(T)-\frac T{2\pi}\log\frac T{2\pi e}-\frac78|\le R(\log T)$, where $R(x)=0.112x+0.278\log x+2.510+0.2/e$ (the constants of the published version of \cite{Trudgian14}).
 \item \textbf{Zero-free region} \cite[Thm.~1]{MT15}. There are no zeros with $|t|\ge2$ and $\sigma>1-1/(5.573412\log|t|)$.
 \item \textbf{Verification of RH} \cite{PT21}. All zeros with $0<\gamma\le3\cdot10^{12}$ lie on the critical line.
 \end{itemize}
@@ -336,7 +340,7 @@ where
 \[
 r_{\rm d}=\frac1{11.15(20\mu+1)},\qquad N=\frac{20\mu+1-\log2\pi}{4\pi}+2R(20\mu+1),\qquad K_1=2\log(c/3)+8.08 .
 \]
-Ball arithmetic gives the values $P(5)\le1.854\times10^{13}$, $P(15)\le1.151\times10^{15}$ and $P(100)\le1.557\times10^{18}$. Each factor of $P$, divided by its power of $\mu$ or $\log\mu$, is non-increasing, so $P(\mu)/(\mu^{7/2}(\log\mu)^3)$ is non-increasing for $\mu\ge5$. \qed
+Ball arithmetic gives the values $P(5)\le1.872\times10^{13}$, $P(15)\le1.159\times10^{15}$ and $P(100)\le1.568\times10^{18}$. Each factor of $P$, divided by its power of $\mu$ or $\log\mu$, is non-increasing, so $P(\mu)/(\mu^{7/2}(\log\mu)^3)$ is non-increasing for $\mu\ge5$. \qed
 
 \section{The Hermite limit and Theorem~\ref{thm:L6}}\label{sec:L6}
 
@@ -432,7 +436,7 @@ By Theorem~\ref{thm:C}, Lemma~\ref{lem:L0} and \cite[Thm.~1]{MoriPSWF},
 \[
 |W(k_\lambda)|\le\big(P(\mu)C_4(2\pi\mu)^{9/2}e^{-4\pi\mu}+e^{-16\mu}\big)\|h_\lambda\|^2,
 \]
-where $C_4\le6621$ \cite[Thm.~1 and Table~1]{MoriPSWF}. Since $\lambda_{\min}\le W(k_\lambda)/\|k_\lambda\|^2$ \cite[(2.1)]{MoriWWUB}, Theorem~\ref{thm:L6} gives the first bound. The function $P(\mu)/(\mu^{7/2}\log^3\mu)$ and the term $e^{-16\mu+4\pi\mu}/(\mu^8\log^3\mu)$ are non-increasing, so their values at $\mu=50$ give the constant $5.011\times10^{17}$. \qed
+where $C_4\le6621$ \cite[Thm.~1 and Table~1]{MoriPSWF}. Since $\lambda_{\min}\le W(k_\lambda)/\|k_\lambda\|^2$ \cite[(2.1)]{MoriWWUB}, Theorem~\ref{thm:L6} gives the first bound. The function $P(\mu)/(\mu^{7/2}\log^3\mu)$ and the term $e^{-16\mu+4\pi\mu}/(\mu^8\log^3\mu)$ are non-increasing, so their values at $\mu=50$ give the constant $5.046\times10^{17}$. \qed
 
 \section{Numerical evidence}\label{sec:num}
 
@@ -520,7 +524,7 @@ T:=\int_{4/3}^\infty\tilde\psi^2\ge\frac{E_0}{2+1/2000}\Big(\frac7{10}I-\frac{10
 Since $\tilde\psi_n$ has parity $(-1)^n$, $\int_{|t|>1}\tilde\psi^2\ge2T\ge C_*A_0^2/c$ with $C_*=118059822/465616375>\frac14$. The mass identity $\int_{|t|>1}\tilde\psi^2=(1-\lambda_n)/\lambda_n$ completes the proof.
 
 \section*{Reproducibility}
-All computer-assisted steps are reproducible from the public repository \url{https://github.com/moriryota/prolate-weil-bounds}, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions; this paper corresponds to release \texttt{v1.0.1}), which contains every script, its raw output, and a table matching each constant of this paper to its script. The constants of Lemmas~\ref{lem:L5a}, \ref{lem:L5b}, \ref{lem:amp}, \ref{lem:S1a} and~\ref{lem:S1b}, of $P(\mu)$, of $\kappa_\infty$, of Theorem~\ref{thm:L6} and of Theorem~\ref{thm:E} are computed in ball arithmetic (Arb, via python-flint) with directed rounding asserted in the scripts. The Galerkin values in Section~\ref{sec:num} are not part of any proof; the script records the parameters needed for convergence.
+All computer-assisted steps are reproducible from the public repository \url{https://github.com/moriryota/prolate-weil-bounds}, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions; this version corresponds to release \texttt{v1.2.1}), which contains every script, its raw output, and a table matching each constant of this paper to its script. The constants of Lemmas~\ref{lem:L5a}, \ref{lem:L5b}, \ref{lem:amp}, \ref{lem:S1a} and~\ref{lem:S1b}, of $P(\mu)$, of $\kappa_\infty$, of Theorem~\ref{thm:L6} and of Theorem~\ref{thm:E} are computed in ball arithmetic (Arb, via python-flint) with directed rounding asserted in the scripts. The Galerkin values in Section~\ref{sec:num} are not part of any proof; the script records the parameters needed for convergence.
 
 \section*{Use of generative AI}
 This work was carried out with extensive use of generative AI systems, namely Anthropic Claude, Google Gemini and OpenAI GPT. Under the direction of the author, these systems drafted the proofs, implemented and ran the computations, reviewed one another's drafts adversarially, searched the literature, and drafted this manuscript. The author chose the problem and the strategy, assigned and reviewed the tasks, and takes full responsibility for the content. The AI systems are not authors of this paper.

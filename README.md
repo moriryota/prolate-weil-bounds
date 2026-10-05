@@ -13,11 +13,11 @@ with C_n = 18.34, 155.0, 703.4, 2340 and 6621. The power of c is the one in Fuch
 **Paper II** (`paper-II/`). *The Weil quadratic form of the Connes–Consani–Moscovici prolate vector, and a μ⁸ upper bound for windowed Weil forms.* All three results are unconditional:
 - **Theorem C:** |W(k_λ)| ≤ P(μ)ρ_out‖h_λ‖² + e^{−16μ}‖h_λ‖².
 - **Theorem D:** ‖k_λ‖² ≥ 0.109‖h_λ‖² for μ ≥ 50.
-- **Theorem E:** λ_min(λ) ≤ 5.011×10¹⁷ μ⁸ (log μ)³ e^{−4πμ} for μ ≥ 50.
+- **Theorem E:** λ_min(λ) ≤ 5.046×10¹⁷ μ⁸ (log μ)³ e^{−4πμ} for μ ≥ 50 (version 2; see the corrections below).
 
 **Paper III** (`paper-III/`). *An endpoint-smoothed prolate vector and a μ^{9/2}(log μ)⁴ upper bound for windowed Weil forms.* The vector of paper II is smoothed in a layer of width ≍ c⁻² at its truncation points. Unconditionally:
-- **Theorem F:** |W(k̃_λ)| ≤ 6.034×10¹⁴ (log μ)⁴ B for 50 ≤ μ ≤ 10⁴, and |W(k̃_λ)| ≤ 5.2×10¹⁴ √μ (log μ)⁵ B for all μ ≥ 50, where B = ρ_out‖h_λ‖².
-- **Theorem G:** λ_min(λ) ≤ 1.434×10²³ μ^{9/2} (log μ)⁴ e^{−4πμ} for 50 ≤ μ ≤ 10⁴, and λ_min(λ) ≤ 1.24×10²³ μ⁵ (log μ)⁵ e^{−4πμ} for all μ ≥ 50. An explicit refinement is below 0.832 times the bound of paper II, Theorem E, for all μ ≥ 50.
+- **Theorem F:** |W(k̃_λ)| ≤ 6.048×10¹⁴ (log μ)⁴ B for 50 ≤ μ ≤ 10⁴, and |W(k̃_λ)| ≤ 5.2×10¹⁴ √μ (log μ)⁵ B for all μ ≥ 50, where B = ρ_out‖h_λ‖².
+- **Theorem G:** λ_min(λ) ≤ 1.437×10²³ μ^{9/2} (log μ)⁴ e^{−4πμ} for 50 ≤ μ ≤ 10⁴, and λ_min(λ) ≤ 1.24×10²³ μ⁵ (log μ)⁵ e^{−4πμ} for all μ ≥ 50. An explicit refinement is below 0.832 times the bound of paper II, Theorem E, for all μ ≥ 50.
 
 **Paper IV** (`paper-IV/`). *A conditional lower bound for windowed Weil forms from sampling on the zeros of ζ.* Under the Riemann Hypothesis and a local hypothesis (LP) on close pairs of zeros, 4πμ − O(log μ) ≤ −log λ_min(λ) ≤ Cμ log log μ; under RH alone, effective but weak lower bounds. The proofs are analytic; `numerics-IV/` contains numerical illustrations only.
 
@@ -26,9 +26,17 @@ Paper II is a sequel to *Unconditional doubly exponential upper bounds for the b
 DOIs:
 - Code (all versions): [10.5281/zenodo.23092422](https://doi.org/10.5281/zenodo.23092422)
 - Paper I: [10.5281/zenodo.23092454](https://doi.org/10.5281/zenodo.23092454)
-- Paper II: [10.5281/zenodo.23092542](https://doi.org/10.5281/zenodo.23092542)
-- Paper III: [10.5281/zenodo.23119609](https://doi.org/10.5281/zenodo.23119609)
+- Paper II: version 2 [10.5281/zenodo.23162895](https://doi.org/10.5281/zenodo.23162895); version 1 [10.5281/zenodo.23092542](https://doi.org/10.5281/zenodo.23092542)
+- Paper III: version 2 [10.5281/zenodo.23162896](https://doi.org/10.5281/zenodo.23162896); version 1 [10.5281/zenodo.23119609](https://doi.org/10.5281/zenodo.23119609)
 - Paper IV: [10.5281/zenodo.23134085](https://doi.org/10.5281/zenodo.23134085)
+
+## Corrections in v1.2.1 (papers II and III, version 2)
+
+Versions 1 of papers II and III used the zero-counting bound of T. Trudgian (J. Number Theory 134 (2014) 280–292, Cor. 1) with the constants 0.111, 0.275, 2.450 of its arXiv version (arXiv:1208.5846v2), while citing the published version, whose constants are 0.112, 0.278, 2.510. In v1.2.1 every script uses the published constants (`proofs-II/theoremC_constants.py`, `proofs-III/*.py`), and the outputs in `outputs/` were regenerated. Changed constants:
+- paper II: P(5) ≤ 1.872×10¹³ (was 1.854×10¹³), P(15) ≤ 1.159×10¹⁵, P(100) ≤ 1.568×10¹⁸, Theorem E 5.046×10¹⁷ (was 5.011×10¹⁷);
+- paper III: Theorem F(a) 6.048×10¹⁴ (was 6.034×10¹⁴), Theorem G(a) 1.437×10²³ (was 1.434×10²³), C_M and C_T, Table 1. Theorems F(b), G(b) and G(c) keep their printed constants.
+
+The powers of μ and log μ, the statements and the proofs are unchanged. Papers I and IV are not affected.
 
 Papers I–III give upper bounds only; they say nothing about positivity and do not address the Riemann Hypothesis. Paper IV gives lower bounds under RH (and, for the main theorem, an additional hypothesis); it does not prove RH.
 

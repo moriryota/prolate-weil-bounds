@@ -3,7 +3,7 @@
   "precision_bits": 256,
   "CE_upper": "410726.283447",
   "two_CE_squared_upper": "337392159829",
-  "positive_zero_reciprocal_sum_upper": "0.106260832",
+  "positive_zero_reciprocal_sum_upper": "0.106631017",
   "simple_positive_zero_sum_upper": "0.107",
   "norm_k_over_original_H2_lower": "0.1089",
   "conditional_E_conversion_constant_upper": "237522697",

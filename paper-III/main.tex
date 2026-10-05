@@ -1,4 +1,4 @@
-% Ryota Mori. Version 1, 2026-10-03. Licence: CC BY 4.0. doi:10.5281/zenodo.23119609
+% Ryota Mori. Version 2, 2026-10-05 (version 1: 2026-10-03, doi:10.5281/zenodo.23119609). Licence: CC BY 4.0.
 % Paper III: sequel to Paper II (doi:10.5281/zenodo.23092542).
 \documentclass[11pt]{amsart}
 \usepackage[margin=1in]{geometry}
@@ -28,21 +28,23 @@
 \author{Ryota Mori}
 \address{Independent researcher, Tokyo, Japan}
 \email{moriryota31@gmail.com}
-\date{3 October 2026}
+\date{3 October 2026; version 2, 5 October 2026}
 
 \begin{document}
 
 \begin{abstract}
-Weil's criterion states that the Riemann Hypothesis holds if and only if Weil's quadratic form $W$ is nonnegative. Restricted to test functions supported in a multiplicative window $[\lambda^{-1},\lambda]$, this becomes $\lambda_{\min}(\lambda)\ge0$ for all $\lambda$, where $\lambda_{\min}(\lambda)$ is the bottom of the spectrum of the restricted form. Put $\mu=\lambda^2$. In a previous paper we proved, without any hypothesis on the zeros of $\zeta$, that $\lambda_{\min}(\lambda)\le5.011\times10^{17}\mu^8(\log\mu)^3e^{-4\pi\mu}$ for $\mu\ge50$, using the prolate vector of Connes, Consani and Moscovici. The loss $\mu^{7/2}$ in that bound comes from the jump of the truncated prolate functions at the spatial truncation points $x=\pm\lambda$, which forces the zero sum to be controlled up to height $e^{20\mu}$. We smooth the vector in a layer of width $\asymp c^{-2}$ at these points, where $c=2\pi\mu$ is the bandwidth. This costs only a bounded factor in the out-of-band mass, and it makes the outer remainder differentiable with a polynomial bound. The zero sum is then dominated by zeros below $3\cdot10^{12}$, where RH is verified. We prove, unconditionally,
+Weil's criterion states that the Riemann Hypothesis holds if and only if Weil's quadratic form $W$ is nonnegative. Restricted to test functions supported in a multiplicative window $[\lambda^{-1},\lambda]$, this becomes $\lambda_{\min}(\lambda)\ge0$ for all $\lambda$, where $\lambda_{\min}(\lambda)$ is the bottom of the spectrum of the restricted form. Put $\mu=\lambda^2$. In a previous paper we proved, without any hypothesis on the zeros of $\zeta$, that $\lambda_{\min}(\lambda)\le5.046\times10^{17}\mu^8(\log\mu)^3e^{-4\pi\mu}$ for $\mu\ge50$, using the prolate vector of Connes, Consani and Moscovici. The loss $\mu^{7/2}$ in that bound comes from the jump of the truncated prolate functions at the spatial truncation points $x=\pm\lambda$, which forces the zero sum to be controlled up to height $e^{20\mu}$. We smooth the vector in a layer of width $\asymp c^{-2}$ at these points, where $c=2\pi\mu$ is the bandwidth. This costs only a bounded factor in the out-of-band mass, and it makes the outer remainder differentiable with a polynomial bound. The zero sum is then dominated by zeros below $3\cdot10^{12}$, where RH is verified. We prove, unconditionally,
 \[
-\lambda_{\min}(\lambda)\le1.434\times10^{23}\,\mu^{9/2}(\log\mu)^4e^{-4\pi\mu}\qquad(50\le\mu\le10^4),
+\lambda_{\min}(\lambda)\le1.437\times10^{23}\,\mu^{9/2}(\log\mu)^4e^{-4\pi\mu}\qquad(50\le\mu\le10^4),
 \]
 and $\lambda_{\min}(\lambda)\le1.24\times10^{23}\mu^5(\log\mu)^5e^{-4\pi\mu}$ for all $\mu\ge50$. The power $9/2$ is that of Fuchs' asymptotic formula for the prolate eigenvalue defect. All constants are explicit and established with ball arithmetic. The results are upper bounds only and say nothing about positivity.
 \end{abstract}
 
 \maketitle
 
-\noindent\textit{Version 1.} Zenodo, \doi{10.5281/zenodo.23119609}. Licence: CC BY 4.0.
+\begin{sloppypar}
+\noindent\textit{Version 2} (5 October 2026), Zenodo \doi{10.5281/zenodo.23162896}; version~1: \doi{10.5281/zenodo.23119609}. Licence: CC BY 4.0. Version~1 used the zero-counting bound of \cite{Trudgian14} with the constants $0.111$, $0.275$, $2.450$ of its arXiv version (arXiv:1208.5846v2), while citing the published version, whose constants are $0.112$, $0.278$, $2.510$. All constants that depend on this bound have been recomputed with the published constants. The constants of Theorem~\ref{thm:F}(a) and Theorem~\ref{thm:G}(a) change from $6.034\times10^{14}$ and $1.434\times10^{23}$ to $6.048\times10^{14}$ and $1.437\times10^{23}$. The constants $C_M$ and $C_T$ of Section~\ref{sec:proofs} also change, as do the comparison with \cite[Thm.~E]{MoriWeilII} (whose constant is now $5.046\times10^{17}$) and Table~\ref{tab:compare}. Theorem~\ref{thm:F}(b) and Theorem~\ref{thm:G}(b),(c) hold with the same printed constants. The statements, powers and proofs are otherwise those of version~1.
+\end{sloppypar}
 
 
 \begin{center}
@@ -58,7 +60,7 @@ Let $W$ be Weil's quadratic form and $W_\lambda$ its restriction to test functio
 Upper bounds are obtained from test vectors. In \cite{MoriWWUB} we proved $\lambda_{\min}(\lambda)\le1.362\times10^9\mu^{23}e^{-4\pi\mu}$ for $\mu\ge5$. In \cite{MoriWeilII} we analysed the prolate vector $k_\lambda$ of Connes, Consani and Moscovici \cite[\S7]{CCM25} and proved (Theorems~C and~E there)
 \[
 |W(k_\lambda)|\le P(\mu)\rho_{\rm out}\|h_\lambda\|^2+e^{-16\mu}\|h_\lambda\|^2,\qquad
-\lambda_{\min}(\lambda)\le5.011\times10^{17}\mu^8(\log\mu)^3e^{-4\pi\mu}\quad(\mu\ge50),
+\lambda_{\min}(\lambda)\le5.046\times10^{17}\mu^8(\log\mu)^3e^{-4\pi\mu}\quad(\mu\ge50),
 \]
 with $P(\mu)=O(\mu^{7/2}(\log\mu)^3)$. The factor $\rho_{\rm out}\le1-\lambda_4(2\pi\mu)\le C\mu^{9/2}e^{-4\pi\mu}$ is controlled by the companion paper \cite{MoriPSWF}, so the power of $\mu$ in the final bound is $9/2$ plus the power lost in $P$.
 
@@ -80,7 +82,7 @@ Then $\int\tilde h=0$, and $\tilde h$ is $C^1$ with $\tilde h(\pm\lambda)=\tilde
 \begin{theorem}\label{thm:F}
 Without any hypothesis on the zeros of $\zeta$:
 \begin{enumerate}
-\item[(a)] for $50\le\mu\le10^4$, $|W(\tilde k)|\le6.034\times10^{14}(\log\mu)^4B$;
+\item[(a)] for $50\le\mu\le10^4$, $|W(\tilde k)|\le6.048\times10^{14}(\log\mu)^4B$;
 \item[(b)] for every $\mu\ge50$, $|W(\tilde k)|\le P''(\mu)B\le5.2\times10^{14}\sqrt\mu(\log\mu)^5B$, where $P''$ is the explicit function \eqref{eq:Ppp}.
 \end{enumerate}
 \end{theorem}
@@ -88,7 +90,7 @@ Without any hypothesis on the zeros of $\zeta$:
 \begin{theorem}\label{thm:G}
 Without any hypothesis on the zeros of $\zeta$:
 \begin{enumerate}
-\item[(a)] for $50\le\mu\le10^4$, $\lambda_{\min}(\lambda)\le1.434\times10^{23}\,\mu^{9/2}(\log\mu)^4e^{-4\pi\mu}$;
+\item[(a)] for $50\le\mu\le10^4$, $\lambda_{\min}(\lambda)\le1.437\times10^{23}\,\mu^{9/2}(\log\mu)^4e^{-4\pi\mu}$;
 \item[(b)] for every $\mu\ge50$, $\lambda_{\min}(\lambda)\le1.24\times10^{23}\,\mu^5(\log\mu)^5e^{-4\pi\mu}$;
 \item[(c)] for every $\mu\ge50$, $\lambda_{\min}(\lambda)\le237522697\,P''(\mu)\,\mu^{9/2}e^{-4\pi\mu}$, and this is less than $0.832$ times the bound of \cite[Thm.~E]{MoriWeilII}.
 \end{enumerate}
@@ -102,12 +104,12 @@ Theorem~\ref{thm:G}(a) improves \cite[Thm.~E]{MoriWeilII} for $55\le\mu\le10^4$,
 \toprule
 $\mu$ & $50$ & $10^3$ & $10^6$ & $10^{12}$\\
 \midrule
-Theorem~\ref{thm:G}(a) / \cite[Thm.~E]{MoriWeilII} & $1.27$ & $6.3\times10^{-5}$ & -- & --\\
-Theorem~\ref{thm:G}(b) / \cite[Thm.~E]{MoriWeilII} & $30.3$ & $1.2\times10^{-2}$ & $4.7\times10^{-11}$ & $1.9\times10^{-28}$\\
-Theorem~\ref{thm:G}(c) / \cite[Thm.~E]{MoriWeilII} & $0.830$ & $2.4\times10^{-5}$ & $8.5\times10^{-12}$ & $5.8\times10^{-30}$\\
+Theorem~\ref{thm:G}(a) / \cite[Thm.~E]{MoriWeilII} & $1.26$ & $6.2\times10^{-5}$ & -- & --\\
+Theorem~\ref{thm:G}(b) / \cite[Thm.~E]{MoriWeilII} & $30.1$ & $1.2\times10^{-2}$ & $4.7\times10^{-11}$ & $1.9\times10^{-28}$\\
+Theorem~\ref{thm:G}(c) / \cite[Thm.~E]{MoriWeilII} & $0.824$ & $2.4\times10^{-5}$ & $8.6\times10^{-12}$ & $5.8\times10^{-30}$\\
 \bottomrule
 \end{tabular}
-\caption{Ratios of the new upper bounds for $\lambda_{\min}$ to the bound $5.011\times10^{17}\mu^8(\log\mu)^3e^{-4\pi\mu}$ of \cite[Thm.~E]{MoriWeilII}.}\label{tab:compare}
+\caption{Ratios of the new upper bounds for $\lambda_{\min}$ to the bound $5.046\times10^{17}\mu^8(\log\mu)^3e^{-4\pi\mu}$ of \cite[Thm.~E]{MoriWeilII}.}\label{tab:compare}
 \end{table}
 
 \subsection{Numerical context}
@@ -343,7 +345,7 @@ The factor $\lambda=\sqrt\mu$ accounts for possible zeros off the critical line;
 
 \section{Proofs of Theorems~\ref{thm:F} and~\ref{thm:G}}\label{sec:proofs}
 
-\emph{Theorem~\ref{thm:F}(a).} Take $T=T_0$. The bound is $L_{\rm low}(c)$ plus the high-zero bound of Section~\ref{sec:zeros}, in which the strip integral is bounded by the cruder $L_T(\lambda)$ of Appendix~\ref{app:functions}. By the monotonicity statements of Appendix~\ref{app:functions}, $L_{\rm low}/(\log\mu)^4$ is maximal at $\mu=50$ and the high-zero coefficient is maximal at $\mu=10^4$, which gives $C_{F,a}$ of \eqref{eq:CFa}. Ball arithmetic gives $C_{F,a}\le603317800634135\le6.034\times10^{14}$.
+\emph{Theorem~\ref{thm:F}(a).} Take $T=T_0$. The bound is $L_{\rm low}(c)$ plus the high-zero bound of Section~\ref{sec:zeros}, in which the strip integral is bounded by the cruder $L_T(\lambda)$ of Appendix~\ref{app:functions}. By the monotonicity statements of Appendix~\ref{app:functions}, $L_{\rm low}/(\log\mu)^4$ is maximal at $\mu=50$ and the high-zero coefficient is maximal at $\mu=10^4$, which gives $C_{F,a}$ of \eqref{eq:CFa}. Ball arithmetic gives $C_{F,a}\le604723437447156\le6.048\times10^{14}$.
 
 \emph{Theorem~\ref{thm:F}(b).} With $T=\max(T_0,c^3)$,
 \begin{equation}\label{eq:Ppp}
@@ -353,13 +355,13 @@ with $L_{\rm low}$ and $M_{\rm mid}$ as in Appendix~\ref{app:functions} ($M_{\rm
 \[
 P''\le C_L(\log\mu)^4+C_M\lambda(\log\mu)^5\mathbf 1_{\mu>\mu_*}+C_T\lambda(\log\mu)^3+C_B\lambda\log\mu\le5.2\times10^{14}\sqrt\mu(\log\mu)^5,
 \]
-with $C_L=395545739509246$, $C_M=496386197282357$, $C_T=11498327513$ and $C_B=3492549$.
+with $C_L=395545739509250$, $C_M=502626965820918$, $C_T=11642889148$ and $C_B=3492549$.
 
-\emph{Theorem~\ref{thm:G}.} By Proposition~\ref{prop:oob}(c), $\lambda_{\min}\le W(\tilde k)/\|\tilde k\|^2\le|W(\tilde k)|/(0.1089H^2)$, and $B\le U(c)H^2$ with $c^{9/2}=(2\pi)^{9/2}\mu^{9/2}$. The conversion factor is $6621(2\pi)^{9/2}/0.1089\le237522697$, and $237522697\times6.034\times10^{14}<1.434\times10^{23}$, $237522697\times5.2\times10^{14}<1.24\times10^{23}$. For (c), with $l=\log\mu$, the ratio to $5.011\times10^{17}\mu^8l^3$ is at most
+\emph{Theorem~\ref{thm:G}.} By Proposition~\ref{prop:oob}(c), $\lambda_{\min}\le W(\tilde k)/\|\tilde k\|^2\le|W(\tilde k)|/(0.1089H^2)$, and $B\le U(c)H^2$ with $c^{9/2}=(2\pi)^{9/2}\mu^{9/2}$. The conversion factor is $6621(2\pi)^{9/2}/0.1089\le237522697$, and $237522697\times6.048\times10^{14}<1.437\times10^{23}$, $237522697\times5.2\times10^{14}<1.24\times10^{23}$. For (c), with $l=\log\mu$, the ratio to $5.046\times10^{17}\mu^8l^3$ is at most
 \[
-\frac{237522697}{5.011\times10^{17}}\Bigl[C_L\frac{l}{\mu^{7/2}}+\frac{C_T}{\mu^3}+\frac{C_B}{\mu^3l^2}+\mathbf 1_{\mu>\mu_*}C_M\frac{l^2}{\mu^3}\Bigr].
+\frac{237522697}{5.046\times10^{17}}\Bigl[C_L\frac{l}{\mu^{7/2}}+\frac{C_T}{\mu^3}+\frac{C_B}{\mu^3l^2}+\mathbf 1_{\mu>\mu_*}C_M\frac{l^2}{\mu^3}\Bigr].
 \]
-The first three terms decrease for $\mu\ge50$ and the last for $\mu\ge\mu_*$, so the sum of their values at $50$ (first three) and at $\mu_*$ (last) bounds the ratio; ball arithmetic gives $0.831028501\ldots<0.832$.
+The first three terms decrease for $\mu\ge50$ and the last for $\mu\ge\mu_*$, so the sum of their values at $50$ (first three) and at $\mu_*$ (last) bounds the ratio; ball arithmetic gives $0.825279423\ldots<0.832$.
 
 \section{Numerical evidence}\label{sec:num}
 
@@ -411,10 +413,10 @@ $D_J(c)=[\sqrt{8c}+E_J(c)]^2\le D_+(c)$, $m_0(c)$ as in \eqref{eq:m0}, $Z_{\rm r
 Y=\bigl[\sqrt Z+\sqrt2(a+4)(\sqrt{K_*}+\tfrac14\sqrt Z)\bigr]^2,\qquad \mathfrak A_0=L_RZ+K_*/R^2,\qquad \mathfrak A_1=2(a+4)^2L_RZ+Y/R^2.
 \]
 
-\emph{Zero side.} With $C_N=3.325+0.2/e$,
+\emph{Zero side.} With $C_N=3.385+0.2/e$ (from the constants $0.112$, $0.278$, $2.510$ of the published version of \cite{Trudgian14}),
 \begin{gather*}
-S(d)=\frac{\frac43\log d+1}{\pi d}+\frac{0.772\log d+2C_N+0.193}{d^2},\\
-n(x)=\Bigl(\frac1{4\pi}+0.222\Bigr)x+0.55\log x+4.9+\frac{0.4}e,\qquad
+S(d)=\frac{\frac43\log d+1}{\pi d}+\frac{0.780\log d+2C_N+0.195}{d^2},\\
+n(x)=\Bigl(\frac1{4\pi}+0.224\Bigr)x+0.556\log x+5.02+\frac{0.4}e,\qquad
 j(x,l)=\frac12\Bigl[\log\frac{11.15x}l+e^{-1}\Bigr],
 \end{gather*}
 $\mathcal A(T)$ as in Section~\ref{sec:zeros}, $x_0=\log(3T_0)$, $L_T(\lambda)=\frac12+\frac\lambda2\log\frac{11.15x_0}2$ (the strip bound of \cite[proof of Lemma~5.1]{MoriWeilII}), $H_T=(\log T_0+1)/(\pi T_0)$, and
@@ -435,7 +437,7 @@ M_{\rm mid}(c)=\begin{cases}0,&c^3\le T_0,\\ 2n(x)(11.15x)^2\lambda j(x,l)m_0(c)
 \end{enumerate}
 
 \section*{Reproducibility}
-All computer-assisted steps are reproducible from the public repository \url{https://github.com/moriryota/prolate-weil-bounds}, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions; this paper corresponds to release \texttt{v1.1.0}). It contains every script and its raw output. The scripts in \texttt{proofs-III/} use ball arithmetic (Arb, via python-flint) or SymPy; every printed upper bound is rounded upward, every lower bound downward, and each is asserted against the ball.
+All computer-assisted steps are reproducible from the public repository \url{https://github.com/moriryota/prolate-weil-bounds}, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions; this version corresponds to release \texttt{v1.2.1}). It contains every script and its raw output. The scripts in \texttt{proofs-III/} use ball arithmetic (Arb, via python-flint) or SymPy; every printed upper bound is rounded upward, every lower bound downward, and each is asserted against the ball.
 
 \begin{center}\small
 \begin{tabular}{ll}
@@ -463,7 +465,7 @@ This work was carried out with extensive use of generative AI systems, namely An
 \bibitem{CCM25} A.~Connes, C.~Consani, H.~Moscovici, Zeta spectral triples, arXiv:2511.22755.
 \bibitem{Fuchs64} W.~H.~J.~Fuchs, On the eigenvalues of an integral equation arising in the theory of band-limited signals, \emph{J. Math. Anal. Appl.} 9 (1964) 317--330. \doi{10.1016/0022-247X(64)90017-4}
 \bibitem{MoriPSWF} R.~Mori, A non-asymptotic bound with the sharp power of $c$ for the eigenvalue defect $1-\lambda_n(c)$ of time and frequency limiting, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092454}
-\bibitem{MoriWeilII} R.~Mori, The Weil quadratic form of the Connes--Consani--Moscovici prolate vector, and a $\mu^8$ upper bound for windowed Weil forms, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092542}
+\bibitem{MoriWeilII} R.~Mori, The Weil quadratic form of the Connes--Consani--Moscovici prolate vector, and a $\mu^8$ upper bound for windowed Weil forms, preprint, version 2, Zenodo, 2026. \doi{10.5281/zenodo.23162895}
 \bibitem{MoriWWUB} R.~Mori, Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms, version 3, Zenodo, 2026. \doi{10.5281/zenodo.23066578}
 \bibitem{MT15} M.~J.~Mossinghoff, T.~S.~Trudgian, Nonnegative trigonometric polynomials and a zero-free region for the Riemann zeta-function, \emph{J. Number Theory} 157 (2015) 329--349. \doi{10.1016/j.jnt.2015.05.010}
 \bibitem{PT21} D.~Platt, T.~Trudgian, The Riemann hypothesis is true up to $3\cdot10^{12}$, \emph{Bull. London Math. Soc.} 53 (2021) 792--797. \doi{10.1112/blms.12460}

@@ -13,9 +13,9 @@ Dp=lambda c:16*c+CD*c.log()**2
 Z=lambda c:ZC*(c/(2*pi)).log()**2
 ga=3*(50+690*e8)/(2*pi).sqrt()
 K=lambda c:(Z(c).sqrt()+ga*c*c+120*c**(A(3)/2)+c*Dp(c).sqrt())**2
-CN=A('3.325')+A('.2')/A(1).exp()
-S=lambda d:(A(4)/3*d.log()+1)/(pi*d)+(A('.772')*d.log()+2*CN+A('.193'))/d**2
-n=lambda x:(1/(4*pi)+A('.222'))*x+A('.55')*x.log()+A('4.9')+A('.4')/A(1).exp()
+CN=A('3.385')+A('.2')/A(1).exp()
+S=lambda d:(A(4)/3*d.log()+1)/(pi*d)+(A('.780')*d.log()+2*CN+A('.195'))/d**2
+n=lambda x:(1/(4*pi)+A('.224'))*x+A('.556')*x.log()+A('5.02')+A('.4')/A(1).exp()
 S4=A(572587)/414720; kappa=(A(1000)/999)**2
 Jfactor=lambda x,l:((b*x/l).log()+1/A(1).exp())/2
 def up(x,digits=0):
@@ -47,7 +47,7 @@ CP=A(up(CP_exact));CPsimple=A(10)**13*A(up(CP/A(10)**13))
 conversion=6621*(2*pi)**(A(9)/2)/A('.1089');Econv=A(237522697)
 assert conversion<Econv
 CEexact=Econv*CPsimple;CEsimple=A(10)**21*A(up(CEexact/A(10)**21))
-advantage=Econv/A('5.011e17')*(CL*l0/A(50)**(A(7)/2)+Ct/A(50)**3+Cb/(A(50)**3*l0**2)+Cm*ls**2/mus**3)
+advantage=Econv/A('5.046e17')*(CL*l0/A(50)**(A(7)/2)+Ct/A(50)**3+Cb/(A(50)**3*l0**2)+Cm*ls**2/mus**3)
 assert advantage<A('.85')
 # Assertions behind the analytic monotonicity reductions.
 assert x0>40*A(2).log();assert x0>1;assert c0>3
@@ -67,12 +67,12 @@ def calc(mu):
  env=CPsimple*lam*l**5
  # Original paper II P, with its independent exponentially small additive term omitted.
  xx=20*mu+1
- R=A('.111')*xx+A('.275')*xx.log()+A('2.450')+A('.2')/A(1).exp()
+ R=A('.112')*xx+A('.278')*xx.log()+A('2.510')+A('.2')/A(1).exp()
  N=(xx-(2*pi).log())/(4*pi)+2*R
  r=1/(b*xx)
  Pold=2*N/r**2*(A('.5')+lam/2*(1/(2*r)).log())*(592+A('152.2')*(2*(c/3).log()+A('8.08'))**2)
  Cprime=A('6.034e14')*l**4
- oldE=A('5.011e17')*mu**8*l**3
+ oldE=A('5.046e17')*mu**8*l**3
  newE=Econv*mu**(A(9)/2)*P
  assert P<env;assert newE<oldE
  return {'mu':str(int(mu.unique_fmpz())),'T_upper':up(T),'middle_nonempty':middle,'low_upper':up(lo),'middle_upper':up(mid),'tail_Q_upper':up(tq),'tail_b_upper':up(tb),'P_double_upper':up(P),'P_double_lower':down(P),'global_envelope_upper':up(env),'P_thmFa_formal_upper':up(Cprime),'P_thmFa_valid':bool(mu<=10000),'P_paperII_upper':up(Pold),'P_double_over_thmFa_upper':up(P/Cprime,12),'P_double_over_paperII_interval':str(P/Pold),'E_refined_over_paperII_interval':str(newE/oldE),'E_simple_over_paperII_interval':str(CEsimple*mu**5*l**5/oldE),'P_double_over_sqrt_mu_log5_interval':str(P/(lam*l**5))}

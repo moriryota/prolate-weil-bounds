@@ -32,10 +32,10 @@ ga=3*(Af+2*Cf)/(2*pi).sqrt()
 def G(c):return (ga*c*c+120*c**(A(3)/2))**2
 def Z(c):return ZC*(c/(2*pi)).log()**2
 def K(c):return (Z(c).sqrt()+G(c).sqrt()+c*DB(c).sqrt())**2
-Cz=A('3.325')+A('.2')/A(1).exp()
-def S(d):return (A(4)/3*d.log()+1)/(pi*d)+(A('.772')*d.log()+2*Cz+A('.193'))/d**2
+Cz=A('3.385')+A('.2')/A(1).exp()
+def S(d):return (A(4)/3*d.log()+1)/(pi*d)+(A('.780')*d.log()+2*Cz+A('.195'))/d**2
 T=A(3)*10**12;x0=(3*T).log()
-n0=(1/(4*pi)+A('.222'))*x0+A('.55')*x0.log()+A('4.9')+A('.4')/A(1).exp()
+n0=(1/(4*pi)+A('.224'))*x0+A('.556')*x0.log()+A('5.02')+A('.4')/A(1).exp()
 At=2*(A(1000)/999)**2*n0*(A('11.15')*x0)**2/T**2*(A(572587)/414720)
 tail=(T.log()+1)/(pi*T)
 def Ltail(mu):return A('.5')+A(mu).sqrt()/2*(A('11.15')*x0/2).log()
@@ -46,8 +46,8 @@ def high(mu):
 low_b_max=4*DB(c50)*S(c50**2)
 CPexact=48*pi*26*ZC+(low_b_max+high(M))/lo**4
 CPderived=A(up(CPexact,0))
-CP=A(603400000000000)
-CE=A(143400000000000000000000)
+CP=A(604800000000000)
+CE=A(143700000000000000000000)
 assert CP>=CPderived.upper()
 assert CE>=A(237522697)*CP
 checks={}

@@ -99,7 +99,7 @@ for mu in [5, 7, 11]:
 
 # Theorem C factors
 def Rtr(lT):  # Trudgian 2014 Cor. 1, T0 = e
-    return arb('0.111') * lT + arb('0.275') * lT.log() + arb('2.450') + arb('0.2') / arb(1).exp()
+    return arb('0.112') * lT + arb('0.278') * lT.log() + arb('2.510') + arb('0.2') / arb(1).exp()
 
 def P_of(mu):
     mu = arb(mu); lam = mu.sqrt(); c = 2 * PI * mu

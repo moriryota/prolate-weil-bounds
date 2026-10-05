@@ -44,7 +44,7 @@ S=sum(F(comb(4,k),40**k)*mom[k] for k in range(5))
 Sarb=A(S.numerator)/S.denominator
 T0=A(3)*10**12;x0=(3*T0).log()
 assert x0>40*A(2).log()
-nx=(1/(4*pi)+A('.222'))*x0+A('.55')*x0.log()+A('4.9')+A('.4')/A(1).exp()
+nx=(1/(4*pi)+A('.224'))*x0+A('.556')*x0.log()+A('5.02')+A('.4')/A(1).exp()
 At=2*(A(1000)/999)**2*nx*(A('11.15')*x0)**2/T0**2*Sarb
 rows=[]
 for mu0 in [50,100,1000,10000]:
