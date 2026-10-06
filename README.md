@@ -1,6 +1,6 @@
 # prolate-weil-bounds
 
-This repository contains the computations for four papers by Ryota Mori, together with their LaTeX sources and PDFs.
+This repository contains the computations for five papers by Ryota Mori, together with their LaTeX sources and PDFs.
 
 **Paper I** (`paper-I/`). *A non-asymptotic bound with the sharp power of c for the eigenvalue defect 1 − λ_n(c) of time and frequency limiting.*
 
@@ -21,6 +21,11 @@ with C_n = 18.34, 155.0, 703.4, 2340 and 6621. The power of c is the one in Fuch
 
 **Paper IV** (`paper-IV/`). *A conditional lower bound for windowed Weil forms from sampling on the zeros of ζ.* Under the Riemann Hypothesis and a local hypothesis (LP) on close pairs of zeros, 4πμ − O(log μ) ≤ −log λ_min(λ) ≤ Cμ log log μ; under RH alone, effective but weak lower bounds. The proofs are analytic; `numerics-IV/` contains numerical illustrations only.
 
+**Paper V** (`paper-V/`). *A μ^{9/2} log μ upper bound for windowed Weil forms.* Two of the three sources of the logarithms in paper III are removed: a translation in the Sobolev step, and the exact Prüfer phase with an L² (non-stationary phase) estimate of the Poisson sum, which replaces paper II, Lemma 4.1 by ‖r_τ‖² ≤ λ^{2τ}·729B/(1−2τ). Unconditionally:
+- **Theorem J:** |W(k̃_λ)| ≤ 1.47×10¹⁶ (log μ) B for 50 ≤ μ ≤ 10⁴, and ≤ 3.19×10¹⁶ √μ (log μ)³ B for all μ ≥ 50.
+- **Theorem K:** λ_min(λ) ≤ 3.50×10²⁴ μ^{9/2} log μ e^{−4πμ} for 50 ≤ μ ≤ 10⁴, and ≤ 7.58×10²⁴ μ⁵ (log μ)³ e^{−4πμ} for all μ ≥ 50.
+- Numerically (not certified), λ_min/(1−λ₄(2πμ)) is about 4.1–5.4 at the integers 7 ≤ μ ≤ 20 (`numerics-V/`).
+
 Paper II is a sequel to *Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms* ([code](https://github.com/moriryota/weil-window-upper-bounds), [paper](https://doi.org/10.5281/zenodo.23059297)).
 
 DOIs:
@@ -29,6 +34,7 @@ DOIs:
 - Paper II: version 2 [10.5281/zenodo.23162895](https://doi.org/10.5281/zenodo.23162895); version 1 [10.5281/zenodo.23092542](https://doi.org/10.5281/zenodo.23092542)
 - Paper III: version 2 [10.5281/zenodo.23162896](https://doi.org/10.5281/zenodo.23162896); version 1 [10.5281/zenodo.23119609](https://doi.org/10.5281/zenodo.23119609)
 - Paper IV: [10.5281/zenodo.23134085](https://doi.org/10.5281/zenodo.23134085)
+- Paper V: [10.5281/zenodo.23175061](https://doi.org/10.5281/zenodo.23175061)
 
 ## Corrections in v1.2.1 (papers II and III, version 2)
 
@@ -38,15 +44,15 @@ Versions 1 of papers II and III used the zero-counting bound of T. Trudgian (J. 
 
 The powers of μ and log μ, the statements and the proofs are unchanged. Papers I and IV are not affected.
 
-Papers I–III give upper bounds only; they say nothing about positivity and do not address the Riemann Hypothesis. Paper IV gives lower bounds under RH (and, for the main theorem, an additional hypothesis); it does not prove RH.
+Papers I–III and V give upper bounds only; they say nothing about positivity and do not address the Riemann Hypothesis. Paper IV gives lower bounds under RH (and, for the main theorem, an additional hypothesis); it does not prove RH.
 
 ## Layout
 
 | Directory | Contents |
 |---|---|
-| `paper-I/` … `paper-IV/` | LaTeX sources and PDFs. |
-| `proofs-I/`, `proofs-II/`, `proofs-III/` | Computations that **prove** the numerical constants of the papers. They use ball arithmetic (Arb, through python-flint) or exact rationals. Every printed upper bound is rounded upward, every lower bound downward, and each is asserted against the ball. |
-| `numerics-I/` … `numerics-IV/` | Numerical illustrations. These scripts are **not** part of any proof. |
+| `paper-I/` … `paper-V/` | LaTeX sources and PDFs. |
+| `proofs-I/`, `proofs-II/`, `proofs-III/`, `proofs-V/` | Computations that **prove** the numerical constants of the papers. They use ball arithmetic (Arb, through python-flint) or exact rationals. Every printed upper bound is rounded upward, every lower bound downward, and each is asserted against the ball. |
+| `numerics-I/` … `numerics-V/` | Numerical illustrations. These scripts are **not** part of any proof. |
 | `common/` | Shared code for the numerics: prolate spheroidal wave functions from Legendre expansions, and the Weil form on a Legendre basis in Arb. |
 | `outputs/` | The raw outputs of all scripts, with the same file names that `run_all.sh` produces. |
 
@@ -62,6 +68,8 @@ Papers I–III give upper bounds only; they say nothing about positivity and do 
 **Trial polynomials.** `proofs-I/trials.json` contains the trial polynomials f₀,…,f₄ of paper I, Lemma 5.1, as exact decimal rationals.
 - `proofs-I/certify.py` reads `trials.json` and writes the certified matrices and bounds to `proofs-I/certificate.json`.
 - `proofs-I/make_trials.py` documents how the trials were chosen. It is not part of the proof, and on another platform it may produce slightly different (equally valid) trials.
+
+**Galerkin values of λ_min (paper V).** `numerics-V/galerkin_lambda_min.py mu N prec nq` computes the bottom of the even part. Convergence in N needs N/(a c) ≳ 2.3 (a = ½ log μ, c = 2πμ), and the precision must grow with N (μ = 20, N = 570 gives a negative value with 840 bits and 1.09899×10⁻⁹⁶ with 1300 bits; `numerics-V/precision_check.py`). The raw outputs of all runs (hours each, on a 4-vCPU machine) are in `outputs/numerics-V/runs/`, and `outputs/numerics-V/ratio_table.txt` collects the ratios. The λ_min(even) values printed by `numerics-II/galerkin_W.py` are not converged at the N listed there; only its W(k)/‖k‖² values were used in paper II, and even these change by a few percent at larger N.
 
 **Galerkin values.** The values of W(k_λ)/‖k_λ‖² in the table of paper II come from `numerics-II/galerkin_W.py`. They need the parameters recorded there, in particular the quadrature size nq = N + 40 for μ ≥ 13. With smaller N or nq the digits are wrong.
 

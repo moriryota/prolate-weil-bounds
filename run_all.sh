@@ -5,7 +5,7 @@ set -u
 PY=${PYTHON:-python3}
 MODE=${1:-proofs}
 NEW=run_all_outputs
-mkdir -p $NEW/proofs-I $NEW/proofs-II $NEW/proofs-III $NEW/numerics-I $NEW/numerics-II $NEW/numerics-III $NEW/numerics-IV
+mkdir -p $NEW/proofs-I $NEW/proofs-II $NEW/proofs-III $NEW/proofs-V $NEW/numerics-I $NEW/numerics-II $NEW/numerics-III $NEW/numerics-IV
 status=0
 run() {  # run DIR SCRIPT [ARGS...]  -> NEW/DIR/SCRIPT[_ARGS].out, compared with outputs/DIR/same name
   d=$1; s=$2; shift 2
@@ -23,6 +23,8 @@ for s in chi_bound constants_proof bessel_compact bl1_independent assembly_const
 for s in chi_bound lg_delta_bound L5b_constants S1e_selfcheck theoremC_constants kappa_inf_enclosure L6_effective_constants theoremE_constants; do run proofs-II $s; done
 # ---- proofs (paper III)
 for s in layer_constants trace_constants cancellation_identities theoremF_a_constants theoremF_b_constants all_mu_identities; do run proofs-III $s; done
+# ---- proofs (paper V)
+run proofs-V constants_V
 if [ "$MODE" = all ] || [ "$MODE" = numerics ]; then
   for s in theorem2_ratio_check slepian_identity_check liouville_delta_scan bessel_constants_scan BL3_spot_check; do run numerics-I $s; done
   for s in kappa_limit hermite_residual theoremC_sanity kvector_endpoint kvector_outofband L6_checks weighted_error_check; do run numerics-II $s; done

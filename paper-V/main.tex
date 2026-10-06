@@ -1,0 +1,338 @@
+% Ryota Mori. Version 1, 2026-10-06. Licence: CC BY 4.0. doi:10.5281/zenodo.23175061
+% Paper V: sequel to papers II and III (prolate-weil-bounds).
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+
+\newtheorem{theorem}{Theorem}
+\renewcommand{\thetheorem}{\Alph{theorem}}
+\setcounter{theorem}{9}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{conjecture}[proposition]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[proposition]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathcal{E}}
+\emergencystretch=3em
+
+\title[A $\mu^{9/2}\log\mu$ upper bound for windowed Weil forms]{A $\mu^{9/2}\log\mu$ upper bound for windowed Weil forms}
+\author{Ryota Mori}
+\address{Independent researcher, Tokyo, Japan}
+\email{moriryota31@gmail.com}
+\date{6 October 2026}
+
+\begin{document}
+
+\begin{abstract}
+Let $\lambda_{\min}(\lambda)$ be the bottom of the spectrum of Weil's quadratic form restricted to test functions supported in the multiplicative window $[\lambda^{-1},\lambda]$, and put $\mu=\lambda^2$. By Weil's criterion, the Riemann Hypothesis is equivalent to $\lambda_{\min}(\lambda)\ge0$ for all $\lambda$. In previous papers we proved, without any hypothesis on the zeros of $\zeta$, that $\lambda_{\min}(\lambda)\le1.437\times10^{23}\mu^{9/2}(\log\mu)^4e^{-4\pi\mu}$ for $50\le\mu\le10^4$, using an endpoint-smoothed prolate vector. We locate the sources of the four logarithms in that bound. One logarithm is the density of the zeros of $\zeta$ at height $\asymp\mu$. The other three are artefacts. A Sobolev step weighted by the position $y$ costs a factor $\log\mu$, which disappears after a translation by the window half-width. A sum of phase errors bounded by the triangle inequality costs $(\log\mu)^2$. Keeping the exact Pr\"ufer phase of the prolate functions and estimating the sum in $L^2$ by non-stationary phase removes it. We prove, unconditionally,
+\[
+\lambda_{\min}(\lambda)\le3.50\times10^{24}\,\mu^{9/2}\log\mu\;e^{-4\pi\mu}\qquad(50\le\mu\le10^4),
+\]
+and $\lambda_{\min}(\lambda)\le7.58\times10^{24}\mu^5(\log\mu)^3e^{-4\pi\mu}$ for all $\mu\ge50$. Numerical Galerkin computations of the even part at integer $\mu$ with $7\le\mu\le20$ give ratios $\lambda_{\min}^{\rm Gal}/(1-\lambda_4(2\pi\mu))$ between about $4.1$ and $5.4$, where $\lambda_4$ is the prolate eigenvalue whose defect is of order $\mu^{9/2}e^{-4\pi\mu}$. These values are numerical, not certified. The results are upper bounds only and say nothing about positivity.
+\end{abstract}
+
+\maketitle
+
+\noindent\textit{Version 1.} Zenodo, \doi{10.5281/zenodo.23175061}. Licence: CC BY 4.0.
+
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\small
+\textbf{Status.} The new arguments (Sections~\ref{sec:phase}--\ref{sec:assembly}) passed two independent AI reviews with no blocking or major findings. Constants are established by ball arithmetic (Arb). Not formalized. This paper has not yet been reviewed by independent human experts.}}
+\end{center}
+
+\section{Introduction}
+
+\subsection{Background}
+Let $W$ be Weil's quadratic form and $W_\lambda$ its restriction to test functions supported in $[\lambda^{-1},\lambda]$ \cite{CC21,CCM25}. Write $\lambda_{\min}(\lambda)$ for the bottom of its spectrum and $\mu=\lambda^2$. By Weil's criterion, RH is equivalent to $\lambda_{\min}(\lambda)\ge0$ for all $\lambda$. Numerically $\lambda_{\min}(\lambda)$ is positive and decays like $e^{-4\pi\mu}$.
+
+Upper bounds come from test vectors. In \cite{MoriWeilII,MoriWeilIII} we used the prolate vector of Connes, Consani and Moscovici \cite[\S7]{CCM25}, and an endpoint-smoothed version of it, and proved
+\begin{gather*}
+\lambda_{\min}(\lambda)\le5.046\times10^{17}\mu^8(\log\mu)^3e^{-4\pi\mu}\quad(\mu\ge50),\\
+\lambda_{\min}(\lambda)\le1.437\times10^{23}\mu^{9/2}(\log\mu)^4e^{-4\pi\mu}\quad(50\le\mu\le10^4).
+\end{gather*}
+The power $9/2$ is that of Fuchs' asymptotic formula for the prolate eigenvalue defect $1-\lambda_4(c)$, $c=2\pi\mu$ \cite{Fuchs64,MoriPSWF}. Under RH and a hypothesis on close pairs of zeros, \cite{MoriWeilIV} proves the lower bound $\lambda_{\min}\ge\exp(-C\mu\log\log\mu)$, so even the exponent $4\pi$ is not yet matched from below, and the polynomial factor in front of $e^{-4\pi\mu}$ is open.
+
+This paper asks how many of the four logarithms in the second bound are needed.
+
+\subsection{Where the logarithms come from}
+In \cite[Section~6]{MoriWeilIII} the zeros below $T_0=3\cdot10^{12}$, where RH is verified \cite{PT21}, contribute
+\begin{equation}\label{eq:oldL}
+48\pi\bigl[\mathfrak A_0+2\sqrt{\mathfrak A_0\mathfrak A_1}\bigr]B,\qquad
+\mathfrak A_0=L_RZ+\frac{K_*}{R^2},\quad \mathfrak A_1=2(a+4)^2L_RZ+\frac Y{R^2},
+\end{equation}
+with $L_R=\log(2c^3)$, $Z=Z_C(\log\mu)^2$ and $B=\rho_{\rm out}\|h\|^2$ \cite[Appendix~A]{MoriWeilIII}. Thus the bound $\sqrt{\mathfrak A_0\mathfrak A_1}=O((\log\mu)^4)$ is a product of three factors.
+\begin{itemize}
+\item $L_R\asymp\log\mu$ is the local density of zeros at height $\lesssim c^3$. We keep it.
+\item $Z\propto(\log c)^2$ comes from \cite[Lemma~4.1]{MoriWeilII}: $\|r_\tau\|^2\le\lambda^{2\tau}(1-2\tau)^{-1}(592+152.2K_1^2)B$ with $K_1=2\log(c/3)+8.08$. The only logarithm there is a sum $\sum_{mu\ge2}|\rho_n(mu)|/m\le2\log(c/3)+5.49$. Here $\rho_n$ is the additive residual in the representation $\tilde\psi_n(t)=A_{\infty,n}(ct^2)^{-1/2}[\sin(ct+\Phi_n)+\rho_n(t)]$ of \cite[Lemma~3.6]{MoriWeilII}. It contains the amplitude and normalisation errors and the deviation of the true phase from the linear phase $ct+\Phi_n$; the last one is not small for $t\lesssim c$.
+\item $(a+4)^2$, $a=\log\lambda$, comes from the weight $y$ in the Sobolev step: $\|yq_d\|^2\le2(a+4)^2ZB$.
+\end{itemize}
+
+\subsection{Results}\label{sec:intro-results}
+We keep the notation of \cite{MoriWeilII,MoriWeilIII}: $h=I_4h_0-I_0h_4$, $\tilde h$ the smoothed vector, $\tilde k=\E(\tilde h)|_{[\lambda^{-1},\lambda]}$, $r$ and $\tilde r$ the parts outside the window, $r_\tau(y)=e^{-\tau y}r(y)$. We continue the theorem lettering of \cite{MoriWeilII,MoriWeilIII,MoriWeilIV}.
+
+\begin{proposition}[the remainder without logarithms]\label{prop:M}
+For $c\ge10\pi$ and $0\le\tau<\frac12$,
+\[
+\|r_\tau\|^2\le\frac{\lambda^{2\tau}}{1-2\tau}\,729\,B .
+\]
+This replaces \cite[Lemma~4.1]{MoriWeilII}.
+\end{proposition}
+
+\begin{theorem}\label{thm:J}
+Without any hypothesis on the zeros of $\zeta$:
+\begin{enumerate}
+\item[(a)] for $50\le\mu\le10^4$, $|W(\tilde k)|\le1.47\times10^{16}\,(\log\mu)\,B$;
+\item[(b)] for every $\mu\ge50$, $|W(\tilde k)|\le3.19\times10^{16}\sqrt\mu(\log\mu)^3B$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}\label{thm:K}
+Without any hypothesis on the zeros of $\zeta$:
+\begin{enumerate}
+\item[(a)] for $50\le\mu\le10^4$, $\lambda_{\min}(\lambda)\le3.50\times10^{24}\,\mu^{9/2}\log\mu\;e^{-4\pi\mu}$;
+\item[(b)] for every $\mu\ge50$, $\lambda_{\min}(\lambda)\le7.58\times10^{24}\,\mu^5(\log\mu)^3e^{-4\pi\mu}$.
+\end{enumerate}
+\end{theorem}
+
+The constants are large, because they inherit the layer and trace constants of \cite{MoriWeilIII} (the function $V(c)\approx1.4\times10^6$ below). Theorem~\ref{thm:K}(a) is smaller than \cite[Thm.~G(a)]{MoriWeilIII} for all $50\le\mu\le10^4$: the ratio is $24.4/(\log\mu)^3$, which is $0.41$ at $\mu=50$ and $0.031$ at $\mu=10^4$. Theorem~\ref{thm:K}(b) is smaller than \cite[Thm.~G(b)]{MoriWeilIII} exactly when $(\log\mu)^2>7.58\times10^{24}/(1.24\times10^{23})$, i.e.\ for $\mu>2486.2$, in particular for $\mu\ge2500$.
+
+In the range $\mu\le10^4$ the restriction is where the contribution of the zeros above $T_0$ is absorbed into the constant, as in \cite{MoriWeilIII}. What is new is that the contribution of the zeros below $T_0$ is $O(\log\mu)B$ for every $\mu\ge50$, and the contribution of the zeros above $T_0$ is $O(\sqrt\mu(\log\mu)^3)B$.
+
+\subsection{Is the last logarithm needed?}
+We do not know. The remaining factor $\log\mu$ is the mean density of zeros near height $c$. For the unsmoothed vector of \cite{MoriWeilII}, Galerkin values and a heuristic computation suggest that $W(k)/(\|k\|^2(1-\lambda_4))$ grows like $\log\mu$ (Section~\ref{sec:num}); we have not computed the corresponding ratio for the smoothed vector. For $\lambda_{\min}$ itself, the numerical Galerkin ratios $\lambda_{\min}^{\rm Gal}/(1-\lambda_4(2\pi\mu))$ at the integers of Table~\ref{tab:ratio} lie between about $4.1$ and $5.4$, with changes of up to $22\%$ between consecutive integers and no visible growth. This suggests:
+
+\begin{conjecture}\label{conj}
+$\lambda_{\min}(\lambda)\asymp1-\lambda_4(2\pi\mu)\asymp\mu^{9/2}e^{-4\pi\mu}$.
+\end{conjecture}
+
+The upper half of Conjecture~\ref{conj} would remove the last logarithm from Theorem~\ref{thm:K}; the lower half is far beyond the methods of \cite{MoriWeilIV}.
+
+\subsection{Method}
+\begin{enumerate}
+\item \textbf{Translation} (Section~\ref{sec:translation}). On the real axis $|\hat q(t)|=|e^{iat}\hat q(t)|$, and $e^{iat}\hat q$ is the transform of $q(\cdot-a)$, which is supported in $y<0$ (while $q$ is supported in $y<-a$). In the Sobolev step the weight $y$ becomes $y+a$, and the existing weighted bound with $\tau=\frac14$ controls $\|(y+a)q\|$ by an absolute constant.
+\item \textbf{Exact phase} (Section~\ref{sec:phase}). In the Pr\"ufer variables of \cite[Lemmas~3.2 and~3.6]{MoriWeilII}, the exact phase satisfies $\theta'=cv(1+\delta\sin^2\theta)$ with $v=\sqrt{(t^2-s)/(t^2-1)}$. From the bounds on $\delta$ and $\delta'$ we get $g'=(t\theta')'\ge c/2$ for $t\ge2$.
+\item \textbf{Orthogonality} (Section~\ref{sec:orth}). The Poisson sum $\sum_m m^{-1}e^{i\theta(mu)}$ is estimated in $L^2$ over unit intervals in $u$. The phase difference of the $m$-th and $k$-th terms has derivative at least $c|m-k|/2$, and one integration by parts gives $|\int e^{i(\theta(mu)-\theta(ku))}du|\le10/(c|m-k|)$. Since $\sum_{m\ne k}1/(mk|m-k|)=4\zeta(3)$, the $L^2$ norm is bounded by an absolute constant.
+\end{enumerate}
+
+\section{Setting and inputs}\label{sec:setting}
+
+Throughout, $\lambda>1$, $\mu=\lambda^2$, $a=\log\lambda$, $c=2\pi\mu\ge10\pi$, and $n\in\{0,4\}$ indexes the two prolate functions. Fourier transforms are $\hat f(z)=\int f(y)e^{izy}dy$ in the logarithmic variable. For a function $f$ on $(-\infty,-a)$ put $f_\tau(y)=e^{-\tau y}f(y)$. The quantities $\psi_n$, $\tilde\psi_n$, $\lambda_n$, $\chi_{(n)}$, $w_n$, $\Psi$, $\alpha=I_4$, $\beta=-I_0$, $B=\rho_{\rm out}\|h\|^2$ are those of \cite[Section~2]{MoriWeilII}.
+
+From \cite{MoriWeilII} we use:
+\begin{itemize}
+\item the Poisson form \cite[Lemma~2.3]{MoriWeilII}: $r(-\log X)=X^{1/2}\sum_{m\ge1}\hat h(mX)-\frac12h(0)X^{-1/2}$ for a.e.\ $X>\lambda$, with symmetric partial sums; and $\hat h(\lambda t)=\sum_nw_n\tilde\psi_n(t)$;
+\item the Liouville--Green normal form \cite[Lemma~3.2]{MoriWeilII}: with $p=t^2-1$, $r_s=t^2-s$, $q=c^2r_s$, $s=\chi^{\rm SL}_n/c^2\in[0,0.3)$, $z'=\sqrt{q/p}$ and $\tilde\psi_n=(pq)^{-1/4}w$, one has $w_{zz}+(1+\delta)w=0$ with
+\[
+\delta=\frac1{4c^2}\Bigl[\frac1{p\,r_s}-\frac{s^2+2s+(3-6s)t^2}{r_s^3}\Bigr],\qquad |\delta|\le\frac{0.5038}{c^2t^4}\quad(t\ge2);
+\]
+\item the amplitude bounds \cite[Lemma~3.5]{MoriWeilII}: $A_{\infty,n}\le1.78|\psi_n(1)|$ for the limit $A_{\infty,n}$ of $(w^2+w_z^2)^{1/2}$, and $\tilde\psi_n(t)^2\le3.79\psi_n(1)^2/(c\sqrt{t^2-1})$ for $1<t\le2$;
+\item from the proof of \cite[Lemma~3.6]{MoriWeilII}, for $t\ge2$: the amplitude $A(t)=(w^2+w_z^2)^{1/2}$ satisfies $|A(t)/A_\infty-1|\le0.00464\,t^{-2}$, and $(pq)^{-1/4}=(ct^2)^{-1/2}(1+\eta)$ with $0\le\eta\le0.3829\,t^{-2}$;
+\item $\Psi^2\le8cB$ \cite[Lemma~3.3]{MoriWeilII} and $h(0)^2\le2.0408\lambda B$ \cite[Lemma~3.4]{MoriWeilII}.
+\end{itemize}
+From \cite{MoriWeilIII} we use the smoothed vector, the trace $J$ and corrector $b_d$, the function $V(c)$ with ${\rm TV}(\tilde h-h)\le V(c)\sqrt{\lambda B}$, condition~(A) and the zero-side machinery of \cite[Sections~2--6 and Appendix~A]{MoriWeilIII}. The zero count is that of \cite[Cor.~1]{Trudgian14} with the constants $0.112$, $0.278$, $2.510$ of its published version, as in version~2 of \cite{MoriWeilII,MoriWeilIII}.
+
+\section{The exact phase}\label{sec:phase}
+
+Fix $n\in\{0,4\}$. Since $(w,w_z)$ never vanishes for a nonzero solution, we may write $w=A\sin\theta$, $w_z=A\cos\theta$ with $A>0$ and a continuous phase $\theta$. Differentiating gives
+\begin{equation}\label{eq:prufer}
+\theta_z=1+\delta\sin^2\theta,\qquad (\log A)_z=-\delta\sin\theta\cos\theta .
+\end{equation}
+We write $\Theta(t)=\theta(z(t))$ and use $'$ for $d/dt$. Then, with $v=\sqrt{(t^2-s)/(t^2-1)}$,
+\begin{equation}\label{eq:Theta}
+\Theta'=cv\,(1+\delta\sin^2\Theta).
+\end{equation}
+
+\begin{lemma}[far-field representation with the exact phase]\label{lem:far}
+For $t\ge2$,
+\[
+\tilde\psi_n(t)=\frac{A_{\infty,n}}{\sqrt c\,t}\bigl[\sin\Theta_n(t)+r^{\rm amp}_n(t)\bigr],\qquad|r^{\rm amp}_n(t)|\le\frac{0.4}{t^2}.
+\]
+\end{lemma}
+\begin{proof}
+$\tilde\psi_n=(pq)^{-1/4}A\sin\Theta=(ct^2)^{-1/2}(1+\eta)(1+\varepsilon_2)A_\infty\sin\Theta$ with $|\varepsilon_2|\le0.00464t^{-2}$ and $0\le\eta\le0.3829t^{-2}$. Hence $r^{\rm amp}=(\varepsilon_2+\eta+\varepsilon_2\eta)\sin\Theta$, and $0.00464+0.3829+0.00464\cdot0.3829/4<0.4$ since $t\ge2$. No phase approximation is used.
+\end{proof}
+
+\begin{lemma}[derivatives]\label{lem:P}
+For $t\ge2$ and $c\ge10\pi$, put $q_\theta=\Theta'-cv$ and $g(t)=t\Theta'(t)$. Then
+\[
+|q_\theta|\le\frac{6}{5ct^4},\qquad|q_\theta'|\le\frac{15}{ct^5}+\frac3{2t^4},\qquad g'(t)\ge\frac c2 .
+\]
+\end{lemma}
+\begin{proof}
+For $t\ge2$ we have $1\le v\le\sqrt{4/3}<6/5$ and $v'=-(1-s)t/[(t^2-1)^2v]$, so $|v'|\le2/t^3$. We weaken $|\delta|\le0.5038/(c^2t^4)$ to $1/(c^2t^4)$. Then \eqref{eq:Theta} gives $|q_\theta|\le6/(5ct^4)$ and $\Theta'\le5c/4$.
+
+For $\delta'$, write $\delta=(4c^2)^{-1}[1/(pr_s)-N/r_s^3]$ with $N=s^2+2s+(3-6s)t^2$. For $t\ge2$ and $0\le s<0.3$ we have $p\ge\frac34t^2$, $r_s\ge\frac{37}{40}t^2$, $0\le N\le(3+0.69/4)t^2$ and $|N'|\le6t$. Differentiating the three factors,
+\[
+|\delta'|\le\frac1{4c^2t^5}\Bigl[\frac4{(3/4)^2(37/40)^2}+\frac6{(37/40)^3}+\frac{6(3+0.69/4)}{(37/40)^4}\Bigr]<\frac{12}{c^2t^5};
+\]
+the bracket divided by $4$ equals $176656000/16867449<10.48$. Now
+\[
+q_\theta'=cv'\delta\sin^2\Theta+cv\delta'\sin^2\Theta+cv\delta\sin(2\Theta)\Theta' .
+\]
+The three terms are at most $2/(ct^7)$, $14.4/(ct^5)$ and $\frac65\cdot\frac54\,t^{-4}=\frac3{2}t^{-4}$. The last term comes from the fast oscillation of $\Theta$ and is kept. Since $t\ge2$, the first two add up to less than $15/(ct^5)$.
+
+Let $h_1(t)=tv(t)$. Then $h_1'=v[1-(1-s)t^2/((t^2-1)(t^2-s))]$, and $(1-s)t^2/((t^2-1)(t^2-s))\le t^2/(t^2-1)^2\le4/9$, so $\frac59\le h_1'\le\frac65$. Since $g=ch_1+tq_\theta$,
+\[
+|g'-ch_1'|\le|q_\theta|+t|q_\theta'|\le\frac{17}{ct^4}+\frac3{2t^3}\le\frac{17}{480}+\frac3{16}<\frac c{18},
+\]
+and $g'\ge\frac59c-\frac1{18}c=\frac c2$.
+\end{proof}
+
+\section{Orthogonality of the Poisson terms}\label{sec:orth}
+
+Let $J_j=[j,j+1]$, $j\ge1$. On $J_1$ we use $m\ge2$ and on $J_j$, $j\ge2$, we use $m\ge1$; thus $mu\ge2$ for every term.
+
+\begin{lemma}[one pair]\label{lem:pair}
+Let $m>k$ be admissible indices on $J_j$, $D=m-k$, and $\phi(u)=\Theta(mu)-\Theta(ku)$. Then
+\[
+\Bigl|\int_{J_j}e^{i\phi(u)}du\Bigr|\le\frac{10}{cD}.
+\]
+\end{lemma}
+\begin{proof}
+$\phi'(u)=[g(mu)-g(ku)]/u\ge cD/2$ by Lemma~\ref{lem:P}. Let $\zeta'=cv$ be the WKB phase and $\phi_0(u)=\zeta(mu)-\zeta(ku)$. Since $h_1'\le\frac65$, $0\le\phi_0'\le\frac65cD$. The function $t^2v'(t)=-(1-s)t^3/[(t^2-1)^{3/2}(t^2-s)^{1/2}]$ is negative and increasing, since the logarithmic derivative of its absolute value is $3/t-3t/(t^2-1)-t/(t^2-s)<0$. Hence $\phi_0''=(c/u^2)[(mu)^2v'(mu)-(ku)^2v'(ku)]\ge0$ and $\int_{J_j}|\phi_0''|\le\phi_0'(j+1)\le\frac65cD$. By Lemma~\ref{lem:P},
+\[
+|\phi''-\phi_0''|\le\frac{15}{cu^5}(m^{-3}+k^{-3})+\frac3{2u^4}(m^{-2}+k^{-2}),
+\]
+whose integral over $J_j$ is at most $30/c+3\le4$. Integrating $e^{i\phi}=(e^{i\phi})'/(i\phi')$ by parts,
+\[
+\Bigl|\int_{J_j}e^{i\phi}\Bigr|\le\frac{2}{\min\phi'}+\int_{J_j}\frac{|\phi''|}{\phi'^2}\le\frac4{cD}+\frac4{c^2D^2}\Bigl(\frac65cD+4\Bigr)\le\frac{28/3}{cD}.
+\]
+\end{proof}
+
+\begin{lemma}[the Poisson sum in $L^2$]\label{lem:O}
+Let $S(u)=\sum_mm^{-1}e^{i\Theta(mu)}$, the sum over the admissible $m$. The partial sums converge in $L^2(J_j)$, uniformly in $j$, and $\|S\|_{L^2(J_j)}^2\le\zeta(2)+40\zeta(3)/c<(11/6)^2$.
+\end{lemma}
+\begin{proof}
+Expanding the square, the diagonal contributes at most $\zeta(2)$ and, by Lemma~\ref{lem:pair}, the off-diagonal terms at most $(10/c)\sum_{m\ne k}1/(mk|m-k|)$. Writing $d=|m-k|$, $\sum_{m\ne k}1/(mk|m-k|)=2\sum_{m,d\ge1}1/(md(m+d))=2\int_0^1\log^2(1-x)\,dx/x=4\zeta(3)$. The same estimate restricted to $m,k>N$ tends to $0$ uniformly in $j$, so the partial sums are Cauchy in $L^2(J_j)$. Finally $\zeta(2)+40\zeta(3)/(10\pi)<10/3<(11/6)^2$.
+\end{proof}
+
+\section{The remainder: proof of Proposition~\ref{prop:M}}\label{sec:remainder}
+
+Put $X=\lambda u$ with $u>1$, and split $r(-\log X)$ into three parts: \emph{far} (all terms with $mu\ge2$), \emph{edge} ($m=1$, $1<u<2$) and \emph{central} ($-\frac12h(0)X^{-1/2}$). The parts cover $u>1$ without overlap. The measure is $dy=du/u$ and $e^{-\tau y}=(\lambda u)^\tau$, so for any $F$,
+\[
+\|F_\tau\|^2=\lambda^{2\tau}\int_1^\infty u^{2\tau-1}|F|^2du .
+\]
+
+\emph{Far part.} By the Poisson form and Lemma~\ref{lem:far}, with $b_n=\lambda^{1/2}w_nA_{\infty,n}c^{-1/2}$,
+\[
+r_{\rm far}(-\log\lambda u)=u^{-1/2}\sum_nb_n\sum_{mu\ge2}\frac{\sin\Theta_n(mu)+r_n^{\rm amp}(mu)}m .
+\]
+By Lemma~\ref{lem:O}, the sine sum has $L^2(J_j)$ norm at most $11/6$. The amplitude remainders sum absolutely: $\sum_m|r^{\rm amp}_n(mu)|/m\le0.4\zeta(3)/u^2<\frac12$. We combine $n=0$ and $n=4$ by Minkowski, so no separation between the two phases is needed. With $\sum_n|b_n|\le1.78\Psi/\sqrt c\le1.78\sqrt{8B}$ and $\sum_{j\ge1}j^{2\tau-2}\le1+1/(1-2\tau)\le2/(1-2\tau)$,
+\[
+\|r_{{\rm far},\tau}\|\le\frac{\lambda^\tau\sqrt B}{\sqrt{1-2\tau}}\cdot4\cdot1.78\cdot\frac73 .
+\]
+We first apply this to finite symmetric partial sums. By Lemma~\ref{lem:O} they converge in the weighted $L^2$ norm, and a subsequence converges a.e.\ to the function given by the Poisson form.
+
+\emph{Edge part.} Here $X^{1/2}\hat h(X)=(\lambda u)^{1/2}\sum_nw_n\tilde\psi_n(u)$ and $\sum_n|w_n||\psi_n(1)|=\Psi/\sqrt\lambda$, so $|r_{\rm edge}|^2\le3.79\,u\Psi^2/(c\sqrt{u^2-1})$. Since $u^{2\tau}\le2$ on $(1,2)$,
+\[
+\|r_{{\rm edge},\tau}\|^2\le\lambda^{2\tau}\frac{7.58\Psi^2}c\operatorname{arcosh}2\le\lambda^{2\tau}B\cdot8\cdot7.58\operatorname{arcosh}2<\frac{\lambda^{2\tau}}{1-2\tau}\,81B .
+\]
+
+\emph{Central part.} $\|r_{{\rm central},\tau}\|^2=\lambda^{2\tau}h(0)^2/(4\lambda(1-2\tau))\le\lambda^{2\tau}B\cdot0.5102/(1-2\tau)<\lambda^{2\tau}(0.72)^2B/(1-2\tau)$.
+
+By Minkowski, $\|r_\tau\|\le(16.62+9+0.72)\lambda^\tau\sqrt{B/(1-2\tau)}<27\lambda^\tau\sqrt{B/(1-2\tau)}$, which proves Proposition~\ref{prop:M}. For $-\frac12<\tau<0$ we have $\|r_\tau\|\le\lambda^\tau\|r_0\|$ and $1-2\tau\le2$, so for all $|\tau|<\frac12$,
+\begin{equation}\label{eq:1458}
+\|r_\tau\|^2\le\frac{\lambda^{2\tau}}{1-2\tau}\,1458\,B .
+\end{equation}
+\qed
+
+\section{Translation in the Sobolev step}\label{sec:translation}
+
+Let $q=q_d$ be the corrected remainder of \cite[Section~5]{MoriWeilIII}, and let $Z,K$ be numbers with
+\[
+\|q_\tau\|^2\le\frac{\lambda^{2\tau}}{1-2\tau}ZB,\qquad\|(q_\tau)'\|^2\le\frac{\lambda^{2\tau}}{1-2\tau}KB\qquad(|\tau|<\tfrac12).
+\]
+
+\begin{lemma}[translation]\label{lem:T}
+$\|(y+a)q\|^2\le(32/e^2)ZB$ and $\|((y+a)q)'\|^2\le Y_{\rm tr}B$ with $Y_{\rm tr}=[\sqrt Z+(\sqrt{32}/e)(\sqrt K+\frac14\sqrt Z)]^2$.
+\end{lemma}
+\begin{proof}
+Put $\sigma=-y-a\ge0$ on the support of $q$. With $\tau=\frac14$, $e^{-y/2}=\lambda^{1/2}e^{\sigma/2}$, so $\int e^{\sigma/2}|q|^2\le2ZB$. Since $\sup_{\sigma\ge0}\sigma^2e^{-\sigma/2}=16/e^2$, the first claim follows. With $w=e^{-y/4}q$ we have $e^{-y/4}q'=w'+w/4$, hence $\int e^{\sigma/2}|q'|^2\le2(\sqrt K+\frac14\sqrt Z)^2B$. Apply Minkowski to $((y+a)q)'=q+(y+a)q'$. The zero extension of $q$ is in $H^1$ with zero trace at $y=-a$, so there are no boundary terms.
+\end{proof}
+
+On the real axis, $G(t)=e^{iat}\hat q(t)$ satisfies $|G|=|\hat q|$ and $G'=ie^{iat}\widehat{(y+a)q}$. We apply the Sobolev bound \cite[(6.1)]{MoriWeilIII} to $G$ instead of $\hat q$. We first split $|F|^2\le2|\hat q|^2+2|\hat b_d|^2$ as in \cite{MoriWeilIII}; the $b_d$ part is unchanged. The translation is used only on the real axis, i.e.\ for the zeros below $T_0$, which lie on the critical line \cite{PT21}. For the zeros above $T_0$ we use the disc averages of \cite[Section~6]{MoriWeilIII} unchanged, with their factors $\lambda^{2\tau}$. With $\log(|t|+e+1)\le L_R+t^2/R^2$, $R=c^3$, and Plancherel, the low zeros contribute at most
+\begin{equation}\label{eq:newL}
+48\pi\bigl[A_0+2\sqrt{A_0A_1}\bigr]B+4D_+(c)S(c^2)B,\qquad A_0=L_RZ+\frac K{R^2},\quad A_1=\frac{32}{e^2}L_RZ+\frac{Y_{\rm tr}}{R^2},
+\end{equation}
+with $D_+$ and $S$ as in \cite[Appendix~A]{MoriWeilIII}.
+
+\section{Assembly}\label{sec:assembly}
+
+\emph{New $Z$ and $K$.} In \cite[(3.3)]{MoriWeilIII}, $m_0(c)$ is built from \cite[Lemma~4.1]{MoriWeilII} and $V(c)$. With \eqref{eq:1458} it becomes
+\[
+m_{\rm new}(c)=\bigl[\sqrt{1458}+V(c)\bigr]^2,\qquad Z_{\rm new}(c)=\bigl[\sqrt{m_{\rm new}(c)}+\sqrt{D_J(c)}/c\bigr]^2 .
+\]
+Both decrease in $c$, because $V$ decreases and $\sqrt{D_J}/c=\sqrt{8/c}+E_J(c)/c$ with $E_J=O(\log c)$. At $c=100\pi$, ball arithmetic gives $m_{\rm new}<1.906\times10^{12}$ and $Z_{\rm new}<1.918\times10^{12}$, so $\bar m=\bar Z=2\times10^{12}$ serve for all $\mu\ge50$. The logarithm of $E_J$ is not removed; it is divided by $c$. Rerunning condition~(A) \cite[Prop.~5.3]{MoriWeilIII} with $\bar Z$ gives $K_{\rm new}=[\sqrt{\bar Z}+g_Ac^2+120c^{3/2}+c\sqrt{D_+(c)}]^2$ and, by Lemma~\ref{lem:T}, $Y_{\rm new}=[\sqrt{\bar Z}+(\sqrt{32}/e)(\sqrt{K_{\rm new}}+\frac14\sqrt{\bar Z})]^2$.
+
+\emph{Majorants.} Let $c_*=100\pi$ and $l=\log\mu\ge l_*=\log50$. Since $D_+(c)/c^2$ decreases, $K_{\rm new}\le\bar Kc^4$ and $Y_{\rm new}\le\bar Yc^4$, with $\bar K=[\sqrt{\bar Z}/c_*^2+g_A+120/\sqrt{c_*}+\sqrt{D_+(c_*)}/c_*]^2$ and $\bar Y=[\sqrt{\bar Z}/c_*^2+(\sqrt{32}/e)(\sqrt{\bar K}+\sqrt{\bar Z}/(4c_*^2))]^2$. Since $L_R=\log2+3\log c\le5l$ and $c^2l$ increases, $A_0\le a_0l$ and $A_1\le a_1l$ with $a_0=5\bar Z+\bar K/(c_*^2l_*)$ and $a_1=5(32/e^2)\bar Z+\bar Y/(c_*^2l_*)$. The term $D_+(c)S(c^2)$ is a sum of terms $(\log c)^p/c^q$ with positive coefficients and $p/q\le\frac32<\log c_*$, so it decreases. Hence the low zeros contribute at most $C_Ll\,B$ with
+\[
+C_L=48\pi\bigl[a_0+2\sqrt{a_0a_1}\bigr]+4D_+(c_*)S(c_*^2)/l_*<7.785\times10^{15}.
+\]
+
+\emph{Proof of Theorem~\ref{thm:J}(a).} Take $T=T_0$ and the strip bound $L_T(\lambda)$ of \cite{MoriWeilIII} for the zeros above $T_0$. Using $K_{\rm new}\le\bar K(2\pi\cdot10^4)^4$, $L_T(\lambda)\le L_T(100)$, $\lambda\le100$, the monotonicity of $D_+$ and $l\ge l_*$,
+\[
+\frac{|W(\tilde k)|}{lB}\le C_L+\frac{2\mathcal A(T_0)L_T(100)\bar K(2\pi\cdot10^4)^4+400D_+(2\pi\cdot10^4)(\log T_0+1)/(\pi T_0)}{l_*}<1.47\times10^{16}.
+\]
+Of this constant, about $6.8\times10^{15}$ comes from the zeros above $T_0$; it is not negligible.
+
+\emph{Proof of Theorem~\ref{thm:J}(b).} Take $T=\max(T_0,c^3)$ and $\mu_*=T_0^{1/3}/(2\pi)$. The intermediate zeros $T_0<|t_\rho|\le T$ (only for $\mu>\mu_*$) contribute $2n(x)(11.15x)^2\lambda j(x,l)\bar m\,B$ with $x=\log(3c^3)$ \cite[Section~6]{MoriWeilIII}, and the zeros above $T$ contribute as in \cite{MoriWeilIII} with $K_{\rm new}$. Since $x_T/l$ and $n(x)/x$ decrease and $j$ increases in $x/l$, and with $T^2\ge T_0^{2/3}c^4$, $T\ge c^3$ and $\log T+1\le x_T$,
+\[
+|W(\tilde k)|\le\bigl[C_Ll+C_M\lambda l^3\mathbf 1_{\mu>\mu_*}+C_T\lambda l^3+C_B\lambda l\bigr]B,
+\]
+with $C_M<3.175\times10^{16}$, $C_T<1.165\times10^{10}$ and $C_B<3.493\times10^6$. Dividing by $\lambda l^3$ and using $\mu\ge50$ gives the constant $3.19\times10^{16}$.
+
+\emph{Proof of Theorem~\ref{thm:K}.} As in \cite[Section~7]{MoriWeilIII}, $\lambda_{\min}\le|W(\tilde k)|/(0.1089\|h\|^2)$ and $B\le6621c^{9/2}e^{-2c}\|h\|^2$ \cite{MoriPSWF}, and $6621(2\pi)^{9/2}/0.1089\le237522697$. Then $237522697\times1.47\times10^{16}<3.50\times10^{24}$ and $237522697\times3.19\times10^{16}<7.58\times10^{24}$. \qed
+
+\section{Numerical context}\label{sec:num}
+
+\emph{Galerkin values.} The bottom of the even part of $W_\lambda$ was computed on the Legendre basis of $L^2(-a,a)$, as in \cite[Section~9]{MoriWeilII}, with $N$ basis functions. The matrix entries are computed in ball arithmetic, but the quadrature errors are not enclosed, so these values are numerical. Rayleigh--Ritz values computed from the exact matrix would be upper bounds for the bottom of the even part, and hence for $\lambda_{\min}$; since the quadrature errors are not enclosed, the values below are not certified upper bounds. Table~\ref{tab:ratio} lists the ratio to the prolate defect $1-\lambda_4(2\pi\mu)$.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lccccccccccc}
+\toprule
+$\mu$ & 7 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20\\
+\midrule
+$N$ & 240 & 320 & 300 & 330 & 370 & 370 & 440 & 420 & 440 & 470 & 570\\
+ratio & 4.21 & 4.72 & 4.11 & 4.94 & 4.55 & 4.63 & 4.49 & 4.70 & 4.38 & 5.34 & 4.90\\
+\bottomrule
+\end{tabular}
+\caption{$\lambda_{\min}^{\rm Gal}/(1-\lambda_4(2\pi\mu))$ at the largest computed $N$. At $\mu=18,19$ only one $N$ was computed. At $\mu=20$ the values for $N=350,390,440,500,570$ are $7.83$, $5.87$, $5.30$, $5.02$, $4.90$; the last one was computed with $1300$ bits.}\label{tab:ratio}
+\end{table}
+
+Three observations:
+\begin{itemize}
+\item \emph{Resolution.} In these computations, convergence in $N$ needed $N/(ac)\gtrsim2.3$ rather than a fixed $N/c$; this is an empirical guide, not a sufficient condition. With too small $N$ the ratio is badly overestimated: for example $7.83$ at $\mu=20$, $N=350$, and $38.4$ at $\mu=25$, $N=440$. An earlier impression that the ratio grows from $3.6$ to $5.4$ on $5\le\mu\le17$ came from such under-resolved values.
+\item \emph{Accuracy.} Recomputing with more precision ($980$ instead of $680$ bits at $\mu=17$, $N=420$; $1100$ instead of $760$ bits at $\mu=20$, $N=440$) and $100$ more quadrature nodes reproduced the stored $8$ significant digits of $\lambda_{\min}^{\rm Gal}$ (relative differences $1.5\times10^{-8}$ and $7.6\times10^{-9}$). The required precision grows with $N$: at $\mu=20$, $N=570$, a run with $840$ bits gave a negative bottom, while $1300$ bits (and $100$ more nodes) gave $1.09899\times10^{-96}>0$, the value in Table~\ref{tab:ratio}. Precision was checked only at these four points; at $\mu=25$ ($N\le660$, at most $1000$ bits) the values were still decreasing ($5.86$ at $N=580$, $5.14$ at $N=660$) and were not checked, so we do not list them.
+\item \emph{Fluctuation.} The ratio changes by up to $22\%$ between consecutive integers (for example $4.11\to4.94$ from $\mu=12$ to $13$, and $4.38\to5.34$ from $18$ to $19$), while $1-\lambda_4(2\pi\mu)$ is smooth: its ratio to Fuchs' asymptotic $\frac{2^{11}\sqrt\pi}3c^{9/2}e^{-2c}$ increases smoothly from $0.89$ at $\mu=11$ to $0.94$ at $\mu=20$. A possible explanation is arithmetic: the prime-power terms $n<\mu$ of the explicit formula enter one at a time as $\mu$ grows. We have not tested this.
+\end{itemize}
+
+\emph{The test vector.} For the unsmoothed vector of \cite{MoriWeilII}, the Galerkin values of $W(k)/(\|k\|^2(1-\lambda_4))$ are $5.4$, $6.0$, $6.8$, $7.0$, $7.5$, $7.4$ at $\mu=5,7,11,13,15,17$. This is consistent with growth like $A\log\mu+B$. Heuristically, under RH and counting zeros with multiplicity, $W(k)=2\sum_{\gamma>0}m_\gamma|\hat k(\gamma)|^2$, and $|\hat k(t)|^2$ is roughly flat up to $t\asymp c$ and decays like $t^{-2}$ beyond. Summing this against the mean zero density $\frac1{2\pi}\log\frac t{2\pi}$ (the derivative of the main term of the zero count) gives a factor $\log\mu$. We have not proved this. Note that this mean density equals the Nyquist density $a/\pi$ of the window exactly at height $t=c=2\pi\mu$, which links the prolate bandwidth of \cite{MoriWeilII} to the sampling picture of \cite{MoriWeilIV}.
+
+\section*{Reproducibility}
+The constants of Sections~\ref{sec:phase}--\ref{sec:assembly} are computed with Arb (python-flint) at $256$ bits. Every printed upper bound of Sections~\ref{sec:assembly} and~\ref{sec:intro-results} is asserted against the ball. The scripts (\texttt{proofs-V/constants\_V.py}), their outputs, and the Galerkin scripts and raw outputs of Section~\ref{sec:num} (\texttt{numerics-V/}) are in release \texttt{v1.3.0} of the public repository \url{https://github.com/moriryota/prolate-weil-bounds}, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions).
+
+\section*{Use of generative AI}
+This work was carried out with extensive use of generative AI systems, namely Anthropic Claude and OpenAI GPT. Under the direction of the author, these systems located the logarithmic losses, drafted the proofs, implemented and ran the computations, and reviewed one another's work adversarially. Two independent AI reviews of the new arguments found no blocking or major issues, and an AI citation audit checked the versions and constants of the cited results. The author is responsible for the content.
+
+\begin{thebibliography}{99}
+\bibitem{CC21} A.~Connes, C.~Consani, Spectral triples and $\zeta$-cycles, arXiv:2106.01715v1.
+\bibitem{CCM25} A.~Connes, C.~Consani, H.~Moscovici, Zeta spectral triples, arXiv:2511.22755v1.
+\bibitem{Fuchs64} W.~H.~J.~Fuchs, On the eigenvalues of an integral equation arising in the theory of band-limited signals, \emph{J. Math. Anal. Appl.} 9 (1964) 317--330. \doi{10.1016/0022-247X(64)90017-4}
+\bibitem{MoriPSWF} R.~Mori, A non-asymptotic bound with the sharp power of $c$ for the eigenvalue defect $1-\lambda_n(c)$ of time and frequency limiting, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092454}
+\bibitem{MoriWeilII} R.~Mori, The Weil quadratic form of the Connes--Consani--Moscovici prolate vector, and a $\mu^8$ upper bound for windowed Weil forms, preprint, version 2, Zenodo, 2026. \doi{10.5281/zenodo.23162895}
+\bibitem{MoriWeilIII} R.~Mori, An endpoint-smoothed prolate vector and a $\mu^{9/2}(\log\mu)^4$ upper bound for windowed Weil forms, preprint, version 2, Zenodo, 2026. \doi{10.5281/zenodo.23162896}
+\bibitem{MoriWeilIV} R.~Mori, A conditional lower bound for windowed Weil forms from sampling on the zeros of $\zeta$, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23134085}
+\bibitem{PT21} D.~Platt, T.~Trudgian, The Riemann hypothesis is true up to $3\cdot10^{12}$, \emph{Bull. London Math. Soc.} 53 (2021) 792--797. \doi{10.1112/blms.12460}
+\bibitem{Trudgian14} T.~Trudgian, An improved upper bound for the argument of the Riemann zeta-function on the critical line II, \emph{J. Number Theory} 134 (2014) 280--292. \doi{10.1016/j.jnt.2013.07.017}
+\end{thebibliography}
+
+\end{document}
