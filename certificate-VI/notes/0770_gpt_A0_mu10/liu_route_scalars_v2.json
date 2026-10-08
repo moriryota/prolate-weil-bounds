@@ -1,0 +1,81 @@
+{
+  "status": "PASS scalar preconditions only; finite target matrix not assembled or certified",
+  "L": "[1.151292546497022842008995727342182103800550744314386488016663950483786304838676240117998602544799149170983892021143 +/- 1.67e-115]",
+  "prime_row_weight": "1+(19/40)(x/L)^2",
+  "prime_operator_bound": 3,
+  "cells": [
+    {
+      "exp_2x_interval": [
+        "1",
+        "10/9"
+      ],
+      "row_upper_enclosure": "[2.966 +/- 4.44e-4]"
+    },
+    {
+      "exp_2x_interval": [
+        "10/9",
+        "8/5"
+      ],
+      "row_upper_enclosure": "[2.031 +/- 6.15e-4]"
+    },
+    {
+      "exp_2x_interval": [
+        "8/5",
+        "5/2"
+      ],
+      "row_upper_enclosure": "[2.435 +/- 8.21e-4]"
+    },
+    {
+      "exp_2x_interval": [
+        "5/2",
+        "49/10"
+      ],
+      "row_upper_enclosure": "[2.55 +/- 1.79e-3]"
+    },
+    {
+      "exp_2x_interval": [
+        "49/10",
+        "32/5"
+      ],
+      "row_upper_enclosure": "[2.864 +/- 8.97e-4]"
+    },
+    {
+      "exp_2x_interval": [
+        "32/5",
+        "81/10"
+      ],
+      "row_upper_enclosure": "[2.844 +/- 6.65e-4]"
+    },
+    {
+      "exp_2x_interval": [
+        "81/10",
+        "10"
+      ],
+      "row_upper_enclosure": "[2.972 +/- 7.87e-4]"
+    }
+  ],
+  "M_bounds": [
+    "1/2",
+    "13/2"
+  ],
+  "Omega": 256,
+  "N_all_degrees": 640,
+  "per_parity_dimension": 320,
+  "projection_r": "2^-190",
+  "theta": "1",
+  "pole_p": "2^-440",
+  "uniform_band_defect_delta": "2^-49158",
+  "uniform_weil_target_tau": "2^-49162 only if remaining matrix contract passes",
+  "retained_rank_weights": [
+    81,
+    27
+  ],
+  "error_e": "1500 r+p",
+  "error_n": "896 r^2+p",
+  "error_h": "12000 r^2+p",
+  "uniform_error_budget_alpha_plus_beta_b_squared": "654948561960368771653541220768766020368816723496049479591180060596627661023242004769819504829862828083399113249552287504374086095030471107298549398419855234687095997691882773392486580379142692170741799973470339073/4030567406735727282351225165683873035574701889313671280883489296162978382543372035785043761349923613698382530158025360183067576717096915825463421688597793169484885580072983292218545475458477624146884198880429638585482979102044576592960015561832398528163324589244416",
+  "uniform_error_budget_lt_2_pow_minus_170": true,
+  "alpha_float_diagnostic": 9.558551466794714e-55,
+  "beta_float_diagnostic": 3.8234205867178855e-54,
+  "projection_integer_slack_bits_diagnostic": 3
+}

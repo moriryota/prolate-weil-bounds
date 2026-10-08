@@ -1,0 +1,60 @@
+{
+  "N": 640,
+  "q": 192,
+  "bits": 1280,
+  "manifest": {
+    "path": "notes/0775_gpt_A0_N640/n640p1280q192_source_manifest.json",
+    "sha256": "bde8da6bb1da0844b836ebb10e8f57e6d731e62952b6834814f158af3f0a5c4d"
+  },
+  "files": {
+    "p0_A": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p0_A.json.gz",
+      "sha256": "cc879fa1d84a5bec702b39f00975941f8d5753dc256ce770e820354a2b82abdc"
+    },
+    "p0_B": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p0_B.json.gz",
+      "sha256": "8d1fd1f0b598a1ddc570075b5ea1e86058aec2b768850ca5097b96c8a9992335"
+    },
+    "p0_J": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p0_J.json.gz",
+      "sha256": "5844d2a441c73753dda08ab219c85340a66bab3e9ef72bb26ad84cb4ee6e322e"
+    },
+    "p0_band": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p0_band.json.gz",
+      "sha256": "a03f7d1344df1ef811b972dd6b26572a0d423dae2cba6e93ccef25ccc1769748"
+    },
+    "p0_pole": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p0_pole.json.gz",
+      "sha256": "8efafed1a3d67b33ae830f0d66ce21e8581fc7e785128bb232b51d0f1f5b452a"
+    },
+    "p0_U": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p0_U.json.gz",
+      "sha256": "a03db1a64cca7941645a8a36eab1e7116d5cd2182b652f92373ee5e783f16298"
+    },
+    "p1_A": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p1_A.json.gz",
+      "sha256": "7c9ef5b25c927b3efc41f3e2cc0da9552d0a27b68eef470b08b2630209e63635"
+    },
+    "p1_B": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p1_B.json.gz",
+      "sha256": "3dbb07a8ebd891e48310c73571a7060149ae13529cd7f0070a391e128e340575"
+    },
+    "p1_J": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p1_J.json.gz",
+      "sha256": "0f00aecc88956a2b63d8cf5675dcdabce6218716c99b6054b7d16ac4e0a88fdb"
+    },
+    "p1_band": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p1_band.json.gz",
+      "sha256": "a6626243eddc4f0501957cd14aa4fdc7a58094b379d75d82af15a65629dbbf4a"
+    },
+    "p1_pole": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p1_pole.json.gz",
+      "sha256": "48befd4ee95a48108336ce0980e20e6cfdd09010ee01e3a4e273e5ff9f47c783"
+    },
+    "p1_U": {
+      "path": "notes/0775_gpt_A0_N640/n640p1280q192_p1_U.json.gz",
+      "sha256": "5ae63eea7b27d2d9434c49b1d3ab4f79d067fc627ad0f9bef81f93873e885fa4"
+    }
+  },
+  "scope": "Arb source quadrature from pinned 0775 source generator; analytic remainders supplied separately in 0776"
+}
