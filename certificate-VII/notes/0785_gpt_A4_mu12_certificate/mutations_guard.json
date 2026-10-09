@@ -1,0 +1,10 @@
+{
+  "command": [
+    "/Users/moriryota/research/math/rh-weil-all-windows/.venv/bin/python",
+    "notes/0785_gpt_A4_mu12_certificate/test_mutations_v2.py"
+  ],
+  "exit_code": 0,
+  "seconds": 38.41120183398016,
+  "sampled_tree_peak_RSS_bytes": 1074298880,
+  "memory_stop": false
+}

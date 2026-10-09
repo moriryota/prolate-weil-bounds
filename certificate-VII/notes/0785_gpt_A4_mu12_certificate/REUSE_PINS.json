@@ -1,0 +1,8 @@
+{
+  "notes/0776_gpt_A1_certificate/codec.py": "2d557ce700e5227a297507a7b01426f2256346439ff3ed9b894905433a143a5d",
+  "notes/0776_gpt_A1_certificate/propose.py": "dd0d9d5dede1f5648d311248110a385a752b271d8ebc0a479097e22d3ba80fcf",
+  "notes/0776_gpt_A1_certificate/check_certificate.py": "6dd59a46fca3f3f98e8d64e220a12bddbaee8b1a9ea7ff0dc3663b63b3a0c718",
+  "notes/0776_gpt_A1_certificate/test_mutations_v2.py": "acc92d596ba6ed37dd5282685e4fd4cc441b70ebf2c5e74933d637fc775c1d81",
+  "notes/0778_gpt_A2_beyond_L76/scalar_gate.py": "dfd6bf20089723357f6b42628c05dd5bc64a4ad219534783cd0fceffaca5b4d3",
+  "python/weil_spectral.py": "9dc6057c54cf1eee3afb51d381bac278242db251aef536ef66c3c97464f28f2c"
+}

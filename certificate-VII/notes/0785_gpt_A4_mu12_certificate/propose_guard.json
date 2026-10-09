@@ -1,0 +1,10 @@
+{
+  "command": [
+    "/Users/moriryota/research/math/rh-weil-all-windows/.venv/bin/python",
+    "notes/0785_gpt_A4_mu12_certificate/propose.py"
+  ],
+  "exit_code": 0,
+  "seconds": 147.54788891610224,
+  "sampled_tree_peak_RSS_bytes": 1195343872,
+  "memory_stop": false
+}

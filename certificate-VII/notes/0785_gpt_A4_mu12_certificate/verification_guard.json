@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/Users/moriryota/research/math/rh-weil-all-windows/.venv/bin/python",
+    "notes/0785_gpt_A4_mu12_certificate/check_certificate.py",
+    "--output",
+    "notes/0785_gpt_A4_mu12_certificate/verification.json"
+  ],
+  "exit_code": 0,
+  "seconds": 32.35917962505482,
+  "sampled_tree_peak_RSS_bytes": 1205436416,
+  "memory_stop": false
+}

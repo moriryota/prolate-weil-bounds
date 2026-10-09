@@ -1,0 +1,347 @@
+% Ryota Mori. Version 1, 2026-10-09. Licence: CC BY 4.0. doi:10.5281/zenodo.23261744
+% Paper VII: Weil positivity on the window of width log 12; a lower bound for the prolate defect.
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+
+\newtheorem{theorem}{Theorem}
+\renewcommand{\thetheorem}{\Alph{theorem}}
+\setcounter{theorem}{12}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[proposition]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\emergencystretch=3em
+
+\title[Weil positivity on the window of width $\log 12$]{Weil positivity on the window of width $\log 12$, and a lower bound for the prolate eigenvalue defect}
+\author{Ryota Mori}
+\address{Independent researcher, Tokyo, Japan}
+\email{moriryota31@gmail.com}
+\date{9 October 2026}
+
+\begin{document}
+
+\begin{abstract}
+Weil's criterion states that the Riemann Hypothesis holds if and only if Weil's quadratic form $Q$ is nonnegative on all admissible test functions. Restricting the support to a fixed interval $[-L,L]$ gives a weaker, unconditional question. We prove that $Q(f)\ge2^{-1518}\|f\|_2^2$ for every complex $C^2$ function $f$ supported in $[-\tfrac12\log12,\tfrac12\log12]$; the half-width $\tfrac12\log12\approx1.2425$ exceeds that of the previous proofs we know of, the largest being $\tfrac12\log10$ (our previous paper). The new analytic ingredient is an explicit lower bound for the defect of the top eigenvalue of time and frequency limiting: $1-\lambda_0(c)\ge e^{-2(c+1)}/(4(c+1)(c+4))$ for all $c>0$, which has the correct exponential rate $e^{-2c}$. It replaces the out-of-band estimate of our previous paper, which was proved under the convenient hypothesis $L<7/6$, and it improves the constant on the window of half-width $\tfrac12\log10$ from $2^{-49162}$ to $2^{-876}$ without recomputing the finite matrices. The proof follows Liu's bounded-comparison framework and reduces positivity to a finite matrix inequality of size $416$ in each parity, which we certify in Arb ball arithmetic with all quadrature, rounding and inversion errors paid: the finite margin is about $1.21\times10^{-54}$ (even) and $1.59\times10^{-50}$ (odd), while the total error is below $10^{-75}$. It is an external certificate, not a formal proof. The result concerns one fixed window and does not address the Riemann Hypothesis.
+\end{abstract}
+
+\maketitle
+
+\begin{sloppypar}
+\noindent\textit{Version 1.} Zenodo, \doi{10.5281/zenodo.23261744}. Certificate data and code: release \texttt{v1.5.0} of \url{https://github.com/moriryota/prolate-weil-bounds}, \doi{10.5281/zenodo.23092422}. Licence: CC BY 4.0.
+\end{sloppypar}
+
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\small
+\textbf{Status.} Analytic proof plus an external interval-arithmetic certificate (Arb/FLINT). The lower bound for the prolate defect, the general tail estimate and the certificate passed two independent AI reviews each, including an independent reimplementation of the final check; no blocking issues remained. An independent review of this manuscript led to local corrections of proof text and citations. Not formalized in Lean. Not yet reviewed by independent human experts.}}
+\end{center}
+
+\section{Introduction}
+
+\subsection{Background}
+% Reuse paper VI, Section 1.1, with Theorem L added to the list.
+Let $Q$ be Weil's quadratic form \cite{Weil1952,Bombieri2000}. Weil's criterion states that RH is equivalent to $Q(f)\ge0$ for all admissible $f$. If the support of $f$ is restricted to $[-L,L]$, only prime powers $n<e^{2L}$ contribute and the question can be decided unconditionally for small $L$. Positivity is known for $L=\frac12\log2$ (Yoshida \cite{Yoshida1992}), $L=0.8$ (Zhu \cite{Zhu2026}), $L=\frac12\log5$ (Lean~4, \cite{MoriLog5}), $L=17/16$ (Liu \cite{Liu2026}, unrefereed) and $L=\frac12\log10$ (\cite{MoriVI}). For $\mu=e^{2L}$, the bottom $\lambda_{\min}$ of the spectrum of the restricted form satisfies $\lambda_{\min}\le3.50\times10^{24}\mu^{9/2}\log\mu\,e^{-4\pi\mu}$ for $50\le\mu\le10^4$, and $\lambda_{\min}\le7.58\times10^{24}\mu^5(\log\mu)^3e^{-4\pi\mu}$ for every $\mu\ge50$ \cite[Theorem~K]{MoriWeilV}. These are upper bounds only, but they show that each enlargement of the window must resolve a much smaller margin.
+
+In \cite{MoriVI} the high frequencies were controlled by a lower bound on the out-of-band mass, $I-B_{\rm band}\succeq\delta I$, proved by Lagrange interpolation. That argument was stated under the convenient sufficient condition $L<7/6$ (that is, $e^{2L}<10.3$) and gave only $\delta=2^{-49158}$, while the best constant is the defect $1-\lambda_0(\Omega L)$ of time and frequency limiting, of size $e^{-2\Omega L}$ up to powers.
+
+\subsection{Results}
+For $L>0$, $f\in C^2(\R;\C)$ with $\operatorname{supp}f\subset[-L,L]$, put $F_f(z)=\int f(x)e^{izx}\,dx$, $a(t)=\operatorname{Re}\psi(\tfrac14+\tfrac{it}2)-\log\pi$ and
+\begin{equation}\label{eq:Q}
+\begin{aligned}
+Q(f)={}&2\Bigl|\int f(x)\cosh\tfrac x2\,dx\Bigr|^2-2\Bigl|\int f(x)\sinh\tfrac x2\,dx\Bigr|^2
++\frac1{2\pi}\int_\R a(t)|F_f(t)|^2\,dt\\
+&-2\sum_{n<e^{2L}}\frac{\Lambda(n)}{\sqrt n}\operatorname{Re}\int_\R f(x)\overline{f(x-\log n)}\,dx .
+\end{aligned}
+\end{equation}
+By the Guinand--Weil explicit formula, $Q(f)=\operatorname{Re}\sum_\rho m_\rho F_f(\gamma_\rho)\overline{F_f(\overline{\gamma_\rho})}$ with $\gamma_\rho=(\rho-\frac12)/i$; RH is not assumed. The derivation, the convergence of the zero sum, and the reduction to real symmetric operators on each parity are as in \cite[Section~2]{MoriVI}; nothing there depends on $L$. For $L=\frac12\log12$ the prime powers are $n\in\{2,3,4,5,7,8,9,11\}$.
+
+\begin{theorem}\label{thm:M}
+For every $f\in C^2(\R;\C)$ with $\operatorname{supp}f\subset[-\frac12\log12,\frac12\log12]$,
+\[
+Q(f)\ge2^{-1518}\int_\R|f(x)|^2\,dx .
+\]
+\end{theorem}
+
+\begin{theorem}\label{thm:N}
+Let $\lambda_0(c)$ be the largest eigenvalue of the operator on $L^2(-1,1)$ with kernel $\sin(c(x-y))/(\pi(x-y))$. For every $c>0$,
+\[
+1-\lambda_0(c)\ge\frac{e^{-2(c+1)}}{4(c+1)(c+4)} .
+\]
+Moreover the normalized positive ground state satisfies $\psi_{0,c}(1)^2\ge e^{-2c}/(4c+12)$.
+\end{theorem}
+
+\begin{corollary}\label{cor:mu10}
+The constant in Theorem~L of \cite{MoriVI} can be replaced by $2^{-876}$: $Q(f)\ge2^{-876}\|f\|^2$ for every $f\in C^2(\R;\C)$ supported in $[-\frac12\log10,\frac12\log10]$.
+\end{corollary}
+
+Theorem~\ref{thm:M} is proved by an ordinary analytic argument together with an external certificate in ball arithmetic (Arb/FLINT \cite{Arb}), produced and checked by separate programs. It is not a formal proof.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{llll}
+\toprule
+reference & half-width $L$ & $e^{2L}$ & method\\
+\midrule
+Yoshida \cite{Yoshida1992} & $\frac12\log2\approx0.347$ & $2$ & analytic + computer-assisted\\
+Zhu \cite{Zhu2026} & $0.8$ & $4.95$ & interval certificate\\
+\cite{MoriLog5} & $\frac12\log5\approx0.805$ & $5$ & Lean 4 (kernel-checked)\\
+Liu \cite{Liu2026} & $17/16=1.0625$ & $8.37$ & interval certificate (unrefereed)\\
+\cite{MoriVI} & $\frac12\log10\approx1.151$ & $10$ & interval certificate\\
+Theorem~\ref{thm:M} & $\frac12\log12\approx1.242$ & $12$ & interval certificate\\
+\bottomrule
+\end{tabular}
+\caption{Unconditional positivity on windows $[-L,L]$. The approach of Connes and Consani \cite{CC20} works under vanishing conditions on the Fourier transform and is not listed.}
+\end{table}
+
+\subsection{Method and what is new}
+\begin{itemize}
+\item Theorem~\ref{thm:N}: a comparison of the ground state with $x^{-1/2}I_0(c\sqrt{1-x^2})$, combined with Slepian's identity. The exponential rate $e^{-2c}$ is sharp (Fuchs \cite{Fuchs64}); the polynomial factor is $c^{-2}$ instead of $\sqrt c$. A lower bound $C^{-1}e^{-2Cc/\pi}$ with an unspecified constant follows from the uncertainty principle of Nazarov and Jaming \cite{Nazarov93,Jaming07}; explicit endpoint bounds of Bonami and Karoui \cite{BK16,BK17} require conditions that the ground state does not satisfy. We do not claim that Theorem~\ref{thm:N} is new.
+\item A tail inequality for general $L$ and $\Omega$, with the projection errors written as functions of $N$ and of the ellipse parameter $\rho$ (Section~\ref{sec:tail}).
+\item The window $\frac12\log12$, where the prime $11$ enters, with $\|C_p\|\le\frac{57}{16}$ and $\Omega=416$; the finite condition is certified at $N=832$; at $N=640$ the computed comparison matrix was numerically negative in both parities (Section~\ref{sec:certificate}).
+\end{itemize}
+
+\section{The defect of the top prolate eigenvalue}\label{sec:defect}
+% Source: notes/0778_gpt_A2_beyond_L76/DEFECT_LOWER_BOUND.md §1-3; reviews 0782 (Claude) and 0783 (Sol).
+Let $Q_c$ be the operator on $L^2(-1,1)$ with kernel $\sin(c(x-y))/(\pi(x-y))$ and $D_c=-\frac d{dx}(1-x^2)\frac d{dx}+c^2x^2$. We use the following classical facts (see also \cite{Slepian65,Osipov13}). The operators $Q_c$ and $D_c$ have a common complete system of real eigenfunctions $\psi_{n,c}$, and the largest eigenvalue $\lambda_0(c)$ of $Q_c$ and the smallest eigenvalue $\chi_0(c)$ of $D_c$ belong to the same simple eigenfunction $\psi=\psi_{0,c}$ \cite[Section~2.1]{BJK21}. This eigenfunction is even and has no zeros in $(-1,1)$ \cite[Theorems~1 and~3]{Osipov12}. The finite Fourier eigenfunction relation gives an entire extension, and the endpoint values are nonzero by uniqueness of the analytic solution at the regular singular endpoints. We normalize $\psi>0$ and $\int_{-1}^1\psi^2=1$. Slepian's identity, with this normalization, is proved in \cite[Lemma~2.1]{MoriPSWF}:
+\begin{equation}\label{eq:slepian}
+\lambda_0'(c)=\frac{2\lambda_0(c)\psi_{0,c}(1)^2}c .
+\end{equation}
+In particular $\lambda_0$ is increasing. Write $p(x)=1-x^2$ and $A=\psi(1)>0$. The eigenvalue equation is $(p\psi')'=(c^2x^2-\chi_0)\psi$, and the constant test function gives $0<\chi_0\le c^2/3$.
+
+\begin{lemma}[centre]\label{lem:centre}
+$\psi'<0$ on $(0,1)$, and $\psi(a)\ge\frac56\psi(0)$ for $a=1/(2(c+1))$.
+\end{lemma}
+\begin{proof}
+$p\psi'$ vanishes at $0$ (parity) and at $1$ (regularity), and $(p\psi')'$ changes sign once on $(0,1)$, at $x=\sqrt{\chi_0}/c$; hence $p\psi'<0$ on $(0,1)$. Since $\psi\le\psi(0)$ there, $-p(x)\psi'(x)=\int_0^x(\chi_0-c^2t^2)\psi\,dt\le\chi_0\psi(0)x\le c^2\psi(0)x$. Integrating, $\psi(a)\ge\psi(0)\bigl(1+\frac{c^2}2\log(1-a^2)\bigr)$, and $-\frac{c^2}2\log(1-a^2)\le\frac{c^2a^2}{2(1-a^2)}\le\frac{1/4}{3/2}=\frac16$.
+\end{proof}
+
+\begin{lemma}[comparison]\label{lem:comparison}
+Let $Y(x)=x^{-1/2}I_0(c\sqrt{1-x^2})$ for $0<x\le1$, where $I_0$ is the modified Bessel function. Then
+\[
+(pY')'=\Bigl(c^2x^2+\frac3{4x^2}+\frac14\Bigr)Y,
+\]
+and $\psi(x)\le AY(x)$ for $0<x\le1$.
+\end{lemma}
+\begin{proof}
+Put $w=I_0(c\sqrt p)$. From the modified Bessel equation \cite[10.25.1]{DLMF}, $(pw')'=c^2x^2w-c\sqrt p\,I_1(c\sqrt p)$ and $w'=-cxI_1(c\sqrt p)/\sqrt p$. With $Y=x^{-1/2}w$, the cross term $2p(x^{-1/2})'w'=c\sqrt p\,I_1(c\sqrt p)x^{-1/2}$ cancels the last term, and $(p(x^{-1/2})')'=(\frac3{4x^2}+\frac14)x^{-1/2}$ gives the identity. Moreover $Y(1)=1$, and $pY'\to0$ as $x\to1$.
+
+Let $d=Y-\psi/A$. Then $d(1)=0$. Evaluating the two differential equations at $x=1$ gives $Y'(1)=-(c^2+1)/2$ and $\psi'(1)=-(c^2-\chi_0)A/2$, so $d'(1)=-(1+\chi_0)/2<0$ and $d>0$ near $1$. Also
+\[
+(pd')'=c^2x^2d+\Bigl(\frac3{4x^2}+\frac14\Bigr)Y+\frac{\chi_0}A\psi .
+\]
+Suppose $d$ vanishes in $(0,1)$ and let $x_1$ be its largest zero there. On $(x_1,1)$ the right side is positive, so $pd'(x)=-\int_x^1(pd')'<0$, and $d(x_1)=-\int_{x_1}^1d'>0$, a contradiction.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:N}]
+By \cite[10.32.1]{DLMF}, $I_0(z)\le e^z$ for $z\ge0$, so Lemma~\ref{lem:comparison} gives $\psi(x)^2\le A^2x^{-1}e^{2c}$ on $(0,1]$. On $[0,a]$, Lemma~\ref{lem:centre} gives $\psi^2\le\psi(0)^2\le4\psi(a)^2\le4A^2a^{-1}e^{2c}$. Hence
+\[
+1=2\int_0^1\psi^2\le2A^2e^{2c}\bigl(4+\log\tfrac1a\bigr)=A^2e^{2c}\bigl(8+2\log(2(c+1))\bigr)\le A^2e^{2c}(4c+12),
+\]
+which is the bound for $\psi_{0,c}(1)^2$. If $\lambda_0(c)\le\frac12$, then $1-\lambda_0(c)\ge\frac12$, which exceeds the claimed bound. Otherwise $\lambda_0(s)>\frac12$ for $s\ge c$, and by \eqref{eq:slepian}
+\[
+1-\lambda_0(c)\ge\lambda_0(c+1)-\lambda_0(c)=\int_c^{c+1}\frac{2\lambda_0(s)\psi_{0,s}(1)^2}s\,ds\ge\int_c^{c+1}\frac{e^{-2s}}{s(4s+12)}\,ds\ge\frac{e^{-2(c+1)}}{4(c+1)(c+4)} .
+\qedhere
+\]
+\end{proof}
+
+\begin{remark}\label{rem:scaling}
+(i) For a window $[-L,L]$ and the band $|t|\le\Omega$ (with $F_f(t)=\int f(x)e^{itx}dx$), scaling $x=Ls$ shows that $\frac1{2\pi}\int_{|t|>\Omega}|F_f|^2\ge(1-\lambda_0(\Omega L))\|f\|^2$, so Theorem~\ref{thm:N} gives the out-of-band bound $I-B_{\rm band}\succeq d(\Omega L)I$ with $d(c)=e^{-2(c+1)}/(4(c+1)(c+4))$, for every $L$.
+(ii) By Fuchs \cite{Fuchs64}, $1-\lambda_0(c)\sim4\sqrt\pi\,c^{1/2}e^{-2c}$, so Theorem~\ref{thm:N} has the correct exponential rate and loses a factor of order $c^{5/2}$. A Legendre--Galerkin computation for $0.5\le c\le20$ gives ratios between $3.7\times10^2$ and $4.6\times10^5$ (numerical, not used).
+\end{remark}
+
+\section{The bounded comparison for general windows}\label{sec:tail}
+% Source: notes/0778 GENERAL_TAIL.md; review 0782 §5; second review pending (Sol).
+Throughout this section $L>0$ is fixed, $I=[-L,L]$, $H=L^2(I;\C)$, and $\Omega>0$, $m>0$ are parameters. The argument is that of \cite[Sections~3--4]{MoriVI} with every constant written in terms of $L$, $\Omega$, $m$ and the truncation order $N$; it follows the framework of Liu \cite{Liu2026}.
+
+\subsection{The prime operator}
+For $a\in\R$ let $S_af(x)=\mathbf 1_I(x-a)f(x-a)$, $C_p=\sum_{n<e^{2L}}\Lambda(n)n^{-1/2}(S_{\log n}+S_{-\log n})$, so that the prime term of \eqref{eq:Q} is $-\langle f,C_pf\rangle$. For a positive even weight $w$ the weighted Schur inequality gives $\|C_p\|\le\operatorname{ess\,sup}R_w$, where
+\[
+R_w(x)=\sum_{n<e^{2L}}\frac{\Lambda(n)}{\sqrt n}\,\frac{\mathbf 1_I(x+\log n)w(x+\log n)+\mathbf 1_I(x-\log n)w(x-\log n)}{w(x)} .
+\]
+In the variable $q=e^{2x}$, $x\ge0$, the shift by $+\log n$ is active for $q<e^{2L}/n^2$ and the shift by $-\log n$ for $q>n^2e^{-2L}$. If $\|C_p\|\le s$, put $\gamma=s+m$ and $M=\gamma I-C_p$; then $mI\preceq M\preceq bI$ with $b=2s+m$.
+
+\subsection{The tail}
+Let $B_{\rm band}$ have kernel $\sin(\Omega(x-y))/(\pi(x-y))$ on $I$, and
+\[
+K=2|\cosh\tfrac x2\rangle\langle\cosh\tfrac x2|-2|\sinh\tfrac x2\rangle\langle\sinh\tfrac x2|+\frac1{2\pi}\int_{-\Omega}^{\Omega}(a(t)-\gamma)|e_t\rangle\langle e_t|\,dt,\qquad e_t(x)=e^{itx}.
+\]
+Then $Q(f)=\langle f,(M+K)f\rangle+T_{\rm tail}(f)$ with $T_{\rm tail}(f)=\frac1{2\pi}\int_{|t|>\Omega}(a(t)-\gamma)|F_f(t)|^2dt$. By the proof of Lemma~3.3 of \cite{MoriVI}, $a(t)\ge\log\frac t{2\pi}-\frac1t$ for $t\ge\frac{15}4$; the right side increases with $t$, so
+\begin{equation}\label{eq:C}
+a(t)-\gamma\ge C:=\log\frac\Omega{2\pi}-\frac1\Omega-\gamma\qquad(|t|\ge\Omega\ge\tfrac{15}4).
+\end{equation}
+
+\begin{proposition}[tail inequality]\label{prop:tail}
+Assume $C>0$, let $c=\Omega L>2$, and let $0<\delta\le d(c)=e^{-2(c+1)}/(4(c+1)(c+4))$. Put $S=I-B_{\rm band}-\delta I$, $v_0=(2L)^{-1/2}$, $v_1=\sqrt{3/(2L)}\,x/L$, $h_j=Sv_j$,
+\[
+E_0=\frac{c+1}{\pi c^2},\qquad E_1=\frac{3c^2+6c+2}{\pi c^3},
+\]
+and let $u_0,u_1\ge0$ satisfy $u_jE_j\le C$. Then, with $U=u_0|h_0\rangle\langle h_0|+u_1|h_1\rangle\langle h_1|$,
+\[
+T_{\rm tail}(f)\ge C\delta\|f\|^2+\langle f,Uf\rangle .
+\]
+\end{proposition}
+\begin{proof}
+By Theorem~\ref{thm:N} and Remark~\ref{rem:scaling}(i), $I-B_{\rm band}\succeq d(c)I\succeq\delta I$, so $0\preceq S\preceq I$, and \eqref{eq:C} gives $T_{\rm tail}(f)\ge C\delta\|f\|^2+C\langle f,Sf\rangle$. As in \cite[Proposition~3.4]{MoriVI}, $e_j=\langle v_j,(I-B_{\rm band})v_j\rangle$ satisfies $\frac{c-1}{\pi c^2}\le e_0\le E_0$ and $\frac{3(c-2)}{\pi c^2}\le e_1\le E_1$; these bounds come from integration by parts and hold for every $c>2$. In fact $1-\lambda_0(c)>d(c)$: this is immediate if $\lambda_0(c)\le\frac12$; otherwise the first inequality in the proof of Theorem~\ref{thm:N} is strict, since $\lambda_0(c+1)<1$. Thus $S\succeq(1-\lambda_0(c)-\delta)I\succ0$, and $\langle v_j,Sv_j\rangle=e_j-\delta>0$ for both $j=0,1$. The vectors $v_0,v_1$ have opposite parities and $S$ commutes with the reflection, so the Cauchy--Schwarz inequality for the form $\langle\cdot,S\cdot\rangle$ on each parity gives $\langle f,Sf\rangle\ge\sum_j|\langle h_j,f\rangle|^2/(e_j-\delta)$, and $C/(e_j-\delta)\ge C/E_j\ge u_j$.
+\end{proof}
+
+With $V=K+U$ we obtain, for admissible $f$,
+\begin{equation}\label{eq:reduction}
+Q(f)\ge C\delta\|f\|^2+\langle f,(M+V)f\rangle ,
+\end{equation}
+and it suffices to prove $M+V\succeq0$ on $H$.
+
+\subsection{Reduction to a finite matrix}
+Let $N\ge2$ be an integer, counting both parities, and let $v_j(x)=\sqrt{(2j+1)/(2L)}P_j(x/L)$, $E:\C^N\to H$, $Ez=\sum_{j<N}z_jv_j$, $P=EE^*$, and
+\[
+A=E^*ME,\quad B=E^*M^2E,\quad J=E^*VE,\quad G=E^*M^{-1}E,\quad D_M=B-A^2\succeq0 .
+\]
+Let $R=V-EJE^*$, and suppose $\|(I-P)RP\|\le e$, $(I-P)R(I-P)\succeq-n$ and $\|(I-P)R(I-P)\|\le h$ with $n<m$. With
+\[
+\alpha=e+\frac{2e^2}{m-n},\qquad\beta=\frac{e+n}{m^2}+\frac{2h^2}{m^2(m-n)},
+\]
+the block elimination of \cite[(4.1)]{MoriVI} (with $\theta=\chi=1$; the proof uses only $mI\preceq M$ and $n<m$) gives
+\begin{equation}\label{eq:finite}
+G^{-1}+J\succeq\alpha I+\beta D_M\quad\Longrightarrow\quad M+V\succeq0\ \text{on }H .
+\end{equation}
+For every matrix $X$, $\mathcal W(X)=X+X^*-X^*AX+m^{-1}(I-AX-X^*A+X^*BX)$ satisfies $\mathcal W(X)\succeq G$ \cite[Section~4]{MoriVI}. So it suffices to certify, in each parity,
+\begin{equation}\label{eq:T}
+T=\mathcal W(X)^{-1}+J-\alpha I-\beta(B-A^2)\succ0 .
+\end{equation}
+
+\begin{lemma}[projection errors]\label{lem:proj}
+Let $\rho>1$, $c=\Omega L$, and
+\[
+r_N^2=\frac{8L\rho^2}{(\rho-1)^2}e^{c(\rho-\rho^{-1})}\rho^{-2N},\qquad
+K_0=\frac\Omega\pi\max\bigl(|a(0)-\gamma|,|a(\Omega)-\gamma|\bigr),
+\]
+$H_p=\sqrt{2L}\cosh\frac L2$ and $q_N=\sqrt{2L}e^{L/2}(L/2)^N/N!$. Then one may take
+\[
+e=\Bigl[K_0\sqrt{2L}+\sqrt{\Omega/\pi}\,(u_0\sqrt{E_0}+u_1\sqrt{E_1})\Bigr]r_N+4H_pq_N,\quad
+n=K_0r_N^2+4q_N^2,\quad
+h=\Bigl[K_0+\frac\Omega\pi(u_0+u_1)\Bigr]r_N^2+4q_N^2 .
+\]
+\end{lemma}
+\begin{proof}
+For $|t|\le\Omega$, $e^{itx}$ on $I$ is, after scaling to $[-1,1]$, bounded by $e^{c(\rho-\rho^{-1})/2}$ on the Bernstein ellipse $E_\rho$. Hence its Chebyshev coefficients are at most $2H\rho^{-k}$, where $H=e^{c(\rho-\rho^{-1})/2}$, and the truncation of degree $N-1$ has sup-norm error at most $2H\rho^{-N}/(1-\rho^{-1})=2H\rho^{1-N}/(\rho-1)$. Since the $L^2$ projection is optimal and $\|1\|_{L^2(I)}^2=2L$, this gives $\|(I-P)e_t\|\le r_N$. The function $a$ is increasing on $t\ge0$: in the series for $\psi$, each term $\operatorname{Re}(\frac14+\frac{it}2+k)^{-1}$ decreases in $t$. Therefore $\frac1{2\pi}\int_{-\Omega}^\Omega|a-\gamma|\le K_0$. The band part of $R$ is then bounded by $K_0\sqrt{2L}r_N$ off the diagonal block, and by $K_0r_N^2$ in the complementary block (from below and in norm).
+
+For $U$: $(I-P)h_j=-(I-P)B_{\rm band}v_j=-\frac1{2\pi}\int_{-\Omega}^\Omega\hat v_j(t)(I-P)e_t\,dt$, with norm at most $r_N\sqrt{\Omega/\pi}$ by Cauchy--Schwarz and Plancherel. Also $\|h_j\|^2\le\langle v_j,Sv_j\rangle\le E_j$, and $U\succeq0$, so $U$ contributes nothing to $n$.
+
+For the poles: the Taylor remainder of $e^{\pm x/2}$ of order $N$ gives $\|(I-P)\cosh\frac x2\|,\|(I-P)\sinh\frac x2\|\le q_N$, and both norms are at most $H_p$.
+\end{proof}
+
+\section{The window \texorpdfstring{$\frac12\log12$}{(1/2) log 12}}\label{sec:mu12}
+Let $L=\frac12\log12$, so $e^{2L}=12$ and the prime powers are $2,3,4,5,7,8,9,11$.
+
+\emph{Prime operator.} With $w(x)=1+\frac{19}{40}(x/L)^2$, the breakpoints on $x\ge0$ are $q\in\{1,\frac43,\frac{25}{12},3,\frac{49}{12},\frac{16}3,\frac{27}4,\frac{121}{12},12\}$. Bounding $R_w$ in ball arithmetic on $8\cdot256=2048$ closed subintervals gives $R_w<3.5557$, hence $\|C_p\|\le s=\frac{57}{16}$. We take $m=\frac12$, so $\gamma=\frac{65}{16}$ and $b=\frac{61}8$.
+
+\emph{Tail.} With $\Omega=416$ we get $c=\Omega L\approx516.86$ and $C\approx0.12790>\frac18$. Moreover $-\log_2d(c)=1514.27\ldots$, so we take $\delta=2^{-1515}$ and $\tau=\delta/8=2^{-1518}<C\delta$. The coefficients $u_0=207$, $u_1=68$ satisfy $u_jE_j<C$.
+
+\emph{Projection errors.} With $N=832$ (that is, $416$ modes in each parity) and $\rho=3$, Lemma~\ref{lem:proj} gives, in ball arithmetic,
+\[
+e<2.08\times10^{-94}<2^{-311},\qquad n<1.27\times10^{-191}<2^{-634},\qquad h<3.82\times10^{-190}<2^{-629} .
+\]
+Then $n<m$, and $\alpha+\beta b^2<2^{-303}$ (checked with exact rationals).
+
+\begin{remark}
+At $N=640$ the midpoint value of the smallest eigenvalue of $\mathcal W(X_*)^{-1}+J$ was negative in both parities ($-1.99\times10^{-46}$ even, $-4.89\times10^{-50}$ odd). The negative directions are concentrated on Legendre degrees below $32$, and the simple compression $A+J$ is positive in the same directions. So the failure comes from the loss in the inverse bound, not from the Weil form. At $N=832$ the condition holds. For comparison, our Legendre--Galerkin computation of the bottom of the spectrum of $Q$ on this window gives about $4.05\times10^{-54}$ (numerical, not used in the proof; cf.\ \cite{MoriWeilV}).
+\end{remark}
+
+\section{Source matrices, quadrature and the certificate}\label{sec:certificate}
+
+\emph{$A$ and $B$.} After splitting $I$ at the support boundaries of the shifts, the entries are integrals of polynomials of degree at most $1662$; Gauss--Legendre quadrature with $834$ nodes is exact, so only rounding errors occur. These are enclosed by the balls, and $\epsilon_A=\epsilon_B=2^{-400}$ covers them together with the distance to the rational centres.
+
+\emph{$J$.} In each parity the band and gamma-weighted integrals are computed on the panels $[0,\frac12],[\frac12,1],[1,2],\dots,[128,256],[256,416]$ with $256$ Gauss nodes each, from the representation $\int_Iv_je^{itx}dx=\sqrt{2L(2j+1)}\,i^jj_j(Lt)$.
+
+\begin{lemma}[quadrature]\label{lem:quad}
+On the Bernstein ellipses $\rho=2$ of the panels, $|\operatorname{Im}z|\le60$ and $|z|\le436$. There $|b_ib_j|\le2Le^{120L}<\frac52e^{150}$, and $g(z)=\frac12[\psi(\frac14+\frac{iz}2)+\psi(\frac14-\frac{iz}2)]-\log\pi-\frac{65}{16}$ is holomorphic with $|g|<1100$. Consequently the quadrature error of $J$, including the pole and $U$ terms, is below $2^{-263}$ in operator norm.
+\end{lemma}
+\begin{proof}
+The longest panel $[256,416]$ has half-length $80$, so its ellipse has semi-minor axis $80\cdot\frac34=60$, and every point satisfies $|z|\le336+100$. For $w=\frac14\pm\frac{iz}2$: on the three panels of length at most $1$, $\operatorname{Re}w\ge\frac1{16}$; on the others, $\operatorname{Re}z\ge\frac74$, so $|\operatorname{Im}w|\ge\frac78$. Hence $|w+k|\ge\frac1{16}$ for all integers $k\ge0$.
+
+After $31$ applications of the recurrence, $v=w+31$ has $\operatorname{Re}v\ge\frac54$ and $|v-1|<249$, and the series $\psi(v)=-\gamma_E+(v-1)\sum_{k\ge0}\frac1{(k+1)(k+v)}$ \cite[5.7.6]{DLMF} gives $|\psi(v)|<499$. The recurrence costs at most $31\cdot16$.
+
+A Chebyshev truncation of degree $511$ and the exactness of $256$-point Gauss up to degree $511$ give the panel error $4\ell H\,2^{-511}$. The sum of the panel lengths is $416$, and the operator norm is at most $416$ times the entrywise bound. The pole coefficients use $872$ nodes and the Taylor polynomials of degree $912$, with remainder $2(5/8)^{913}/913!$. For $U$, $\|E^*Sv_j\|\le1$. Adding the three contributions in ball arithmetic gives $5.45\times10^{-80}<2^{-263}$.
+\end{proof}
+
+\emph{The constant $\delta$.} The saved matrix $J$ was computed with $\delta_{\rm old}=d(c)$ (enclosed in a ball), while the theorem uses $\delta=2^{-1515}\le d(c)$. With $t=\delta_{\rm old}-\delta\in[0,2^{-1514})$ we have $h_j^{\rm new}=h_j^{\rm old}+tv_j$, so $\|U^{\rm new}-U^{\rm old}\|\le(u_0+u_1)(2t+t^2)<2^{-1504}$. This is added to the error of $J$. The pieces $(I-P)h_j$ do not change, so Lemma~\ref{lem:proj} still applies.
+
+\emph{Certificate.} As in \cite[Section~6]{MoriVI}, for each parity the proposer outputs rational matrices with denominator $2^{512}$: centres $A_0,B_0,J_0$, a matrix $X$, $W_0\approx\mathcal W(X)$, $Y\approx W_0^{-1}$, and congruence transforms for $C=B-mA$, $W$ and $T$. The checker does not import the proposer and computes no eigenvalues. It verifies:
+\begin{itemize}
+\item all entries against the saved source balls, whose SHA-256 sums are pinned;
+\item $\epsilon_J=2^{-250}$ (quadrature, the $\delta$ change and rounding), $\epsilon_W=2^{-350}$ and $\epsilon_D=2^{-380}$;
+\item the inverse residual, measured by the geometric mean of the row-sum and column-sum norms;
+\item $\eta+\epsilon_T\|Z\|_F^2<1$, which gives $\lambda_{\min}(T)\ge(1-\eta-\epsilon_T\|Z\|_F^2)/\|Z\|_F^2$, where $\epsilon_T=2b^2\epsilon_W+\epsilon_Y+\epsilon_J+\beta\epsilon_D$.
+\end{itemize}
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lcc}
+\toprule
+& even & odd\\
+\midrule
+total error $\epsilon_T$ & $5.53\times10^{-76}$ & $5.53\times10^{-76}$\\
+certified lower bound for $\lambda_{\min}(T)$ & $1.2092639998\times10^{-54}$ & $1.5867129002\times10^{-50}$\\
+\bottomrule
+\end{tabular}
+\caption{The certified finite condition \eqref{eq:T} at $N=832$, $\mu=12$.}
+\end{table}
+
+The checker passed at $1280$ and at $1536$ bits. It rejected seven altered inputs for the intended reasons: the sign of $J$ reversed; an inflated declared error; $B$ replaced by $A^2$; a file changed without updating its hash; an understated error of $J$; a wrong contract; and a negative $T$. An independent reimplementation of the final check at $1664$ bits, which does not share code with the checker, reproduced both lower bounds to more than $90$ digits; it also recomputed nine further source entries independently. The checker runs in about $32$ seconds and $1.3$ GB of memory.
+
+\begin{proof}[Proof of Theorem~\ref{thm:M}]
+The certificate gives \eqref{eq:T} in both parities, hence $G^{-1}+J\succeq\alpha I+\beta D_M$ because $\mathcal W(X)\succeq G$. By \eqref{eq:finite}, $M+V\succeq0$ on $H$. By \eqref{eq:reduction}, $Q(f)\ge C\delta\|f\|^2\ge2^{-1518}\|f\|^2$.
+\end{proof}
+
+\section{Proof of Corollary~\ref{cor:mu10}}\label{sec:mu10}
+In \cite{MoriVI} ($L=\frac12\log10$, $\Omega=256$, $\gamma=\frac72$, $m=\frac12$, $N=640$, $u=(81,27)$), the out-of-band constant was $\delta_{\rm old}=2^{-49158}$, and the certified finite margin was above $2^{-144}$ in both parities. By Theorem~\ref{thm:N} with $c=128\log10\approx294.73$ we have $-\log_2d(c)=871.73\ldots$, so $\delta=2^{-872}\le d(c)$ is admissible.
+
+Replacing $\delta_{\rm old}$ by $\delta$ changes only $U$: with $t=\delta-\delta_{\rm old}$, $h_j^{\rm new}=h_j^{\rm old}-tv_j$, and $\|U^{\rm new}-U^{\rm old}\|\le108(2t+t^2)<2^{-863}$. The constant $\delta$ enters nothing else in \cite{MoriVI}: not $A$, $B$, $\mathcal W$, nor the error budgets. Moreover $(I-P)h_j$ is unchanged, and $\|h_j^{\rm new}\|^2\le e_j$, so the bounds $e,n,h$ remain valid. The finite condition therefore keeps a margin above $2^{-144}-2^{-863}>2^{-145}$.
+
+The tail inequality of \cite[Proposition~3.4]{MoriVI} holds with $\delta$ in place of $\delta_{\rm old}$: the only properties used were $I-B_{\rm band}\succeq\delta I$, $e_j>\delta$ and $C_0\delta>\delta/16$. Hence $Q(f)\ge\delta/16\,\|f\|^2=2^{-876}\|f\|^2$.
+
+\section{Remarks}
+\emph{Larger windows.} Theorem~\ref{thm:N} supplies an out-of-band estimate for every $L>0$, replacing the interpolation estimate stated in \cite{MoriVI} under the convenient sufficient condition $L<7/6$. The obstacle for larger windows is now the prime operator. As $e^{2L}$ grows, $s$ grows, hence $\Omega$ (through $C>0$), $N$, and the precision. Rough estimates suggest $\Omega\approx600$--$900$ for $e^{2L}=15$. For $e^{2L}=20$ the expected margin is about $10^{-96}$, which requires error budgets below $2^{-340}$. Both need a more economical implementation than ours.
+
+\emph{Margins.} The certified finite margins are of the same order as the numerical bottom of the spectrum. The final constants $2^{-1518}$ and $2^{-876}$ are much smaller because they come from the out-of-band bound, which is of size $e^{-2\Omega L}$.
+
+\emph{Trust.} The proof relies on the analytic lemmas above and in \cite{MoriVI}, on Arb/FLINT \cite{Arb} for the ball enclosures, and on the checker program. It has not been checked by a proof assistant.
+
+\section*{Reproducibility}
+The source matrices, the certificate, the proposer, the checker and the mutation tests are in the folder \texttt{certificate-VII/} of release \texttt{v1.5.0} of \url{https://github.com/moriryota/prolate-weil-bounds} (about 350 MB), with SHA-256 sums and replay instructions, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions). The checker runs in about 32 seconds and 1.3 GB of memory.
+
+\section*{Use of generative AI}
+This work was carried out with extensive use of generative AI systems, namely Anthropic Claude and OpenAI GPT. Under the direction of the author, these systems derived the analytic bounds, implemented and ran the computations, and reviewed one another's work adversarially. The author is responsible for the content.
+
+\begin{thebibliography}{99}
+\bibitem{Arb} F.~Johansson, Arb: efficient arbitrary-precision midpoint-radius interval arithmetic, \emph{IEEE Trans. Comput.} 66 (2017) 1281--1292. \doi{10.1109/TC.2017.2690633}
+\bibitem{BK16} A.~Bonami, A.~Karoui, Uniform approximation and explicit estimates for the prolate spheroidal wave functions, \emph{Constr. Approx.} 43 (2016) 15--45. \doi{10.1007/s00365-015-9295-1}; we used arXiv:1405.3676v2.
+\bibitem{BK17} A.~Bonami, A.~Karoui, Spectral decay of time and frequency limiting operator, \emph{Appl. Comput. Harmon. Anal.} 42 (2017) 1--20. \doi{10.1016/j.acha.2015.05.003}
+\bibitem{Bombieri2000} E.~Bombieri, Remarks on Weil's quadratic functional in the theory of prime numbers, I, \emph{Atti Accad. Naz. Lincei Rend. Lincei Mat. Appl.} (9) 11 (2000) 183--233.
+\bibitem{CC20} A.~Connes, C.~Consani, Weil positivity and trace formula, the archimedean place, \emph{Selecta Math. (N.S.)} 27 (2021), article 77. \doi{10.1007/s00029-021-00689-4}; we used arXiv:2006.13771v1.
+\bibitem{DLMF} NIST Digital Library of Mathematical Functions, \url{https://dlmf.nist.gov}.
+\bibitem{Fuchs64} W.~H.~J.~Fuchs, On the eigenvalues of an integral equation arising in the theory of band-limited signals, \emph{J. Math. Anal. Appl.} 9 (1964) 317--330. \doi{10.1016/0022-247X(64)90017-4}
+\bibitem{Jaming07} Ph.~Jaming, Nazarov's uncertainty principles in higher dimension, \emph{J. Approx. Theory} 149 (2007) 30--41. \doi{10.1016/j.jat.2007.04.005}
+\bibitem{BJK21} A.~Bonami, Ph.~Jaming, A.~Karoui, Non-asymptotic behavior of the spectrum of the sinc-kernel operator and related applications, \emph{J. Math. Phys.} 62 (2021) 033511. \doi{10.1063/1.5140496}; we used arXiv:1804.01257v1.
+\bibitem{Liu2026} V.~Liu, Certified Weil positivity beyond the unit window: source-exact block-Schur and tail-compensation bounds for the Riemann zeta function, manuscript, 14 September 2026, \url{https://github.com/luciferyu666/certified-weil-positivity} (release \texttt{v1.0-mcom-submission}).
+\bibitem{MoriLog5} R.~Mori, Weil positivity on a window of width $\log5$: a formal proof in Lean~4, version~2, Zenodo, 2026. \doi{10.5281/zenodo.23035705}
+\bibitem{MoriPSWF} R.~Mori, A non-asymptotic bound with the sharp power of $c$ for the eigenvalue defect $1-\lambda_n(c)$ of time and frequency limiting, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092454}
+\bibitem{MoriWeilV} R.~Mori, A $\mu^{9/2}\log\mu$ upper bound for windowed Weil forms, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23175061}
+\bibitem{MoriVI} R.~Mori, Weil positivity on the window of width $\log10$: an interval-arithmetic certificate, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23238480}
+\bibitem{Nazarov93} F.~L.~Nazarov, Local estimates for exponential polynomials and their applications to inequalities of the uncertainty principle type, \emph{Algebra i Analiz} 5(4) (1993) 3--66; English transl. \emph{St. Petersburg Math. J.} 5(4) (1994) 663--717.
+\bibitem{Osipov12} A.~Osipov, Certain upper bounds on the eigenvalues associated with prolate spheroidal wave functions, arXiv:1206.4541v1, 2012.
+\bibitem{Osipov13} A.~Osipov, V.~Rokhlin, H.~Xiao, \emph{Prolate Spheroidal Wave Functions of Order Zero}, Applied Mathematical Sciences 187, Springer, New York, 2013. \doi{10.1007/978-1-4614-8259-8}
+\bibitem{Slepian65} D.~Slepian, Some asymptotic expansions for prolate spheroidal wave functions, \emph{J. Math. and Phys.} 44 (1965) 99--140. \doi{10.1002/sapm196544199}
+\bibitem{Weil1952} A.~Weil, Sur les ``formules explicites'' de la th\'eorie des nombres premiers, \emph{Comm. S\'em. Math. Univ. Lund}, tome suppl\'ementaire (1952) 252--265.
+\bibitem{Yoshida1992} H.~Yoshida, On Hermitian forms attached to zeta functions, in: \emph{Zeta Functions in Geometry (Tokyo, 1990)}, Adv. Stud. Pure Math. 21, Kinokuniya, Tokyo, 1992, 281--325. \doi{10.2969/aspm/02110281}
+\bibitem{Zhu2026} X.~Zhu, Weil positivity in compact windows: a finite reduction, certified two-sided bounds, and a Landau--Widom decay law, arXiv:2608.24827v2, 2026.
+\end{thebibliography}
+
+\end{document}

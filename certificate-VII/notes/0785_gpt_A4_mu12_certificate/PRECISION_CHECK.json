@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "runs": [
+    1280,
+    1536
+  ],
+  "results": [
+    {
+      "parity": 0,
+      "relative_lower_bound_difference": "[+/- 4.53e-155]",
+      "certified_dyadic_lower": "2^-180",
+      "epsilon_T_less_than": "2^-249"
+    },
+    {
+      "parity": 1,
+      "relative_lower_bound_difference": "[+/- 1.14e-155]",
+      "certified_dyadic_lower": "2^-166",
+      "epsilon_T_less_than": "2^-249"
+    }
+  ]
+}

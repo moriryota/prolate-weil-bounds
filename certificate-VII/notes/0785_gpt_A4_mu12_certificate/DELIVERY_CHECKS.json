@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "scope": "external numerical certificate and delivery integrity; independent mathematical review outstanding",
+  "fixed_inputs": 17,
+  "source_matrices": 6,
+  "rational_candidate_matrices": 18,
+  "verification_bits": [
+    1280,
+    1536
+  ],
+  "negative_tests": 7,
+  "tau": "2^-1518",
+  "all_owned_heavy_jobs_finished": true,
+  "VM_used": false,
+  "prior_reuse_pins_unchanged": true
+}
