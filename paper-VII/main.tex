@@ -1,4 +1,4 @@
-% Ryota Mori. Version 1, 2026-10-09. Licence: CC BY 4.0. doi:10.5281/zenodo.23261744
+% Ryota Mori. Version 2, 2026-10-10. Licence: CC BY 4.0. doi:10.5281/zenodo.23265728 (version 1: 10.5281/zenodo.23261744)
 % Paper VII: Weil positivity on the window of width log 12; a lower bound for the prolate defect.
 \documentclass[11pt]{amsart}
 \usepackage[margin=1in]{geometry}
@@ -25,7 +25,7 @@
 \author{Ryota Mori}
 \address{Independent researcher, Tokyo, Japan}
 \email{moriryota31@gmail.com}
-\date{9 October 2026}
+\date{10 October 2026 (version 2; version 1: 9 October 2026)}
 
 \begin{document}
 
@@ -36,7 +36,7 @@ Weil's criterion states that the Riemann Hypothesis holds if and only if Weil's 
 \maketitle
 
 \begin{sloppypar}
-\noindent\textit{Version 1.} Zenodo, \doi{10.5281/zenodo.23261744}. Certificate data and code: release \texttt{v1.5.0} of \url{https://github.com/moriryota/prolate-weil-bounds}, \doi{10.5281/zenodo.23092422}. Licence: CC BY 4.0.
+\noindent\textit{Version 2.} Zenodo, \doi{10.5281/zenodo.23265728} (version 1: \doi{10.5281/zenodo.23261744}). Version 2 defines the functions $b_j$ of Lemma~\ref{lem:quad} and the transform $\hat v_j$ in the proof of Lemma~\ref{lem:proj}, adds the identity behind $\mathcal W(X)\succeq G$, and refers to release \texttt{v1.5.1}, which corrects the replay instructions; the theorems and all constants are unchanged. Certificate data and code: release \texttt{v1.5.1} of \url{https://github.com/moriryota/prolate-weil-bounds}, \doi{10.5281/zenodo.23092422}. Licence: CC BY 4.0.
 \end{sloppypar}
 
 \begin{center}
@@ -211,7 +211,7 @@ the block elimination of \cite[(4.1)]{MoriVI} (with $\theta=\chi=1$; the proof u
 \begin{equation}\label{eq:finite}
 G^{-1}+J\succeq\alpha I+\beta D_M\quad\Longrightarrow\quad M+V\succeq0\ \text{on }H .
 \end{equation}
-For every matrix $X$, $\mathcal W(X)=X+X^*-X^*AX+m^{-1}(I-AX-X^*A+X^*BX)$ satisfies $\mathcal W(X)\succeq G$ \cite[Section~4]{MoriVI}. So it suffices to certify, in each parity,
+For every matrix $X$, $\mathcal W(X)=X+X^*-X^*AX+m^{-1}(I-AX-X^*A+X^*BX)$ satisfies $\mathcal W(X)\succeq G$ \cite[Section~4]{MoriVI}: with $R_X=E-MEX$ one has $\mathcal W(X)-G=R_X^*(m^{-1}I-M^{-1})R_X\succeq0$. Since $G\succeq b^{-1}I$, both inverses exist and $\mathcal W(X)^{-1}\preceq G^{-1}$. So it suffices to certify, in each parity,
 \begin{equation}\label{eq:T}
 T=\mathcal W(X)^{-1}+J-\alpha I-\beta(B-A^2)\succ0 .
 \end{equation}
@@ -232,7 +232,7 @@ h=\Bigl[K_0+\frac\Omega\pi(u_0+u_1)\Bigr]r_N^2+4q_N^2 .
 \begin{proof}
 For $|t|\le\Omega$, $e^{itx}$ on $I$ is, after scaling to $[-1,1]$, bounded by $e^{c(\rho-\rho^{-1})/2}$ on the Bernstein ellipse $E_\rho$. Hence its Chebyshev coefficients are at most $2H\rho^{-k}$, where $H=e^{c(\rho-\rho^{-1})/2}$, and the truncation of degree $N-1$ has sup-norm error at most $2H\rho^{-N}/(1-\rho^{-1})=2H\rho^{1-N}/(\rho-1)$. Since the $L^2$ projection is optimal and $\|1\|_{L^2(I)}^2=2L$, this gives $\|(I-P)e_t\|\le r_N$. The function $a$ is increasing on $t\ge0$: in the series for $\psi$, each term $\operatorname{Re}(\frac14+\frac{it}2+k)^{-1}$ decreases in $t$. Therefore $\frac1{2\pi}\int_{-\Omega}^\Omega|a-\gamma|\le K_0$. The band part of $R$ is then bounded by $K_0\sqrt{2L}r_N$ off the diagonal block, and by $K_0r_N^2$ in the complementary block (from below and in norm).
 
-For $U$: $(I-P)h_j=-(I-P)B_{\rm band}v_j=-\frac1{2\pi}\int_{-\Omega}^\Omega\hat v_j(t)(I-P)e_t\,dt$, with norm at most $r_N\sqrt{\Omega/\pi}$ by Cauchy--Schwarz and Plancherel. Also $\|h_j\|^2\le\langle v_j,Sv_j\rangle\le E_j$, and $U\succeq0$, so $U$ contributes nothing to $n$.
+For $U$: $(I-P)h_j=-(I-P)B_{\rm band}v_j=-\frac1{2\pi}\int_{-\Omega}^\Omega\hat v_j(t)(I-P)e_t\,dt$, where $\hat v_j(t)=\int_Iv_j(x)e^{-itx}\,dx=F_{v_j}(-t)$ (the opposite sign to $F$), with norm at most $r_N\sqrt{\Omega/\pi}$ by Cauchy--Schwarz and Plancherel. Also $\|h_j\|^2\le\langle v_j,Sv_j\rangle\le E_j$, and $U\succeq0$, so $U$ contributes nothing to $n$.
 
 For the poles: the Taylor remainder of $e^{\pm x/2}$ of order $N$ gives $\|(I-P)\cosh\frac x2\|,\|(I-P)\sinh\frac x2\|\le q_N$, and both norms are at most $H_p$.
 \end{proof}
@@ -258,7 +258,11 @@ At $N=640$ the midpoint value of the smallest eigenvalue of $\mathcal W(X_*)^{-1
 
 \emph{$A$ and $B$.} After splitting $I$ at the support boundaries of the shifts, the entries are integrals of polynomials of degree at most $1662$; Gauss--Legendre quadrature with $834$ nodes is exact, so only rounding errors occur. These are enclosed by the balls, and $\epsilon_A=\epsilon_B=2^{-400}$ covers them together with the distance to the rational centres.
 
-\emph{$J$.} In each parity the band and gamma-weighted integrals are computed on the panels $[0,\frac12],[\frac12,1],[1,2],\dots,[128,256],[256,416]$ with $256$ Gauss nodes each, from the representation $\int_Iv_je^{itx}dx=\sqrt{2L(2j+1)}\,i^jj_j(Lt)$.
+\emph{$J$.} In each parity the band and gamma-weighted integrals are computed on the panels $[0,\frac12],[\frac12,1],[1,2],\dots,[128,256],[256,416]$ with $256$ Gauss nodes each, from the representation $\int_Iv_je^{itx}dx=\sqrt{2L(2j+1)}\,i^jj_j(Lt)$. For each parity $p\in\{0,1\}$ and $j\equiv p\pmod2$ put
+\[
+b_j(t)=i^{-p}F_{v_j}(t)=(-1)^{(j-p)/2}\sqrt{2L(2j+1)}\,j_j(Lt).
+\]
+These functions are real for real $t$, and in a fixed parity the band and gamma-weighted band entries are $\pi^{-1}\int_0^\Omega b_i(t)b_j(t)\,dt$ and $\pi^{-1}\int_0^\Omega(a(t)-\gamma)b_i(t)b_j(t)\,dt$. The functions $b_j$ extend holomorphically to the quadrature ellipses.
 
 \begin{lemma}[quadrature]\label{lem:quad}
 On the Bernstein ellipses $\rho=2$ of the panels, $|\operatorname{Im}z|\le60$ and $|z|\le436$. There $|b_ib_j|\le2Le^{120L}<\frac52e^{150}$, and $g(z)=\frac12[\psi(\frac14+\frac{iz}2)+\psi(\frac14-\frac{iz}2)]-\log\pi-\frac{65}{16}$ is holomorphic with $|g|<1100$. Consequently the quadrature error of $J$, including the pole and $U$ terms, is below $2^{-263}$ in operator norm.
@@ -315,7 +319,7 @@ The tail inequality of \cite[Proposition~3.4]{MoriVI} holds with $\delta$ in pla
 \emph{Trust.} The proof relies on the analytic lemmas above and in \cite{MoriVI}, on Arb/FLINT \cite{Arb} for the ball enclosures, and on the checker program. It has not been checked by a proof assistant.
 
 \section*{Reproducibility}
-The source matrices, the certificate, the proposer, the checker and the mutation tests are in the folder \texttt{certificate-VII/} of release \texttt{v1.5.0} of \url{https://github.com/moriryota/prolate-weil-bounds} (about 350 MB), with SHA-256 sums and replay instructions, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions). The checker runs in about 32 seconds and 1.3 GB of memory.
+The source matrices, the certificate, the proposer, the checker and the mutation tests are in the folder \texttt{certificate-VII/} of release \texttt{v1.5.1} of \url{https://github.com/moriryota/prolate-weil-bounds} (about 350 MB), with SHA-256 sums and replay instructions, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions). The checker runs in about 32 seconds and 1.3 GB of memory.
 
 \section*{Use of generative AI}
 This work was carried out with extensive use of generative AI systems, namely Anthropic Claude and OpenAI GPT. Under the direction of the author, these systems derived the analytic bounds, implemented and ran the computations, and reviewed one another's work adversarially. The author is responsible for the content.

@@ -1,7 +1,7 @@
 # Weil positivity on the window of width log 12 — certificate data and code
 
 Certificate data and code for: R. Mori, *Weil positivity on the window of width log 12, and a lower bound for the prolate eigenvalue defect*, Zenodo, 2026, doi:10.5281/zenodo.23261744 (paper VII).
-This folder is part of https://github.com/moriryota/prolate-weil-bounds (release v1.5.0), archived on Zenodo, doi:10.5281/zenodo.23092422 (all versions). The data files are included.
+This folder is part of https://github.com/moriryota/prolate-weil-bounds (release v1.5.1; first released in v1.5.0), archived on Zenodo, doi:10.5281/zenodo.23092422 (all versions). The data files are included.
 
 Theorem M: for every complex C² function f supported in [−½ log 12, ½ log 12], Weil's quadratic form satisfies
 Q(f) ≥ 2^−1518 ‖f‖². The proof is analytic (paper VII, Sections 2–4) plus this external interval-arithmetic certificate
@@ -27,14 +27,28 @@ the work notes is not included, the paper is the reference.)
 | `notes/0787_gpt_review_mu12_certificate/source_spotchecks.py`, `scalar_review.py` | independent recomputation of nine source entries; independent check of the scalar bounds |
 | `notes/0786_claude_review_0785/spot_check_*.py` | independent mpmath check of A[0][0], B[0][0] (both parities) and J[0][0] (even) |
 | `notes/0782_claude_review_0778/check_defect.py`, `check_general_tail.py` | numerical illustration of Theorem N (c ≤ 20) and of the bounds for e₀, e₁ (not part of the proof) |
+| `replay_mutations.py` | runs the mutation tests in a disposable copy (added in v1.5.1; see below) |
 
 ## Integrity
-    shasum -a 256 -c SHA256SUMS      # from this folder
+    shasum -a 256 -c SHA256SUMS      # from this folder; lists exactly the files shipped in this folder (no Python caches)
+
+Run this first: the independent check below rewrites `independent_certificate.json` (restore it with
+`git checkout -- notes/0787_gpt_review_mu12_certificate/independent_certificate.json`).
 
 ## Reproducing (from this directory; tested with Python 3.12, python-flint 0.9.0, mpmath 1.3.0, numpy)
     python notes/0785_gpt_A4_mu12_certificate/check_certificate.py --bits 1280 --output replay.json   # ~32 s, ~1.3 GB → PASS_EXTERNAL_CERTIFICATE
-    python notes/0787_gpt_review_mu12_certificate/independent_certificate.py                         # ~32 s; overwrites independent_certificate.json → PASS_INDEPENDENT_CERTIFICATE
-    python notes/0785_gpt_A4_mu12_certificate/test_mutations_v2.py                                   # seven mutations rejected for the intended reasons (writes mutations/)
+    python notes/0787_gpt_review_mu12_certificate/independent_certificate.py                         # ~60 s; rewrites independent_certificate.json → PASS_INDEPENDENT_CERTIFICATE
+    python replay_mutations.py                                                                       # ~60 s; seven mutations rejected for the intended reasons
+
+`replay_mutations.py` runs the original `test_mutations_v2.py` in a disposable hard-link copy under `replay/` and
+compares the rejection reasons with the shipped `mutation_results.json`. (Running `test_mutations_v2.py` directly in
+this folder performs the seven tests but then stops, because it refuses to overwrite the shipped results; the script
+itself is unchanged, since its hash is recorded in the provenance files.)
+
+Changes in v1.5.1: `SHA256SUMS` no longer lists two Python cache files that are not shipped (in v1.5.0 the
+integrity command therefore exited with status 1, while all shipped files matched), and `replay_mutations.py` was
+added. No data file, checker or result changed.
+
 Regenerating the source matrices takes about 16 minutes and 2.5 GB:
 
     python notes/0784_gpt_A3_mu12/generate.py 832 1920 256 regen      # writes regen_* files; refuses to overwrite

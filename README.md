@@ -43,7 +43,11 @@ DOIs:
 - Paper IV: [10.5281/zenodo.23134085](https://doi.org/10.5281/zenodo.23134085)
 - Paper V: [10.5281/zenodo.23175061](https://doi.org/10.5281/zenodo.23175061)
 - Paper VI: [10.5281/zenodo.23238480](https://doi.org/10.5281/zenodo.23238480) (certificate data in `certificate-VI/` of this repository)
-- Paper VII: [10.5281/zenodo.23261744](https://doi.org/10.5281/zenodo.23261744) (certificate data in `certificate-VII/` of this repository)
+- Paper VII: version 2 [10.5281/zenodo.23265728](https://doi.org/10.5281/zenodo.23265728); version 1 [10.5281/zenodo.23261744](https://doi.org/10.5281/zenodo.23261744) (certificate data in `certificate-VII/` of this repository)
+
+## Changes in v1.5.1 (paper VII, version 2)
+
+`certificate-VII/SHA256SUMS` listed two Python cache files that are not shipped, so the integrity command of v1.5.0 exited with status 1 although every shipped file matched; it now lists exactly the shipped files. The mutation tests are replayed with `certificate-VII/replay_mutations.py` in a disposable copy (running the original script directly stops at the end, because it refuses to overwrite the shipped results). No data file, checker or result changed. Paper VII version 2 adds three clarifications (the functions b_j of Lemma 5.1, the sign of the transform in Lemma 3.2, the identity behind W(X) ⪰ G); its theorems and constants are unchanged.
 
 ## Corrections in v1.2.1 (papers II and III, version 2)
 
