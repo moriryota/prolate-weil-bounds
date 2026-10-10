@@ -1,0 +1,202 @@
+{
+  "status": "PASS_INDEPENDENT_SOURCE_SPOTCHECKS",
+  "reviewer": "sol",
+  "prime_precision_bits": 8192,
+  "frequency_precision_bits": 2304,
+  "frequency_q": 256,
+  "prime_method": "Legendre coefficient formula, factorial-convolution Taylor shifts, polynomial antiderivatives",
+  "pole_method": "Exact modified-Bessel-I exponential moment; cosh/sinh by parity",
+  "source_delta": "d(736L), not target 2^-2901",
+  "own_frequency_operator_error": "[3.257985344462639337120794866055592808649e-116 +/- 1.33e-158]",
+  "source_full_J_quadrature_error": "2^-319",
+  "records": [
+    {
+      "parity": 0,
+      "matrix": "A",
+      "row": 7,
+      "column": 4,
+      "degrees": [
+        14,
+        8
+      ],
+      "own": "[-0.02683342566811425708459108175668557811115 +/- 3.90e-42]",
+      "source": "[-0.02683342566811425708459108175668557811115 +/- 3.90e-42]",
+      "difference": "[+/- 3.17e-696]",
+      "ratio": "[1.000000000000000000000000000000000000000 +/- 1e-44]",
+      "raw_balls_overlap": true,
+      "analytic_difference_bound": "0",
+      "difference_over_bound": null,
+      "status": "PASS",
+      "prime13_increment": "[-0.08605538580343431816166675952072011933143 +/- 2.54e-43]"
+    },
+    {
+      "parity": 0,
+      "matrix": "A",
+      "row": 400,
+      "column": 401,
+      "degrees": [
+        800,
+        802
+      ],
+      "own": "[-0.09040246842939596147822979494213438513487 +/- 1.41e-42]",
+      "source": "[-0.09040246842939596147822979494213438513487 +/- 1.41e-42]",
+      "difference": "[+/- 8.80e-695]",
+      "ratio": "[1.000000000000000000000000000000000000000 +/- 3e-45]",
+      "raw_balls_overlap": true,
+      "analytic_difference_bound": "0",
+      "difference_over_bound": null,
+      "status": "PASS",
+      "prime13_increment": "[-0.01511586374380029768858835662334900064704 +/- 1.28e-42]"
+    },
+    {
+      "parity": 0,
+      "matrix": "B",
+      "row": 7,
+      "column": 4,
+      "degrees": [
+        14,
+        8
+      ],
+      "own": "[-0.3250443168526900301559583207440981077957 +/- 1.72e-41]",
+      "source": "[-0.3250443168526900301559583207440981077957 +/- 1.72e-41]",
+      "difference": "[+/- 2.08e-695]",
+      "ratio": "[1.000000000000000000000000000000000000000 +/- 1e-44]",
+      "raw_balls_overlap": true,
+      "analytic_difference_bound": "0",
+      "difference_over_bound": null,
+      "status": "PASS",
+      "prime13_increment": "[-0.6986992278734776833018841269608104352855 +/- 2.10e-41]"
+    },
+    {
+      "parity": 0,
+      "matrix": "B",
+      "row": 400,
+      "column": 401,
+      "degrees": [
+        800,
+        802
+      ],
+      "own": "[-0.2642416286329704417652250606872132562178 +/- 1.35e-41]",
+      "source": "[-0.2642416286329704417652250606872132562178 +/- 1.35e-41]",
+      "difference": "[+/- 9.11e-695]",
+      "ratio": "[1.000000000000000000000000000000000000000 +/- 3e-45]",
+      "raw_balls_overlap": true,
+      "analytic_difference_bound": "0",
+      "difference_over_bound": null,
+      "status": "PASS",
+      "prime13_increment": "[-0.009101462917900886442116505328511448036520 +/- 3.56e-43]"
+    },
+    {
+      "parity": 0,
+      "matrix": "J",
+      "row": 7,
+      "column": 4,
+      "degrees": [
+        14,
+        8
+      ],
+      "own": "[0.1537930772644296049494967519362147298279 +/- 1.84e-41]",
+      "source": "[0.1537930772644296049494967519362147298279 +/- 1.84e-41]",
+      "difference": "[+/- 8.82e-265]",
+      "ratio": "[1.000000000000000000000000000000000000000 +/- 1e-44]",
+      "raw_balls_overlap": true,
+      "analytic_difference_bound": "[9.363352709384396654637497362163617073542e-97 +/- 1.27e-137]",
+      "difference_over_bound": "[+/- 9.42e-169]",
+      "status": "PASS"
+    },
+    {
+      "parity": 0,
+      "matrix": "J",
+      "row": 400,
+      "column": 401,
+      "degrees": [
+        800,
+        802
+      ],
+      "own": "[0.008378678051174975378966004924438779263326 +/- 2.18e-43]",
+      "source": "[0.008378678051174975378966004924438779263326 +/- 2.18e-43]",
+      "difference": "[+/- 6.17e-266]",
+      "ratio": "[1.000000000000000000000000000000000000000 +/- 3e-45]",
+      "raw_balls_overlap": true,
+      "analytic_difference_bound": "[9.363352709384396654637497362163617073542e-97 +/- 1.27e-137]",
+      "difference_over_bound": "[+/- 6.59e-170]",
+      "status": "PASS"
+    },
+    {
+      "parity": 1,
+      "matrix": "A",
+      "row": 3,
+      "column": 0,
+      "degrees": [
+        7,
+        1
+      ],
+      "own": "[0.02650692756510262271542339337613385425743 +/- 3.40e-43]",
+      "source": "[0.02650692756510262271542339337613385425743 +/- 3.40e-43]",
+      "difference": "[+/- 1.44e-696]",
+      "ratio": "[1.000000000000000000000000000000000000000 +/- 3e-45]",
+      "raw_balls_overlap": true,
+      "analytic_difference_bound": "0",
+      "difference_over_bound": null,
+      "status": "PASS",
+      "prime13_increment": "[0.03515951861926831106789147927035544449159 +/- 3.95e-42]"
+    },
+    {
+      "parity": 1,
+      "matrix": "B",
+      "row": 3,
+      "column": 0,
+      "degrees": [
+        7,
+        1
+      ],
+      "own": "[0.5146780759919185280766924355877833980037 +/- 6.16e-42]",
+      "source": "[0.5146780759919185280766924355877833980037 +/- 6.16e-42]",
+      "difference": "[+/- 2.35e-694]",
+      "ratio": "[1.000000000000000000000000000000000000000 +/- 1e-44]",
+      "raw_balls_overlap": true,
+      "analytic_difference_bound": "0",
+      "difference_over_bound": null,
+      "status": "PASS",
+      "prime13_increment": "[0.4094639453320933043271106417944532698197 +/- 4.17e-41]"
+    },
+    {
+      "parity": 1,
+      "matrix": "J",
+      "row": 3,
+      "column": 0,
+      "degrees": [
+        7,
+        1
+      ],
+      "own": "[0.1220856124050038176835436002763212876326 +/- 3.98e-41]",
+      "source": "[0.1220856124050038176835436002763212876326 +/- 3.98e-41]",
+      "difference": "[+/- 4.84e-265]",
+      "ratio": "[1.000000000000000000000000000000000000000 +/- 3e-45]",
+      "raw_balls_overlap": true,
+      "analytic_difference_bound": "[9.363352709384396654637497362163617073542e-97 +/- 1.27e-137]",
+      "difference_over_bound": "[+/- 5.17e-169]",
+      "status": "PASS"
+    },
+    {
+      "parity": 1,
+      "matrix": "J",
+      "row": 400,
+      "column": 401,
+      "degrees": [
+        801,
+        803
+      ],
+      "own": "[0.008087670457125124768924476666736921934487 +/- 2.96e-43]",
+      "source": "[0.008087670457125124768924476666736921934487 +/- 2.96e-43]",
+      "difference": "[+/- 7.87e-266]",
+      "ratio": "[1.000000000000000000000000000000000000000 +/- 3e-45]",
+      "raw_balls_overlap": true,
+      "analytic_difference_bound": "[9.363352709384396654637497362163617073542e-97 +/- 1.27e-137]",
+      "difference_over_bound": "[+/- 8.40e-170]",
+      "status": "PASS"
+    }
+  ],
+  "seconds": 24.750123459030874,
+  "maxrss_bytes": 1847934976
+}

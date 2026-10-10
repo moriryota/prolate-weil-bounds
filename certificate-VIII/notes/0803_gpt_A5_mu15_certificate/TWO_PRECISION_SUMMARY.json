@@ -1,0 +1,54 @@
+{
+  "status": "PASS_TWO_PRECISIONS",
+  "checks": [
+    {
+      "bits": 1280,
+      "status": "PASS_EXTERNAL_CERTIFICATE",
+      "seconds": 202.17617487499956,
+      "peak_rss_bytes": 2322300928,
+      "blocks": [
+        {
+          "parity": 0,
+          "certified_finite_lower_power": "2^-232",
+          "finite_lower_approx": "[2.39793692267373184881609e-70 +/- 1.94e-94]",
+          "epsilon_T": "[4.79403658787245918992087e-94 +/- 2.17e-118]",
+          "paid_congruence": "[1.99923381762934681659324e-24 +/- 7.87e-49]",
+          "epsilon_Y": "[8.26341738632850575063934e-151 +/- 1.46e-175]"
+        },
+        {
+          "parity": 1,
+          "certified_finite_lower_power": "2^-218",
+          "finite_lower_approx": "[3.94580058982584616981629e-66 +/- 1.87e-91]",
+          "epsilon_T": "[4.79403658787245918992087e-94 +/- 2.17e-118]",
+          "paid_congruence": "[1.21497183633530024412805e-28 +/- 2.31e-52]",
+          "epsilon_Y": "[5.94207540536413552300490e-151 +/- 1.07e-175]"
+        }
+      ]
+    },
+    {
+      "bits": 1536,
+      "status": "PASS_EXTERNAL_CERTIFICATE",
+      "seconds": 197.68895679106936,
+      "peak_rss_bytes": 2790899712,
+      "blocks": [
+        {
+          "parity": 0,
+          "certified_finite_lower_power": "2^-232",
+          "finite_lower_approx": "[2.39793692267373184881609e-70 +/- 1.94e-94]",
+          "epsilon_T": "[4.79403658787245918992087e-94 +/- 2.17e-118]",
+          "paid_congruence": "[1.99923381762934681659324e-24 +/- 7.87e-49]",
+          "epsilon_Y": "[8.26341738632850575063934e-151 +/- 1.46e-175]"
+        },
+        {
+          "parity": 1,
+          "certified_finite_lower_power": "2^-218",
+          "finite_lower_approx": "[3.94580058982584616981629e-66 +/- 1.87e-91]",
+          "epsilon_T": "[4.79403658787245918992087e-94 +/- 2.17e-118]",
+          "paid_congruence": "[1.21497183633530024412805e-28 +/- 2.31e-52]",
+          "epsilon_Y": "[5.94207540536413552300490e-151 +/- 1.07e-175]"
+        }
+      ]
+    }
+  ],
+  "interpretation": "Both prove lower bounds, not an assertion that rounded endpoints coincide."
+}

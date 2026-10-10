@@ -1,6 +1,6 @@
 # prolate-weil-bounds
 
-This repository contains the computations for seven papers by Ryota Mori, together with their LaTeX sources and PDFs.
+This repository contains the computations for eight papers by Ryota Mori, together with their LaTeX sources and PDFs.
 
 **Paper I** (`paper-I/`). *A non-asymptotic bound with the sharp power of c for the eigenvalue defect 1 − λ_n(c) of time and frequency limiting.*
 
@@ -33,6 +33,8 @@ with C_n = 18.34, 155.0, 703.4, 2340 and 6621. The power of c is the one in Fuch
 - **Theorem N:** 1 − λ₀(c) ≥ e^{−2(c+1)}/(4(c+1)(c+4)) for every c > 0 (an analytic proof). It replaces the out-of-band estimate of paper VI and improves its constant to 2^−876 without recomputing the finite matrices.
 `certificate-VII/` contains the code and all data (about 350 MB); see `certificate-VII/README.md`.
 
+**Paper VIII** (`paper-VIII/`, `certificate-VIII/`). *Weil positivity on the window of width log 15.* Unconditionally, Q(f) ≥ 2^−2904 ‖f‖² for every complex C² function f supported in [−½ log 15, ½ log 15] (the prime 13 enters; finite matrix inequality at N = 1664, certified in Arb with all errors paid; an external interval-arithmetic certificate, not a formal proof). `certificate-VIII/` contains the code only; the matrices (about 1.8 GB) are in the separate repository [weil-log15-certificate-data](https://github.com/moriryota/weil-log15-certificate-data) ([10.5281/zenodo.23281176](https://doi.org/10.5281/zenodo.23281176)); see `certificate-VIII/README.md`.
+
 Paper II is a sequel to *Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms* ([code](https://github.com/moriryota/weil-window-upper-bounds), [paper](https://doi.org/10.5281/zenodo.23059297)).
 
 DOIs:
@@ -44,6 +46,7 @@ DOIs:
 - Paper V: [10.5281/zenodo.23175061](https://doi.org/10.5281/zenodo.23175061)
 - Paper VI: [10.5281/zenodo.23238480](https://doi.org/10.5281/zenodo.23238480) (certificate data in `certificate-VI/` of this repository)
 - Paper VII: version 2 [10.5281/zenodo.23265728](https://doi.org/10.5281/zenodo.23265728); version 1 [10.5281/zenodo.23261744](https://doi.org/10.5281/zenodo.23261744) (certificate data in `certificate-VII/` of this repository)
+- Paper VIII: [10.5281/zenodo.23281236](https://doi.org/10.5281/zenodo.23281236) (certificate code in `certificate-VIII/`; data [10.5281/zenodo.23281176](https://doi.org/10.5281/zenodo.23281176))
 
 ## Changes in v1.5.1 (paper VII, version 2)
 
@@ -57,14 +60,14 @@ Versions 1 of papers II and III used the zero-counting bound of T. Trudgian (J. 
 
 The powers of μ and log μ, the statements and the proofs are unchanged. Papers I and IV are not affected.
 
-Papers I–III and V give upper bounds only and say nothing about positivity; papers VI and VII prove positivity on fixed windows only. None of them addresses the Riemann Hypothesis. Paper IV gives lower bounds under RH (and, for the main theorem, an additional hypothesis); it does not prove RH.
+Papers I–III and V give upper bounds only and say nothing about positivity; papers VI–VIII prove positivity on fixed windows only. None of them addresses the Riemann Hypothesis. Paper IV gives lower bounds under RH (and, for the main theorem, an additional hypothesis); it does not prove RH.
 
 ## Layout
 
 | Directory | Contents |
 |---|---|
-| `paper-I/` … `paper-VII/` | LaTeX sources and PDFs. |
-| `certificate-VI/`, `certificate-VII/` | Code and data of the positivity certificates of papers VI and VII. |
+| `paper-I/` … `paper-VIII/` | LaTeX sources and PDFs. |
+| `certificate-VI/`, `certificate-VII/`, `certificate-VIII/` | Code and data of the positivity certificates of papers VI and VII; code of paper VIII (its data are in a separate repository). |
 | `proofs-I/`, `proofs-II/`, `proofs-III/`, `proofs-V/` | Computations that **prove** the numerical constants of the papers. They use ball arithmetic (Arb, through python-flint) or exact rationals. Every printed upper bound is rounded upward, every lower bound downward, and each is asserted against the ball. |
 | `numerics-I/` … `numerics-V/` | Numerical illustrations. These scripts are **not** part of any proof. |
 | `common/` | Shared code for the numerics: prolate spheroidal wave functions from Legendre expansions, and the Weil form on a Legendre basis in Arb. |

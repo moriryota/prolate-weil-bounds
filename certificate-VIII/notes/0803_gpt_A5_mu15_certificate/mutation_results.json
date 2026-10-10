@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "tests": [
+    {
+      "case": "sign_reversed_J",
+      "expected_reason": "E_SOURCE_J",
+      "actual_reason": "E_SOURCE_J",
+      "exit_code": 1,
+      "passed": true
+    },
+    {
+      "case": "excess_error",
+      "expected_reason": "E_ERROR_BUDGET",
+      "actual_reason": "E_ERROR_BUDGET",
+      "exit_code": 1,
+      "passed": true
+    },
+    {
+      "case": "B_replaced_by_A_squared",
+      "expected_reason": "E_SOURCE_B",
+      "actual_reason": "E_SOURCE_B",
+      "exit_code": 1,
+      "passed": true
+    },
+    {
+      "case": "file_tampering",
+      "expected_reason": "E_FILE_HASH",
+      "actual_reason": "E_FILE_HASH",
+      "exit_code": 1,
+      "passed": true
+    },
+    {
+      "case": "understated_J_error",
+      "expected_reason": "E_SOURCE_J",
+      "actual_reason": "E_SOURCE_J",
+      "exit_code": 1,
+      "passed": true
+    },
+    {
+      "case": "wrong_contract",
+      "expected_reason": "E_CONTRACT",
+      "actual_reason": "E_CONTRACT",
+      "exit_code": 1,
+      "passed": true
+    },
+    {
+      "case": "negative_T_same_congruence_gate",
+      "expected_reason": "E_POSITIVITY_T",
+      "actual_reason": "E_POSITIVITY_T",
+      "passed": true
+    }
+  ],
+  "base_packet_unchanged": true,
+  "seconds": 256.62076225003693
+}

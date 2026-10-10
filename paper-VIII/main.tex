@@ -1,0 +1,244 @@
+% Ryota Mori. Version 1, 2026-10-10. Licence: CC BY 4.0. doi:10.5281/zenodo.23281236
+% Paper VIII: Weil positivity on the window of width log 15.
+% Sources: notes/0803_gpt_A5_mu15_certificate (certificate), 0802 (Sol, analytic budget), 0804 (Claude review),
+%          0805 (Sol, independent review: accepted). Manuscript review 0806 (Sol): conditional accept, 6 minor, applied in 0807.
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+
+\newtheorem{theorem}{Theorem}
+\renewcommand{\thetheorem}{\Alph{theorem}}
+\setcounter{theorem}{14}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[proposition]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\emergencystretch=3em
+
+\title[Weil positivity on the window of width $\log 15$]{Weil positivity on the window of width $\log 15$}
+\author{Ryota Mori}
+\address{Independent researcher, Tokyo, Japan}
+\email{moriryota31@gmail.com}
+\date{10 October 2026}
+
+\begin{document}
+
+\begin{abstract}
+Weil's criterion states that the Riemann Hypothesis holds if and only if Weil's quadratic form $Q$ is nonnegative on all admissible test functions. Restricting the support to a fixed interval $[-L,L]$ gives a weaker, unconditional question. We prove that $Q(f)\ge2^{-2904}\|f\|_2^2$ for every complex $C^2$ function $f$ supported in $[-\tfrac12\log15,\tfrac12\log15]$. The previous largest window we know of is $\tfrac12\log12$ (our previous paper). On the new window the prime $13$ enters. The proof uses the bounded-comparison framework of Liu and the general tail estimate and prolate defect bound of our previous paper, with a new weight in the Schur bound for the prime operator, and quadrature estimates that do not assume $L<5/4$. Positivity is reduced to a finite matrix inequality of size $832$ in each parity, which we certify in Arb ball arithmetic with all quadrature, rounding and inversion errors paid. The certified finite margin is about $2.40\times10^{-70}$ (even) and $3.95\times10^{-66}$ (odd), while the total error is below $5\times10^{-94}$. This is an external certificate, not a formal proof. The result concerns one fixed window and does not address the Riemann Hypothesis.
+\end{abstract}
+
+\maketitle
+
+\begin{sloppypar}
+\noindent Zenodo, \doi{10.5281/zenodo.23281236}. Certificate code: release \texttt{v1.6.0} of \url{https://github.com/moriryota/prolate-weil-bounds}, \doi{10.5281/zenodo.23092422}; data: \url{https://github.com/moriryota/weil-log15-certificate-data}, \doi{10.5281/zenodo.23281176}. Licence: CC BY 4.0.
+\end{sloppypar}
+
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\small
+\textbf{Status.} Analytic proof plus an external interval-arithmetic certificate (Arb/FLINT). The analytic error budget and the certificate passed independent AI reviews, including an independent reimplementation of the final check; no blocking issues remained. Not formalized in Lean. Not yet reviewed by independent human experts.}}
+\end{center}
+
+\section{Introduction}
+
+\subsection{Background}
+Let $Q$ be Weil's quadratic form \cite{Weil1952,Bombieri2000}. Weil's criterion states that RH is equivalent to $Q(f)\ge0$ for all admissible $f$. If the support of $f$ is restricted to $[-L,L]$, only prime powers $n<e^{2L}$ contribute and the question can be decided unconditionally for small $L$. Positivity is known for $L=\frac12\log2$ (Yoshida \cite{Yoshida1992}), $L=0.8$ (Zhu \cite{Zhu2026}), $L=\frac12\log5$ (Lean~4, \cite{MoriLog5}), $L=17/16$ (Liu \cite{Liu2026}, unrefereed), $L=\frac12\log10$ (\cite{MoriVI}) and $L=\frac12\log12$ (\cite{MoriVII}). For $\mu=e^{2L}$, the bottom $\lambda_{\min}$ of the spectrum of the restricted form satisfies $\lambda_{\min}\le3.50\times10^{24}\mu^{9/2}\log\mu\,e^{-4\pi\mu}$ for $50\le\mu\le10^4$ \cite[Theorem~K]{MoriWeilV}, so each enlargement of the window must resolve a much smaller margin.
+
+In \cite{MoriVII} we proved a lower bound for the defect of the top prolate eigenvalue (Theorem~N there), which gives an out-of-band estimate for every $L$, and we wrote the bounded comparison with all constants as functions of $L$, $\Omega$, $m$ and the truncation order $N$. That paper noted that the obstacle for larger windows is the prime operator: as $e^{2L}$ grows, its norm grows, and with it the band limit $\Omega$, the order $N$ and the precision. This paper carries the method to $e^{2L}=15$.
+
+\subsection{Result}
+For $L>0$, $f\in C^2(\R;\C)$ with $\operatorname{supp}f\subset[-L,L]$, put $F_f(z)=\int f(x)e^{izx}\,dx$, $a(t)=\operatorname{Re}\psi(\tfrac14+\tfrac{it}2)-\log\pi$ and
+\begin{equation}\label{eq:Q}
+\begin{aligned}
+Q(f)={}&2\Bigl|\int f(x)\cosh\tfrac x2\,dx\Bigr|^2-2\Bigl|\int f(x)\sinh\tfrac x2\,dx\Bigr|^2
++\frac1{2\pi}\int_\R a(t)|F_f(t)|^2\,dt\\
+&-2\sum_{n<e^{2L}}\frac{\Lambda(n)}{\sqrt n}\operatorname{Re}\int_\R f(x)\overline{f(x-\log n)}\,dx .
+\end{aligned}
+\end{equation}
+By the Guinand--Weil explicit formula, $Q(f)=\operatorname{Re}\sum_\rho m_\rho F_f(\gamma_\rho)\overline{F_f(\overline{\gamma_\rho})}$ with $\gamma_\rho=(\rho-\frac12)/i$; RH is not assumed. The derivation, the convergence of the zero sum, and the reduction to real symmetric operators on each parity are as in \cite[Section~2]{MoriVI}; nothing there depends on $L$. For $L=\frac12\log15$ the prime powers are $n\in\{2,3,4,5,7,8,9,11,13\}$.
+
+\begin{theorem}\label{thm:O}
+For every $f\in C^2(\R;\C)$ with $\operatorname{supp}f\subset[-\frac12\log15,\frac12\log15]$,
+\[
+Q(f)\ge2^{-2904}\int_\R|f(x)|^2\,dx .
+\]
+\end{theorem}
+
+Theorem~\ref{thm:O} is proved by an ordinary analytic argument together with an external certificate in ball arithmetic (Arb/FLINT \cite{Arb}), produced and checked by separate programs. It is not a formal proof.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{llll}
+\toprule
+reference & half-width $L$ & $e^{2L}$ & method\\
+\midrule
+Yoshida \cite{Yoshida1992} & $\frac12\log2\approx0.347$ & $2$ & analytic + computer-assisted\\
+Zhu \cite{Zhu2026} & $0.8$ & $4.95$ & interval certificate\\
+\cite{MoriLog5} & $\frac12\log5\approx0.805$ & $5$ & Lean 4 (kernel-checked)\\
+Liu \cite{Liu2026} & $17/16=1.0625$ & $8.37$ & interval certificate (unrefereed)\\
+\cite{MoriVI} & $\frac12\log10\approx1.151$ & $10$ & interval certificate\\
+\cite{MoriVII} & $\frac12\log12\approx1.242$ & $12$ & interval certificate\\
+Theorem~\ref{thm:O} & $\frac12\log15\approx1.354$ & $15$ & interval certificate\\
+\bottomrule
+\end{tabular}
+\caption{Unconditional positivity on windows $[-L,L]$. The approach of Connes and Consani \cite{CC20} works under vanishing conditions on the Fourier transform and is not listed.}
+\end{table}
+
+\subsection{What changes from \texorpdfstring{$\log12$}{log 12}}
+\begin{itemize}
+\item The prime $13$ enters. With the weight $w(x)=1+\frac23(x/L)^2$ in the Schur test we obtain $\|C_p\|\le\frac{66}{16}$ (Section~\ref{sec:mu15}); a smaller $s$ allows a smaller band limit $\Omega$ and hence a smaller $N$.
+\item The quadrature lemma of \cite{MoriVII} used $L<5/4$. Lemma~\ref{lem:quad} below is proved without it, with panels of length at most $64$ up to $\Omega=736$.
+\item The finite condition is certified at $N=1664$ ($832$ modes in each parity). At $N=1280$ the computed comparison matrix was numerically negative in both parities (Remark~\ref{rem:N1280}). The source matrices were computed one parity at a time to fit in $16$~GB of memory.
+\end{itemize}
+Nothing else is new. In particular the tail inequality, the projection lemma and the block elimination are used exactly as stated in \cite{MoriVII}.
+
+\section{The bounded comparison}\label{sec:tail}
+We recall the reduction of \cite[Section~3]{MoriVII}. Let $L>0$, $I=[-L,L]$, $H=L^2(I;\C)$. For $a\in\R$ let $S_af(x)=\mathbf 1_I(x-a)f(x-a)$ and $C_p=\sum_{n<e^{2L}}\Lambda(n)n^{-1/2}(S_{\log n}+S_{-\log n})$, so that the prime term of \eqref{eq:Q} is $-\langle f,C_pf\rangle$. For a positive even weight $w$, the weighted Schur test gives $\|C_p\|\le\operatorname{ess\,sup}R_w$, where
+\[
+R_w(x)=\sum_{n<e^{2L}}\frac{\Lambda(n)}{\sqrt n}\,\frac{\mathbf 1_I(x+\log n)w(x+\log n)+\mathbf 1_I(x-\log n)w(x-\log n)}{w(x)} .
+\]
+If $\|C_p\|\le s$, put $m>0$, $\gamma=s+m$, $M=\gamma I-C_p$ and $b=2s+m$, so that $mI\preceq M\preceq bI$.
+
+Let $B_{\rm band}$ have kernel $\sin(\Omega(x-y))/(\pi(x-y))$ on $I$, $c=\Omega L$, $d(c)=e^{-2(c+1)}/(4(c+1)(c+4))$, and
+\[
+C=\log\frac\Omega{2\pi}-\frac1\Omega-\gamma,\qquad E_0=\frac{c+1}{\pi c^2},\qquad E_1=\frac{3c^2+6c+2}{\pi c^3}.
+\]
+If $C>0$, $c>2$, $0<\delta\le d(c)$, and $u_j\ge0$ with $u_jE_j\le C$, then by \cite[Proposition~3.1 and (3.2)]{MoriVII}
+\begin{equation}\label{eq:reduction}
+Q(f)\ge C\delta\|f\|^2+\langle f,(M+V)f\rangle,\qquad V=K+U,
+\end{equation}
+where $K$ is the integral operator with kernel
+\[
+K(x,y)=2\cosh\frac{x-y}{2}+\frac1{2\pi}\int_{-\Omega}^{\Omega}(a(t)-\gamma)e^{it(x-y)}\,dt
+\]
+(the pole terms and the band-limited part of the archimedean term) and $U=u_0|h_0\rangle\langle h_0|+u_1|h_1\rangle\langle h_1|$ with $h_j=(I-B_{\rm band}-\delta I)v_j$, $v_0=(2L)^{-1/2}$, $v_1=\sqrt{3/(2L)}\,x/L$.
+
+Let $N\ge2$, $v_j(x)=\sqrt{(2j+1)/(2L)}P_j(x/L)$, $E:\C^N\to H$, $Ez=\sum_{j<N}z_jv_j$, $P=EE^*$, and
+\[
+A=E^*ME,\quad B=E^*M^2E,\quad J=E^*VE,\quad G=E^*M^{-1}E,\quad D_M=B-A^2 .
+\]
+For $\rho>1$, Lemma~3.2 of \cite{MoriVII} gives explicit $e,n,h$ such that the residual $R=V-EJE^*$ satisfies $\|(I-P)RP\|\le e$, $(I-P)R(I-P)\succeq-n$, $\|(I-P)R(I-P)\|\le h$, and with
+\[
+\alpha=e+\frac{2e^2}{m-n},\qquad\beta=\frac{e+n}{m^2}+\frac{2h^2}{m^2(m-n)}
+\]
+the block elimination of \cite[(3.3)]{MoriVII} gives: if $n<m$ and $G^{-1}+J\succeq\alpha I+\beta D_M$, then $M+V\succeq0$ on $H$. Finally, for every matrix $X$, $\mathcal W(X)=X+X^*-X^*AX+m^{-1}(I-AX-X^*A+X^*BX)\succeq G$, so it suffices to certify, in each parity,
+\begin{equation}\label{eq:T}
+T=\mathcal W(X)^{-1}+J-\alpha I-\beta(B-A^2)\succ0 .
+\end{equation}
+
+\section{The window \texorpdfstring{$\frac12\log15$}{(1/2) log 15}}\label{sec:mu15}
+Let $L=\frac12\log15\approx1.354025$, so $e^{2L}=15$ and the prime powers are $2,3,4,5,7,8,9,11,13$.
+
+\emph{Prime operator.} Take $w(x)=1+\frac23(x/L)^2$. In the variable $y=e^{2x}$, $x\ge0$, the shift by $\pm\log n$ is switched on or off at $y=\max(15/n^2,n^2/15)$, so the breakpoints are
+\[
+y\in\Bigl\{1,\tfrac{16}{15},\tfrac53,\tfrac{49}{15},\tfrac{15}4,\tfrac{64}{15},\tfrac{27}5,\tfrac{121}{15},\tfrac{169}{15},15\Bigr\}.
+\]
+Bounding $R_w$ in ball arithmetic on $9\cdot256=2304$ closed subintervals gives $R_w<4.0915$, the maximum occurring on the cell $\frac{49}{15}\le y\le\frac{15}4$. Hence $\|C_p\|\le s=\frac{66}{16}$. We take $m=\frac12$, so $\gamma=\frac{37}8$ and $b=\frac{35}4$. The weight enters only the proof of the norm bound; the operator $C_p$ and the matrices $A$, $B$ do not depend on it.
+
+\emph{Tail.} With $\Omega=736$ we get $c=\Omega L\approx996.56$ and $C\approx0.136994>\frac18$. Moreover $-\log_2d(c)=2900.29\ldots$, so we take $\delta=2^{-2901}$ and $\tau=\delta/8=2^{-2904}<C\delta$. The coefficients $u_0=428$, $u_1=142$ satisfy $u_0E_0\approx0.13684<C$ and $u_1E_1\approx0.13634<C$.
+
+\emph{Projection errors.} With $N=1664$ (that is, $832$ modes in each parity) and $\rho=3$, Lemma~3.2 of \cite{MoriVII} gives, in ball arithmetic,
+\[
+e<2.75\times10^{-213}<2^{-706},\qquad n<1.09\times10^{-429}<2^{-1424},\qquad h<6.29\times10^{-428}<2^{-1419} .
+\]
+Then $n<m$, and $\alpha+\beta b^2<2^{-697}$ (checked with exact rationals).
+
+\begin{remark}\label{rem:N1280}
+At $N=1280$ the $LDL^*$ factorization of the midpoint comparison matrix had one negative pivot in each parity (smallest pivots $-3.46$ even and $-93.5$ odd). The same happened for $e^{2L}=12$ at $N=640$, where the ratio $N/c$ was about $1.24$; there the condition held at $N/c\approx1.61$. Here $N/c\approx1.28$ at $N=1280$ and $N/c\approx1.67$ at $N=1664$.
+\end{remark}
+
+\section{Source matrices, quadrature and the certificate}\label{sec:certificate}
+
+\emph{$A$ and $B$.} After splitting $I$ at the support boundaries of the shifts, the entries are integrals of polynomials of degree at most $3326$; Gauss--Legendre quadrature with $1666$ nodes is exact, so only rounding errors occur. These are enclosed by the balls, and $\epsilon_A=\epsilon_B=2^{-400}$ covers them together with the distance to the rational centres.
+
+\emph{$J$.} In each parity the band and gamma-weighted integrals are computed on the $19$ panels with endpoints
+\[
+0,\tfrac12,1,2,4,8,16,32,64,128,192,256,\dots,704,736
+\]
+(steps of $64$ from $64$ to $704$), with $224$ Gauss nodes each. For each parity $p\in\{0,1\}$ and $j\equiv p\pmod2$ put
+\[
+b_j(t)=i^{-p}F_{v_j}(t)=(-1)^{(j-p)/2}\sqrt{2L(2j+1)}\,j_j(Lt),
+\]
+where $j_j$ is the spherical Bessel function. These functions are real for real $t$, entire, and $|b_j(z)|\le\sqrt{2L}\,e^{L|\operatorname{Im}z|}$. In a fixed parity the band and gamma-weighted band entries are $\pi^{-1}\int_0^\Omega b_i(t)b_j(t)\,dt$ and $\pi^{-1}\int_0^\Omega(a(t)-\gamma)b_i(t)b_j(t)\,dt$.
+
+\begin{lemma}[quadrature]\label{lem:quad}
+On the Bernstein ellipses $\rho=2$ of the panels, $|\operatorname{Im}z|\le24$ and $|z|\le768$. There $|b_ib_j|\le H_B:=2Le^{48L}$, and $g(z)=\frac12[\psi(\frac14+\frac{iz}2)+\psi(\frac14-\frac{iz}2)]-\log\pi-\frac{37}8$ is holomorphic with $|g|<1100$. Consequently the quadrature error of $J$, including the pole and $U$ terms, is below $2^{-319}$ in operator norm.
+\end{lemma}
+\begin{proof}
+For a panel of length $\ell$, the ellipse has semi-axes $\frac58\ell$ and $\frac38\ell$. The longest panels have length $64$, so $|\operatorname{Im}z|\le24$, and every point satisfies $|z|\le736+32$. For $w=\frac14\pm\frac{iz}2$: on the three panels of length at most $1$, $\operatorname{Re}w\ge\frac1{16}$; on the others $\operatorname{Re}z\ge\frac74$, so $|\operatorname{Im}w|\ge\frac78$. Hence $|w+k|\ge\frac1{16}$ for all integers $k\ge0$, and $g$ has no poles.
+
+Since $\operatorname{Re}w\ge\frac14-12=-\frac{47}4$, the point $v=w+13$ has $\operatorname{Re}v\ge\frac54$ and $|v-1|\le397$. The series $\psi(v)=-\gamma_E+(v-1)\sum_{k\ge0}\frac1{(k+1)(k+v)}$ \cite[5.7.6]{DLMF}, with $|k+v|\ge k+1$, $\gamma_E<1$ and $\sum_{k\ge0}(k+1)^{-2}<2$, gives $|\psi(v)|<1+397\cdot2=795$. The $13$ steps of the recurrence $\psi(w)=\psi(w+1)-1/w$ cost at most $13\cdot16=208$, so $|\psi(w)|\le1003$ and $|g|\le1003+\log\pi+\frac{37}8<1100$.
+
+A Chebyshev truncation of degree $447$ and the exactness of $224$-point Gauss up to degree $447$ give the panel error $4\ell H_B\,2^{-447}$ for the band entries, and $1100$ times this for the gamma-weighted entries. The sum of the panel lengths is $736$, and the operator norm is at most $832$ times the entrywise bound, so $\epsilon_{\rm band}=832\cdot4\cdot736\cdot H_B\,2^{-447}$ and $\epsilon_K=1100\,\epsilon_{\rm band}$. For $U$, the true vectors $E^*h_j$ have norm at most $1$, so $\epsilon_U\le428(2\epsilon_{\rm band}+\epsilon_{\rm band}^2)$; the two parities are orthogonal and the larger coefficient suffices. The pole coefficients use $1704$ nodes and Taylor polynomials of degree $1744$; with the basis degree at most $1663$ the polynomial part is integrated exactly, and the remainder of $e^{\pm x/2}$ is at most $d_p=2e^{L/2}(L/2)^{1745}/1745!$ uniformly on $I$. With $\sqrt{2L}<2$ and $H_p<3$ this gives a vector error below $4d_p$ and an error in the two rank-one terms below $96d_p+64d_p^2$. Adding the contributions in ball arithmetic gives $6.01\times10^{-97}<2^{-319}$.
+\end{proof}
+
+\emph{The constant $\delta$.} The saved matrix $J$ was computed with $\delta_{\rm old}=d(c)$ (enclosed in a ball), while the theorem uses $\delta=2^{-2901}\le d(c)$. With $t=\delta_{\rm old}-\delta\in[0,d(c)]$ we have $h_j^{\rm new}=h_j^{\rm old}+tv_j$, so $\|U^{\rm new}-U^{\rm old}\|\le(u_0+u_1)(2t+t^2)<2^{-2889}$. This is added to the error of $J$. The pieces $(I-P)h_j$ do not change, so the projection bounds still apply.
+
+\emph{Certificate.} As in \cite[Section~5]{MoriVII}, for each parity the proposer outputs rational matrices with denominator $2^{512}$: centres $A_0,B_0,J_0$, a matrix $X$, $W_0\approx\mathcal W(X)$, an approximation $Y$ to $W_{\rm up}^{-1}$, where $W_{\rm up}=W_0+\epsilon_WI$, and congruence transforms $Z$ for $C_M=B-mA$, $W$ and $T$. Put
+\[
+T_0=Y+J_0-\alpha I-\beta(B_0-A_0^2).
+\]
+Since $W_{\rm up}\succeq\mathcal W(X)$, the order of inverses and the source-error bounds give $T\succeq T_0-\epsilon_TI$, so a congruence test for $T_0$ gives a lower bound for $T$. The checker does not import the proposer and computes no eigenvalues. It verifies:
+\begin{itemize}
+\item all entries against the saved source balls, whose SHA-256 sums are pinned, with $\epsilon_A=\epsilon_B=2^{-400}$ and $\epsilon_J=2^{-310}$ (quadrature, the $\delta$ change and rounding);
+\item the positivity of $C_M=B-mA$ and of $\mathcal W(X)$ by congruence, and $\epsilon_W=2^{-350}$, $\epsilon_D=2^{-380}$;
+\item the inverse residual $r=\|I-W_{\rm up}Y\|<1$, giving $\epsilon_Y=\|Y\|r/(1-r)$;
+\item $\epsilon_T=2b^2\epsilon_W+\epsilon_Y+\epsilon_J+\beta\epsilon_D\le2^{-300}$ and $\eta+\epsilon_T\|Z\|_F^2<1$ with $\eta=\|Z^*T_0Z-I\|$, which gives $\lambda_{\min}(T)\ge(1-\eta-\epsilon_T\|Z\|_F^2)/\|Z\|_F^2$.
+\end{itemize}
+The term $2b^2\epsilon_W$ is not needed for the logic, since $W_{\rm up}\succeq\mathcal W(X)$ already accounts for $\epsilon_W$; it is kept as a margin.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lcc}
+\toprule
+& even & odd\\
+\midrule
+certified upper bound for $\epsilon_T$ & $4.80\times10^{-94}$ & $4.80\times10^{-94}$\\
+certified lower bound for $\lambda_{\min}(T)$ & $2.3979369226\times10^{-70}$ & $3.9458005898\times10^{-66}$\\
+\bottomrule
+\end{tabular}
+\caption{The certified finite condition \eqref{eq:T} at $N=1664$, $\mu=15$.}
+\end{table}
+
+The checker passed at $1280$ and at $1536$ bits, in about $200$ seconds and $2.3$--$2.8$ GB of memory each. It rejected seven altered inputs for the intended reasons: the sign of $J$ reversed; an inflated declared error; $B$ replaced by $A^2$; a file changed without updating its hash; an understated error of $J$; a wrong contract; and a negative $T$ with the same congruence. An independent reimplementation of the final check at $1664$ bits, which does not share code with the checker, reproduced both lower bounds to $39$ digits and rejected an altered entry of $J$. Independently computed source entries agreed with the saved balls: $18$ entries of $A$, $B$ and $J$ in one review, and $10$ further entries in the other, computed by different methods (exact antiderivatives for $A$ and $B$, $256$ Gauss nodes for $J$); the latter include entries in which omitting the prime $13$ changes the value by more than $0.08$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:O}]
+The certificate gives \eqref{eq:T} in both parities, hence $G^{-1}+J\succeq\alpha I+\beta D_M$ because $\mathcal W(X)\succeq G$. Since $n<m$, the block elimination gives $M+V\succeq0$ on $H$. By \eqref{eq:reduction}, $Q(f)\ge C\delta\|f\|^2\ge2^{-2904}\|f\|^2$.
+\end{proof}
+
+\section{Remarks}
+\emph{Cost.} The source matrices at $N=1664$ and $3328$ bits took about $7800$ seconds and $5$~GB of memory per parity on a laptop with $16$~GB of memory, which is close to the limit of what we can do locally. Larger windows need a more economical implementation.
+
+\emph{Margins.} The certified finite margins are about $2^{-232}$ (even) and $2^{-218}$ (odd), while all paid errors are below $2^{-300}$. The final constant $2^{-2904}$ is much smaller because it comes from the out-of-band bound, which is of size $e^{-2\Omega L}$.
+
+\emph{Trust.} The proof relies on the analytic lemmas above and in \cite{MoriVI,MoriVII}, on Arb/FLINT \cite{Arb} for the ball enclosures, and on the checker program. It has not been checked by a proof assistant.
+
+\section*{Reproducibility}
+The proposer, the checker, the generator, the independent check and the mutation tests are in the folder \texttt{certificate-VIII/} of release \texttt{v1.6.0} of \url{https://github.com/moriryota/prolate-weil-bounds}, archived on Zenodo, \doi{10.5281/zenodo.23092422} (all versions). The certificate matrices and the source matrices (about $1.8$~GB) are in the separate repository \url{https://github.com/moriryota/weil-log15-certificate-data}, archived on Zenodo, \doi{10.5281/zenodo.23281176}, with a script that restores them into the code folder and checks every SHA-256 sum. The checker runs in about $200$ seconds and $3$~GB of memory.
+
+\section*{Use of generative AI}
+This work was carried out with extensive use of generative AI systems, namely Anthropic Claude and OpenAI GPT. Under the direction of the author, these systems derived the analytic bounds, implemented and ran the computations, and reviewed one another's work adversarially. The author is responsible for the content.
+
+\begin{thebibliography}{99}
+\bibitem{Arb} F.~Johansson, Arb: efficient arbitrary-precision midpoint-radius interval arithmetic, \emph{IEEE Trans. Comput.} 66 (2017) 1281--1292. \doi{10.1109/TC.2017.2690633}
+\bibitem{Bombieri2000} E.~Bombieri, Remarks on Weil's quadratic functional in the theory of prime numbers, I, \emph{Atti Accad. Naz. Lincei Rend. Lincei Mat. Appl.} (9) 11 (2000) 183--233.
+\bibitem{CC20} A.~Connes, C.~Consani, Weil positivity and trace formula, the archimedean place, \emph{Selecta Math. (N.S.)} 27 (2021), article 77. \doi{10.1007/s00029-021-00689-4}; we used arXiv:2006.13771v1.
+\bibitem{DLMF} NIST Digital Library of Mathematical Functions, \url{https://dlmf.nist.gov}.
+\bibitem{Liu2026} V.~Liu, Certified Weil positivity beyond the unit window: source-exact block-Schur and tail-compensation bounds for the Riemann zeta function, manuscript, 14 September 2026, \url{https://github.com/luciferyu666/certified-weil-positivity} (release \texttt{v1.0-mcom-submission}).
+\bibitem{MoriLog5} R.~Mori, Weil positivity on a window of width $\log5$: a formal proof in Lean~4, version~2, Zenodo, 2026. \doi{10.5281/zenodo.23035705}
+\bibitem{MoriWeilV} R.~Mori, A $\mu^{9/2}\log\mu$ upper bound for windowed Weil forms, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23175061}
+\bibitem{MoriVI} R.~Mori, Weil positivity on the window of width $\log10$: an interval-arithmetic certificate, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23238480}
+\bibitem{MoriVII} R.~Mori, Weil positivity on the window of width $\log12$, and a lower bound for the prolate eigenvalue defect, version~2, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23265728}
+\bibitem{Weil1952} A.~Weil, Sur les ``formules explicites'' de la th\'eorie des nombres premiers, \emph{Comm. S\'em. Math. Univ. Lund}, tome suppl\'ementaire (1952) 252--265.
+\bibitem{Yoshida1992} H.~Yoshida, On Hermitian forms attached to zeta functions, in: \emph{Zeta Functions in Geometry (Tokyo, 1990)}, Adv. Stud. Pure Math. 21, Kinokuniya, Tokyo, 1992, 281--325. \doi{10.2969/aspm/02110281}
+\bibitem{Zhu2026} X.~Zhu, Weil positivity in compact windows: a finite reduction, certified two-sided bounds, and a Landau--Widom decay law, arXiv:2608.24827v2, 2026.
+\end{thebibliography}
+
+\end{document}

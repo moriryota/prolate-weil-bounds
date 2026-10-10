@@ -1,0 +1,5 @@
+{
+  "status": "REJECT",
+  "reason": "E_ERROR_BUDGET",
+  "detail": "total T error exceeds fixed 2^-300 budget"
+}

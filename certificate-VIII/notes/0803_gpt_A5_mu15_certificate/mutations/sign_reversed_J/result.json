@@ -1,0 +1,5 @@
+{
+  "status": "REJECT",
+  "reason": "E_SOURCE_J",
+  "detail": "candidate does not enclose pinned true source with the declared bound"
+}

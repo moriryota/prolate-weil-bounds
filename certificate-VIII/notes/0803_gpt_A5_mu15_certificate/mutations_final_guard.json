@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/Users/moriryota/research/math/rh-weil-all-windows/.venv/bin/python",
+    "/Users/moriryota/research/math/rh-weil-all-windows/notes/0803_gpt_A5_mu15_certificate/test_mutations_v2.py"
+  ],
+  "exit_code": 0,
+  "memory_stop": false,
+  "sampled_peak_RSS_bytes": 2235695104,
+  "limit_bytes": 8500000000,
+  "seconds": 259.1563452921109,
+  "rss_scope": "sum_of_owned_process_tree",
+  "script_sha256": "77372bcd87d079a564ec1d9878e885f2548f4c6138943ec134362c0371961914"
+}

@@ -1,0 +1,7 @@
+log2 d(c) -2900.28572737  C 0.136994356667
+u0*E0, u1*E1 vs C 0.13684374 0.13634091
+u from floor(C/E): 428 142
+log2(alpha+beta b^2) ~ -697.7367307996274
+2^-698 bound holds? False
+perturb 570(2d+d^2) log2 -2890.130909
+SCALARS PASS

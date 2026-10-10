@@ -1,0 +1,87 @@
+{
+  "N": 1664,
+  "q": 224,
+  "bits": 3328,
+  "original_delta": "d(736 L)",
+  "target_delta": "2^-2901",
+  "manifests": [
+    {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p0_source_manifest.json",
+      "sha256": "e517d8ce3ab31a6e886761856dfaa9a6dcbeb300bbedbe4f971f30d7485c10e8"
+    },
+    {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p1_source_manifest.json",
+      "sha256": "2c0c5f10f4b246def7dbbf32b4ea0bfeb70f3de6f9e08cd4dde7b7f297ce5498"
+    }
+  ],
+  "diagnostics": [
+    {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p0_diagnostic.json",
+      "sha256": "448625187cd117545c80a7a7fe7087ad9d54e94c707c6291ad736817922c919c"
+    },
+    {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p1_diagnostic.json",
+      "sha256": "474c2951e494632121c85ff55e919e2b3afa64dd536007b270f61c1aee73eb75"
+    }
+  ],
+  "files": {
+    "p0_band": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p0_band.json.gz",
+      "sha256": "61817f4c2a637d827e19fb5f10d777793f06424d08b21a5690dd846cba84f315"
+    },
+    "p0_pole": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p0_pole.json.gz",
+      "sha256": "1fc19d5306df0e6d40a3ec214ac1d2885ec584e8c3130135e0056092dc720d35"
+    },
+    "p0_U": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p0_U.json.gz",
+      "sha256": "fd5c4e6ea4d2906d958107a346e02d413018dd2f79bb41e841ce4f7822078e6e"
+    },
+    "p0_A": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p0_A.json.gz",
+      "sha256": "b0d0b3b86a86bc0fbb1e5143ddf814e6273a70fb4015cfb8fe90926bda4ff805"
+    },
+    "p0_B": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p0_B.json.gz",
+      "sha256": "bdc06ddf4d7d3884b1f31f5e9878499360cfbd557c2e2cffc65d481bdbc767c7"
+    },
+    "p0_J": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p0_J.json.gz",
+      "sha256": "40d6c849b84a3f89643731be0000c8430b0610d9ca43f9990e78da647f8b31e4"
+    },
+    "p0_Z": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p0_Z.json.gz",
+      "sha256": "d5d4377d95951344816c8f444bddb6013af49533f98a2cacaa49c164d64f0848",
+      "role": "UNTRUSTED_WITNESS"
+    },
+    "p1_band": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p1_band.json.gz",
+      "sha256": "92ce536206db05f50ad89f7bb45ba29ac1d6e842be47a96a08babd735775ca11"
+    },
+    "p1_pole": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p1_pole.json.gz",
+      "sha256": "1650b49975fecd087546d3c5864165ffff75bd1a41cfd5080e8bf5101ade5916"
+    },
+    "p1_U": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p1_U.json.gz",
+      "sha256": "913392a3890833b6a6d44b35289da6259ecca25fba8e6d975632c0a6376bb506"
+    },
+    "p1_A": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p1_A.json.gz",
+      "sha256": "e4f63bb23086c56063116375a4b2319e8a65615108e12e3ce8c35e26ca5838a0"
+    },
+    "p1_B": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p1_B.json.gz",
+      "sha256": "93c24fa263f7b0261bb9e3d02c6146f15831300619edb10d954ba3392517875b"
+    },
+    "p1_J": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p1_J.json.gz",
+      "sha256": "ff8cd8f0590e0dc3cc4500290995c33b97e6c3a9da6904cf8c118893f97f5504"
+    },
+    "p1_Z": {
+      "path": "notes/0792_claude_lowmem_generator/runs/m15n1664p3328q224_p1_Z.json.gz",
+      "sha256": "b163b6b4b40b352e0e123a525141f4406afd13b79066c99069a49e02967fbd45",
+      "role": "UNTRUSTED_WITNESS"
+    }
+  }
+}

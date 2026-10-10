@@ -1,0 +1,5 @@
+{
+  "notes/0792_claude_lowmem_generator/generate_lowmem.py": "45a739818826435e9f7ab927e45041db47c68b8d7cc7ad8e244ab76c7cb5d58e",
+  "notes/0792_claude_lowmem_generator/matrix_utils.py": "50ce6b630a85a90627e6dc6e873b38c6f9f85e701b0da6cd2e0c51b11aaccfc6",
+  "python/weil_spectral.py": "9dc6057c54cf1eee3afb51d381bac278242db251aef536ef66c3c97464f28f2c"
+}

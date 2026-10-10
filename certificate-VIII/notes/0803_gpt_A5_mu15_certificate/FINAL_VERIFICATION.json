@@ -1,0 +1,12 @@
+{
+  "status": "PASS_END_INTEGRITY",
+  "source_inputs": 44,
+  "source_matrices": 12,
+  "untrusted_source_witnesses": 2,
+  "packet_matrices": 18,
+  "code_pins_unchanged": true,
+  "source_code_pins_unchanged": true,
+  "review_0802_pins_unchanged": true,
+  "negative_tests": 7,
+  "base_packet_unchanged": true
+}
