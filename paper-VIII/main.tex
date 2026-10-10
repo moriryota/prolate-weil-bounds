@@ -1,7 +1,5 @@
 % Ryota Mori. Version 1, 2026-10-10. Licence: CC BY 4.0. doi:10.5281/zenodo.23281236
 % Paper VIII: Weil positivity on the window of width log 15.
-% Sources: notes/0803_gpt_A5_mu15_certificate (certificate), 0802 (Sol, analytic budget), 0804 (Claude review),
-%          0805 (Sol, independent review: accepted). Manuscript review 0806 (Sol): conditional accept, 6 minor, applied in 0807.
 \documentclass[11pt]{amsart}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
@@ -43,7 +41,7 @@ Weil's criterion states that the Riemann Hypothesis holds if and only if Weil's 
 
 \begin{center}
 \fbox{\parbox{0.92\textwidth}{\small
-\textbf{Status.} Analytic proof plus an external interval-arithmetic certificate (Arb/FLINT). The analytic error budget and the certificate passed independent AI reviews, including an independent reimplementation of the final check; no blocking issues remained. Not formalized in Lean. Not yet reviewed by independent human experts.}}
+\textbf{Status.} Analytic proof plus an external interval-arithmetic certificate (Arb/FLINT). The certificate was produced and checked by separate programs, and the final check was reimplemented independently. Not formalized in Lean. Not yet reviewed by independent human experts.}}
 \end{center}
 
 \section{Introduction}
@@ -207,7 +205,7 @@ certified lower bound for $\lambda_{\min}(T)$ & $2.3979369226\times10^{-70}$ & $
 \caption{The certified finite condition \eqref{eq:T} at $N=1664$, $\mu=15$.}
 \end{table}
 
-The checker passed at $1280$ and at $1536$ bits, in about $200$ seconds and $2.3$--$2.8$ GB of memory each. It rejected seven altered inputs for the intended reasons: the sign of $J$ reversed; an inflated declared error; $B$ replaced by $A^2$; a file changed without updating its hash; an understated error of $J$; a wrong contract; and a negative $T$ with the same congruence. An independent reimplementation of the final check at $1664$ bits, which does not share code with the checker, reproduced both lower bounds to $39$ digits and rejected an altered entry of $J$. Independently computed source entries agreed with the saved balls: $18$ entries of $A$, $B$ and $J$ in one review, and $10$ further entries in the other, computed by different methods (exact antiderivatives for $A$ and $B$, $256$ Gauss nodes for $J$); the latter include entries in which omitting the prime $13$ changes the value by more than $0.08$.
+The checker passed at $1280$ and at $1536$ bits, in about $200$ seconds and $2.3$--$2.8$ GB of memory each. It rejected seven altered inputs for the intended reasons: the sign of $J$ reversed; an inflated declared error; $B$ replaced by $A^2$; a file changed without updating its hash; an understated error of $J$; a wrong contract; and a negative $T$ with the same congruence. An independent reimplementation of the final check at $1664$ bits, which does not share code with the checker, reproduced both lower bounds to $39$ digits and rejected an altered entry of $J$. Independently computed source entries agreed with the saved balls: $18$ entries of $A$, $B$ and $J$ in one check, and $10$ further entries in another, computed by different methods (exact antiderivatives for $A$ and $B$, $256$ Gauss nodes for $J$); the latter include entries in which omitting the prime $13$ changes the value by more than $0.08$.
 
 \begin{proof}[Proof of Theorem~\ref{thm:O}]
 The certificate gives \eqref{eq:T} in both parities, hence $G^{-1}+J\succeq\alpha I+\beta D_M$ because $\mathcal W(X)\succeq G$. Since $n<m$, the block elimination gives $M+V\succeq0$ on $H$. By \eqref{eq:reduction}, $Q(f)\ge C\delta\|f\|^2\ge2^{-2904}\|f\|^2$.

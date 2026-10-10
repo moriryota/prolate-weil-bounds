@@ -5,7 +5,7 @@ authors:
   - family-names: Mori
     given-names: Ryota
 license: Apache-2.0
-version: "1.6.0"
+version: "1.6.1"
 doi: "10.5281/zenodo.23092422"
 date-released: "2026-10-10"
 repository-code: "https://github.com/moriryota/prolate-weil-bounds"
