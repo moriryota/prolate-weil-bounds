@@ -1,4 +1,4 @@
-% Ryota Mori. Version 2, 2026-10-05 (version 1: 2026-10-03, doi:10.5281/zenodo.23119609). Licence: CC BY 4.0.
+% Ryota Mori. Version 3, 2026-10-10 (version 2: 2026-10-05, doi:10.5281/zenodo.23162896; version 1: 2026-10-03, doi:10.5281/zenodo.23119609). Licence: CC BY 4.0. doi:10.5281/zenodo.23282857
 % Paper III: sequel to Paper II (doi:10.5281/zenodo.23092542).
 \documentclass[11pt]{amsart}
 \usepackage[margin=1in]{geometry}
@@ -28,7 +28,7 @@
 \author{Ryota Mori}
 \address{Independent researcher, Tokyo, Japan}
 \email{moriryota31@gmail.com}
-\date{3 October 2026; version 2, 5 October 2026}
+\date{3 October 2026; version 2, 5 October 2026; version 3, 10 October 2026}
 
 \begin{document}
 
@@ -43,13 +43,13 @@ and $\lambda_{\min}(\lambda)\le1.24\times10^{23}\mu^5(\log\mu)^5e^{-4\pi\mu}$ fo
 \maketitle
 
 \begin{sloppypar}
-\noindent\textit{Version 2} (5 October 2026), Zenodo \doi{10.5281/zenodo.23162896}; version~1: \doi{10.5281/zenodo.23119609}. Licence: CC BY 4.0. Version~1 used the zero-counting bound of \cite{Trudgian14} with the constants $0.111$, $0.275$, $2.450$ of its arXiv version (arXiv:1208.5846v2), while citing the published version, whose constants are $0.112$, $0.278$, $2.510$. All constants that depend on this bound have been recomputed with the published constants. The constants of Theorem~\ref{thm:F}(a) and Theorem~\ref{thm:G}(a) change from $6.034\times10^{14}$ and $1.434\times10^{23}$ to $6.048\times10^{14}$ and $1.437\times10^{23}$. The constants $C_M$ and $C_T$ of Section~\ref{sec:proofs} also change, as do the comparison with \cite[Thm.~E]{MoriWeilII} (whose constant is now $5.046\times10^{17}$) and Table~\ref{tab:compare}. Theorem~\ref{thm:F}(b) and Theorem~\ref{thm:G}(b),(c) hold with the same printed constants. The statements, powers and proofs are otherwise those of version~1.
+\noindent\textit{Version 3} (10 October 2026), Zenodo \doi{10.5281/zenodo.23282857}; version~2: \doi{10.5281/zenodo.23162896}; version~1: \doi{10.5281/zenodo.23119609}. Licence: CC BY 4.0. Version~3 removes from the status box the statement about AI reviews, gives the Galerkin values of $W$ in Section~\ref{sec:num} to two digits, since they are not fully converged, and adds arXiv version numbers to the references; nothing else changes. Version~2: version~1 used the zero-counting bound of \cite{Trudgian14} with the constants $0.111$, $0.275$, $2.450$ of its arXiv version (arXiv:1208.5846v2), while citing the published version, whose constants are $0.112$, $0.278$, $2.510$. All constants that depend on this bound have been recomputed with the published constants. The constants of Theorem~\ref{thm:F}(a) and Theorem~\ref{thm:G}(a) change from $6.034\times10^{14}$ and $1.434\times10^{23}$ to $6.048\times10^{14}$ and $1.437\times10^{23}$. The constants $C_M$ and $C_T$ of Section~\ref{sec:proofs} also change, as do the comparison with \cite[Thm.~E]{MoriWeilII} (whose constant is now $5.046\times10^{17}$) and Table~\ref{tab:compare}. Theorem~\ref{thm:F}(b) and Theorem~\ref{thm:G}(b),(c) hold with the same printed constants. The statements, powers and proofs are otherwise those of version~1.
 \end{sloppypar}
 
 
 \begin{center}
 \fbox{\parbox{0.92\textwidth}{\small
-\textbf{Status.} The proofs passed independent AI reviews with no blocking or major findings; this manuscript was reviewed separately and revised. Constants are established by ball arithmetic (Arb). Not formalized. This paper has not yet been reviewed by independent human experts.}}
+\textbf{Status.} Proved in this paper, with explicit constants established by ball arithmetic (Arb). Not formalized. This paper has not yet been reviewed by independent human experts.}}
 \end{center}
 
 \section{Introduction}
@@ -385,11 +385,11 @@ out-of-band mass ratio, $n=4$, $L$ & 1.299 & 1.254 & 1.204\\
 \toprule
 $\mu$ & $W(k)/B$ & $W(\tilde k)/\tilde B$ & $\|k\|^2/H^2$ & $\|\tilde k\|^2/\|\tilde h\|^2$\\
 \midrule
-5 & 1.623 & 2.141 & 0.222685 & 0.222685\\
-7 & 1.805 & 2.292 & 0.221439 & 0.221439\\
+5 & 1.6 & 2.1 & 0.222685 & 0.222685\\
+7 & 1.8 & 2.3 & 0.221439 & 0.221439\\
 \bottomrule
 \end{tabular}
-\caption{Galerkin values ($N=140$ Legendre modes, 480 bits); not part of any proof. Here $\tilde B=\tilde I_4^2b_0+\tilde I_0^2b_4$ is the out-of-band mass of the unsmoothed combination with the smoothed coefficients; it differs from $B$ by a relative amount of order $\eta(c)\sqrt{U(c)}$.}
+\caption{Galerkin values ($N=140$ Legendre modes, 480 bits); not part of any proof. The values of $W$ are not fully converged and may differ from the limits by a few percent (at $\mu=5$, $W(k)$ increases by $3.5\%$ from $N=140$ to $N=320$), so we give two digits. Here $\tilde B=\tilde I_4^2b_0+\tilde I_0^2b_4$ is the out-of-band mass of the unsmoothed combination with the smoothed coefficients; it differs from $B$ by a relative amount of order $\eta(c)\sqrt{U(c)}$.}
 \end{table}
 
 \begin{itemize}
@@ -461,8 +461,8 @@ The numerical values in Section~\ref{sec:num} and the check of Lemma~\ref{lem:st
 This work was carried out with extensive use of generative AI systems, namely Anthropic Claude, Google Gemini and OpenAI GPT. Under the direction of the author, these systems drafted the proofs, implemented and ran the computations, reviewed one another's drafts adversarially, and drafted this manuscript. The author chose the problem and the strategy, assigned and reviewed the tasks, and takes full responsibility for the content. The AI systems are not authors of this paper.
 
 \begin{thebibliography}{99}
-\bibitem{CC21} A.~Connes, C.~Consani, Spectral triples and $\zeta$-cycles, arXiv:2106.01715.
-\bibitem{CCM25} A.~Connes, C.~Consani, H.~Moscovici, Zeta spectral triples, arXiv:2511.22755.
+\bibitem{CC21} A.~Connes, C.~Consani, Spectral triples and $\zeta$-cycles, arXiv:2106.01715v1.
+\bibitem{CCM25} A.~Connes, C.~Consani, H.~Moscovici, Zeta spectral triples, arXiv:2511.22755v1.
 \bibitem{Fuchs64} W.~H.~J.~Fuchs, On the eigenvalues of an integral equation arising in the theory of band-limited signals, \emph{J. Math. Anal. Appl.} 9 (1964) 317--330. \doi{10.1016/0022-247X(64)90017-4}
 \bibitem{MoriPSWF} R.~Mori, A non-asymptotic bound with the sharp power of $c$ for the eigenvalue defect $1-\lambda_n(c)$ of time and frequency limiting, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092454}
 \bibitem{MoriWeilII} R.~Mori, The Weil quadratic form of the Connes--Consani--Moscovici prolate vector, and a $\mu^8$ upper bound for windowed Weil forms, preprint, version 2, Zenodo, 2026. \doi{10.5281/zenodo.23162895}

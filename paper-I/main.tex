@@ -1,4 +1,4 @@
-% Ryota Mori. Version 1, 2026-10-02. Licence: CC BY 4.0.
+% Ryota Mori. Version 2, 2026-10-10 (version 1: 2026-10-02, doi:10.5281/zenodo.23092454). Licence: CC BY 4.0. doi:10.5281/zenodo.23282841
 % Paper I: non-asymptotic bound with the sharp power for 1 - lambda_n(c).
 \documentclass[11pt]{amsart}
 \usepackage[margin=1in]{geometry}
@@ -26,7 +26,7 @@
 \author{Ryota Mori}
 \address{Independent researcher, Tokyo, Japan}
 \email{moriryota31@gmail.com}
-\date{2 October 2026}
+\date{2 October 2026; version 2, 10 October 2026}
 
 \begin{document}
 
@@ -39,6 +39,10 @@ with explicit constants $C_n$. The exponent $e^{-2c}$ and the power $c^{n+1/2}$ 
 \end{abstract}
 
 \maketitle
+
+\begin{sloppypar}
+\noindent\textit{Version 2} (10 October 2026), Zenodo \doi{10.5281/zenodo.23282841}; version~1: \doi{10.5281/zenodo.23092454}. Licence: CC BY 4.0. Version~2 states how the value $\int_0^\infty K_0=\pi/2$ in Section~\ref{sec:tail} follows from \cite[10.32.9]{DLMF}. The theorems, proofs and constants are those of version~1.
+\end{sloppypar}
 
 \begin{center}
 \fbox{\parbox{0.92\textwidth}{\small
@@ -240,7 +244,7 @@ and Taylor's theorem with integral remainder.
 \[
 x(J_0^2+Y_0^2)=\frac4{\pi^2}\int_0^\infty\frac{K_0(u)\,du}{\sqrt{1+u^2/(4x^2)}}.
 \]
-Since $K_0>0$ and $\int_0^\infty K_0=\pi/2$ \cite[10.32.9]{DLMF}, the right-hand side is at most $2/\pi$. We have also checked (BL1) independently in ball arithmetic: by Taylor enclosures on $65{,}520$ cells covering $[1/64,64]$, by Frobenius series on $(0,1/64]$, and by \eqref{eq:hankel} with $\ell=3$ on $[64,\infty)$.
+Since $K_0>0$ and $\int_0^\infty K_0=\pi/2$ (from the integral representation \cite[10.32.9]{DLMF} and Tonelli's theorem), the right-hand side is at most $2/\pi$. We have also checked (BL1) independently in ball arithmetic: by Taylor enclosures on $65{,}520$ cells covering $[1/64,64]$, by Frobenius series on $(0,1/64]$, and by \eqref{eq:hankel} with $\ell=3$ on $[64,\infty)$.
 
 \textbf{(BL2).} We have $H'=xJ_0Y_0$, so (BL1) gives $|H'|\le1/\pi$. The bound is proved separately on three ranges.
 \begin{itemize}

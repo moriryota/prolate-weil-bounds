@@ -39,14 +39,18 @@ Paper II is a sequel to *Unconditional doubly exponential upper bounds for the b
 
 DOIs:
 - Code (all versions): [10.5281/zenodo.23092422](https://doi.org/10.5281/zenodo.23092422)
-- Paper I: [10.5281/zenodo.23092454](https://doi.org/10.5281/zenodo.23092454)
-- Paper II: version 2 [10.5281/zenodo.23162895](https://doi.org/10.5281/zenodo.23162895); version 1 [10.5281/zenodo.23092542](https://doi.org/10.5281/zenodo.23092542)
-- Paper III: version 2 [10.5281/zenodo.23162896](https://doi.org/10.5281/zenodo.23162896); version 1 [10.5281/zenodo.23119609](https://doi.org/10.5281/zenodo.23119609)
-- Paper IV: [10.5281/zenodo.23134085](https://doi.org/10.5281/zenodo.23134085)
-- Paper V: [10.5281/zenodo.23175061](https://doi.org/10.5281/zenodo.23175061)
-- Paper VI: [10.5281/zenodo.23238480](https://doi.org/10.5281/zenodo.23238480) (certificate data in `certificate-VI/` of this repository)
-- Paper VII: version 2 [10.5281/zenodo.23265728](https://doi.org/10.5281/zenodo.23265728); version 1 [10.5281/zenodo.23261744](https://doi.org/10.5281/zenodo.23261744) (certificate data in `certificate-VII/` of this repository)
+- Paper I: version 2 [10.5281/zenodo.23282841](https://doi.org/10.5281/zenodo.23282841); version 1 [10.5281/zenodo.23092454](https://doi.org/10.5281/zenodo.23092454)
+- Paper II: version 3 [10.5281/zenodo.23282913](https://doi.org/10.5281/zenodo.23282913); version 2 [10.5281/zenodo.23162895](https://doi.org/10.5281/zenodo.23162895); version 1 [10.5281/zenodo.23092542](https://doi.org/10.5281/zenodo.23092542)
+- Paper III: version 3 [10.5281/zenodo.23282857](https://doi.org/10.5281/zenodo.23282857); version 2 [10.5281/zenodo.23162896](https://doi.org/10.5281/zenodo.23162896); version 1 [10.5281/zenodo.23119609](https://doi.org/10.5281/zenodo.23119609)
+- Paper IV: version 2 [10.5281/zenodo.23282860](https://doi.org/10.5281/zenodo.23282860); version 1 [10.5281/zenodo.23134085](https://doi.org/10.5281/zenodo.23134085)
+- Paper V: version 2 [10.5281/zenodo.23282861](https://doi.org/10.5281/zenodo.23282861); version 1 [10.5281/zenodo.23175061](https://doi.org/10.5281/zenodo.23175061)
+- Paper VI: version 2 [10.5281/zenodo.23282866](https://doi.org/10.5281/zenodo.23282866); version 1 [10.5281/zenodo.23238480](https://doi.org/10.5281/zenodo.23238480) (certificate data in `certificate-VI/` of this repository)
+- Paper VII: version 3 [10.5281/zenodo.23282905](https://doi.org/10.5281/zenodo.23282905); version 2 [10.5281/zenodo.23265728](https://doi.org/10.5281/zenodo.23265728); version 1 [10.5281/zenodo.23261744](https://doi.org/10.5281/zenodo.23261744) (certificate data in `certificate-VII/` of this repository)
 - Paper VIII: [10.5281/zenodo.23281236](https://doi.org/10.5281/zenodo.23281236) (certificate code in `certificate-VIII/`; data [10.5281/zenodo.23281176](https://doi.org/10.5281/zenodo.23281176))
+
+## Changes in v1.6.2 (new versions of papers I–VII)
+
+Papers I v2, II v3, III v3, IV v2, V v2, VI v2 and VII v3. The status boxes no longer refer to AI reviews; they state only how the results were proved and checked. The Galerkin values of W in the numerical tables of papers II and III are given to two digits, since they are not fully converged (`numerics-II/galerkin_W.py` now says so too). Paper I states how ∫K₀ = π/2 follows from DLMF 10.32.9; paper IV describes the averages of Chirre–Gonçalves–de Laat as in that paper; arXiv references carry version numbers. No theorem, proof, constant, script output or certificate changed.
 
 ## Changes in v1.6.1
 

@@ -1,4 +1,4 @@
-% Ryota Mori. Version 2, 2026-10-05 (version 1: 2026-10-02). Licence: CC BY 4.0.
+% Ryota Mori. Version 3, 2026-10-10 (version 2: 2026-10-05; version 1: 2026-10-02). Licence: CC BY 4.0. doi:10.5281/zenodo.23282913
 % Paper II: sequel to "Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms".
 \documentclass[11pt]{amsart}
 \usepackage[margin=1in]{geometry}
@@ -28,7 +28,7 @@
 \author{Ryota Mori}
 \address{Independent researcher, Tokyo, Japan}
 \email{moriryota31@gmail.com}
-\date{2 October 2026; version 2, 5 October 2026}
+\date{2 October 2026; version 2, 5 October 2026; version 3, 10 October 2026}
 
 \begin{document}
 
@@ -43,7 +43,7 @@ All constants are explicit and established with ball arithmetic. The results are
 \maketitle
 
 \begin{sloppypar}
-\noindent\textit{Version 2} (5 October 2026), Zenodo \doi{10.5281/zenodo.23162895}; version~1: \doi{10.5281/zenodo.23092542}. Licence: CC BY 4.0. Version~1 used the zero-counting bound of \cite{Trudgian14} with the constants $0.111$, $0.275$, $2.450$ of its arXiv version (arXiv:1208.5846v2), while citing the published version, whose constants are $0.112$, $0.278$, $2.510$. All constants that depend on this bound have been recomputed with the published constants: $P(5)\le1.872\times10^{13}$ (was $1.854\times10^{13}$), $P(15)\le1.159\times10^{15}$, $P(100)\le1.568\times10^{18}$, and the constant in Theorem~\ref{thm:E} is $5.046\times10^{17}$ (was $5.011\times10^{17}$). Nothing else changes: the statements, powers and proofs are those of version~1.
+\noindent\textit{Version 3} (10 October 2026), Zenodo \doi{10.5281/zenodo.23282913}; version~2: \doi{10.5281/zenodo.23162895}; version~1: \doi{10.5281/zenodo.23092542}. Licence: CC BY 4.0. Version~3 gives the Galerkin values of $W(k_\lambda)$ in Section~\ref{sec:num} to two digits, since they are not fully converged, and adds arXiv version numbers to the references; nothing else changes. Version~2: version~1 used the zero-counting bound of \cite{Trudgian14} with the constants $0.111$, $0.275$, $2.450$ of its arXiv version (arXiv:1208.5846v2), while citing the published version, whose constants are $0.112$, $0.278$, $2.510$. All constants that depend on this bound have been recomputed with the published constants: $P(5)\le1.872\times10^{13}$ (was $1.854\times10^{13}$), $P(15)\le1.159\times10^{15}$, $P(100)\le1.568\times10^{18}$, and the constant in Theorem~\ref{thm:E} is $5.046\times10^{17}$ (was $5.011\times10^{17}$). Nothing else changes: the statements, powers and proofs are those of version~1.
 \end{sloppypar}
 
 \begin{center}
@@ -446,12 +446,12 @@ where $C_4\le6621$ \cite[Thm.~1 and Table~1]{MoriPSWF}. Since $\lambda_{\min}\le
 \toprule
 $\mu$ & 5 & 7 & 11 & 13 & 15\\
 \midrule
-$W(k_\lambda)/(\rho_{\rm out}\|h\|^2)$ & 1.62 & 1.80 & 2.05 & 2.12 & 2.25\\
+$W(k_\lambda)/(\rho_{\rm out}\|h\|^2)$ & 1.6 & 1.8 & 2.1 & 2.1 & 2.3\\
 $\|k_\lambda\|^2/\|h_\lambda\|^2$ & 0.2227 & 0.2214 & 0.2205 & 0.2203 & 0.2201\\
 $\rho_{\rm out}$ & $1.9\times10^{-18}$ & $1.1\times10^{-28}$ & $1.4\times10^{-49}$ & $3.6\times10^{-60}$ & $8.5\times10^{-71}$\\
 \bottomrule
 \end{tabular}
-\caption{Galerkin computations (not certified). The value of $\|k_\lambda\|^2/\|h_\lambda\|^2$ at $\mu=50$ is $0.2195$.}
+\caption{Galerkin computations (not certified). The values of $W(k_\lambda)$ were computed with $140$--$260$ Legendre modes and are not fully converged; they may differ from the limits by a few percent (at $\mu=5$, $W(k_\lambda)$ increases by $3.5\%$ from $N=140$ to $N=320$), so we give two digits. The value of $\|k_\lambda\|^2/\|h_\lambda\|^2$ at $\mu=50$ is $0.2195$.}
 \end{table}
 
 
@@ -530,8 +530,8 @@ All computer-assisted steps are reproducible from the public repository \url{htt
 This work was carried out with extensive use of generative AI systems, namely Anthropic Claude, Google Gemini and OpenAI GPT. Under the direction of the author, these systems drafted the proofs, implemented and ran the computations, reviewed one another's drafts adversarially, searched the literature, and drafted this manuscript. The author chose the problem and the strategy, assigned and reviewed the tasks, and takes full responsibility for the content. The AI systems are not authors of this paper.
 
 \begin{thebibliography}{99}
-\bibitem{CC21} A.~Connes, C.~Consani, Spectral triples and $\zeta$-cycles, arXiv:2106.01715.
-\bibitem{CCM25} A.~Connes, C.~Consani, H.~Moscovici, Zeta spectral triples, arXiv:2511.22755.
+\bibitem{CC21} A.~Connes, C.~Consani, Spectral triples and $\zeta$-cycles, arXiv:2106.01715v1.
+\bibitem{CCM25} A.~Connes, C.~Consani, H.~Moscovici, Zeta spectral triples, arXiv:2511.22755v1.
 \bibitem{Fuchs64} W.~H.~J.~Fuchs, On the eigenvalues of an integral equation arising in the theory of band-limited signals, \emph{J. Math. Anal. Appl.} 9 (1964) 317--330. \doi{10.1016/0022-247X(64)90017-4}
 \bibitem{MoriPSWF} R.~Mori, A non-asymptotic bound with the sharp power of $c$ for the eigenvalue defect $1-\lambda_n(c)$ of time and frequency limiting, preprint, Zenodo, 2026. \doi{10.5281/zenodo.23092454}
 \bibitem{MoriWWUB} R.~Mori, Unconditional doubly exponential upper bounds for the bottom of windowed Weil quadratic forms, version 3, Zenodo, 2026. \doi{10.5281/zenodo.23066578}
